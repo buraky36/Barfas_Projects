@@ -1,0 +1,198 @@
+
+/**
+ * @file Flash.c
+ * @author Adem Marangoz (adem.marangoz@barfas.com)
+ * @brief This Flash Driver
+ * @version 0.1
+ * @date 2023-06-09
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+
+//______________________________ Include Files _________________________________
+#include "Flash.h"
+#include "buffer.h"
+#include <string.h>
+#include "temp_pass.h"
+#include "common.h"
+//==============================================================================
+
+//_____________________________ Generic Objects ________________________________
+Flash_DataBase_UN Flash_DataBase[FLASH_DATA_SIZE] = {0};
+static uint8_t Flash_Write_Active = 0;
+extern Smart_Lock Smart_Lock_Val;
+//==============================================================================
+
+//______________________________ Global Functions ______________________________
+
+/**
+ * @brief This function is used to write the database to the flash memory.
+ * 
+ * @param flash_Add Start address for the write operation
+ * @param db_Add Pointer to the start address of the database
+ * @param db_size Number of buffer elements
+ * @return HAL_StatusTypeDef 
+ */
+//  Write_page(RFID_DB_ADD_START, (uint64_t*)RFID_DataBase, DB_SIZE(RFID_DATA_SIZE, RFID_DataBase_UN));
+HAL_StatusTypeDef Write_page(uint32_t flash_Add, uint64_t *db_Add, uint16_t db_size)
+{
+    HAL_StatusTypeDef state = HAL_OK;
+    /* Loop for navigating through array(DB) elements.*/
+    for(uint16_t i = 0; i < db_size; i++)
+    {
+        HAL_FLASH_Unlock();
+
+        if(HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD,flash_Add , *db_Add) != HAL_OK) 
+        {
+							state = HAL_ERROR;
+							i = db_size;
+        }
+
+        db_Add += (uint64_t)1; // Increase by the size of the structure.
+        flash_Add += (uint32_t)8; // Increase by double word
+        HAL_FLASH_Lock();
+    }
+
+    return state;
+}
+
+/**
+ * @brief This function is used to read the database from the flash memory.
+ * 
+ * @param flash_Add Start address for the write operation
+ * @param db_Add Pointer to the start address of the database
+ * @param db_size Number of buffer elements
+ */
+//  Read_DB(RFID_DB_ADD_START, (uint64_t*)RFID_DataBase, DB_SIZE(RFID_DATA_SIZE, RFID_DataBase_UN));
+void Read_DB(uint32_t flash_Add, uint64_t *db_Add, uint16_t db_size)
+{
+    /* Loop for navigating through array(DB) elements.*/
+    for(uint16_t i = 0; i < db_size; i++)
+    {
+        *db_Add = *(uint64_t*)flash_Add; // Read double word
+        db_Add += (uint64_t)1; // Increase by double word
+        flash_Add += (uint32_t)8; // Increase by double word
+    }
+}
+
+/**
+ * @brief This function is used to erase a page from the flash memory.
+ * 
+ * @param bank The bank from which a page is intended to be erased.
+ * @param nbpages The number of pages to be erased.
+ * @param page Page number
+ * @param erase_type Page erase type or full flash erase type
+ * @return HAL_StatusTypeDef    HAL_OK       = 0x00U,
+                                HAL_ERROR    = 0x01U,
+                                HAL_BUSY     = 0x02U,
+                                HAL_TIMEOUT  = 0x03U
+ */
+// bank = FLASH_BANK_1, npages = 1, page = 62, erase_type = FLASH_TYPEERASE_PAGES
+HAL_StatusTypeDef erase_page(uint32_t bank, uint32_t nbpages, uint32_t page, uint32_t erase_type)
+{
+  FLASH_EraseInitTypeDef confi;
+  confi.Banks = bank; // bank of memory ram
+  confi.NbPages = nbpages; // page numbers to write or erase
+  confi.Page = page; // start page number
+  confi.TypeErase = erase_type; // erase type
+  uint32_t error;
+  HAL_FLASH_Unlock(); // unlock flash
+  HAL_StatusTypeDef state = HAL_FLASHEx_Erase(&confi, &error); // erase funtion
+  HAL_FLASH_Lock(); // lock flash
+  return state;
+}
+
+
+/**
+ * @brief This function is used to enable or disable writing to the flash memory.
+ * 
+ * @param State 1 : Active
+ *              2 : Inactive
+ */
+void Set_Flash_Write_Active(uint8_t State)
+{
+    Flash_Write_Active = State;
+}
+
+
+/**
+ * @brief This is used to return the value of the variable 
+ * responsible for enabling or disabling writing to the flash.
+ * 
+ * @return uint8_t  1 : Active
+ *                  2 : Inactive
+ */
+uint8_t Get_Flash_Write_Active()
+{
+    return Flash_Write_Active;
+}
+
+/**
+ * @brief This function combines the erase operation with the write 
+ * operation to the flash memory.
+ * 
+ * @return HAL_StatusTypeDef    HAL_OK       = 0x00U,
+                                HAL_ERROR    = 0x01U,
+                                HAL_BUSY     = 0x02U,
+                                HAL_TIMEOUT  = 0x03U */
+HAL_StatusTypeDef Erase_and_Write()
+{
+    uint8_t state = Get_Flash_Write_Active(); // get Flash_Write_Active state  
+    HAL_StatusTypeDef status = HAL_OK;
+
+    if(state == 1) // if active
+    {
+        status = erase_page(FLASH_BANK_1, 3, 57, FLASH_TYPEERASE_PAGES); // erase the page to be written on
+        status = Write_page(GENERIC_INFO_ADD, (uint64_t*)Flash_DataBase, DB_SIZE(FLASH_DATA_SIZE, Flash_DataBase_UN)); // write generic info to flash
+        status = Write_page(TSM_DB_ADD_START, (uint64_t*)TSM_DataBase, DB_SIZE(TSM_DATA_SIZE, TSM_DataBase_UN)); // write tsm db to flash
+        status = Write_page(RFID_DB_ADD_START, (uint64_t*)RFID_DataBase, DB_SIZE(RFID_DATA_SIZE, RFID_DataBase_UN)); // write rfid db to flash
+        status = Write_page(TEMP_DB_PASS_ADD_START, (uint64_t*)Temp_Pass_DB, 1); // write offline id and password
+//        status = Write_page(TEMP_DB_ONLINE_PASS_ADD_START, (uint64_t*)Temp_Online_Pass_DB, DB_SIZE(MAX_TEMP_PASS, Temp_Online_Pass_DB[0])); // write online TUYA id and password
+				Write_page(DATA_RECORD_ADD_START, (uint64_t*)&Smart_Lock_Val, DB_SIZE(MAX_TEMP_PASS, Temp_Pass_DB[0]));    // FINGERPRINT ADMIN-USER COUNT
+			
+    }
+
+		Set_Flash_Write_Active(2); // set Flash_Write_Active to reset
+    return status;
+}
+
+uint8_t adem_check_erase = 0;
+void Read_When_Run()
+{
+    Read_DB(GENERIC_INFO_ADD, (uint64_t*)Flash_DataBase, DB_SIZE(FLASH_DATA_SIZE, Flash_DataBase_UN));  // Read Generic Info
+    if(Flash_DataBase[0].Flash_DataBase_ST.VERSION[0] == 0xFF)//0xFF  // At the first must be empty and will entry
+    {
+        /* Generic Info and TSM admin pass and write to flash */
+        Flash_DataBase[0].Flash_DataBase_ST.FP_State = 1;
+        Flash_DataBase[0].Flash_DataBase_ST.RFID_State = 1;
+        Flash_DataBase[0].Flash_DataBase_ST.VOICE_State = 1;
+				Flash_DataBase[0].Flash_DataBase_ST.LANGUAGE_State = 1;
+				Flash_DataBase[0].Flash_DataBase_ST.Default_System = 1;
+        strncpy((char*)Flash_DataBase[0].Flash_DataBase_ST.VERSION,"1.10", 4);
+        Fill_Buffers((uint8_t*)TSM_DataBase, DB_SIZE(TSM_DATA_SIZE, TSM_DataBase_UN));
+        Fill_Buffers((uint8_t*)RFID_DataBase, DB_SIZE(RFID_DATA_SIZE, RFID_DataBase_UN));
+        TSM_DataBase[0].TSM_DataBase_ST.user_id[0] = 1;
+        TSM_DataBase[0].TSM_DataBase_ST.user_id[1] = 2;
+        TSM_DataBase[0].TSM_DataBase_ST.user_id[2] = 3;
+        TSM_DataBase[0].TSM_DataBase_ST.user_id[3] = 4;
+        TSM_DataBase[0].TSM_DataBase_ST.user_id[4] = 11;
+        TSM_DataBase[0].TSM_DataBase_ST.access = 2;
+        Set_Flash_Write_Active(1);
+        Erase_and_Write();
+    }
+//		Read_DB(TEMP_DB_ONLINE_PASS_ADD_START, (uint64_t*)Temp_Online_Pass_DB, DB_SIZE(MAX_TEMP_PASS, Temp_Online_Pass_DB[0]));     // Read Temp online Pass DB
+    Read_DB(TEMP_DB_PASS_ADD_START, (uint64_t*)Temp_Pass_DB, DB_SIZE(MAX_TEMP_PASS, Temp_Pass_DB[0]));     // Read Temp offline Pass DB
+    Read_DB(TSM_DB_ADD_START, (uint64_t*)TSM_DataBase, DB_SIZE(TSM_DATA_SIZE, TSM_DataBase_UN));        // Read TSM DB
+    Read_DB(RFID_DB_ADD_START, (uint64_t*)RFID_DataBase, DB_SIZE(RFID_DATA_SIZE, RFID_DataBase_UN));    // Read RFID DB
+		Read_DB(DATA_RECORD_ADD_START, (uint64_t*)&Smart_Lock_Val, 1);    // FINGERPRINT ADMIN-USER COUNT
+		if(Smart_Lock_Val.admin_count == 0xFF)
+			Smart_Lock_Val.admin_count = 0;
+		if(Smart_Lock_Val.user_count == 0xFF)
+			Smart_Lock_Val.user_count = 0;
+}
+//==============================================================================
+
+//_______________________ Static Functions Decleration _________________________
+//==============================================================================

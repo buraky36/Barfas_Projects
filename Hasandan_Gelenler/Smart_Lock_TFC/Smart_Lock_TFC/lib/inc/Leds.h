@@ -1,0 +1,54 @@
+
+/**
+ * @file Leds.h
+ * @author Adem Marangoz (adem.marangoz@barfas.com)
+ * @brief This Leds driven
+ * @version 0.1
+ * @date 2023-06-09
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+
+#ifndef LEDS_H_
+#define LEDS_H_
+//______________________________ Include Files _________________________________
+#include "main.h"
+
+//==============================================================================
+
+
+//------------------------------ General Objects -------------------------------
+
+
+//==============================================================================
+/**
+ * @brief RGB run states @RGB_STATE_DEFINITION
+ */
+typedef enum
+{
+    RGB_IDLE,
+    RGB_RED,
+    RGB_BLUE,
+    RGB_GREEN,
+    RGB_STOP
+}RGB_Typedef;
+
+#define STANDART_TIME       1000 // Timeout of led run
+#define LED_DELAY       		 200
+
+//______________________________ Global Functions ______________________________
+void Set_RGB(RGB_Typedef rgb, uint8_t _reset_state);
+void Confi_RGB(RGB_Typedef rgb);
+void Run_RGB();
+void get_temp_pass();
+void touch_led(uint8_t wh_led, uint8_t led_State);
+void led_all_set(void);
+void led_all_reset(void);
+void led_blink_start(void);
+void led_blink_stop(void);
+//==============================================================================
+
+
+#endif
