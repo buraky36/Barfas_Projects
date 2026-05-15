@@ -1,0 +1,1605 @@
+/**********************************Copyright (c)**********************************
+**                     All rights reserved (C), 2015-2020, Tuya
+**
+**                             http://www.tuya.com
+**
+*********************************************************************************/
+/**
+ * @file    protocol.c
+ * @author  Tuya Team
+ * @version v1.0.7
+ * @date    2020.11.9
+ * @brief                
+ *                       *******Very important, be sure to watch!!!********
+ *          1. The user implements the data delivery/reporting function in this file.
+ *          2. DP ID / TYPE and data processing functions require the user to implement according to the actual definition
+ *          3. There are #err hints inside the function that needs the user to implement the code after starting some macro definitions. 
+ *             Please delete the #err after completing the function.
+ */
+
+
+#include "wifi.h"
+#include "protocol.h" 
+#include "string.h"
+#include "stm32g0xx_ll_rtc.h"
+#include "main.h"
+#include "AP23xxx_G0x.h"
+#include "Leds.h"
+#include "Motor_Driver.h"
+#include "Tuya_App.h"
+#include "rtc.h"
+
+RTC_TimeTypeDef glTime = {0};
+RTC_DateTypeDef glDate = {0};
+
+#define FIRMWARE_BUFFER_SIZE 1024
+
+unsigned char firmwareBuffer[FIRMWARE_BUFFER_SIZE];
+unsigned long firmwarePosition = 0;
+
+const unsigned char * unlock_method_ptr;
+int unlock_method_len = 100;
+
+const unsigned char * synch_method_ptr;
+int synch_method_len = 100;
+
+unsigned char link_mode;
+
+const unsigned char * remote_no_pd_setkey_ptr;
+int remote_no_pd_setkey_len = 100;
+
+const unsigned char * remote_no_dp_key_ptr;
+int remote_no_dp_key_len;
+
+
+
+const unsigned char * all_Fingerprints_ptr;
+int all_Fingerprints_len = 100;
+
+const unsigned char * all_Codes_ptr;
+int all_Codes_len = 100;
+
+const unsigned char * all_Cards_ptr;
+int all_Cards_len = 100;
+
+const unsigned char * offline_Code_Unlocking_ptr;
+int offline_Code_Unlocking_len = 100;
+
+const unsigned char * clear_Offline_Codes_ptr;
+int clear_Offline_Codes_len = 100;
+
+const unsigned char * set_Key_for_NoCode_Unlock_ptr;
+int set_Key_for_NoCode_Unlock_len = 100;
+
+const unsigned char * no_Code_Unlock_ptr;
+int no_Code_Unlock_len = 100;
+
+const unsigned char * lock_Local_Operation_Record_ptr;
+int lock_Local_Operation_Record_len;
+
+const unsigned char * active_Message_Push_ptr;
+int active_Message_Push_len;
+
+unsigned long current_Unlock_with_Fingerprint = 0;
+unsigned long current_Unlock_with_Code = 0;
+unsigned long current_Unlock_with_Temporary_Code = 0;
+unsigned long current_Unlock_with_Card = 0;
+unsigned long current_Unlock_with_Mechanical_Key = 0;
+unsigned long current_Remote_Unlocking_Countdown = 0;
+unsigned long current_Battery_Level = 0;
+unsigned long current_Remaining_Battery = 0;
+unsigned char current_Double_Lock = 0;
+unsigned long current_Remote_Unlocking_in_App = 0;
+unsigned char current_Unlock_from_Inside = 0;
+unsigned char current_Door_Status = 0;
+unsigned char current_SMS_Notification = 0;
+unsigned char current_Auto_Lock = 0;
+unsigned long current_Auto_Lock_Delay = 0;
+unsigned char current_Door_Opening_Direction = 0;
+
+unsigned long auto_lock_time = 0;
+unsigned long temporary_password_modify = 0;
+unsigned long temporary_password_delete = 0;
+unsigned long temporary_password_create = 0;
+unsigned char battery_state = 0;
+unsigned char door_status = 0;
+unsigned char lock_motor_direction = 0;
+unsigned char reverse_lock = 0;
+unsigned char message_notification = 0;
+unsigned char open_inside = 0;
+unsigned char automatic_lock = 0;
+unsigned char *lock_local_record_ptr = NULL;
+unsigned short lock_local_record_len = 0;
+unsigned char *initiative_message_ptr = NULL;
+unsigned short initiative_message_len = 0;
+
+
+uint8_t ind=0;
+
+uint32_t tuyaConnectionCounter = 0;
+
+unsigned char stored_key[9];
+uint8_t key_index, value_index;
+
+uint32_t numUnlockedCounter = 0;
+
+extern tuyaState_t tuyaState;
+extern uint8_t password[6];
+extern uint8_t tuyaCurrentUUID[2];
+extern RTC_HandleTypeDef hrtc;
+extern RTC_TimeTypeDef myTime;
+extern RTC_DateTypeDef myDate;
+
+/******************************************************************************
+                                Transplant instructions:
+1:The MCU must directly call the wifi_uart_service() function in mcu_api.c in the while.
+2:After the normal initialization of the program is completed, 
+  it is recommended not to turn off the serial port interrupt. 
+  If the interrupt must be turned off, the off interrupt time must be short, 
+  and the interrupt will cause the serial port packet to be lost.
+3:Do not call the escalation function in the interrupt/timer interrupt
+******************************************************************************/
+
+         
+/******************************************************************************
+                              Step 1: initialization
+1:Include "wifi.h" in files that need to use wifi related files
+2:Call the wifi_protocol_init() function in the mcu_api.c file in the MCU initialization
+3:Fill the MCU serial single-byte send function into the uart_transmit_output 
+   function in the protocol.c file, and delete #error
+4:Call the uart_receive_input function in the mcu_api.c file in the MCU serial receive 
+   function and pass the received byte as a parameter.
+5:The wifi_uart_service() function in the mcu_api.c file is called after the MCU enters the while loop.
+******************************************************************************/
+
+/******************************************************************************
+                        1:dp data point sequence type comparison table
+          **This is the automatic generation of code, such as the relevant changes in
+              the development platform, please re-download MCU_SDK**
+******************************************************************************/
+const DOWNLOAD_CMD_S download_cmd[] =
+{
+  {DPID_UNLOCK_FINGERPRINT, DP_TYPE_VALUE},
+  {DPID_UNLOCK_PASSWORD, DP_TYPE_VALUE},
+  {DPID_UNLOCK_TEMPORARY, DP_TYPE_VALUE},
+  {DPID_UNLOCK_CARD, DP_TYPE_VALUE},
+  {DPID_UNLOCK_KEY, DP_TYPE_VALUE},
+  {DPID_UNLOCK_REQUEST, DP_TYPE_VALUE},
+  {DPID_BATTERY_STATE, DP_TYPE_ENUM},
+  {DPID_RESIDUAL_ELECTRICITY, DP_TYPE_VALUE},
+  {DPID_REVERSE_LOCK, DP_TYPE_BOOL},
+  {DPID_UNLOCK_APP, DP_TYPE_VALUE},
+  {DPID_OPEN_INSIDE, DP_TYPE_BOOL},
+  {DPID_CLOSED_OPENED, DP_TYPE_ENUM},
+  {DPID_MESSAGE, DP_TYPE_BOOL},
+  {DPID_UPDATE_ALL_FINGER, DP_TYPE_RAW},
+  {DPID_UPDATE_ALL_PASSWORD, DP_TYPE_RAW},
+  {DPID_UPDATE_ALL_CARD, DP_TYPE_RAW},
+  {DPID_UNLOCK_OFFLINE_PD, DP_TYPE_RAW},
+  {DPID_UNLOCK_OFFLINE_CLEAR, DP_TYPE_RAW},
+  {DPID_CREATE_TYPE_ACK, DP_TYPE_ENUM},
+  {DPID_DOOR_INPUT_OK, DP_TYPE_VALUE},
+  {DPID_CREATE_OK, DP_TYPE_BOOL},
+  {DPID_REMOTE_DELETE_FP, DP_TYPE_VALUE},
+  {DPID_REMOTE_DELETE_CD, DP_TYPE_VALUE},
+  {DPID_REMOTE_NO_PD_SETKEY, DP_TYPE_RAW},
+  {DPID_REMOTE_NO_DP_KEY, DP_TYPE_RAW},
+  {DPID_LOCK_MOTOR_STATE, DP_TYPE_BOOL},
+  {DPID_LOCK_RECORD, DP_TYPE_RAW},
+  {DPID_LOCAL_CAPACITY_LINK, DP_TYPE_RAW},
+  {DPID_LOCK_MOTOR_DIRECTION, DP_TYPE_ENUM},
+  {DPID_AUTOMATIC_LOCK, DP_TYPE_BOOL},
+  {DPID_AUTO_LOCK_TIME, DP_TYPE_VALUE},
+  {DPID_LOCK_LOCAL_RECORD, DP_TYPE_RAW},
+  {DPID_TEMPORARY_PASSWORD_MODIFY, DP_TYPE_RAW},
+  {DPID_TEMPORARY_PASSWORD_DELETE, DP_TYPE_RAW},
+  {DPID_TEMPORARY_PASSWORD_CREAT, DP_TYPE_RAW},
+  {DPID_LINK_MODE, DP_TYPE_ENUM},
+  {DPID_UNLOCK_VOICE_REMOTE, DP_TYPE_VALUE},
+  {DPID_UNLOCK_PHONE_REMOTE, DP_TYPE_VALUE},
+  {DPID_SYNCH_METHOD, DP_TYPE_RAW},
+  {DPID_UNLOCK_METHOD_MODIFY, DP_TYPE_RAW},
+  {DPID_UNLOCK_METHOD_DELETE, DP_TYPE_RAW},
+  {DPID_UNLOCK_METHOD_CREATE, DP_TYPE_RAW},
+  {DPID_INITIATIVE_MESSAGE, DP_TYPE_RAW},
+  {DPID_ALARM_LOCK, DP_TYPE_ENUM},
+  {DPID_ARMING_SWITCH, DP_TYPE_BOOL},
+  {DPID_DOOR_INPUT_OK_KIT, DP_TYPE_RAW},
+  {DPID_UNLOCK_ADMIN_KIT, DP_TYPE_RAW},
+  {DPID_ENFORCE_LOCK_UP, DP_TYPE_BOOL},
+  {DPID_UNLOCK_DOUBLE_KIT, DP_TYPE_RAW},
+  {DPID_CANCLE_REMOTE_CREATE, DP_TYPE_BOOL},
+  {DPID_REMOTE_DELETE_PSW, DP_TYPE_VALUE},
+  {DPID_REMOTE_DELETE_ACK, DP_TYPE_BOOL},
+  {DPID_LOCK_ALLOW_DELETE, DP_TYPE_BOOL},
+  {DPID_QUERY_CREATE_TYPE, DP_TYPE_BOOL},
+  {DPID_DOORBELL, DP_TYPE_BOOL},
+  {DPID_CHILD_LOCK, DP_TYPE_BOOL},
+};
+
+
+/******************************************************************************
+                        2:Serial single-byte send function
+Please fill in the MCU serial port send function into the function,
+and pass the received data as a parameter to the serial port send function.
+******************************************************************************/
+extern UART_HandleTypeDef huart2;
+extern volatile uint8_t Tuya_Tx_State_FLAG;
+/**
+ * @brief  Send data processing
+ * @param[in] {value} Serial port receives byte data
+ * @return Null
+ * @note   Please fill the MCU serial port sending function into this function 
+ *            and pass the received data into the serial port sending function as parameters
+ */
+
+void uart_transmit_output(unsigned char value)
+{
+    //#error "Please fill in the MCU serial port send function and delete the line"
+
+	// Wait for the transmit data register to be empty
+	// while (!LL_USART_IsActiveFlag_TXE(USART2)) {}
+	// // Send the character
+	// LL_USART_TransmitData8(USART2, value);
+    Tuya_Tx_State_FLAG = HAL_UART_Transmit(&huart2, &value, 1, 15);
+/*
+    //Example:
+    extern void Uart_PutChar(unsigned char value);
+    Uart_PutChar(value);	                                //Serial port send function
+*/
+}
+/******************************************************************************
+                           Step 2: Implement a specific user function
+1:APP send data processing
+2:Data upload processing
+******************************************************************************/
+
+/******************************************************************************
+                            1:All data upload processing
+The current function handles all data upload (including deliverable/reportable and report only)
+
+  Users need to implement according to the actual situation:
+  1:Need to implement the reportable/reportable data point report
+  2:Need to report only reported data points
+This function must be called internally by the MCU.
+Users can also call this function to achieve all data upload.
+******************************************************************************/
+
+//Automated generation of data reporting functions
+
+/**
+ * @brief  All dp point information of the system is uploaded to realize APP and muc data synchronization
+ * @param  Null
+ * @return Null
+ * @note   This function SDK needs to be called internally;
+ *         The MCU must implement the data upload function in the function;
+ *         including only reporting and reportable hair style data.
+ */
+void all_data_update(void)
+{
+    //#error "Please process the reportable data and report only the data. After the processing is completed, delete the line",
+    // RAW type data report
+    // if(mcu_dp_raw_update(DPID_REMOTE_NO_PD_SETKEY, remote_no_pd_setkey_ptr, remote_no_pd_setkey_len) == SUCCESS){}
+    // if(mcu_dp_raw_update(DPID_REMOTE_NO_DP_KEY, remote_no_dp_key_ptr, remote_no_dp_key_len) == SUCCESS){}
+    // VALUE type data report
+    // if(mcu_dp_value_update(DPID_UNLOCK_FINGERPRINT, unlock_fingerprint) == SUCCESS){}
+    // if(mcu_dp_value_update(DPID_UNLOCK_PASSWORD, unlock_password) == SUCCESS){}
+    // if(mcu_dp_value_update(DPID_UNLOCK_CARD, unlock_card) == SUCCESS){}
+    // if(mcu_dp_value_update(DPID_RESIDUAL_ELECTRICITY, residual_electricity) == SUCCESS){}
+    // if(mcu_dp_value_update(DPID_UNLOCK_VOICE_REMOTE, unlock_voice_remote) == SUCCESS){}
+    // if(mcu_dp_value_update(DPID_UNLOCK_PHONE_REMOTE, unlock_phone_remote) == SUCCESS){}
+    // if(mcu_dp_value_update(DPID_AUTO_LOCK_TIME, auto_lock_time) == SUCCESS){}
+    // if(mcu_dp_value_update(DPID_TEMPORARY_PASSWORD_MODIFY, temporary_password_modify) == SUCCESS){}
+    // if(mcu_dp_value_update(DPID_TEMPORARY_PASSWORD_DELETE, temporary_password_delete) == SUCCESS){}
+    // if(mcu_dp_value_update(DPID_TEMPORARY_PASSWORD_CREAT, temporary_password_create) == SUCCESS){}
+    // ENUM type data report
+    // if(mcu_dp_enum_update(DPID_BATTERY_STATE, battery_state) == SUCCESS){}
+    // mcu_dp_raw_update(DPID_DOOR_INPUT_OK_KIT,current Added pointer,current Added data length);{} //RAW type data report;
+    // if(mcu_dp_enum_update(DPID_CLOSED_OPENED, door_status) == SUCCESS){}
+    // if(mcu_dp_enum_update(DPID_LOCK_MOTOR_DIRECTION, lock_motor_direction) == SUCCESS){}
+    // BOOL type data report
+    // if(mcu_dp_bool_update(DPID_REVERSE_LOCK, reverse_lock) == SUCCESS){}
+    // if(mcu_dp_bool_update(DPID_MESSAGE, message_notification) == SUCCESS){}
+    // if(mcu_dp_bool_update(DPID_OPEN_INSIDE, open_inside) == SUCCESS){}
+    // if(mcu_dp_bool_update(DPID_AUTOMATIC_LOCK, automatic_lock) == SUCCESS){}
+    // RAW type data report
+    // if(mcu_dp_raw_update(DPID_LOCK_LOCAL_RECORD, lock_local_record_ptr, lock_local_record_len) == SUCCESS){}
+    // if(mcu_dp_raw_update(DPID_INITIATIVE_MESSAGE, initiative_message_ptr, initiative_message_len) == SUCCESS){}
+}
+
+
+/******************************************************************************
+                                WARNING!!!    
+                            2:All data upload processing
+Automate code template functions, please implement data processing by yourself
+******************************************************************************/
+/*****************************************************************************
+Function name : dp_download_message_handle
+Function description : on DPID_MESSAGE processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_message_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isBOOL
+    unsigned char ret;
+    //0:off/1:on
+    unsigned char message;
+    
+    message = mcu_get_dp_download_bool(value,length);
+    if(message == 0) {
+        //bool off
+    }else {
+        //bool on
+    }
+  
+    //There should be a report after processing the DP
+    ret = mcu_dp_bool_update(DPID_MESSAGE,message);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_create_type_ack_handle
+Function description : on DPID_CREATE_TYPE_ACK processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_create_type_ack_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isENUM
+    unsigned char ret;
+    unsigned char create_type_ack;
+    
+    create_type_ack = mcu_get_dp_download_enum(value,length);
+    switch(create_type_ack) {
+        case 0:
+        break;
+        
+        case 1:
+        break;
+        
+        case 2:
+        break;
+        
+        case 3:
+        break;
+        
+        case 4:
+        break;
+        
+        case 5:
+        break;
+        
+        case 6:
+        break;
+        
+        case 7:
+        break;
+        
+        case 8:
+        break;
+        
+        case 9:
+        break;
+        
+        default:
+    
+        break;
+    }
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_enum_update(DPID_CREATE_TYPE_ACK, create_type_ack);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_create_ok_handle
+Function description : on DPID_CREATE_OK processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_create_ok_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isBOOL
+    unsigned char ret;
+    //0:off/1:on
+    unsigned char create_ok;
+    
+    create_ok = mcu_get_dp_download_bool(value,length);
+    if(create_ok == 0) {
+        //bool off
+    }else {
+        //bool on
+    }
+  
+    //There should be a report after processing the DP
+    ret = mcu_dp_bool_update(DPID_CREATE_OK,create_ok);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_remote_delete_fp_handle
+Function description : on DPID_REMOTE_DELETE_FP processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_remote_delete_fp_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isVALUE
+    unsigned char ret;
+    unsigned long remote_delete_fp;
+    
+    remote_delete_fp = mcu_get_dp_download_value(value,length);
+    /*
+    //VALUE type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_value_update(DPID_REMOTE_DELETE_FP,remote_delete_fp);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_remote_delete_cd_handle
+Function description : on DPID_REMOTE_DELETE_CD processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_remote_delete_cd_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isVALUE
+    unsigned char ret;
+    unsigned long remote_delete_cd;
+    
+    remote_delete_cd = mcu_get_dp_download_value(value,length);
+    /*
+    //VALUE type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_value_update(DPID_REMOTE_DELETE_CD,remote_delete_cd);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_synch_method_handle
+Function description : on DPID_SYNCH_METHOD processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed to return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_synch_method_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_SYNCH_METHOD,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_unlock_method_modify_handle
+Function description : on DPID_UNLOCK_METHOD_MODIFY processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_unlock_method_modify_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_UNLOCK_METHOD_MODIFY,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_unlock_method_delete_handle
+Function description : on DPID_UNLOCK_METHOD_DELETE processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_unlock_method_delete_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_UNLOCK_METHOD_DELETE,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_unlock_method_create_handle
+Function description : on DPID_UNLOCK_METHOD_CREATE processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_unlock_method_create_handle(const unsigned char value[], unsigned short length)
+{
+   //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_UNLOCK_METHOD_CREATE,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_link_mode_handle
+Function description : on DPID_LINK_MODE processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_link_mode_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isENUM
+    unsigned char ret;
+    unsigned char link_mode;
+    
+    link_mode = mcu_get_dp_download_enum(value,length);
+    switch(link_mode) {
+        case 0:
+        break;
+        
+        case 1:
+        break;
+        
+        case 2:
+        break;
+        
+        default:
+    
+        break;
+    }
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_enum_update(DPID_LINK_MODE, link_mode);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_unlock_voice_remote_handle
+Function description : on DPID_UNLOCK_VOICE_REMOTE processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed to return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_unlock_voice_remote_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isVALUE
+    unsigned char ret;
+    unsigned long unlock_voice_remote;
+    
+    unlock_voice_remote = mcu_get_dp_download_value(value,length);
+    /*
+    //VALUE type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_value_update(DPID_UNLOCK_VOICE_REMOTE,unlock_voice_remote);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_unlock_phone_remote_handle
+Function description : on DPID_UNLOCK_PHONE_REMOTE processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed to return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_unlock_phone_remote_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isVALUE
+    unsigned char ret;
+    unsigned long unlock_phone_remote;
+    
+    unlock_phone_remote = mcu_get_dp_download_value(value,length);
+    /*
+    //VALUE type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_value_update(DPID_UNLOCK_PHONE_REMOTE,unlock_phone_remote);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_local_capacity_link_handle
+Function description : on DPID_LOCAL_CAPACITY_LINK processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_local_capacity_link_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_LOCAL_CAPACITY_LINK,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+
+/*****************************************************************************
+Function name : dp_download_lock_motor_direction_handle
+Function description : on DPID_LOCK_MOTOR_DIRECTION processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_lock_motor_direction_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isENUM
+    unsigned char ret;
+    unsigned char lock_motor_direction;
+    
+    lock_motor_direction = mcu_get_dp_download_enum(value,length);
+    switch(lock_motor_direction) {
+        case 0:
+        break;
+        
+        case 1:
+        break;
+        
+        default:
+    
+        break;
+    }
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_enum_update(DPID_LOCK_MOTOR_DIRECTION, lock_motor_direction);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+
+/*****************************************************************************
+Function name : dp_download_automatic_lock_handle
+Function description : on DPID_AUTOMATIC_LOCK processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_automatic_lock_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isBOOL
+    unsigned char ret;
+    //0:off/1:on
+    unsigned char automatic_lock;
+    
+    automatic_lock = mcu_get_dp_download_bool(value,length);
+    if(automatic_lock == 0) {
+        //bool off
+    }else {
+        //bool on
+    }
+  
+    //There should be a report after processing the DP
+    ret = mcu_dp_bool_update(DPID_AUTOMATIC_LOCK,automatic_lock);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+
+/*****************************************************************************
+Function name : dp_download_auto_lock_time_handle
+Function description : on DPID_AUTO_LOCK_TIME processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_auto_lock_time_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isVALUE
+    unsigned char ret;
+    unsigned long auto_lock_time;
+    
+    auto_lock_time = mcu_get_dp_download_value(value,length);
+    /*
+    //VALUE type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_value_update(DPID_AUTO_LOCK_TIME,auto_lock_time);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+
+/*****************************************************************************
+Function name : dp_download_lock_local_record_handle
+Function description : on DPID_LOCK_LOCAL_RECORD processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_lock_local_record_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_LOCK_LOCAL_RECORD,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_initiative_message_handle
+Function description : on DPID_INITIATIVE_MESSAGE processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed to return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_initiative_message_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_INITIATIVE_MESSAGE,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_temporary_password_modify_handle
+Function description : on DPID_TEMPORARY_PASSWORD_MODIFY processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed to return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_temporary_password_modify_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_TEMPORARY_PASSWORD_MODIFY,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+
+/*****************************************************************************
+Function name : dp_download_temporary_password_delete_handle
+Function description : on DPID_TEMPORARY_PASSWORD_DELETE processing function
+Input parameter : value: Source data
+                  length: Data length
+Return parameter : Successful return: SUCCESS / Failed to return: ERROR
+Instructions for use : Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_temporary_password_delete_handle(const unsigned char value[], unsigned short length)
+{
+    // Example: The current DP type is RAW
+    unsigned char ret;
+    /*
+    // RAW type data processing
+    // ...
+    */
+    
+    // There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_TEMPORARY_PASSWORD_DELETE, value, length);
+    
+    // Check if the report was successful
+    if(ret == SUCCESS) {
+        return SUCCESS; // Successfully reported
+    } else {
+        return ERROR;   // Failed to report
+    }
+}
+/*****************************************************************************
+Function name    : dp_download_temporary_password_creat_handle
+Function description : Processing function for DPID_TEMPORARY_PASSWORD_CREAT
+Input parameter : value: Source data
+                   length: Data length
+Return parameter : Successful return: SUCCESS / Failed return: ERROR
+Instructions for use: Issue and report type, need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_temporary_password_creat_handle(const unsigned char value[], unsigned short length)
+{
+       //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_TEMPORARY_PASSWORD_CREAT,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_remote_no_pd_setkey_handle
+Function description : on DPID_REMOTE_NO_PD_SETKEY processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_remote_no_pd_setkey_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+	
+		for(value_index=13; value_index<21; value_index++) {
+    	stored_key[key_index] = value[value_index];
+    	key_index++;
+    }
+		const unsigned char value0[1] = {0};
+    mcu_dp_raw_update(DPID_REMOTE_NO_PD_SETKEY, value0, 1);	// Return 0x00 success
+		
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_REMOTE_NO_PD_SETKEY, value, length);
+    if(ret == SUCCESS) {
+    	return SUCCESS;
+    }
+    else {
+        return ERROR;
+    }
+//------------------------------------------------------------------------//	
+//  ret = mcu_dp_raw_update(DPID_REMOTE_NO_DP_KEY,value,length);
+//	
+//		if(ret == SUCCESS) 
+//    {
+//        if(value[0] == 1)
+//				{ 
+//					remotely_unlock_st = REMOTELY_UNLOCK_OPEN; 
+//				}
+//        else 
+//				{ 
+//					remotely_unlock_st = REMOTELY_UNLOCK_CLOSE;
+//				}
+//        return SUCCESS;
+//    }
+//		else
+//		{
+//			return ERROR;
+//		}
+//------------------------------------------------------------------------//		
+	
+}
+/*****************************************************************************
+Function name : dp_download_remote_no_dp_key_handle
+Function description : on DPID_REMOTE_NO_DP_KEY processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+extern uint8_t led_delay_flag;
+static unsigned char dp_download_remote_no_dp_key_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+//			const unsigned char value0[] = {1,0,0,stored_key[0],stored_key[1],stored_key[2],stored_key[3],stored_key[4],stored_key[5],stored_key[6],stored_key[7],0,0};
+//			mcu_dp_raw_update(DPID_REMOTE_NO_DP_KEY, value0, 13);
+    */
+  	unlockRequestDowncounter = 0;
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_REMOTE_NO_DP_KEY,value,length);
+    if(ret == SUCCESS) 
+    {
+        if(value[0] == 1){ remotely_unlock_st = REMOTELY_UNLOCK_OPEN; }
+        else 
+				{ 
+					Set_Voice_Add(VOICE_REJECTED);
+//					APP_Check = FAIL_CHECK;
+					led_delay_flag = 0;
+					led_all_reset();
+//					HAL_GPIO_WritePin(KEYPAD_LEDS_PORT, KEYPAD_LEDS_PIN, GPIO_PIN_RESET); // Turn off keypad LEDs
+					remotely_unlock_st = REMOTELY_UNLOCK_CLOSE;
+				}
+        return SUCCESS;
+    }
+		else
+		{
+			return ERROR;
+		}
+}
+
+/*****************************************************************************
+Function name : dp_download_door_input_ok_kit_handle
+Function description : on DPID_DOOR_INPUT_OK_KIT processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_door_input_ok_kit_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_DOOR_INPUT_OK_KIT,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+#ifdef USE_OLD_FUNCTIONS
+/*****************************************************************************
+Function name : dp_download_arming_switch_handle
+Function description : on DPID_ARMING_SWITCH processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_initiative_message_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_INITIATIVE_MESSAGE,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+#endif
+/*****************************************************************************
+Function name : dp_download_battery_percentage_handle
+Function description : on DPID_BATTERY_PERCENTAGE processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_battery_percentage_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isVALUE
+    unsigned char ret;
+    unsigned long battery_percentage;
+    
+    battery_percentage = mcu_get_dp_download_value(value,length);
+    /*
+    //VALUE type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_value_update(DPID_BATTERY_PERCENTAGE,battery_percentage);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_lock_motor_state_handle
+Function description : on DPID_LOCK_MOTOR_STATE processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_lock_motor_state_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isBOOL
+    unsigned char ret;
+    //0:off/1:on
+    unsigned char lock_motor_state;
+    
+    lock_motor_state = mcu_get_dp_download_bool(value,length);
+    if(lock_motor_state == 0) {
+        //bool off
+    }else {
+        //bool on
+    }
+  
+    //There should be a report after processing the DP
+    ret = mcu_dp_bool_update(DPID_LOCK_MOTOR_STATE,lock_motor_state);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/*****************************************************************************
+Function name : dp_download_lock_record_handle
+Function description : on DPID_LOCK_RECORD processing function
+Input parameter : value:Source data
+        : length:Data length
+Return parameter : Successful return:SUCCESS/Failed to return:ERROR
+Instructions for use : Issue and report type,need to report the result to App after data is dealt with
+*****************************************************************************/
+static unsigned char dp_download_lock_record_handle(const unsigned char value[], unsigned short length)
+{
+    //Example: The current DP type isRAW
+    unsigned char ret;
+    /*
+    //RAW type data processing
+    
+    */
+    
+    //There should be a report after processing the DP
+    ret = mcu_dp_raw_update(DPID_LOCK_RECORD,value,length);
+    if(ret == SUCCESS)
+        return SUCCESS;
+    else
+        return ERROR;
+}
+/******************************************************************************
+                                WARNING!!!                     
+The following function users do not modify!!
+******************************************************************************/
+/**
+ * @brief  dp delivery processing function
+ * @param[in] {dpid} DP number
+ * @param[in] {value} dp data buffer address
+ * @param[in] {length} dp data length
+ * @return Dp processing results
+ * -           0(ERROR): failure
+ * -           1(SUCCESS): success
+ * @note   The function user cannot modify
+ */
+unsigned char dp_download_handle(unsigned char dpid,const unsigned char value[], unsigned short length)
+{
+    /*********************************
+    Current function processing can issue/report data calls                    
+    Need to implement the data processing in the specific function
+    The result of the processing needs to be fed back to the APP, otherwise the APP will consider the delivery failure.
+    ***********************************/
+    unsigned char ret;
+    switch(dpid) {
+        case DPID_MESSAGE:
+            //SMS Notificationprocessing function
+            ret = dp_download_message_handle(value,length);
+        break;
+        case DPID_CREATE_TYPE_ACK:
+            //Added Method processing function
+            ret = dp_download_create_type_ack_handle(value,length);
+        break;
+        case DPID_REMOTE_DELETE_FP:
+            //Remotely Delete Fingerprintprocessing function
+            ret = dp_download_remote_delete_fp_handle(value,length);
+        break;
+        case DPID_REMOTE_DELETE_CD:
+            //Remotely Delete Card processing function
+            ret = dp_download_remote_delete_cd_handle(value,length);
+        break;
+        case DPID_REMOTE_NO_PD_SETKEY:
+            //Set Key for No-Code Unlockprocessing function
+            ret = dp_download_remote_no_pd_setkey_handle(value,length);
+        break;
+        case DPID_REMOTE_NO_DP_KEY:
+            //No-Code Unlockprocessing function
+            ret = dp_download_remote_no_dp_key_handle(value,length);
+        break;
+        case DPID_LOCK_MOTOR_DIRECTION:
+            //Door opening direction settingprocessing function
+            ret = dp_download_lock_motor_direction_handle(value,length);
+        break;
+        case DPID_AUTOMATIC_LOCK:
+            //Auto Lockprocessing function
+            ret = dp_download_automatic_lock_handle(value,length);
+        break;
+        case DPID_AUTO_LOCK_TIME:
+            //Auto Lock Delayprocessing function
+            ret = dp_download_auto_lock_time_handle(value,length);
+        break;
+        case DPID_DOOR_INPUT_OK_KIT:
+            //Addedprocessing function
+            ret = dp_download_door_input_ok_kit_handle(value,length);
+        break;
+        case DPID_LOCK_LOCAL_RECORD:
+            //Door lock local operation recordprocessing function
+            ret = dp_download_lock_local_record_handle(value,length);
+        break;
+        case DPID_LOCAL_CAPACITY_LINK:
+            ret = dp_download_local_capacity_link_handle(value, length);
+        break;
+        case DPID_INITIATIVE_MESSAGE:
+            //Active message pushprocessing function
+            ret = dp_download_initiative_message_handle(value,length);
+        break;
+        case DPID_CREATE_OK:
+            //Added processing function
+            ret = dp_download_create_ok_handle(value,length);
+        break;
+        case DPID_LOCK_MOTOR_STATE:
+            //Locking Statusprocessing function
+            ret = dp_download_lock_motor_state_handle(value,length);
+        break;
+        case DPID_LOCK_RECORD:
+            //Lock Recordsprocessing function
+            ret = dp_download_lock_record_handle(value,length);
+        break;
+        case DPID_TEMPORARY_PASSWORD_MODIFY:
+            //Temporary Password Modifyprocessing function
+            ret = dp_download_temporary_password_modify_handle(value,length);
+        break;
+        case DPID_TEMPORARY_PASSWORD_DELETE:
+            //Temporary Password Deleteprocessing function
+            ret = dp_download_temporary_password_delete_handle(value,length);
+        break;
+        case DPID_TEMPORARY_PASSWORD_CREAT:
+            //Temporary Password Creatprocessing function
+            ret = dp_download_temporary_password_creat_handle(value,length);
+        break;
+        case DPID_LINK_MODE:
+            //Link Modeprocessing function
+            ret = dp_download_link_mode_handle(value,length);
+        break;
+        case DPID_UNLOCK_VOICE_REMOTE:
+            //Unlock Voice Remoteprocessing function
+            ret = dp_download_unlock_voice_remote_handle(value,length);
+        break;
+        case DPID_UNLOCK_PHONE_REMOTE:
+            //Unlock Phone Remoteprocessing function
+            ret = dp_download_unlock_phone_remote_handle(value,length);
+        break;
+        case DPID_SYNCH_METHOD:
+            //Synch Methodprocessing function
+            ret = dp_download_synch_method_handle(value,length);
+        break;
+        case DPID_UNLOCK_METHOD_MODIFY:
+            //Unlock Method Modifyprocessing function
+            ret = dp_download_unlock_method_modify_handle(value,length);
+        break;
+        case DPID_UNLOCK_METHOD_DELETE:
+            //Unlock Method Deleteprocessing function
+            ret = dp_download_unlock_method_delete_handle(value,length);
+        break;
+        case DPID_UNLOCK_METHOD_CREATE:
+            //Unlock Method Createprocessing function
+            ret = dp_download_unlock_method_create_handle(value,length);
+        break;
+        case DPID_BATTERY_PERCENTAGE:
+            //Battery Percentageprocessing function
+            ret = dp_download_battery_percentage_handle(value,length);
+        break;
+
+      
+        default:
+        break;
+    }
+    return ret;
+}
+
+/**
+ * @brief  Get the sum of all dp commands
+ * @param[in] Null
+ * @return Sent the sum of the commands
+ * @note   The function user cannot modify
+ */
+unsigned char get_download_cmd_total(void)
+{
+    return(sizeof(download_cmd) / sizeof(download_cmd[0]));
+}
+
+
+
+/******************************************************************************
+                                WARNING!!!                     
+This code is called internally by the SDK. 
+Please implement the internal data of the function according to the actual dp data.
+******************************************************************************/
+#ifdef SUPPORT_MCU_RTC_CHECK
+/**
+ * @brief  MCU proofreads local RTC clock
+ * @param[in] {time} Get the time data
+ * @return Null
+ * @note   MCU needs to implement this function by itself
+ */
+void mcu_write_rtctime(unsigned char time[])
+{
+    // #error "Please complete the RTC clock write code yourself and delete the line"
+    /*
+    time[0] is the time success flag, 0 is a failure, and 1 is a success.
+    time[1] is the year and 0x00 is the year 2000.
+    time[2] is the month, starting from 1 to ending at 12
+    time[3] is the date, starting from 1 to 31
+    time[4] is the clock, starting from 0 to ending at 23
+    time[5] is minutes, starting from 0 to ending at 59
+    time[6] is seconds, starting from 0 to ending at 59
+    time[7] is the week, starting from 1 to 7 and 1 is Monday.
+   */
+    if(time[0] == 1) {
+        //Correctly receive the local clock data returned by the wifi module 
+     
+    }else {
+        //Error getting local clock data, it may be that the current wifi module is not connected
+    }
+}
+#endif
+
+unsigned char offline_time[6] = {0};
+#ifdef SUPPORT_GREEN_TIME
+/**
+ * @brief  Gets the green time
+ * @param[in] {time} Get the time data
+ * @return Null
+ * @note   After the MCU actively calls mcu_get_gelin_time, the Green Time can be obtained in this function
+ */
+void mcu_write_gltime(unsigned char gl_time[])
+{
+    //#error "Please complete the green time logging code yourself and delete the line"
+    /*
+    gl_time[0] is the time success flag, 0 is a failure, and 1 is a success.
+    gl_time[1] is the year and 0x00 is the year 2000.
+    gl_time[2] is the month, starting from 1 to ending at 12
+    gl_time[3] is the date, starting from 1 to 31
+    gl_time[4] is the clock, starting from 0 to ending at 23
+    gl_time[5] is minutes, starting from 0 to ending at 59
+    gl_time[6] is seconds, starting from 0 to ending at 59
+    gl_time[7] is the week, starting from 1 to 7 and 1 is Monday.
+    */
+
+    offline_time[0] = gl_time[1];
+    offline_time[1] = gl_time[2];
+    offline_time[2] = gl_time[3];
+    offline_time[3] = gl_time[4];
+    offline_time[4] = gl_time[5];
+    offline_time[5] = gl_time[6];
+    if(glDate.Month == 0) {
+        //Receive the green data returned by wifi module correctly
+
+    	//Store the green time data
+		glTime.Hours = gl_time[4];
+		glTime.Minutes = gl_time[5];
+		glTime.Seconds = gl_time[6];
+
+		glDate.Year = gl_time[1];
+		glDate.Month = gl_time[2];
+		glDate.Date = gl_time[3];
+		glDate.WeekDay = gl_time[7];
+        
+    RTC_TimeTypeDef sTime = {0};
+		RTC_DateTypeDef sDate = {0};
+
+        if(LL_RCC_GetRTCClockSource() != LL_RCC_RTC_CLKSOURCE_LSI)
+        {
+            LL_RCC_ForceBackupDomainReset();
+            LL_RCC_ReleaseBackupDomainReset();
+            LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSI);
+        }
+
+
+				hrtc.Instance = RTC;
+				hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+				hrtc.Init.AsynchPrediv = 127;
+				hrtc.Init.SynchPrediv = 255;
+				hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+				hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
+				hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+				hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+				hrtc.Init.OutPutPullUp = RTC_OUTPUT_PULLUP_NONE;
+				if (HAL_RTC_Init(&hrtc) != HAL_OK)
+				{
+					Error_Handler();
+				}
+				
+				sTime.Hours = __LL_RTC_CONVERT_BIN2BCD(glTime.Hours);
+				sTime.Minutes = __LL_RTC_CONVERT_BIN2BCD(glTime.Minutes);
+				sTime.Seconds = __LL_RTC_CONVERT_BIN2BCD(glTime.Seconds);
+				sTime.SubSeconds = 0x0;
+				sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+				sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+				if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+				{
+					Error_Handler();
+				}
+				sDate.WeekDay = glDate.WeekDay;
+				sDate.Month = __LL_RTC_CONVERT_BIN2BCD(glDate.Month);
+				sDate.Date = __LL_RTC_CONVERT_BIN2BCD(glDate.Date);
+				sDate.Year = __LL_RTC_CONVERT_BIN2BCD(glDate.Year);
+
+				if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
+				{
+					Error_Handler();
+				}
+				
+    }else {
+        //There is an error in obtaining the green time. It may be that the current wifi module is not connected to the Internet
+    }
+}
+#endif
+
+#ifdef WIFI_TEST_ENABLE
+/**
+ * @brief  Wifi function test feedback
+ * @param[in] {result} Wifi function test
+ * @ref       0: failure
+ * @ref       1: success
+ * @param[in] {rssi} Test success indicates wifi signal strength / test failure indicates error type
+ * @return Null
+ * @note   MCU needs to implement this function by itself
+ */
+void wifi_test_result(unsigned char result,unsigned char rssi)
+{
+    if(result == 0) {
+        //Test failed
+        if(rssi == 0x00) {
+            //Can't scan to the router named tuya_mdev_test, please check
+        }else if(rssi == 0x01) {
+            //Module not authorized
+        }
+    }else {
+        //Test success
+        //rssiis the signal strength (0-100, 0 signal is the worst, 100 signal is the strongest)
+    }
+}
+#endif
+
+/**
+ * @brief  MCU requests wifi module firmware upgrade to return results
+ * @param[in] {status} Check mark
+ * @return Null
+ * @note   After the MCU calls the wifi_update_request function, it can get the module to return the result
+ */
+void wifi_update_handle(unsigned char status)
+{ 
+    switch (status) {
+        case 0: {
+            //Start checking for firmware updates
+            break;
+        }
+
+        case 1: {
+            //It is the latest firmware
+            break;
+        }
+
+        case 2: {
+            //Updating the firmware
+            break;
+        }
+
+        case 3: {
+            //Firmware update successful
+            break;
+        }
+
+        case 4: {
+            //Firmware update failed
+            break;
+        }
+
+        default:
+        break;
+    }
+}
+
+#ifdef SUPPORT_MCU_FIRM_UPDATE
+/**
+ * @brief  MCU requests MCU firmware upgrade
+ * @param  Null
+ * @return Null
+ * @note   After the active call of the MCU is completed, the current status of the upgrade can be obtained in the mcu_update_handle function
+ */
+void mcu_update_request(void)
+{ 
+    wifi_uart_write_frame(MCU_UG_REQ_CMD, 0);
+}
+
+/**
+ * @brief  MCU request mcu firmware upgrade return function
+ * @param[in] {status} Check mark
+ * @return Null
+ * @note   After the MCU actively calls the mcu_update_request function, the current status of the upgrade can be obtained in this function
+ */
+void mcu_update_handle(unsigned char status)
+{ 
+    #error "Please complete the mcu upgrade status processing code yourself and delete this line"
+
+    switch (status) {
+        case 0: {
+            //Start checking for firmware updates
+            break;
+        }
+
+        case 1: {
+            //Already the latest firmware
+            break;
+        }
+
+        case 2: {
+            //Updating firmware
+            break;
+        }
+
+        case 3: {
+            //Successful firmware update
+            break;
+        }
+
+        case 4: {
+            //Firmware update failed
+            break;
+        }
+
+        default:
+        break;
+    }
+}
+
+/**
+ * @brief  MCU enters firmware upgrade mode
+ * @param[in] {value} Firmware buffer
+ * @param[in] {position} The current data packet is in the firmware location
+ * @param[in] {length} Current firmware package length (when the firmware package length is 0, it indicates that the firmware package is sent)
+ * @return Null
+ * @note   MCU needs to implement this function by itself
+ */
+unsigned char mcu_firm_update_handle(const unsigned char value[],unsigned long position,unsigned short length)
+{
+    #error "Please complete the MCU firmware upgrade processing code yourself. Please delete the line after completion"
+    if(length == 0) {
+        //Firmware data transmission completed
+    }else {
+        //Firmware data processing
+    }
+    
+    return SUCCESS;
+}
+#e
+#endif
+
+#ifdef REPORTED_MCU_SN_ENABLE
+/**
+ * @brief  MCU reports SN result
+ * @param[in] {result} 0:Reported successfully  1:Report failed
+ * @return Null
+ * @note   MCU needs to implement this function by itself
+ */
+void mcu_sn_updata_result(unsigned char result)
+{
+    #error "Please complete the MCU reports SN result processing code yourself. Please delete the line after completion"
+    if(0 == result) {
+        //Reported successfully
+    }else {
+        //Report failed
+    }
+}
+#endif
+
+#ifdef WIFI_RESET_NOTICE_ENABLE
+/**
+ * @brief  Module reset status notification
+ * @param[in] {result} Status result
+ * @return Null
+ * @note   The MCU needs to call the mcu_sn_updata function first, and then process the received result in this function
+ */
+void wifi_reset_notice(unsigned char result)
+{
+    switch(result) {
+        case 0x00:
+            //Module local reset
+        break;
+        
+        case 0x01:
+            //APP remote reset
+        break;
+        
+        case 0x02:
+            //APP factory reset
+        break;
+        
+        case 0x03:
+            //Local data is cleared, but the device does not leave the network
+        break;
+        
+        default:break;
+    }
+    wifi_uart_write_frame(WIFI_RESET_NOTICE_CMD, 0);
+}
+#endif

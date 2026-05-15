@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/CMakeFiles/bootloader
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/CMakeFiles/bootloader.rule
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/CMakeFiles/bootloader-complete.rule
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

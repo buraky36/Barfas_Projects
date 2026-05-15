@@ -1,0 +1,13 @@
+# Task Execution Checklist
+- `[ ]` Add global `app_is_access_granted()` helper.
+- `[ ]` Update Wiegand logic to ignore input in Standalone mode (`config.working_mode == 1`).
+- `[ ]` Update Door Open logic to support Relay Toggle (`config.relay_time == 0`).
+- `[ ]` Build complete `* -> UserID -> # -> OldPIN -> # -> NewPIN -> # -> Repeat->#` offline PIN change logic.
+- `[ ]` Add failure animation logic (3 Slow Beeps + Solid Red) for failed user ID checks.
+- `[ ]` Menu 2 (Add User): overhaul to support specific ID, keypad PIN, and auto-assign.
+- `[ ]` Menu 3 (Delete User): support `3 -> MasterCode -> #` to delete all.
+- `[ ]` Menu 4: Toggle supported via relay logic.
+- `[ ]` Menu 5 (Access Mode): Apply `app_is_access_granted()` check before auth.
+- `[ ]` Menu 6 (Working Mode): Block all keys except `9` in Wiegand Reader Mode.
+- `[ ]` Menu 7 (Door Detection): Correct keys to `7->3->#` and `7->4->X->#`.
+- `[ ]` Universal: Ensure `*` immediately exits programming mode cleanly.

@@ -1,0 +1,387 @@
+/**
+ * @file Tuya_App.c
+ * @author adem marangoz (adem.marangoz95@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2023-10-17
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
+//______________________________ Include Files _________________________________
+#include "main.h"
+#include "Tuya_App.h"
+#include "wifi.h"
+#include "mcu_api.h"
+#include "Leds.h"
+#include "AP23xxx_G0x.h"
+#include "Motor_Driver.h"
+#include "common.h"
+#include "Tsm12.h"
+#include "Battery.h"
+//==============================================================================
+
+
+//_____________________________ Generic Objects ________________________________
+static void check_communcation();
+void Check_Input(Input_Typedef _input, Check_Typedef _check, uint8_t id);
+void Smart_Lock_IO();
+static void Unlock_remotly();
+static void send_battery_state();
+volatile uint32_t check_communcation_counter = 0;
+#define TIMEOUT_REPAIR_CONNICATION      20000
+#define UNAVAILABLE_ID 0xFF
+uint8_t unlockRequestDowncounter = 0;
+uint8_t unlock_remotly_counter = 0;
+volatile Remotely_Unlock_state remotely_unlock_st = REMOTELY_UNLOCK_IDEL;
+extern UART_HandleTypeDef huart2;
+unsigned char tuya_RxByte;
+
+volatile uint8_t failed_password_led_off_flag = 0;
+
+volatile uint8_t Tuya_notification_flag = 0;
+volatile uint32_t Tuya_notification_timer = 0;
+
+volatile uint8_t FP_Check_Tuya;
+volatile uint8_t TSM_Check_Tuya;
+volatile uint8_t RFID_Check_Tuya;
+volatile uint8_t APP_Check_Tuya;
+//==============================================================================
+
+static void check_communcation()
+{
+    uint8_t cur_wifi_com_state = mcu_get_wifi_work_state();
+    if((cur_wifi_com_state == LOW_POWER_STATE) && (check_communcation_counter > TIMEOUT_REPAIR_CONNICATION))
+    {
+        mcu_reset_wifi();
+        check_communcation_counter = 0;
+    }else
+    {
+    }
+}
+
+
+void Set_RTC_By_Tuya()
+{
+		uint8_t cur_wifi_com_state = mcu_get_wifi_work_state();
+    if(cur_wifi_com_state == WIFI_CONN_CLOUD)
+			mcu_get_gelin_time();
+}
+
+
+/**
+ * @brief The function relies on the input provided by the user, as well as the input's validity and the user's ID.
+ *
+ */
+#include "Flash.h"
+extern volatile uint8_t Tsm_control_flag;
+extern volatile uint8_t FP_control_flag;
+extern volatile uint8_t RF_control_flag;
+void Smart_Lock_IO()
+{
+  if((FP_Check == SUCCESS_CHECK)   || (TSM_Check == SUCCESS_CHECK)  || (RFID_Check == SUCCESS_CHECK) || (APP_Check == SUCCESS_CHECK)) 
+	{
+		FP_Check_Tuya 	= FP_Check;
+		TSM_Check_Tuya 	= TSM_Check;
+		RFID_Check_Tuya = RFID_Check;
+		APP_Check_Tuya 	= APP_Check;
+		
+		Tsm_control_flag = 1;
+		if(Flash_DataBase[0].Flash_DataBase_ST.RFID_State == 1)
+		{
+			Flash_DataBase[0].Flash_DataBase_ST.RFID_State = 0;
+			RF_control_flag = 1;
+		}
+		if(Flash_DataBase[0].Flash_DataBase_ST.FP_State == 1)
+		{
+			Flash_DataBase[0].Flash_DataBase_ST.FP_State = 0;
+			FP_control_flag = 1;
+		}
+		
+		HAL_GPIO_WritePin(FP_EN_VCC_GPIO_Port,FP_EN_VCC_Pin, GPIO_PIN_SET);
+		
+    //True input
+		err_counter = 0;
+    Confi_RGB(RGB_GREEN); // blink green led
+    Set_Motor_Active_State(MOTOR_CW); // run motor forword cw
+    Set_Voice_Add(VOICE_OPEN_DOOR); // play door opened voice
+    _Reset_And_Clear_Tsm_buffer(); // reset TSM buffer
+    _Reset_And_Clear_Temp_buffer(); // reset TSM temp buffer
+		
+		if(FP_Check == SUCCESS_CHECK) 
+			Check_Input(FP_INPUT, SUCCESS_CHECK, common_id);
+		else if(TSM_Check == SUCCESS_CHECK) 
+			Check_Input(TSM_INPUT, SUCCESS_CHECK, common_id);
+		else if(RFID_Check == SUCCESS_CHECK) 
+			Check_Input(RFID_INPUT, SUCCESS_CHECK, common_id);
+		else if(APP_Check == SUCCESS_CHECK)
+			Check_Input(APP_INPUT, SUCCESS_CHECK, common_id);
+ 
+  }else if ((FP_Check == FAIL_CHECK) || (TSM_Check == FAIL_CHECK) || (RFID_Check == FAIL_CHECK)) // Error input
+  {
+		FP_Check_Tuya 	= FP_Check;
+		TSM_Check_Tuya 	= TSM_Check;
+		RFID_Check_Tuya = RFID_Check;
+		APP_Check_Tuya 	= APP_Check;
+		
+		if(FP_Check == FAIL_CHECK) {
+			Check_Input(FP_INPUT, FAIL_CHECK, UNAVAILABLE_ID);
+		}else if(TSM_Check == FAIL_CHECK) {
+			Check_Input(TSM_INPUT, FAIL_CHECK, UNAVAILABLE_ID);
+		}else if(RFID_Check == FAIL_CHECK) {
+			Check_Input(RFID_INPUT, FAIL_CHECK, UNAVAILABLE_ID);
+		}
+		
+    Confi_RGB(RGB_RED); // blinking red led
+    // increment err counter and if err_counter == 5 then play system locked voice
+    if(++err_counter != ERROR_COUNTER){Set_Voice_Add(VOICE_WORNG_ENTRY);}
+  }
+	if((FP_Check_Tuya != IDLE_CHECK)   || (TSM_Check_Tuya != IDLE_CHECK)  || (RFID_Check_Tuya != IDLE_CHECK) || (APP_Check_Tuya != IDLE_CHECK))
+	{
+		if(!Tuya_notification_flag)
+		{
+			uint8_t cur_wifi_com_state = mcu_get_wifi_work_state();
+			if(cur_wifi_com_state == WIFI_CONN_CLOUD)
+			{
+				Tuya_notification_flag = 0;
+				FP_Check_Tuya 	= IDLE_CHECK;
+				TSM_Check_Tuya 	= IDLE_CHECK;
+				RFID_Check_Tuya = IDLE_CHECK;
+				APP_Check_Tuya 	= IDLE_CHECK;
+			}
+			else
+			{
+				Tuya_notification_flag = 1;
+			}
+		}
+	}
+	
+  if(admin_id == ADMIN_ID_SECCESFUL) { success_admin_login(); admin_id  = ADMIN_ID_IDLE;}//Setting -> admin password TRUE
+  else if(admin_id == ADMIN_ID_FAIL){fail_ademin_login(); admin_id  = ADMIN_ID_IDLE;}//Setting -> admin password FALSE
+	
+	if(Tuya_notification_flag == 1)
+	{
+		uint8_t cur_wifi_com_state = mcu_get_wifi_work_state();
+		if(cur_wifi_com_state == WIFI_CONN_CLOUD)
+		{
+			Tuya_notification_flag = 0;
+			Tuya_notification_timer = 0;
+			if((FP_Check_Tuya == SUCCESS_CHECK)   || (TSM_Check_Tuya == SUCCESS_CHECK)  || (RFID_Check_Tuya == SUCCESS_CHECK) || (APP_Check_Tuya == SUCCESS_CHECK)) 
+			{
+				if(FP_Check_Tuya == SUCCESS_CHECK)
+					mcu_dp_value_update(DPID_UNLOCK_FINGERPRINT, common_id); // Report fingerprint unlock						
+				else if(TSM_Check_Tuya == SUCCESS_CHECK) 
+					mcu_dp_value_update(DPID_UNLOCK_PASSWORD, common_id); // Report password unlock
+				else if(RFID_Check_Tuya == SUCCESS_CHECK) 
+					mcu_dp_value_update(DPID_UNLOCK_CARD, common_id); // Report card unlock
+				else if(APP_Check_Tuya == SUCCESS_CHECK)
+					mcu_dp_value_update(DPID_UNLOCK_APP, 0);
+			}
+			else if((FP_Check_Tuya == FAIL_CHECK) || (TSM_Check_Tuya == FAIL_CHECK) || (RFID_Check_Tuya == FAIL_CHECK))
+			{
+				if(FP_Check_Tuya == FAIL_CHECK) {
+					mcu_dp_enum_update(DPID_ALARM_LOCK, TUYA_WRONG_FINGERPRINT); // Report wrong fingerprint as alert
+				}else if(TSM_Check_Tuya == FAIL_CHECK) {
+					mcu_dp_enum_update(DPID_ALARM_LOCK, TUYA_WRONG_PASSWORD); // Report wrong password as alert
+				}else if(RFID_Check_Tuya == FAIL_CHECK) {
+					Check_Input(RFID_INPUT, FAIL_CHECK, UNAVAILABLE_ID);
+				}
+			}
+			FP_Check_Tuya 	= IDLE_CHECK;
+			TSM_Check_Tuya 	= IDLE_CHECK;
+			RFID_Check_Tuya = IDLE_CHECK;
+			APP_Check_Tuya 	= IDLE_CHECK;
+		}
+	}
+}
+
+/**
+ * @brief Handles user input validation and updates values based on input type, validity, and user ID.
+ *
+ * @param _input Input type based on @INPUT_TYPE_DEFINITION
+ * @param _check ID validity based on @VALIDITY_TYPE_DEFINITION
+ * @param id User ID
+ */
+void Check_Input(Input_Typedef _input, Check_Typedef _check, uint8_t id)
+{
+	switch(_input) {
+		case FP_INPUT:	// If the input is fingerprint
+			if(_check == SUCCESS_CHECK)
+				mcu_dp_value_update(DPID_UNLOCK_FINGERPRINT, id); // Report fingerprint unlock
+			else if(_check == FAIL_CHECK)
+				mcu_dp_enum_update(DPID_ALARM_LOCK, TUYA_WRONG_FINGERPRINT); // Report wrong fingerprint as alert
+			FP_Check = IDLE_CHECK; // Set FP_Check to IDLE_CHECK
+		break;
+		case TSM_INPUT: // If the input is password
+			if(_check == SUCCESS_CHECK)
+				mcu_dp_value_update(DPID_UNLOCK_PASSWORD, id); // Report password unlock
+			else if(_check == FAIL_CHECK)
+			{
+				failed_password_led_off_flag = 1;
+				mcu_dp_enum_update(DPID_ALARM_LOCK, TUYA_WRONG_PASSWORD); // Report wrong password as alert
+			}
+			TSM_Check = IDLE_CHECK; // Set TSM_Check to IDLE_CHECK
+		break;
+		case RFID_INPUT: // If the input is card
+			if(_check == SUCCESS_CHECK)
+				mcu_dp_value_update(DPID_UNLOCK_CARD, id); // Report card unlock
+			else if(_check == FAIL_CHECK)
+				mcu_dp_enum_update(DPID_ALARM_LOCK, TUYA_WRONG_CARD); // Report wrong card as alert
+			RFID_Check = IDLE_CHECK; // Set RFID_Check to IDLE_CHECK
+		break;
+    case APP_INPUT:
+      if(_check == SUCCESS_CHECK)
+        {mcu_dp_value_update(DPID_UNLOCK_APP, 0);} // Report card unlock
+      APP_Check = IDLE_CHECK;
+    break;
+		default: // If en error occurs and something else entered as input
+      APP_Check  = IDLE_CHECK;
+			FP_Check 	 = IDLE_CHECK; // Set FP_Check to IDLE_CHECK
+			TSM_Check  = IDLE_CHECK; // Set TSM_Check to IDLE_CHECK
+			RFID_Check = IDLE_CHECK; // Set RFID_Check to IDLE_CHECK
+		break;
+	}
+}
+
+static void Unlock_remotly()
+{
+  static uint32_t tickstart = 0;
+
+  switch (remotely_unlock_st)
+  {
+    case REMOTELY_UNLOCK_IDEL:
+      break;
+    case REMOTELY_UNLOCK_WAIT:
+      if(unlock_remotly_counter)
+      {
+          if(unlockRequestDowncounter <= UNLOCK_REQUEST_TIME_SEC)
+          {
+            mcu_dp_value_update(DPID_UNLOCK_REQUEST, unlockRequestDowncounter);
+            unsigned char value[1] = {0};
+            mcu_dp_raw_update(DPID_REMOTE_NO_PD_SETKEY, value,0);
+            if(unlockRequestDowncounter == 0){remotely_unlock_st = REMOTELY_UNLOCK_IDEL;}
+          }
+          unlock_remotly_counter = 0;
+      }
+      break;
+    case REMOTELY_UNLOCK_OPEN:
+        mcu_dp_enum_update(DPID_CLOSED_OPENED, 1);
+        mcu_dp_value_update(DPID_UNLOCK_REQUEST, 0);
+//         mcu_dp_bool_update(DPID_LOCK_MOTOR_STATE, 1);
+//         mcu_dp_value_update(DPID_UNLOCK_APP, 0);
+//         Confi_RGB(RGB_GREEN);
+//         Set_Motor_Active_State(MOTOR_CW);
+//         Set_Voice_Add(VOICE_OPEN_DOOR);
+        APP_Check = SUCCESS_CHECK;
+        remotely_unlock_st = REMOTELY_UNLOCK_WAIT_AFTER_OPEN;
+        common_id = 1;
+      break;
+    case REMOTELY_UNLOCK_CLOSE:
+        mcu_dp_enum_update(DPID_CLOSED_OPENED, 2);
+        mcu_dp_value_update(DPID_UNLOCK_REQUEST, 0);
+        mcu_dp_bool_update(DPID_LOCK_MOTOR_STATE, 0);
+        remotely_unlock_st = REMOTELY_UNLOCK_IDEL;
+      break;
+    case REMOTELY_UNLOCK_WAIT_AFTER_OPEN:
+      if(tickstart == 0){tickstart = HAL_GetTick();}
+      if((HAL_GetTick() - tickstart) > 5000) {tickstart = 0; remotely_unlock_st = REMOTELY_UNLOCK_CLOSE;}
+      break;
+    
+    default:
+      break;
+  }
+}
+
+static uint8_t battery_update_flag = 0;
+void update_battery_state(uint8_t flag)
+{
+  battery_update_flag = flag;
+}
+
+static void send_battery_state()
+{
+  if(battery_update_flag)
+  {
+    uint8_t cur_wifi_com_state = mcu_get_wifi_work_state();
+    if(cur_wifi_com_state == WIFI_CONN_CLOUD)
+    {
+			mcu_dp_enum_update(DPID_BATTERY_STATE, Calc_BAT_Level());
+			battery_update_flag = 0;
+		}
+    
+  }
+}
+
+//______________________________ Global Functions ______________________________
+uint8_t DPID_QUERY_CREATE_TYPE0 = 0;
+uint8_t DPID_QUERY_CREATE_TYPE1 = 0;
+uint8_t DPID_CREATE_TYPE_ACK0 = 0;
+uint8_t DPID_CREATE_TYPE_ACK1 = 0;
+uint8_t DPID_CREATE_TYPE_ACK2 = 0;
+uint8_t DPID_CREATE_TYPE_ACK3 = 0;
+uint8_t DPID_CREATE_TYPE_ACK4 = 0;
+uint8_t DPID_DOOR_INPUT_OK_KIT1 = 0;
+uint8_t OFFLINE_DYN_PW_CMD1 = 0;
+uint8_t Get_time1 = 0;
+unsigned char value11[10] = {0};
+extern unsigned char offline_time[6];
+
+uint8_t Tuya_loop()
+{
+  check_communcation(); // System and Tuya Module connection - state Wifi module reet
+//  Set_RTC_By_Tuya(); // System Watch Update
+  Smart_Lock_IO(); // System Input TRUE - FALSE  > AND >  Setting Admin Password TRUE - FALSE
+  Unlock_remotly();
+  send_battery_state();
+
+  if(DPID_DOOR_INPUT_OK_KIT1)
+	{
+		DPID_DOOR_INPUT_OK_KIT1 = 0; 
+		offline_dynamic_password(offline_time,value11,10);
+	}
+  if(OFFLINE_DYN_PW_CMD1)
+	{
+		OFFLINE_DYN_PW_CMD1 = 0; 
+		mcu_dp_raw_update(0x16, value11,sizeof(value11));
+	}
+  if(DPID_QUERY_CREATE_TYPE0)
+	{
+		DPID_QUERY_CREATE_TYPE0 = 0; 
+		mcu_dp_bool_update(DPID_QUERY_CREATE_TYPE, 0);
+	}
+	if(DPID_QUERY_CREATE_TYPE1)
+	{
+		DPID_QUERY_CREATE_TYPE1 = 0; 
+		mcu_dp_bool_update(DPID_QUERY_CREATE_TYPE, 1);
+	}
+  if(DPID_CREATE_TYPE_ACK0){DPID_CREATE_TYPE_ACK0 = 0; mcu_dp_enum_update(DPID_CREATE_TYPE_ACK, 0);}
+  if(DPID_CREATE_TYPE_ACK1){DPID_CREATE_TYPE_ACK1 = 0; mcu_dp_enum_update(DPID_CREATE_TYPE_ACK, 1);}
+  if(DPID_CREATE_TYPE_ACK2){DPID_CREATE_TYPE_ACK2 = 0; mcu_dp_enum_update(DPID_CREATE_TYPE_ACK, 2);}
+  if(DPID_CREATE_TYPE_ACK3){DPID_CREATE_TYPE_ACK3 = 0; mcu_dp_enum_update(DPID_CREATE_TYPE_ACK, 3);}
+  return 0;
+}
+
+
+
+void tuya_init(void) {
+  HAL_UART_Receive_IT(&huart2, &tuya_RxByte, 1);
+///	LL_GPIO_ResetOutputPin(WBR1_EN_GPIO_Port, WBR1_EN_Pin);
+//	LL_GPIO_SetOutputPin(WIFI_SET_BUTTON_GPIO_Port, WIFI_SET_BUTTON_Pin);
+///	HAL_Delay(500); // Wait for 500ms
+///	LL_GPIO_SetOutputPin(WBR1_EN_GPIO_Port, WBR1_EN_Pin);
+//	LL_GPIO_ResetOutputPin(WIFI_SET_BUTTON_GPIO_Port, WIFI_SET_BUTTON_Pin);
+//	HAL_Delay(3000); // Wait for 3 seconds
+///	HAL_Delay(500);
+	wifi_protocol_init();
+	HAL_Delay(250); // Wait for a second
+	wifi_uart_write_frame(SCHEDULE_TEMP_PASS_CMD, 0);
+//	HAL_Delay(2000); // Wait for a second
+//	wifi_uart_write_frame(GET_LOCAL_TIME_CMD,0);
+	HAL_Delay(500); // Wait for a second
+	wifi_uart_write_frame(GET_GL_TIME_CMD,0);// Green TIME for Cloud password
+	HAL_Delay(250); // Wait for a second  
+	
+//	mcu_set_wifi_mode(SMART_CONFIG);
+}
+//==============================================================================

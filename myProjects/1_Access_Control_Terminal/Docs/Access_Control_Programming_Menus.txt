@@ -1,0 +1,258 @@
+Menu 0. Update Master Code
+Menu 1. Add Master Card (Burayı yeni ekledik. Diğer menüleri kaydırdık.)
+Menu 2. Add User
+Menu 3. Delete User
+Menu 4. Set Relay Configuration
+Menu 5. Set Access Mode
+Menu 6. Set the Working Mode
+Menu 7. Set Open Door Detection
+Menu 8. Set Audible and Visual Response
+Menu 9. Set Wiegand Input-Output Formats
+
+
+A.	Enter and Exit Program Mode
+	a. Enter Program Mode (Factory default ise 123456)
+* → (Master Code) → #  
+	b. Exit Program Mode
+*
+
+B.	Set Master Code
+	a. Enter Program Mode
+	* → (Master Code) → #
+	b. Update Master Code (Master code is any 6 digits)
+	0 → (New Master Code) → # → (Repeat New Master Code) → # 
+	c. Exit Program Mode
+	*
+
+C.	Add Master Card (The Master ID: 10000-10010)
+	a. Enter Program Mode (Factory default ise 123456)
+* → (Master Code) → #
+	b. Using Master ID (Allows the device to assign Card to next available Master ID number)
+1 → Read Card → #
+1 → Input 8/10/17 Digits Card Number → #
+The cards can be added contionusly.
+ 	b. Using Specific ID (Allows Master to define a specific Master ID to associate the card to)
+1 → Master → # → Read Card → # 
+1 → Master → # → Input 8/10/17 Digits Card Number → #
+	c. Exit Program Mode
+*
+
+D.	Add Users (The User Card / PIN User ID: 1-9988)
+	a. Enter Program Mode (Factory default ise 123456)
+* → (Master Code) → # 
+	b. Using Auto ID Add Card User (Allows the device to assign Card to next available User ID number)
+2 → Read Card → #
+2 → Input 8/10/17 Digits Card Number → #
+The cards can be added contionusly.
+	b. Using Specific ID Add Card User (Allows Master to define a specific User ID to associate the card to)
+2 → UserID → # → Read Card → # 
+2 → UserID → # → Input 8/10/17 Digits Card Number → #
+	b. Add Card: Block Enrollment (Allow Master to add up to 200 cards to the Reader in a single step) Takes 2 minutes to program.
+2 → UserID → # → Card Quantity → # → The First Card 8/10/17 Digits Number → #
+Card’s number must be consecutive; 
+Card quantity = number of cards to be enrolled.
+	b. Add PIN User : Select Specific ID (Allows manager to define a specific User ID to associate the UserPIN to)
+2 → (UserID) → Input (4-6) Digits UserPIN → #
+UserPIN lenght: 4~6 digits).
+The pins can be added contionusly.
+	c. Exit Program Mode
+	*
+
+Notes:
+Tips for UserPIN Security (Only validfor 6digits UserPIN): 
+For higher security we allow you to hide your correct UserPIN with other numbers up to a max of 10 digits. 
+Example UserPIN: 123434 
+You could use **(123434) ** or ** (123434) 
+(“*”can be any numbers from 0~9)
+
+E.	Change PIN Users (PIN lenght: 4~6 digits)
+Note: Below is done outside programming modei users can undertake this themselves
+	a. Change UserPIN
+* → UserID → # → OldUserPIN → # → NewUserPIN → # → Repeat NewUserPIN → #
+
+F.	Delete Users
+	a. Enter Program Mode (Factory default ise 123456)
+* → (Master Code) → #
+	b. Delete User – by Read Card
+3 → ReadCard → #  
+The users can be deleted continuously
+	b. Delete User – by ID
+3 → UserID → #
+	b. Delete User – by CardNumber
+3 → Input 8/10/17 Digits Card Number → #
+	b. Delete ALL Users
+3 → Master Code → #
+3 → Master Card → #
+	c. Exit Program Mode
+	*
+
+G.	Set Relay Configuration
+	a. Enter Program Mode (Factory default ise 123456)
+* → (Master Code) → #
+	b. Pulse Mode
+4 → 1~99 → #  (Factory Default)
+The relay time is 1-99 seconds.
+Default is 5 seconds.
+	b. Toggle Mode
+4 → 0 → #
+Sets the relay to ON/OFF Toggle mode
+	c. Exit Program Mode
+	*
+
+H.	Set Access Mode
+Bu konfigürasyon 5. Menü oluyor. Ama burayı kaldıracağız. İlerde ekleyebiliriz. 
+Fabrika çıkışında cihaz 2 farklı yazılım ve donanımla çıkacak.
+1. UserPIN + QR
+2. UserPIN + RFID
+şeklinde. Bu menü kalsın ama kapalı olsun.
+
+I.	Set the Working Mode
+Notes: The device has 3 working modes:Standalone Mode, Controller Mode and Wiegand Reader Mode, choose the mode you use. (Factory default is Standalone Mode)
+	a. Enter Program Mode (Factory default ise 123456)
+* → (Master Code) → #
+	b. Standalone Mode
+6 → 7 → # (Factory Deafult)
+	b. Controller Mode
+6 → 8 → #
+	b. Wiegand Reader Mode
+6 → 9 → #
+	c. Exit Program Mode
+	*
+
+J.	Set Open Door Detection
+	a. Enter Program Mode (Factory default ise 123456)
+* → (Master Code) → #
+	b. Disable Door Open Detection 
+7 → 3 → # (Factory Default)
+	b. Enable Door Open Detection Set Alarm Time
+7 → 4 → 0~3(Factory Default is 1 minutes) → # 
+	c. Exit Program Mode
+	*
+
+K.	Set Audible and Visual Response
+	a. Enter Program Mode (Factory default ise 123456)
+* → (Master Code) → #
+	b. Disable Sound
+8 → 0 → #
+	b. Enable Sound
+8 → 1 → # (Factory Default)
+	b. Led Always OFF
+8 → 2 → # 
+	b. Led Always ON
+8 → 3 → #  (Factory Default)
+	c. Exit Program Mode
+	*   
+
+L.	Set Wiegand Input/Output Formats
+	a. Enter Program Mode (Factory default ise 123456)
+* → (Master Code) → #
+	b. Wiegand Input bits (in Controller Mode)
+For 26bits 9 → 26 → #
+For 34bits 9 → 34 → #
+(Factory Default is 34bits)
+	b. Wiegand Output bits (in Wiegand Reader Mode)
+For 26bits 9 → 26 → #
+For 34bits 9 → 34 → #
+(Factory Default is 34bits)
+	b. PIN Output bits (in Controller Mode)
+For 4bit PIN output  9 → 4 → #
+For 8bit PIN output  9 → 8 → #
+For 10bit PIN output 9 → 10 → #
+(Factory Default is 4bit Output)
+	c. Parity Bit (in Controller and Wiegand Reader Mode)
+For Disable Parity Bit 9 → 0 → #
+For Enable Parity  Bit 9 → 1 → #
+(Factory Default is Enable Parity)
+	d. Exit Program Mode
+	*  
+Note: For connecting Wiegand controller with 32,40,56 bits input, need disable
+parity bits.
+
+Keypad format for Wiegand connection When the digit key is pressed, 
+four bits of data are transmitted every time the key is pressed, 
+and finally ends with ‘#’ to inform the host that the key input is completed. 
+
+Note: Please confirm your card reader (model with -K) and access control terminal 
+or access controller support opening door with password through Wiegand reader connection.  
+
+KKKK 
+K: key value bit 
+Bits 1-4: the value of the key 
+Hexadecimal            button 
+0x01                   1 
+0x02                   2 
+0x03                   3 
+0x04                   4 
+0x05                   5 
+0x06                   6 
+0x07                   7 
+0x08                   8 
+0x09                   9 
+0x0A                   * 
+0x0B                   # 
+
+M.	Master Card Usage
+Using Master Card to ADD and DELETE User
+Description: Burada Master Card kullanılarak kullanıcı Card ve kullanıcı PIN ekleme ve silme fonksiyonu anlatılmaktadır.
+User Card ve UserPIN eklemek için 1.adımda Master Card okutulur. 
+2. adımda User Card okutulur ya da UserID girilir, # girilir, PIN girilir ve 2.adım tamamlanır. 
+2.adım başka kullanıcılar için tekrarlanabilir.
+Son adımda Master Card tekrar okutulur yapılan işlemler kaydedilir ve işlem başarılı uyarısı verir cihaz. 
+
+User Card ve ya UserID silmek için 1.adımda Master Card 5 saniye içerisinde 2 kez okutulur.
+2. adımda User Card okutulur ya da UserID girilir, # girilir.
+2. adım başka kullanıcılar için tekrarlanabilir.
+Son adımda Master Card tekrar okutulur yapılan işlemler kaydedilir ve işlem başarılı uyarısı verir cihaz.
+
+	a. Add Card or PIN 
+1. Read the Master Card.
+2. Read User Card or UserID → # Input (4-6) Digits UserPIN → #  
+Repeat step 2 for additional users.
+3. Read the Master Card again.
+	b. Delete Card
+1. Read the Master Card Twice within 5sec.
+2. Read User Card or UserID → # 
+Repeat step 2 for additional users.
+3. Read the Master Card again.
+
+N.	Users Operation & Reset to Factory Default
+	a. Open the Door: Read Valid User Card or Input Valid UserPIN → # 
+	b. Remove Alarm: Enter MasterCode → # or Read Master Card or Valid User Card or Enter UserPIN
+	c. To reset to factory default : Triggered by entering '0' five times on the keypad within the first 10 seconds after power-on.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+ 
+ 

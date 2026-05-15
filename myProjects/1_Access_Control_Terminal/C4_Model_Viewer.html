@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C4 Model: Access Control Terminal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .diagram-container {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .description {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        @media print {
+            .diagram-container {
+                page-break-inside: avoid;
+                border: none;
+                background-color: white;
+            }
+        }
+    </style>
+    <!-- Include Mermaid from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+
+    <h1>C4 Model: Smart Access Control Terminal</h1>
+    <p>This document outlines the architecture of the Smart Access Control Terminal using the C4 model framework. You can use your browser's Print feature (Ctrl+P or Cmd+P) to "Save as PDF".</p>
+
+    <!-- Level 1: System Context -->
+    <h2>Level 1: System Context Diagram</h2>
+    <p class="description">The System Context diagram provides a high-level view of the Access Control Terminal and how it interacts with its environment, including users and external systems.</p>
+    <div class="diagram-container">
+        <div class="mermaid">
+        C4Context
+            title System Context for Access Control Terminal
+
+            Person(personnel, "Personnel", "Employee or visitor requesting access")
+            Person(admin, "Administrator", "Manages device configuration via Mobile App")
+
+            System(act_system, "Access Control Terminal", "Smart device that authenticates users and controls physical access")
+            
+            System_Ext(central_server, "Central Server", "Remote backend server for log storage, central auth, and configs")
+            System_Ext(door_hardware, "External Door Hardware", "Physical door locks, exit buttons, and door sensors")
+            System_Ext(master_controller, "Master Controller (Optional)", "External Wiegand/OSDP controller when device is in Reader Mode")
+
+            Rel(personnel, act_system, "Presents RFID, QR code, or PIN to")
+            Rel(admin, act_system, "Provisions Wi-Fi and configures via BLE using Mobile App")
+            
+            Rel(act_system, central_server, "Sends event logs and fetches config/auth via HTTPS", "Wi-Fi (HTTP/S)")
+            Rel(act_system, door_hardware, "Controls locks, monitors sensors via GPIO")
+            Rel(act_system, master_controller, "Sends badge data to", "Wiegand / OSDP")
+        </div>
+    </div>
+
+    <!-- Level 2: Container -->
+    <h2>Level 2: Container Diagram</h2>
+    <p class="description">The Container diagram zooms into the Access Control Terminal to show the high-level executable/storage containers running on the ESP32 microcontroller.</p>
+    <div class="diagram-container">
+        <div class="mermaid">
+        C4Container
+            title Container Diagram for Access Control Terminal
+
+            System_Boundary(act_system, "Access Control Terminal") {
+                Container(firmware, "Firmware Application", "C / ESP-IDF (FreeRTOS)", "Handles hardware interactions, business logic, auth, and state management")
+                ContainerDb(nvs_storage, "NVS Storage", "Flash Memory", "Stores device configuration (Network, Keys, Mode) and offline logs")
+            }
+            
+            System_Ext(central_server, "Central Server", "Remote backend server")
+            System_Ext(door_hardware, "Door Hardware", "Locks & Sensors")
+            Person(personnel, "Personnel", "User")
+            Person(admin, "Administrator", "Admin Configurator")
+
+            Rel(personnel, firmware, "Interacts by swiping card, typing PIN, scanning QR")
+            Rel(admin, firmware, "Configures via BLE")
+            
+            Rel(firmware, nvs_storage, "Reads/Writes Configs & Logs", "NVS API")
+            Rel(firmware, central_server, "Sends/Receives Data", "JSON/HTTPS")
+            Rel(firmware, door_hardware, "Sends electrical signals", "GPIO")
+        </div>
+    </div>
+
+    <!-- Level 3: Component -->
+    <h2>Level 3: Component Diagram</h2>
+    <p class="description">The Component diagram zooms into the <b>Firmware Application</b> container to show its internal logical components and sub-modules as identified from the current project structure.</p>
+    <div class="diagram-container">
+        <div class="mermaid">
+        C4Component
+            title Component Diagram for Firmware Application
+
+            Container_Boundary(firmware, "Firmware Application") {
+                
+                Component(event_bus, "Event Bus", "Message Queue", "Facilitates asynchronous communication between system components")
+                Component(state_machine, "State Machine", "C State Logic", "Core logic engine managing CONTROLLER and READER modes")
+                Component(auth_engine, "Auth Engine", "C Logic", "Validates user credentials against local rules or routes to central server")
+                Component(door_control, "Door Control", "C Logic", "Manages lock timings, exit button logic, and door status")
+
+                Boundary(drivers, "Hardware Drivers") {
+                    Component(rfid_drv, "RFID Driver", "SPI/UART", "Reads smart cards")
+                    Component(qr_drv, "QR Reader Driver", "UART/Camera", "Reads QR codes")
+                    Component(keypad_drv, "Keypad Driver", "Interrupts/I2C", "Reads PIN inputs")
+                    Component(led_ui_drv, "LED/UI Driver", "GPIO/PWM", "Controls LEDs and Buzzer feedback")
+                }
+
+                Boundary(comm, "Communication Interfaces") {
+                    Component(wifi_mgr, "Wi-Fi Manager", "ESP-IDF API", "Manages Wi-Fi connection and reconnection")
+                    Component(ble_prov, "BLE Provisioning", "NimBLE", "Handles BLE endpoints for setup and config")
+                    Component(server_comm, "Server Communication", "HTTP Client", "Handles secure requests to central server")
+                    Component(wiegand_comm, "Wiegand Interface", "GPIO/Interrupts", "Communicates with legacy Wiegand controllers")
+                    Component(osdp_comm, "OSDP Interface", "RS485", "Communicates securely using OSDP protocol")
+                }
+
+                Component(sys_monitor, "System Monitor", "Task", "Monitors battery, tamper switch, and system health")
+                Component(dev_config, "Device Config", "Data Struct", "In-RAM representation of active settings loaded from storage")
+            }
+
+            ContainerDb(nvs_storage, "NVS Storage", "Flash Memory", "Persistent Configuration")
+            System_Ext(door_hardware, "Door Hardware", "Locks & Sensors")
+            System_Ext(central_server, "Central Server", "HTTP/S backend")
+
+            Rel(rfid_drv, event_bus, "Publishes scan events")
+            Rel(keypad_drv, event_bus, "Publishes PIN events")
+            Rel(qr_drv, event_bus, "Publishes QR events")
+            
+            Rel(event_bus, state_machine, "Consumes events")
+            Rel(state_machine, auth_engine, "Requests validation")
+            Rel(state_machine, door_control, "Commands to unlock")
+            
+            Rel(door_control, door_hardware, "Triggers relays via GPIO")
+            Rel(door_control, led_ui_drv, "Updates status LEDs via GPIO")
+
+            Rel(auth_engine, server_comm, "Validates via cloud (if enabled)")
+            Rel(server_comm, central_server, "HTTP/S requests")
+            
+            Rel(state_machine, dev_config, "Reads active mode")
+            Rel(dev_config, nvs_storage, "Loads settings on boot")
+            
+            Rel(wifi_mgr, ble_prov, "Receives credentials via BLE fallback")
+        </div>
+    </div>
+
+</body>
+</html>

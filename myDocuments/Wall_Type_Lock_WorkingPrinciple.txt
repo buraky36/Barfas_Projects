@@ -1,0 +1,107 @@
+
+Yen proje başlatalım. Projeyi VS code PlatformIO ile geliştireceğim.
+
+Proje detayları:
+Title : Duvar Tipi Kapı Kilidi
+Varyasyonlar : 
+1. QR
+A. Online
+B. Offline
+
+2. RFID
+A. Online
+B. Offline
+
+3. RFID + Touch Numpad
+A. Online 
+B. Offline 
+
+Proje varyasyonlarını #ifdef yapılarıyla seçebilmeliyim. Tek bir yazılım projesi olmalı.
+
+Online ve Offline versiyonlar için 2 ayrı protokol mevcuttur. Bunları paylaşabilirim.
+
+Online versiyonlar : Online versiyonlar ilk etapta BLE based WiFi provisioning yaparlar ve kurulumunu tamamlar.QR ,RFID ve ya Touch ile gelen ID numberlar WiFi aracılığıyla sunucu tarafına gönderilir. 
+Sorgu sonucuna göre wifi üzerinden dönüş olur. Dönen cevaba göre röle tetiklenir yani kapı açılır. 
+
+Offline versiyonlar : Offline versiyoonlar ilk etapta Master-Key ile kurulumunu tamamlar. QR ,RFID ve ya Touch ile gelen ID numberları kendi sorgular. Burada oluşturulan özel bir protokol vardır. QR, 
+RFID ya da tuş takımı ile okunan paket uygunsa röle tetiklenir yani kapı açılır. 
+
+Cihazın aynı zamanda Wiegand(D0-D1) ve OSDP (RS485 üzerinden) protokolleri de mevcuttur.
+
+Cihaz kapı kilidini açmak için Röleyi tetikler.
+
+Cihazda 12 adet Numpad için 1 adette Wi-Fi bağlantısı için led bulunmaktadır.
+12 adet Numpad ledleri cihaz runtime sürekli yanar. Kullanıcı numpad üzerinden şifre girerse, bastığı her bir number ledi 1 saniye boyunca yavaş blink eder. 
+Wi-Fi ledi ise tarama yaparken hızlı blink yapar, bağlantı başarılı olursa sürekli yanar. Bağlantı kurmaya başlanıp başarılı olunamazsa(yanlış şifre vb.) 3 kere blink edip söner.
+
+Cihazda kullanılan donanımlar : 
+
+MCU : ESP32-WROOM-32E-N4
+RFID : MFRC522
+TOUCH IC : TSM12MC
+QR Module :  QR1300V1.10.1
+
+Donanımda kullanılacak pinler : 
+Pin  	Pin Label  	GPIO  	Purpose	Config.
+4	SENSOR_VP	GPIO36	RFID_MISO	
+5	SENSOR_VN	GPIO39	QR_RX	
+6	IO34	GPIO34	RS485_RX	
+7	IO35	GPIO35	RFID_IRQ	Open Drain
+8	IO32	GPIO32	TSM_SDA	
+9	IO33	GPIO33	TSM_SCL	
+10	IO25	GPIO25	QR_TX	
+11	IO26	GPIO26	RS485_TX	
+12	IO27	GPIO27	TSM_OUT	Open Drain
+13	IO14	GPIO14	TSM_INT	Open Drain
+14	IO12	GPIO12		
+16	IO13	GPIO13		
+17	SHD/SD2	GPIO9		
+18	SWP/SD3	GPIO10		
+19	SCS/CMD	GPIO11		
+20	SCK/CLK	GPIO6		
+21	SDO/SD0	GPIO7		
+22	SDI/SD1	GPIO8		
+23	IO15	GPIO15		
+24	IO2	GPIO2		
+25	IO0	GPIO0		
+26	IO4	GPIO4	ShiftReg-Clock	
+27	IO16	GPIO16	ShiftReg-Data	
+28	IO17	GPIO17	ShiftReg-Latch	
+29	IO5	GPIO5		
+30	IO18	GPIO18	RFID_SCK	
+31	IO19	GPIO19	RFID_MOSI	
+33	IO21	GPIO21	RFID_CS	
+34	RXD0	GPIO3		
+35	TXD0	GPIO1		
+36	IO22	GPIO22	Wiegand-D0	
+37	IO23	GPIO23	Wiegand-D1	
+
+
+ESP32 pinleri yetmeyeceğinden projede 2 adet 74HC595 kullanacağız. 
+74HC595-1	Purpose	Config.
+QA	LED_EN_1	
+QB	LED_EN_2	
+QC	LED_EN_3	
+QD	LED_EN_4	
+QE	LED_EN_5	
+QF	LED_EN_6	
+QG	LED_EN_7	
+QH	LED_EN_8	
+74HC595-2		
+QA	LED_EN_9	
+QB	LED_EN_10	
+QC	LED_EN_11	
+QD	LED_EN_12	
+QE	WiFi_LED_EN	
+QF	RELAY1	
+QG	TSM_I2C_EN	Active High
+QH	TSM_RST	Active Low
+
+
+
+
+
+
+
+
+

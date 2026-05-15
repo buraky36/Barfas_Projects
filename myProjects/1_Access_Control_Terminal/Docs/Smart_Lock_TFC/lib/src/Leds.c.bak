@@ -1,0 +1,128 @@
+
+/**
+ * @file Leds.c
+ * @author Adem Marangoz (adem.marangoz@barfas.com)
+ * @brief This Leds driven
+ * @version 0.1
+ * @date 2023-06-09
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+
+//______________________________ Include Files _________________________________
+#include "Leds.h"
+
+//==============================================================================
+
+
+//------------------------------ General Objects -------------------------------
+static RGB_Typedef RGB_State = {0};
+extern volatile uint8_t counter_temp_pass = 0;
+static void reset_leds();
+static uint32_t starttick = 0;
+static uint32_t starttick1 = 0;
+static uint32_t blue_time = 0;
+//==============================================================================
+
+
+//______________________________ Global Functions ______________________________
+/**
+ * @brief reset RGB leds
+ */
+static void reset_leds()
+{
+    HAL_GPIO_WritePin(RGB_BLUE_GPIO_Port, RGB_BLUE_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin, GPIO_PIN_SET);
+}
+
+
+/**
+ * @brief Blinking led according to rgb variable and doing blinking according to _reset_state variable 
+ * 
+ * @param rgb The color of LED to be run
+ * @param _reset_state 1 : reset all leds, 0 : toggle led 
+ */
+void Set_RGB(RGB_Typedef rgb, uint8_t _reset_state)
+{
+    if(_reset_state)
+    {
+        reset_leds();
+    }
+   switch (rgb)
+   {
+       case RGB_IDLE:  break;
+       case RGB_BLUE:  HAL_GPIO_TogglePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin);  RGB_State = RGB_BLUE;   break;
+       case RGB_RED:   HAL_GPIO_TogglePin(RGB_RED_GPIO_Port, RGB_RED_Pin);      RGB_State = RGB_RED;    break;
+       case RGB_GREEN: HAL_GPIO_TogglePin(RGB_BLUE_GPIO_Port, RGB_BLUE_Pin);    RGB_State = RGB_GREEN;  break;
+       default:        break;
+   }
+}
+
+
+/**
+ * @brief Determine the first color to light
+ * 
+ * @param rgb The color of LED to be run
+ */
+void Confi_RGB(RGB_Typedef rgb)
+{
+    RGB_State = rgb;
+    Set_RGB(rgb, 1);
+    starttick1 = 0;
+    if(rgb == RGB_BLUE){blue_time = 7000;}
+}
+
+
+/**
+ * @brief RGB LED color conversion according to the states (durations defined by STANDART_TIME)
+ * 
+ */
+void Run_RGB()
+{
+
+    switch (RGB_State)
+    {
+        case RGB_BLUE:
+            if(starttick1 == 0){starttick1 = HAL_GetTick();}
+            else 
+            {
+                if((HAL_GetTick() - starttick1) > blue_time){ RGB_State = RGB_STOP;}
+            }
+            break;
+        case RGB_RED:
+            if(starttick1 == 0){starttick1 = HAL_GetTick();}
+            else
+            {
+                if((HAL_GetTick() - starttick1) > STANDART_TIME){
+                starttick1 = 0; Set_RGB(RGB_BLUE, 1); blue_time = 2500;}
+            }
+            break;
+        case RGB_GREEN:
+            if(starttick1 == 0){starttick1 = HAL_GetTick();}
+            else
+            {
+                
+                if((HAL_GetTick() - starttick1) > STANDART_TIME){
+                starttick1 = 0; Set_RGB(RGB_BLUE, 1); blue_time = 2500;}
+            }
+            break;
+        case RGB_STOP:
+            starttick1 = 0; reset_leds(); RGB_State = RGB_IDLE;    break;
+    
+        default:
+            break;
+    }
+}
+
+void get_temp_pass()
+{
+    if(counter_temp_pass)
+    {
+        mcu_get_schedule_temp_pass();
+        counter_temp_pass = 0;
+    }
+}
+//==============================================================================

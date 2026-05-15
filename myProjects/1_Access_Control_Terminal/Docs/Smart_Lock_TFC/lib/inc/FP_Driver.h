@@ -1,0 +1,411 @@
+
+/**
+ * @file Fingerprint.h
+ * @author Adem Marangoz (adem.marangoz95@gmail.com)
+ * @brief This Fingerprint drived by UART
+ * @version 0.1
+ * @date 2023-06-09
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+
+/**
+ * 
+ * /////////////////////////////// API GUIDE //////////////////////////////////
+ * This fingerprint sensor API was developed by BIOSEC and is named TM2876B15CM.
+ * You can refer to the document "BIOSE Capacitive integrated Fingerprint
+ * Module TM2876B15CM Product Specification" for a simplified overview of its
+ * technical features.
+ *             !!!!!!!!!!!!!!!!!!! NOTE !!!!!!!!!!!!!!!!!!!
+ * There is an error in the document on page 10 regarding the pin arrangement.
+ * It should be reversed.
+ *             ********************************************
+ * 
+ * This API is built on ARM microcontrollers. The HAL library supported by STM32
+ * was used.
+ * 
+ */
+
+
+#ifndef FP_DRIVER_H_
+#define FP_DRIVER_H_
+
+
+//______________________________ Include Files _________________________________
+
+#include <stdint.h>
+#include "main.h"
+#include <stdbool.h>
+#include "buffer.h"
+//==============================================================================
+
+
+/**
+ * @defgroup A set of definitions through which the user can specify the 
+ * activation of some or all sections in the use of Uart and also read the
+ *  Trigger Pin. @USER_DEFINITIONS
+ */
+    #define FINGER_SIGNAL_INTERRUPT         1
+    #define FINGER_TRANSMIT_POLLING         2
+    #define FINGER_TRANSMIT_DMA             3
+    #define FINGER_TRANSMIT_IT              4
+    #define FINGER_RECEIVE_POLLING          5
+    #define FINGER_RECEIVE_DMA              6
+    #define FINGER_RECEIVE_IT               7
+    #define FP_TX_TYPE                      FINGER_TRANSMIT_POLLING
+    #define FP_RX_TYPE                      FINGER_RECEIVE_POLLING
+
+//***************************************************************
+/**
+ * @brief init FinderPrint Function
+ * 
+ */
+   /*     Parameter Index List (PID):  */
+ #define REGISTER_MODE				 				 				0x0000
+ #define HOMOLOGY_LEVEL				 				 				0x0001
+ #define HAND_DETECTION_CONFIG				 				0x0002
+ #define FINGERPRINT_DETECTION_NUMBER				 	0x0003
+ #define FILM_ATTACK_DETECTION				 				0x0004
+ #define SELF_LEARNING_PRIORITY				 				0x0040
+ 
+ /*     PV: Parameter value  */
+ #define REGISTER_MODE_1CNR				 	0x05
+ #define REGISTER_MODE_NCNR				 	0x06
+ 
+ #define HOMOLOGY_LEVEL_0				 		0x00
+ #define HOMOLOGY_LEVEL_1				 		0x01
+ #define HOMOLOGY_LEVEL_2				 		0x02
+ #define HOMOLOGY_LEVEL_3				 		0x03
+ #define HOMOLOGY_LEVEL_4				 		0x04
+ #define HOMOLOGY_LEVEL_5				 		0x05
+ #define HOMOLOGY_LEVEL_6				 		0x06
+
+ #define HAND_DETECTION_NOT_LIFTING				0x00
+ #define HAND_DETECTION_LIFTING						0x01
+ 
+ #define FINGERPRINT_DETECTION_NUMBER_1				0x01
+ #define FINGERPRINT_DETECTION_NUMBER_2				0x02
+ #define FINGERPRINT_DETECTION_NUMBER_3				0x03
+ #define FINGERPRINT_DETECTION_NUMBER_4				0x04
+ #define FINGERPRINT_DETECTION_NUMBER_5				0x05
+ #define FINGERPRINT_DETECTION_NUMBER_6				0x06
+ #define FINGERPRINT_DETECTION_NUMBER_7				0x07
+ #define FINGERPRINT_DETECTION_NUMBER_8				0x08
+ #define FINGERPRINT_DETECTION_NUMBER_9				0x09
+ #define FINGERPRINT_DETECTION_NUMBER_10			0x0A
+ #define FINGERPRINT_DETECTION_NUMBER_11			0x0B
+ #define FINGERPRINT_DETECTION_NUMBER_12			0x0C
+ #define FINGERPRINT_DETECTION_NUMBER_13			0x0D
+ #define FINGERPRINT_DETECTION_NUMBER_14			0x0E
+ #define FINGERPRINT_DETECTION_NUMBER_15			0x0F
+ #define FINGERPRINT_DETECTION_NUMBER_16			0x10
+ #define FINGERPRINT_DETECTION_NUMBER_17			0x11
+ #define FINGERPRINT_DETECTION_NUMBER_18			0x12
+ #define FINGERPRINT_DETECTION_NUMBER_19			0x13
+ #define FINGERPRINT_DETECTION_NUMBER_20			0x14
+ 
+ #define FIRST_RETURN_SELF_LEARNING				0x00
+ #define SELF_LEARNING_BEFORE_RETURN			0x01
+
+ 
+ 
+ 
+ 
+/***************************************************/
+/**
+ * @brief The function used in sending and receiving is based on the name of another function name
+ * 
+ */
+typedef void (*VCC_Typedef)(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin,
+             GPIO_PinState PinState);
+typedef GPIO_PinState (*Signal_Typedef)(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+typedef HAL_StatusTypeDef (*TxPolling_Typedef)(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+typedef HAL_StatusTypeDef (*RxPolling_Typedef)(UART_HandleTypeDef *huart,
+                             uint8_t *pData, uint16_t Size, uint32_t Timeout);
+typedef HAL_StatusTypeDef (*RXTX_Typedef)(UART_HandleTypeDef *huart,
+                                         uint8_t *pData, uint16_t Size);
+
+/* Some important definitions that need to be configured before starting to use the library. */
+#define FP_VCC_PORT         GPIOA
+#define FP_VCC_PIN          GPIO_PIN_6
+#define FP_USART_INST       huart1
+#define FP_INT_SIGNAL_PORT  GPIOA
+#define FP_INT_SIGNAL_PIN   GPIO_PIN_7
+
+
+
+/**
+ * @defgroup ACK types return form Fingerprinter Sensor. @ACK_DEFINITIONS 
+ */
+#define FP_ACK_SUCCESS                      0x00    // Execution success                
+#define FP_ACK_FAIL                         0x01    // Execution failed                 
+#define FP_ACK_FULL                         0x04    // Fingerprint storage is full          
+#define FP_ACK_NOUSER                       0x05    // User does not exist              
+#define FP_ACK_USER_EXIST                   0x07    // User already exists              
+#define FP_ACK_TIMEOUT                      0x08    // Image acquisition timeout            
+#define FP_ACK_HARDWAREERROR                0x0A    // Hardware error                   
+#define FP_ACK_IMAGEERROR                   0x10    // Image acquisition error              
+#define FP_ACK_BREAK                        0x18    // Command terminated               
+#define FP_ACK_IMAGEFAIL                    0x84    // Image failure                    
+#define FP_ACK_ALGORITHMFAIL                0x11    // Thin film attack detection           
+#define FP_ACK_HOMOLOGYFAIL                 0x12    // Homology check error
+#define FP_ACK_CHKERROR                     0x22    // Checksum Error              
+#define FP_DATA_CORRECT                     0x00
+
+/**
+ * @defgroup CMD types can send it to Fingerprinter sensor by Uart.
+ * =========================== CMD Codes ===========================
+ * @CMD_DEFINITION 
+ */
+#define CMD_REGISTER_ONE				    0x01
+#define CMD_REGISTER_TWO				    0X02
+#define CMD_REGISTER_THREE				    0X03
+#define CMD_DELETE_SPECIFIC_USER		    0x04
+#define CMD_DELETE_ALL_USER				    0x05
+#define CMD_RESET_MODULE				    0x06
+#define CMD_AUTO_SET_LIGHT			        0X07
+#define CMD_SET_MODULE_SERIAL_NUM	   	    0x08
+#define CMD_GET_TOTAL_USER_NUM	    	    0x09
+#define CMD_GET_USER_ROLE				    0x0A
+#define CMD_VERIFY_ONE_TO_ONE			    0x0B
+#define CMD_VERIFY_ONE_TO_ALL			    0x0C
+#define USERID_VERIFY_ONE_TO_ALL			0x00
+#define ROLE_VERIFY_ONE_TO_ALL			    0x01
+#define CMD_SEARCH_NOT_USE_ID			    0x0D
+#define CMD_SET_BAUD					    0x21
+#define CMD_GET_FEA						    0x23             // Get the feature data of the captured image (CMD IS 8 BYTES / ACK > 8 BYTES)
+#define CMD_GET_FINGER_IMAGE			    0x24         // Get captured image (CMD IS 8 BYTES / ACK > 8 BYTES)
+#define CMD_IDENTIFY_TEMPLATE			    0x25
+#define CMD_GET_MODULE_VERSION			    0x26
+#define CMD_READ_MODULE_SET_DATA		    0x27
+#define CMD_SET_MATCH_LEVEL				    0x28
+#define CMD_READ_LIGHT_LEVEL			    0x29
+#define CMD_READ_SERIAL_NUM				    0x2A
+#define CMD_READ_ALL_USER_INFO			    0x2B
+#define CMD_ENTER_LOW_POWER_MODE		    0x2C
+#define CMD_SET_FINGER_ADD_MODE			    0x2D
+#define CMD_CHECK_FINGER_EXIST			    0x30
+#define CMD_READ_USER_FEATURE		        0x31
+#define CMD_W_FEA_TO_MODULE_STORE		    0x41
+#define CMD_W_FEA_TO_M_VERIFY_1_TO_1	    0x42
+#define CMD_W_FEA_TO_M_VERIFY_1_TO_N	    0x43
+#define CMD_W_FEA_TO_M_VERIFY_TO_IMG	    0x44
+#define CMD_VERIFY_IMG_AND_W_FEA_N		    0x45
+#define CMD_SET_MODULE_CONFIG_DATA		    0x46
+#define CMD_PROG_UPGRADE				    0x57
+#define CMD_GET_DEV_ID					    0x58
+#define CMD_GET_UNIQUEID                    0x60
+#define CMD_CALIBRATION					    0x80
+#define CMD_LOCK						    0x81
+#define CMD_UNLOCK						    0x82
+#define CMD_GET_AUTHORIZE				    0x87
+#define CMD_FEED_DOG					    0xC2
+#define CMD_Get_Video					    0xf0
+#define CMD_GET_IMG					        0xf1
+#define CMD_QUIT_GET_IMG				    0xf2
+#define CMD_DELETE_SPECIFIC_ROLE            0x54
+#define CMD_GET_SPECIFIC_ROLE_NUM           0x55
+#define CMD_BROADCAST_VOICE                 0x56
+#define CMD_LIFTING_HAND_DETECTION          0x3F
+#define CMD_UNLOCK_FLASH_CODE			    0xEE
+#define CMD_UNLOCK_JLINK        		    0xEF
+#define CMD_LIGHT                           0xC3
+#define ACK_ERROR_REGISRATION               0x03
+
+
+#define CMD_CONFIG_REG_MODE          0x3F
+
+/**
+ * @defgroup User ID values used in commands sent to the fingerprint sensor.
+ * =========================== USERID Codes ===========================
+ * @USERID_Defintion
+ */
+#define USERID_REGISTER                     0x0000
+#define USERID_NO_COMPARISON                0x0000
+// Breathing light
+#define USERID_RED_LIGHT1                   0x0307 // RED
+#define USERID_GREEN_LIGHT1                 0x0507 // GREEN
+#define USERID_BLUE_LIGHT1                  0x0607 // BLUE
+#define USERID_RED_GREEN_LIGHT1             0x0107 // RED AND GREEN
+#define USERID_RED_BLUE_LIGHT1              0x0207 // RED AND BLUE
+#define USERID_GREEN_BLUE_LIGHT1            0x0407 // GREEN AND BLUE
+// Gradient light
+#define USERID_RED_BLUE_LIGHT2              0x0306 // RED AND BLUE
+#define USERID_RED_GREEN_LIGHT2             0x0306 // RED AND GREEN
+#define USERID_GREEN_BLUE_LIGHT2            0x0306 // GREEN AND BLUE
+#define USERID_RED_GREEN_RED_BLUE_LIGHT     0x0306 // RED AND GREEN RED AND BLUE
+#define USERID_RED_GREEN_GREEN_BLUE_LIGHT   0x0306 // RED AND GREEN AND GREEN AND BLUE
+#define USERID_RED_BLUE_GREEN_BLUE_LIGHT    0x0306 // RED AND BLUEE AND GREEN AND BLUE
+// Monochrome light
+#define USERID_RED_LIGHT2                   0x0303
+#define USERID_GREEN_LIGHT2                 0x0505
+#define USERID_BLUE_LIGHT2                  0x0606
+#define USERID_RED_GREEN_LIGHT3             0x0101
+#define USERID_RED_BLUE_LIGHT3              0x0202
+#define USERID_GREEN_BLUE_LIGHT3            0x0202
+
+#define USERID_TURN_OFF_LIGHT               0x0707 // Turn off
+#define USERID_LIFTING_HAND_DETECTION       0x0002
+
+
+
+/**
+ * @defgroup Role values used in commands sent to the fingerprint sensor.
+ * ================== ROLE Codes ==================
+ * @ROLE_Defintion
+ */
+#define ROLE_LIGHT                          0x96 // Role Light
+#define ROLE_LIFTING_HAND_DETECTION         0x01
+#define ROLE_0                              0x00
+#define ROLE_1                              0x01 // Normal User
+#define ROLE_2                              0x02 // Admin User
+#define ROLE_3                              0x03 // Supervisor User
+#define ROLE_REGISTER                       0x01
+
+
+#define SOF_VALUE                           0xF5    // Start of Frame Command
+#define FP_DATA_LEN                         8       // Frame length
+#define FP_DATA_SIZE                        50      // FP Database element
+#define FP_TX_TIMEOUT                       700     // Timeout of transmit
+#define FP_RX_TIMEOUT                       3000    // Timeout of Receive
+
+/**
+ * @brief Fingerprint sensor's operational status
+ * @FP_Active_State_definition
+ */
+typedef enum
+{
+    FP_ACTIVE = 1,
+    FP_DISACTIVE
+}FP_Active_State;
+
+/**
+ * @brief Interrupt signal status of the fingerprint sensor
+ * @FP_Singal_State_definition
+ */
+typedef enum
+{
+    FP_RECEIVED_SIGNAL = 1,
+    FP_WAIT_SIGNAL
+}FP_Signal_State;
+
+extern volatile FP_Signal_State FP_Signal;
+
+
+/**
+ * @brief Data Format Structure for Transimit Or Receive Data Between 
+ * Fingerprint sensor and MCU . @DATA_FORMAT_DEFINITION
+ * @note You can refer to document XXXXX to learn more about the structure 
+ * of the transmitted and received data from the sensor.
+ */
+typedef struct
+{
+    uint8_t Sof;
+    uint8_t CMD_ACK;
+    uint8_t UserId1;
+    uint8_t UserId2;
+    uint8_t Role;
+    uint8_t Res;
+    uint8_t Chk;
+    uint8_t Eof;
+}FingerPring_Data_Frame;
+
+
+
+/**
+ * @brief state machine of fingerprint sensor
+ */
+typedef enum
+{
+    FP_IDLE,
+    FP_COMPARE_USER,
+    FP_COMPARE_ADMIN,
+    FP_REGISTERATION_USER,
+    FP_DELETE_USER_ID,
+    FP_REGISTERATION_ADMIN,
+    FP_DELETE_ADMIN_ID,
+    FP_SUPERVISOR,
+    FP_INACTIVE
+}FP_State_EN;
+
+
+/**
+ * @brief State of Abort Receive Data from FP sensor
+ * @Abort_Rec_definiton
+ */
+typedef enum
+{
+    Not_Abort_Rec = 0,
+    Abort_Rec
+}FP_Abort_Receive;
+
+
+
+/**
+ * @brief The structure of the drive is the fingerprint sensor.
+ */
+typedef struct 
+{
+    struct
+    {
+        UART_HandleTypeDef *Uartx;              // Pingerprint uses Uart to send and receive data
+                                                // This member base on hal library
+        GPIO_TypeDef* VCC_Port;                 // Fingerprint VCC port. This member base on hal library
+        GPIO_TypeDef* Signal_Port;              // Fingerprint Signal port uses to read trigger to run system
+                                                // This member base on hal library
+        uint16_t VCC_Pin;                       // Vcc Pin. 
+        uint16_t Signal_Pin;                    // Signal Pin.
+    }GPIOx;
+
+    VCC_Typedef VCC_Write;
+    #ifndef FINGER_SIGNAL_INTERRUPT
+        Signal_Typedef Signal_Read;
+    #endif
+
+    #if (FP_TX_TYPE == FINGER_TRANSMIT_POLLING)
+        TxPolling_Typedef Tx_Polling;
+    #elif (FP_TX_TYPE == FINGER_TRANSMIT_IT)
+        RXTX_Typedef Tx_IT;
+    #elif (FP_TX_TYPE == FINGER_TRANSMIT_DMA)
+        RXTX_Typedef Tx_DMA;
+    #endif
+
+    #if (FP_RX_TYPE == FINGER_RECEIVE_POLLING)
+        RxPolling_Typedef Rx_Polling;
+    #elif (FP_RX_TYPE == FINGER_RECEIVE_IT)
+        RXTX_Typedef Rx_IT;
+    #elif (FP_RX_TYPE == FINGER_RECEIVE_DMA)
+        RXTX_Typedef Rx_DMA;
+    #endif
+
+}Fingerprint_Driver;
+
+
+extern uint8_t LED_ON_OFF; // To indicate the status of the fingerprint sensor's LED.
+extern FP_State_EN FP_State; // To indicate the status or operating mode of the sensor.
+extern Fingerprint_Driver Finger1; // Fingerprint sensor structure.
+
+//==============================================================================
+
+
+//______________________________ Global Functions ______________________________
+HAL_StatusTypeDef FP_Init(void);
+uint8_t FP_Compare_Received_Data(void);
+uint8_t FP_Send_CMD(uint8_t CMD, uint16_t User_ID, uint8_t Role, FP_Abort_Receive _abort);
+uint8_t FP_Wait_Respons(void);
+FP_Active_State Get_FP_Active_State();
+void Set_FP_Active_State(FP_Active_State State);
+uint8_t Get_Role(uint16_t UserId);
+void Delete_User(ID_Type id_type);
+void Delete_All_User(void);
+uint16_t Register_User(ID_Type id_type);
+uint16_t Match_User(ID_Type id_type, uint8_t role);
+void FP_Task_F(void);
+void FP_Task(void);
+//==============================================================================
+
+
+
+#endif

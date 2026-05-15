@@ -1,0 +1,37 @@
+Menüyü tekrar değiştiriyorum. Kaldırdığımız Set Open Door Detection ı tekrar ekledim. 
+
+Menu 0. Update Master Code
+Menu 1. Add Master Card (Burayı yeni ekledik. Diğer menüleri kaydırdık.)
+Menu 2. Add User
+Menu 3. Delete User
+Menu 4. Set Relay Configuration
+Menu 5. Set Access Mode
+Menu 6. Set the Working Mode
+Menu 7. Set Open Door Detection
+Menu 8. Set Audible and Visual Response
+Menu 9. Set Wiegand Input-Output Formats
+
+Kodlamaya geçmeden şunlarıda belirteyim:
+Çalışma modlarımız:
+1. Standalone Mode
+Bu modda kayıtlı kullanıcılar için ve master için kapı açılacak. 10sn timeout ile aynı kullanıcı üst üste kapıyı açabilecek. Yani giriş çıkışta yön olmayacak.
+Bu modda Wiegand Input/Output haberleşmesi olmayacak.
+Digital Inputlar bu modda çalışacak.
+1.Dig_In : Exit Button : Direkt olarak kapıyı açabilir.
+2.Dig_In : Door Contact: Kapının Açık/Kapalı konumu algılamak için kullanacağız. Bu giriş LOW olduğunda kapı açık konumda olduğunu anlayacağız.
+
+2. Controller Mode:
+Bu modda kontrol edilen kapı için yön olacak. Cihaz kapının dışarısında olacak. PIN, Card ya da QR ile giriş yapan kullanıcı, 
+kapının diğer tarafında bulunan ve harici olarak cihaza bağlanan Wiegand Reader ile çıkış yapmadan tekrar giriş yapamayacak. Yani kullanıcı, kapıdan giriş yapmadan çıkış, çıkış yapmadan da giriş yapamayacak.
+Bu modda cihaza Wiegand girişinden harici bir Reader bağlanabilecek. Yani dahili inputları olan RFID, PIN ve QR okuyucularının yanı sıra, harici bağlanan Reader da UID gönderebilecek. 
+Bu mod set edildiğinde Wiegand Output Enable- Low a çekilmeli ki Wiegand direction-input olsun.
+Cihaz bu moda set edildiği zaman "Menu 9" Wiegand Data Formats ayarlayabilecek. Bu data formats alınacak Wiegand paketlerinin formatı olacak. 
+Digital Inputlar bu modda çalışacak.
+1.Dig_In : Exit Button : Direkt olarak kapıyı açabilir.
+2.Dig_In : Door Contact: Kapının Açık/Kapalı konumu algılamak için kullanacağız. Bu giriş LOW olduğunda kapı açık konumda olduğunu anlayacağız.
+
+3. Reader Mode:
+Cihaz bu moda set edildiği zaman sadece "Menu 9" konfigürasyonu yapılabilecek. Yani Wiegand Data Formats ayarlanabilecek. Bu data formats gönderilecek Wiegand paketlerinin formatı olacak. 
+Çünkü cihaz bu modda inputlarından okuduğu ID leri hiç bir işlem yapmadan Wiegand Outputundan gönderecek. 
+Bunu yapmadan önce Wiegand Output Enable pinini High yapacak. Bunu Wiegand direction-Output olarak ayarlamak için yapacak.
+Digital Inputlar bu modda çalışmayacak.

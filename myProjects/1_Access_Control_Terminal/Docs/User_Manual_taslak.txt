@@ -1,0 +1,156 @@
+Adım 1: Context (Sistem Bağlamı) Diyagramı
+
+Sistemin Adı Ne?  Akıllı Geçiş Kontrol Terminali
+
+Kullanıcı Kim? Son Kullanıcılar
+
+Dış Sistemler Neler? Uzak Sunucu, Main Geçiş Kontrol Sistemi ve Konfigürasyon yapılan Mobil App. Bunun dışında buton.
+
+
+
+Projenin temel amacı: 
+
+Cihaz temelde inputlarına göre access control yapıyor ve klitli kapıyı açıyor.
+
+
+
+Inputs:
+
+1. RFID Card
+
+2. Touch PIN
+
+3. QR Code
+
+4. Buton
+
+
+
+Cihaz gelen bu inputları konfigürasyonuna göre lokal database ine, uzak sunucuya(wi-fi) ve ya main access controller(OSDP protokolü ile) cihazına sorgulatabilir. Dönen cevaba göre de kapıyı açar. Doanımsal olarak bir röle kuru kontak çıkışı var. Bu çıkışla kapıyı açıyor. 2 adet digital input var. Bunlardan biriyle buton okuyor. Biriyle kapının durumunu feedback alıyor. Açık mı kapalı mı gibi. Kapı aç dedikten sonra açılmazsa arıza kaydı açabiliyor.
+
+
+
+Cihaz dünyaya geldiğinde bir test setupına bağlanacak. Ve enerjilendiğinde, cihaz yazılımı 1 kez test yazılımını başlatacak.(İlk başladığından hiç teste girdim mi ? Girdiysem geçtim mi diye sorgulayacak.)Testi başarılı geçmizse ana yazılımı başlayacak. Testten başarılı geçmemişse test yazılımı başlaması için dijital inputlardan 1 inden sinyal bekleyecek. Sinyal geldikten sonra donanım testlerini yapacak. Son olarak test personeli yardımı gereken donanımları(rfid kart okutması, led görsel testi vb.) test edecek. Akabinden test başarılı tamamlanmış olacak.
+
+
+
+Bu aşamadan sonra cihaz konfigürasyon modunda olacak ve Active edilmeyi bekleyecek. Konfigürasyonu Admin kartıyla, Bluetooth bağlantısı ile mobil app üzerinden ya da wi-fi bağlantısı ile uzak sunucu tarafından alabilir. Uzak sunucu konfigürasyonu için cihaz BLE provisioning ile wi-fi ağına katılmalı.
+
+
+
+Cihazın alabileceği konfigürasyonlar:
+
+Uzak Sunucudan(Wi-Fi) ya da Mobil App üzerinden(Bluetooth)
+
+1- View Device Information:
+
+View the device name, language, model, serial No., version, IO input number, IO output number, local RS-485, number of alarm input, number of alarm output, device capacity, etc.
+
+2-Change Administrator's Password
+
+The password strength of the device can be automatically checked. Using a minimum of 8 characters, including at least three kinds of following categories: upper case letters, lower case letters, numbers, and special characters)
+
+3-Access Control Settings
+
+3.1-Set Authentication Parameters
+
+ a.  Authentication Function : Enable/ Disable
+
+ b.  Authentication : Card or PIN or QR Code
+
+ c.  Authentication Interval : 1-999 second
+
+ d.  Alarm of Max. Failed Attempts : 1-999
+
+ e.  Max. Interval When Entering Password : 1-999
+
+3.2- Set Door Parameters
+
+ a.  Open Duration : 1-999 second
+
+ b.  Door Open Timeout Alarm : 1-999 second
+
+ c.  Door Contact : Remain Open/ Remain Closed (default)
+
+ d.  Exit Button Type : Remain Open(default)/ Remain Closed 
+
+ e.  Extended Open Duration : 1-999 second
+
+ f.  Door Remain Open Duration with First Person : 1-999 minute
+
+ g.  Duress Code : Using a minimum of 6 characters
+
+ h.  Super Password :  Using a minimum of 6 characters
+
+3.3-Set RS-485 Parameters
+
+ a.  Enable RS-485 : Enable / Disable
+
+ b.  Peripheral Type: Card Reader, Extension Module, Access Controller, or Disable.
+
+ c.  RS-485 Address : 1-255 (If you select Access Controller: If connect the device to a terminal via the RS-485 interface, set the RS-485 address as 2. If you connect the device to a controller, set the RS-485 address according to the door No.) 
+
+ d. Baud Rate : 4800, 9600, 19200, 38400, 57600 and 115200
+
+3.4-Weiegand Parameters
+
+ a.  Enable Wiegand : Enable / Disable
+
+ b.  Set the Transmission direction : Input (The device can connect a Wiegand card reader.) / Output (The can connect an external access controller. And the two devices will transmit the card No. via Wiegand 26 or 34.)
+
+ c.  Set the Time Interval : 1 to 20 ms
+
+ d.  Set the Pulse Width : 1 to 100 us
+
+3.5-Set Terminal Parameters
+
+ a.  Set the Working Mode : Access Control Mode.
+
+
+
+Activation:  After powering on the device for the first time, the hotspot function is enabled by default.
+
+Steps:
+
+1. Connect to the device hotspot with your mobile phone by entering the hotspot password. The activation page will pop up.
+
+Note : 
+
+- The device is in the AP mode by default. The AP mode will be disabled after 30 min. Hold key 5 for 10 s to enter the AP mode again.
+
+- For inactive devices, the device hotspot name is AP_Serial Number, and the hotspot password is the device serial number.
+
+- After device activation, the hotspot password will be changed to the device activation password.
+
+2. Create a new password (admin password) and confirm the password.
+
+Using a minimum of 8 characters, including upper case letters, lower case letters, numbers, and special characters.
+
+Note:
+
+- Characters containing admin and nimda are not supported to be set as activation password.
+
+3. Click Activate.
+
+4. Enter Configuration > Communication Settings > Wi-Fi and connect to a Wi-Fi
+
+
+
+
+
+
+
+
+
+Projeye donanımsal olarak baktığımızda:
+
+MCU : ESP32-WROOM-32E-N4
+
+RFID : MFRC522 IC
+
+Touch : TSM12 IC
+
+QR : XR1300 Module
+
+kullanıyoruz.
+

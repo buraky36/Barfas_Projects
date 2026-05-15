@@ -1,0 +1,721 @@
+/**
+ * @file Tsm12.h
+ * @author Adem Marangoz (adem.marangoz95@gmail.com)
+ * @brief This TSM12 driver by I2C
+ * @version 0.1
+ * @date 2023-06-09
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+
+//______________________________ Include Files _________________________________
+#include "Tsm12.h"
+#include "Flash.h"
+#include "buffer.h"
+#include <string.h>
+#include "AP23xxx_G0x.h"
+#include "FP_Driver.h"
+#include "MFRC522.h"
+#include "Motor_Driver.h"
+#include "Leds.h"
+#include "common.h"
+#include "wifi.h"
+#include "Tuya_App.h"
+#include "Temp_pass.h"
+//==============================================================================
+
+
+//_____________________________ Generic Objects ________________________________
+extern I2C_HandleTypeDef hi2c1;
+extern volatile uint8_t system_reset_flag;
+volatile uint8_t system_default_admin = 0;
+volatile uint8_t system_reset_button_flag = false;
+extern volatile uint8_t max_admin_user_flag;
+extern volatile uint8_t Remotly_control_flag;
+/**
+ * @brief Defining the data structure of the TSM sensor used.
+ */
+Tsm12_Driver Tsm12_1 =  {
+                            .GPIOx.Enable_Port = TOUCH_EN_PORT,
+                            .GPIOx.Enable_Pin = TOUCH_EN_PIN,
+                            .GPIOx.I2c = &TOUCH_HANDLE,
+                            .TSM_En = HAL_GPIO_WritePin,
+                            #if(TSM_Tx_Type == TSM_Transmit_Polling)
+                                .TSM_Trans_Poll = HAL_I2C_Master_Transmit,
+                            #elif (TSM_Tx_Type == TSM_Transmit_IT)
+                                .TSM_Trans_IT = HAL_I2C_Master_Transmit_IT,
+                            #elif (TSM_Tx_Type == TSM_Transmit_DMA)
+                                .TSM_Trans_DMA = HAL_I2C_Master_Transmit_DMA,    
+                            #endif
+                            
+                            #if(TSM_Rx_Type == TSM_Receive_Polling)
+                                .TSM_Rec_Poll = HAL_I2C_Master_Receive,
+                            #elif (TSM_Rx_Type == TSM_Receive_IT)
+                                .TSM_Rec_IT = HAL_I2C_Master_Receive_IT,
+                            #elif (TSM_Rx_Type == TSM_Receive_DMA)
+                                .TSM_Rec_DMA = HAL_I2C_Master_Receive_DMA
+                            #endif
+                        };
+
+TSM_DataBase_UN TSM_DataBase[TSM_DATA_SIZE] = {0};
+
+/* This variable, temp_buffer, is used to store the value of the button pressed 
+   and its value is assigned to the tsm_buffer when the finger is lifted from the button.
+*/
+uint8_t temp_buffer[2] = {0}; 
+
+/* This variable is where the input values are stored through TSM. */
+uint8_t tsm_buffer[TSM_BUFFER_LEN] = {0};
+
+Sys1_menu _sys1_menu = standby;
+Sys2_menu _sys2_menu = main_menu;
+
+uint8_t index_tsm_buffer = 0;
+uint8_t index_temp_buffer = 0;
+static void clear_and_warrning();
+static void Next_step(uint16_t voice_add, Sys2_menu next_state, FP_State_EN fp_previous_state, RFID_State_EN rfid_previous_state);
+static void Next_step1(uint16_t voice_add, Sys1_menu next_state, FP_State_EN fp_previous_state, RFID_State_EN rfid_previous_state);
+
+//==============================================================================
+
+
+//------------------------------- LOCAL OBJECTS --------------------------------
+
+//static uint8_t key_sort[12] = {BOTTON_1, BOTTON_2, BOTTON_3, BOTTON_4, BOTTON_5, BOTTON_6, BOTTON_7, BOTTON_8, BOTTON_9, BOTTON_START, BOTTON_0, BOTTON_HASH};
+//static uint8_t key_sort[12] = {BOTTON_3, BOTTON_2, BOTTON_1, BOTTON_5, BOTTON_6, BOTTON_4, BOTTON_7, BOTTON_8, BOTTON_9, BOTTON_HASH, BOTTON_0, BOTTON_START}; // for New Pcb Design (Touch_AntennaV_02) Smart_Lock_V0_4
+static uint8_t key_sort[12] = {BOTTON_3, BOTTON_2, BOTTON_1, BOTTON_6, BOTTON_5, BOTTON_4, BOTTON_7, BOTTON_8, BOTTON_9, BOTTON_0, BOTTON_START, BOTTON_HASH}; // for New Pcb Design (Touch_AntennaV_02) Smart_Lock_V0_5
+//==============================================================================
+
+
+//______________________________ Global Functions ______________________________
+
+/**
+ * @brief This function is used to initialize the TSM sensor.
+ * @param Sensitivity Bottons Sensitivity (should be determined according to TSM12 datasheet section 8.2) 0xFF is recommended as starting point
+ */
+
+		/*********# TSM REGISTER READ FUNCTION #************/
+//		uint8_t key[1] = {0};
+//    uint8_t data1[1] = {TSM_Reg_CTRL2};
+//    HAL_I2C_Master_Transmit(&hi2c1, TSM_Write_ADD, data1, 1, TOUCH_WRITE_TIMEOUT);
+//    HAL_I2C_Master_Receive(&hi2c1, TSM_Write_ADD, key, 1, TOUCH_RECEIVE_TIMEOUT);		
+		/*********# TSM REGISTER READ FUNCTION #************/
+
+
+uint8_t TSM12_I2CACKError = 0;
+uint8_t data[2] = {0};
+uint8_t RepCnt = 0;
+uint8_t DATA_STATE = 0;
+
+void TSM_Init(uint8_t Sensitivity)
+{
+	
+//------------------------------------------------------------------------------------------------------------------
+	
+		HAL_GPIO_WritePin(TSM_RESET_GPIO_Port, TSM_RESET_Pin, GPIO_PIN_SET);
+		TSM_Delay(100);
+		HAL_GPIO_WritePin(TSM_RESET_GPIO_Port, TSM_RESET_Pin, GPIO_PIN_RESET);
+		TSM_Delay(200);
+	
+		Tsm12_1.TSM_En(Tsm12_1.GPIOx.Enable_Port, Tsm12_1.GPIOx.Enable_Pin, GPIO_PIN_RESET);
+    TSM_Delay(200);
+	
+	RepCnt = 3;
+	do
+  {
+		TSM12_I2CACKError=0;
+		
+		data[0] = TSM_Reg_CTRL2;
+		data[1] = 0x0F;
+		TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(50);
+		
+		data[1] = 0x07; //0x03;
+		TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+		
+		RepCnt--;
+	}
+  while (TSM12_I2CACKError && RepCnt);
+
+	RepCnt = 3;
+	do
+	{
+		TSM12_I2CACKError=0;
+		
+		// Sensitivity setting , 
+    data[0] = TSM_Reg_SENS1;
+    data[1] = Sensitivity;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+    TSM_Delay(5);
+
+    // Sensitivity setting , 
+    data[0] = TSM_Reg_SENS2;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+
+    // Sensitivity setting , 
+    data[0] = TSM_Reg_SENS3;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+
+    // Sensitivity setting , 
+    data[0] = TSM_Reg_SENS4;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+
+    // Sensitivity setting , 
+    data[0] = TSM_Reg_SENS5;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+
+    // Sensitivity setting , 
+    data[0] = TSM_Reg_SENS6;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+		
+		RepCnt--;
+	}
+	while (TSM12_I2CACKError && RepCnt);
+		
+	RepCnt = 3;
+	do
+	{
+		TSM12_I2CACKError=0;
+		
+		data[0] = TSM_Reg_CTRL1;
+		data[1] = 0x02;//0x83;//0x22; //0x7F;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+		
+		data[0] = TSM_Reg_CH_HOLD1;
+		data[1] = 0x00;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+		
+		data[0] = TSM_Reg_CH_HOLD2;
+		data[1] = 0x00;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+		
+		data[0] = TSM_Reg_REF_RST1;
+		data[1] = 0x00; //0xFF;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+		
+		data[0] = TSM_Reg_REF_RST2;
+		data[1] = 0x00; //0x0F;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+		
+		data[0] = TSM_Reg_REF_RST1;
+		data[1] = 0x00;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+		
+		data[0] = TSM_Reg_REF_RST2;
+		data[1] = 0x00;
+    TSM12_I2CACKError = Tsm12_1.TSM_Trans_Poll(Tsm12_1.GPIOx.I2c, TSM_Write_ADD, data, 2, TOUCH_WRITE_TIMEOUT);
+		TSM_Delay(5);
+		
+		RepCnt--;
+	}
+	while (TSM12_I2CACKError && RepCnt);
+	
+   Tsm12_1.TSM_En(Tsm12_1.GPIOx.Enable_Port, Tsm12_1.GPIOx.Enable_Pin, GPIO_PIN_SET);
+   TSM_Delay(5);
+  _Reset_And_Clear_Tsm_buffer();
+
+//------------------------------------------------------------------------------------------------------------------
+
+}
+
+
+/**
+ * @brief This function is used to read the registers of the buttons that have been pressed.
+ * @param cmp Pointer to the variable that will store the value of the button that has been pressed.
+ * @retval  13: Not pressed any button (otherwise the button number)
+ *          
+*/
+TSM_pressure_t Touch_Pad_check(uint8_t *cmp)
+{
+	*cmp = 13;
+    // Tsm12_1.TSM_En(Tsm12_1.GPIOx.Enable_Port, Tsm12_1.GPIOx.Enable_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(TOUCH_EN_PORT, TOUCH_EN_PIN, GPIO_PIN_RESET);
+    TSM_Delay(2);
+    uint8_t key[3] = {0};
+    uint8_t data[1] = {TSM_Reg_OUTPUT1};
+    HAL_I2C_Master_Transmit(&hi2c1, TSM_Write_ADD, data, 1, TOUCH_WRITE_TIMEOUT);
+    HAL_I2C_Master_Receive(&hi2c1, TSM_Write_ADD, key, 3, TOUCH_RECEIVE_TIMEOUT);
+    uint32_t temp = (key[2] << 16) | (key[1] << 8) | (key[0]);
+    uint32_t i;
+    for(i = 0; i < BOTTON_Num + 1; i++)
+    {
+        if(temp & ((uint32_t)0x03 << i*2))
+        {
+        	*cmp = key_sort[i];
+            break;
+        }
+    }
+
+    HAL_GPIO_WritePin(TOUCH_EN_PORT, TOUCH_EN_PIN, GPIO_PIN_SET);
+    // Tsm12_1.TSM_En(Tsm12_1.GPIOx.Enable_Port, Tsm12_1.GPIOx.Enable_Pin, GPIO_PIN_SET);
+    return (temp & ((uint32_t)0x03 << i)) >> i;
+}
+
+volatile uint8_t tsm_test[1];
+volatile uint32_t x;
+
+extern uint8_t DPID_DOOR_INPUT_OK_KIT1;
+extern unsigned char value11[10];
+volatile uint8_t system_rst_btn_flag2 = 0;
+extern GPIO_InitTypeDef GPIO_InitStruct;
+/**
+ * @brief This function is used to control most of the device's functions, including the TSM sensor.
+ * @note This function is created solely for the smart lock device utilizing keypad, rfid, voice, motor, fingerprint, Tuya & LEDs
+ *          To forge or reduce number of peripherals used, some functinality can be erased or changed
+ * @return uint8_t unused
+ */
+uint8_t TSM_Data_Process()
+{
+    static uint8_t cccc = 2;
+    Touch_Pad_check(temp_buffer + index_temp_buffer);
+    uint8_t data[1] = {cccc};
+    HAL_I2C_Master_Transmit(&hi2c1, TSM_Write_ADD, data, 1, TOUCH_WRITE_TIMEOUT);
+    HAL_I2C_Master_Receive(&hi2c1, TSM_Write_ADD, tsm_test, 1, TOUCH_RECEIVE_TIMEOUT);
+    if(cccc >= 0x12){cccc = 2;}
+    cccc++;
+    x++;
+		if(system_reset_button_flag){ temp_buffer[0] = 14; temp_buffer[1] = 13; system_rst_btn_flag2 = true;}
+    if(temp_buffer[0] != 13)
+    {
+				led_all_set();
+				if(!Tsm_control_flag)
+			  {
+					Confi_RGB(RGB_BLUE); // blinking rgb led to blue
+					index_temp_buffer = 1;
+					if(temp_buffer[1] == 13)
+					{
+							touch_led(temp_buffer[0], RESET);//led toggle
+						
+							Set_Voice_Add(VOICE_PRASSED_BOTTON); 
+							tsm_counter = 0; 
+							tsm_buffer[index_tsm_buffer++] = temp_buffer[0]; // into prassed button to tsm buffer
+							if(_sys1_menu == standby)
+							{
+									if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_HASH)
+									{
+											if((tsm_buffer[0] == BOTTON_START) && (tsm_buffer[1] == BOTTON_HASH)) // '*#'
+											{
+													Next_step1(VOICE_ENTRY_ADMIN_ID, entry_seting_mode, FP_COMPARE_ADMIN, RFID_COMPARE_ADMIN);
+											}else if((tsm_buffer[0] == BOTTON_9) && (tsm_buffer[1] == BOTTON_HASH)) // '9#'
+											{
+												currentWifiWorkingState = mcu_get_wifi_work_state();
+												if(currentWifiWorkingState == WIFI_CONN_CLOUD) 
+												{
+														activateTuyaUnlockingRequest = 1;	// Activate the Tuya remote unlock request
+														unlockRequestDowncounter = UNLOCK_REQUEST_TIME_SEC+1; // Reset the unlocking downcounter to its default value
+														remotely_unlock_st = REMOTELY_UNLOCK_WAIT;
+														Set_Voice_Add(VOICE_REMOTE_CONTROLLING);
+														Remotly_control_flag = true;
+												}
+												else
+												{
+													Set_Voice_Add(VOICE_TRY_AGAIN);
+												}
+											}
+	/********/					else if(tsm_buffer[MAX_TEMP_PASS] == BOTTON_HASH)
+											{
+												DPID_DOOR_INPUT_OK_KIT1 = 1;
+												for(uint8_t i = 0; i< MAX_TEMP_PASS; i++)
+													{value11[i] = tsm_buffer[i];} 	
+											}
+											else // compare tsm id for open the door
+											{
+													uint8_t cmpret2 = check_valid_pass((uint8_t*)tsm_buffer);
+													uint8_t cmpret = Compare_Id((uint8_t*)tsm_buffer, (uint8_t*)&(TSM_DataBase[0]), 50 , sizeof(TSM_DataBase_UN), sizeof(TSM_DataBase->TSM_DataBase_ST.user_id),USER_ID);
+													if((cmpret != 0xFF) || (cmpret2 != 0xFF)) { TSM_Check = SUCCESS_CHECK; common_id = cmpret; }
+													else{TSM_Check = FAIL_CHECK;}
+											}
+											_Reset_And_Clear_Tsm_buffer(); // clear tsm buffer
+									}else if((temp_buffer[0] == BOTTON_START) && tsm_buffer[0] != BOTTON_START)  { _Reset_And_Clear_Tsm_buffer(); } // when entry '*' clear tsm buffer
+									else if(tsm_buffer[0] == BOTTON_START) // when user entred the first character '*' then number while the first character will remove and 
+									{
+											_Reset_And_Clear_Tsm_buffer(); // clear tsm buffer
+											tsm_buffer[index_tsm_buffer++] = temp_buffer[0]; 
+									}else if(index_tsm_buffer == TSM_BUFFER_LEN) {clear_and_warrning();}
+							}else if (_sys1_menu == entry_seting_mode)
+							{
+									if((tsm_buffer[index_tsm_buffer - 1] == BOTTON_HASH) && (index_tsm_buffer == 5)) //  When entering the given instruction code
+									{
+											/* TSM Master id comparison */
+											uint8_t cmpret = Compare_Id((uint8_t*)tsm_buffer, (uint8_t*)&(TSM_DataBase[0]), 50 , sizeof(TSM_DataBase_UN), sizeof(TSM_DataBase->TSM_DataBase_ST.user_id),ADMIN_ID); 
+											if(cmpret != 0xFF){ admin_id = ADMIN_ID_SECCESFUL; active_dis_device(0);
+											}else {admin_id = ADMIN_ID_FAIL;}
+									}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // Go back to the previous state
+									{
+											Next_step1(VOICE_PRASSED_BOTTON, standby, FP_IDLE, RFID_IDLE);
+											active_dis_device(1); // active rfid, fp
+											_Reset_And_Clear_Tsm_buffer();
+									}else if(index_tsm_buffer == 5)  { clear_and_warrning();}
+							}else if (_sys1_menu == setting_mode)
+							{
+									if(_sys2_menu == main_menu)
+									{
+											if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_1) // forward to admin setting state
+											{
+													_sys2_menu = delete_register_admin;  // change state of system
+													Set_Voice_Add(VOICE_REG_DEL_ADMIN);  // play admin setting voice
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_2) // forward to user setting state
+											{
+													_sys2_menu = delete_register_user; // change state of system
+													Set_Voice_Add(VOICE_REG_DEL_USER); // play user setting voice
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_3) // forward to setting state
+											{
+													_sys2_menu = system_menu;
+													Set_Voice_Add(VOICE_DEVICE_SETTING_MENU); 
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_4) // backwart to previous state 
+											{
+													_sys2_menu = sys_reset_hand;
+	/*System Reset*/				Set_Voice_Add(VOICE_OK_CANCEL);
+												
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backwart to previous state 
+											{
+													Next_step(VOICE_PRASSED_BOTTON, main_menu, FP_IDLE, RFID_IDLE);
+													active_dis_device(1); // active RFID, FP
+													_sys1_menu = standby; // change state of system
+											}
+											else{ 
+															Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON); //Sistem Sifirlama											
+											}
+											_Reset_And_Clear_Tsm_buffer(); // clear tsm buffer
+									}else if(_sys2_menu == delete_register_admin) // admin menu
+									{
+											if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_1) // add admin id state
+											{
+													Next_step(VOICE_ENTER_THE_ID, add_admin_id, FP_REGISTERATION_ADMIN, RFID_REGISTERATION_ADMIN);
+													active_dis_device(1);
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_2) // delete admin id state
+											{
+													Next_step(VOICE_ENTER_THE_ID, del_admin_id, FP_DELETE_ADMIN_ID, RFID_DELETE_ADMIN_ID);
+													active_dis_device(1);
+	/*TUYA Wifi Reset*/ }else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_3) // backword to previous states
+											{
+												
+												wifi_uart_write_frame(WIFI_RESET_CMD, 0);
+												Set_Voice_Add(VOICE_CONNECTING);
+												Play_Voice();
+												HAL_Delay(2000);
+												mcu_set_wifi_mode(SMART_CONFIG);
+													
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backword to previous state
+											{
+													Next_step(VOICE_MAIN_MENU, main_menu, FP_IDLE, RFID_IDLE);
+													active_dis_device(0); // disactive fp, rfid
+											}else  
+											{Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON);} // worng entry
+											_Reset_And_Clear_Tsm_buffer(); // clear tsm buffer
+									}else if(_sys2_menu == add_admin_id)
+									{
+											if((tsm_buffer[index_tsm_buffer - 1] == BOTTON_HASH) && (index_tsm_buffer == 5)) // If the input is correct.
+											{
+													system_default_admin = 1;
+													uint8_t admin_check_control = Compare_Id((uint8_t*)tsm_buffer, (uint8_t*)&(TSM_DataBase[0]), 50 , sizeof(TSM_DataBase_UN), sizeof(TSM_DataBase->TSM_DataBase_ST.user_id),ADMIN_ID);
+													if(admin_check_control == 0xFF)//ayni sifre girilmemesi için kontrol
+													{
+														registrtion_id((uint64_t*)TSM_DataBase, TSM_DATA_SIZE, sizeof(TSM_DataBase_UN), (uint8_t*)&(tsm_buffer),sizeof(TSM_DataBase->TSM_DataBase_ST.user_id), ADMIN_ID);
+														if(max_admin_user_flag)
+															Set_Voice_Add(VOICE_MAX_REGISTRATION);
+														else
+															Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);
+													}
+													else
+														Set_Voice_Add(VOICE_REGISTERED_USER); 
+													_Reset_And_Clear_Tsm_buffer();
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													active_dis_device(0); // disactive fp, rfid
+													Next_step(VOICE_REG_DEL_ADMIN, delete_register_admin, FP_IDLE, RFID_IDLE);
+											}else if((index_tsm_buffer == 5) || (tsm_buffer[0] == BOTTON_HASH) || (tsm_buffer[1] == BOTTON_HASH) || (tsm_buffer[2] == BOTTON_HASH) || (tsm_buffer[3] == BOTTON_HASH) ) 
+															{  _Reset_And_Clear_Tsm_buffer(); Set_Voice_Add(VOICE_WORNG_ENTRY);} // play worng entry voice 
+									}else if (_sys2_menu == del_admin_id)
+									{
+											if((tsm_buffer[index_tsm_buffer - 1] == BOTTON_HASH) && (index_tsm_buffer == 5)) // If the input is correct.
+											{
+													delete_id(tsm_buffer, (uint8_t*)&(TSM_DataBase[0]), TSM_DATA_SIZE , sizeof(TSM_DataBase_UN), sizeof(TSM_DataBase->TSM_DataBase_ST.user_id),ADMIN_ID);
+													_Reset_And_Clear_Tsm_buffer();
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													Next_step(VOICE_REG_DEL_ADMIN, delete_register_admin, FP_IDLE, RFID_IDLE);
+													active_dis_device(0); // disactive fp, rfid
+											}else if((index_tsm_buffer == 5) || (tsm_buffer[0] == BOTTON_HASH) || (tsm_buffer[1] == BOTTON_HASH) || (tsm_buffer[2] == BOTTON_HASH) || (tsm_buffer[3] == BOTTON_HASH) ) 	
+															{ _Reset_And_Clear_Tsm_buffer(); Set_Voice_Add(VOICE_WORNG_ENTRY); } // play worng entry voice 
+
+									}else if(_sys2_menu == delete_register_user) // user menu
+									{
+											if(tsm_buffer[index_temp_buffer - 1] == BOTTON_1) // forward to add new user id
+											{
+													Next_step(VOICE_ENTER_THE_ID, add_user_id, FP_REGISTERATION_USER, RFID_REGISTERATION_USER);
+													active_dis_device(1); // active RFID, FO
+											}else if(tsm_buffer[index_temp_buffer - 1] == BOTTON_2) // forward to delete user id
+											{
+													Next_step(VOICE_ENTER_THE_ID, del_user_id, FP_DELETE_USER_ID, RFID_DELETE_USER_ID);
+													active_dis_device(1); // active RFID, FP
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													Next_step(VOICE_MAIN_MENU, main_menu, FP_IDLE, RFID_IDLE);
+													active_dis_device(0); // disactive RFID , FP
+											}else { Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON); }
+											_Reset_And_Clear_Tsm_buffer();
+									}else if(_sys2_menu == add_user_id) // add new user id
+									{
+											if((tsm_buffer[index_tsm_buffer - 1] == BOTTON_HASH) && (index_tsm_buffer == 5)) // If the input is correct.
+											{
+													uint8_t user_check_control = Compare_Id((uint8_t*)tsm_buffer, (uint8_t*)&(TSM_DataBase[0]), 50 , sizeof(TSM_DataBase_UN), sizeof(TSM_DataBase->TSM_DataBase_ST.user_id),USER_ID);
+													if(user_check_control == 0xFF)//ayni sifre girilmemesi için kontrol
+													{
+														registrtion_id((uint64_t*)TSM_DataBase, TSM_DATA_SIZE, sizeof(TSM_DataBase_UN), (uint8_t*)&(tsm_buffer),sizeof(TSM_DataBase->TSM_DataBase_ST.user_id), USER_ID);
+														if(max_admin_user_flag)
+															Set_Voice_Add(VOICE_MAX_REGISTRATION);
+														else
+															Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL); 
+													}
+													else
+														Set_Voice_Add(VOICE_REGISTERED_USER);
+													_Reset_And_Clear_Tsm_buffer();
+
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													Next_step(VOICE_REG_DEL_USER, delete_register_user, FP_IDLE, RFID_IDLE);
+													_Reset_And_Clear_Tsm_buffer();
+
+											}else if((index_tsm_buffer == 5) || (tsm_buffer[0] == BOTTON_HASH) || (tsm_buffer[1] == BOTTON_HASH) || (tsm_buffer[2] == BOTTON_HASH) || (tsm_buffer[3] == BOTTON_HASH) ) 
+															{ _Reset_And_Clear_Tsm_buffer(); Set_Voice_Add(VOICE_WORNG_ENTRY); } // If 5 characters are entered incorrectly.
+									}else if(_sys2_menu == del_user_id) // delete user id
+									{
+											if((tsm_buffer[index_tsm_buffer - 1] == BOTTON_HASH) && (index_tsm_buffer == 5)) // If the input is correct.
+											{
+													delete_id(tsm_buffer, (uint8_t*)&(TSM_DataBase[0]), TSM_DATA_SIZE , sizeof(TSM_DataBase_UN), sizeof(TSM_DataBase->TSM_DataBase_ST.user_id),USER_ID); 
+													_Reset_And_Clear_Tsm_buffer();
+
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													Next_step(VOICE_REG_DEL_USER, delete_register_user, FP_IDLE, RFID_IDLE);
+													_Reset_And_Clear_Tsm_buffer();
+
+											}else if((index_tsm_buffer == 5) || (tsm_buffer[0] == BOTTON_HASH) || (tsm_buffer[1] == BOTTON_HASH) || (tsm_buffer[2] == BOTTON_HASH) || (tsm_buffer[3] == BOTTON_HASH) ) 
+															{Set_Voice_Add(VOICE_WORNG_ENTRY); _Reset_And_Clear_Tsm_buffer();} // If 5 characters are entered incorrectly.
+									}else if(_sys2_menu == system_menu)
+									{
+											if(tsm_buffer[index_temp_buffer - 1] == BOTTON_1) // voice menu state 
+											{
+													_sys2_menu = voice_menu; // set to voice menu
+													Set_Voice_Add(VOICE_SOUND_OK_CANCEL);
+											}
+											else if(tsm_buffer[index_temp_buffer - 1] == BOTTON_2) // language menu state 
+											{
+													_sys2_menu = language_menu; // set to language menu
+													Set_Voice_Add(VOICE_TURKISH_ENGLISH);
+											}else if(tsm_buffer[index_temp_buffer - 1] == BOTTON_3) // device menu state
+											{
+													_sys2_menu = device_menu; // set to device menu
+													Set_Voice_Add(VOICE_RFID_FP_MANU);
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													Set_Voice_Add(VOICE_MAIN_MENU);
+													_sys2_menu = main_menu; // set to previous state
+											}
+											else { Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON);}
+											_Reset_And_Clear_Tsm_buffer();
+									}else if(_sys2_menu == voice_menu)
+									{
+											if(tsm_buffer[index_temp_buffer - 1] == BOTTON_1) // enable voice state
+											{
+													Flash_DataBase[0].Flash_DataBase_ST.VOICE_State = 1; // enable voice as output
+													Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);
+													Set_Flash_Write_Active(1); // write to flash active
+											}else if(tsm_buffer[index_temp_buffer - 1] == BOTTON_2) // disable voice state
+											{
+													Flash_DataBase[0].Flash_DataBase_ST.VOICE_State = 2; // disable voice as output
+													Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);
+													Set_Flash_Write_Active(1); // write to flash active
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward state
+											{
+													Set_Voice_Add(VOICE_DEVICE_SETTING_MENU);
+													_sys2_menu = system_menu; // set to previous state 
+											}else { Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON); }
+											_Reset_And_Clear_Tsm_buffer();
+									}else if(_sys2_menu == language_menu)
+									{
+											if(tsm_buffer[index_temp_buffer - 1] == BOTTON_1) // language Turkish state
+											{
+													Flash_DataBase[0].Flash_DataBase_ST.LANGUAGE_State = 1; // set language to turkish
+													Set_Flash_Write_Active(1); // write to flash active
+													Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);
+											}else if(tsm_buffer[index_temp_buffer - 1] == BOTTON_2) // language English state
+											{
+													Flash_DataBase[0].Flash_DataBase_ST.LANGUAGE_State = 2; // set language to english
+													Set_Flash_Write_Active(1); // write to flash active
+													Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													Set_Voice_Add(VOICE_DEVICE_SETTING_MENU);
+													_sys2_menu = system_menu; // set previous state
+											}else { Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON); }
+											_Reset_And_Clear_Tsm_buffer();
+
+									}else if(_sys2_menu == device_menu)
+									{
+											if(tsm_buffer[index_temp_buffer - 1] == BOTTON_1) // RFID setting state
+											{
+													Set_Voice_Add(VOICE_ACTIVE_MENU);
+													_sys2_menu = rfid_device_menu; // set next state
+											}else if(tsm_buffer[index_temp_buffer - 1] == BOTTON_2) // FP setting state
+											{
+													Set_Voice_Add(VOICE_ACTIVE_MENU);
+													_sys2_menu = fp_device_menu; // set next state
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													Set_Voice_Add(VOICE_DEVICE_SETTING_MENU);
+													_sys2_menu = system_menu; // set previous state
+											}else { Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON); }
+											_Reset_And_Clear_Tsm_buffer();
+									}else if(_sys2_menu == rfid_device_menu)
+	/**/             {
+											if(tsm_buffer[index_temp_buffer - 1] == BOTTON_1) // enable RFID as input
+											{
+													Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);
+													Flash_DataBase[0].Flash_DataBase_ST.RFID_State = 1; // enable RFID as input
+													Set_Flash_Write_Active(1); // wrtie to flash active
+											}else if(tsm_buffer[index_temp_buffer - 1] == BOTTON_2) // disable RFID as input
+											{
+													Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);
+													Flash_DataBase[0].Flash_DataBase_ST.RFID_State = 2; // disable RFID as input
+													Set_Flash_Write_Active(1); // write to flash active
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													Set_Voice_Add(VOICE_RFID_FP_MANU);
+													_sys2_menu = device_menu; // set previous state
+											}else{ Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON); }
+											_Reset_And_Clear_Tsm_buffer();
+									}else if(_sys2_menu == fp_device_menu) // disable enable FP state
+									{
+											if(tsm_buffer[index_temp_buffer - 1] == BOTTON_1) // FP enable state
+											{
+													Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);
+													Flash_DataBase[0].Flash_DataBase_ST.FP_State = 1; // enable FP as input 
+													Set_Flash_Write_Active(1); // write to flash active
+												//	Fingerprint - RFID active and passive control  //
+													/*Configure GPIO pin : PtPin */
+													GPIO_InitStruct.Pin = EXTI_FP_Touch_Pin;
+													GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+													GPIO_InitStruct.Pull = GPIO_NOPULL;
+													HAL_GPIO_Init(EXTI_FP_Touch_GPIO_Port, &GPIO_InitStruct);
+												//	Fingerprint - RFID active and passive control  //
+											}else if(tsm_buffer[index_temp_buffer - 1] == BOTTON_2) // FP disable state
+											{
+													Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);
+													Flash_DataBase[0].Flash_DataBase_ST.FP_State = 2; // disable FP as input
+													Set_Flash_Write_Active(1); // write to flash active
+												//	Fingerprint - RFID active and passive control  //
+													/*Configure GPIO pin : PtPin */
+													GPIO_InitStruct.Pin = EXTI_FP_Touch_Pin;
+													GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+													GPIO_InitStruct.Pull = GPIO_NOPULL;
+													HAL_GPIO_Init(EXTI_FP_Touch_GPIO_Port, &GPIO_InitStruct);
+												//	Fingerprint - RFID active and passive control  //
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+													Set_Voice_Add(VOICE_RFID_FP_MANU);
+													_sys2_menu = device_menu; // set previous state
+											}else{ Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON);}
+											_Reset_And_Clear_Tsm_buffer();
+	/*System Reset*/}else if(_sys2_menu == sys_reset_hand)
+									{
+											if(tsm_buffer[index_temp_buffer - 1] == BOTTON_1) // language Turkish state
+											{
+													system_reset_flag = true; //Sistem Sifirlama
+													_sys1_menu = standby; // change state of system
+													_sys2_menu = main_menu; // change state of system
+													Set_Voice_Add(VOICE_PRASSED_BOTTON);
+													system_rst_btn_flag2 = false;
+													active_dis_device(1); // active RFID, FP
+											}else if(tsm_buffer[index_temp_buffer - 1] == BOTTON_3) // language English state
+											{
+												_sys1_menu = setting_mode;
+												_sys2_menu = main_menu;
+												admin_id = ADMIN_ID_SECCESFUL; 
+												active_dis_device(0);
+												system_rst_btn_flag2 = false;
+												
+											}else if(tsm_buffer[index_tsm_buffer - 1] == BOTTON_START) // backward to previous state
+											{
+												if(system_rst_btn_flag2){_sys1_menu = standby; _sys2_menu = main_menu; active_dis_device(1); Set_Voice_Add(VOICE_PRASSED_BOTTON);/* active RFID, FP Set_Voice_Add(VOICE_OPERATION_SUCCESSFUL);*/}
+												else{
+													_sys2_menu = main_menu;
+													admin_id = ADMIN_ID_SECCESFUL; 
+													active_dis_device(0);												
+												}
+												system_rst_btn_flag2 = false;
+											}else{ Set_Voice_Add(VOICE_FAIL_PRESSED_BOTTON); }
+											system_reset_button_flag = false;
+											_Reset_And_Clear_Tsm_buffer();
+
+									}
+							}
+							_Reset_And_Clear_Temp_buffer();
+					}
+					
+       }
+			 
+    }
+
+    return 0;
+}
+
+/**
+ * @brief This function is used to warn the user of incorrect input 
+ * and also increments the error count while resetting the TSM buffer.
+ */
+static void clear_and_warrning()
+{
+    _Reset_And_Clear_Tsm_buffer(); // clear tsm buffer
+    if(++err_counter != ERROR_COUNTER){Set_Voice_Add(VOICE_WORNG_ENTRY);}
+}
+
+
+/**
+ * @brief This function is used to determine the next state for the FP and RFID, 
+ * as well as to specify the audio file that will act as determined by the next system state.
+ * @param voice_add The address of the audio file
+ * @param previous_state Next system state
+ * @param fp_previous_state Next FP state
+ * @param rfid_previous_state Next RFID state
+ */
+static void Next_step(uint16_t voice_add, Sys2_menu next_state, FP_State_EN fp_previous_state, RFID_State_EN rfid_previous_state)
+{
+    RFID_State = rfid_previous_state; // Set the RFID state as compare for open door
+    FP_State = fp_previous_state; // Set the FP state as compare for open door
+    Set_Voice_Add(voice_add); // play main entry the admin id
+    _sys2_menu = next_state; // forword to next state entry_seting_mode
+}
+
+
+/**
+ * @brief This function is used to determine the next state for the FP and RFID, 
+ * as well as to specify the audio file that will act as determined by the next system state.
+ * @param voice_add The address of the audio file
+ * @param previous_state Next system state
+ * @param fp_previous_state Next FP state
+ * @param rfid_previous_state Next RFID state
+ */
+static void Next_step1(uint16_t voice_add, Sys1_menu next_state, FP_State_EN fp_previous_state, RFID_State_EN rfid_previous_state)
+{
+    RFID_State = rfid_previous_state; // Set the RFID state as compare for open door
+    FP_State = fp_previous_state; // Set the FP state as compare for open door
+    Set_Voice_Add(voice_add); // play main entry the admin id
+    _sys1_menu = next_state; // forword to next state entry_seting_mode
+}
+//==============================================================================

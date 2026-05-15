@@ -1,0 +1,436 @@
+Menüyü tekrar değiştiriyorum. Kaldırdığımız Set Open Door Detection ı tekrar ekledim. 
+
+Menu 0. Update Master Code
+Menu 1. Add Master Card (Burayı yeni ekledik. Diğer menüleri kaydırdık.)
+Menu 2. Add User
+Menu 3. Delete User
+Menu 4. Set Relay Configuration
+Menu 5. Set Access Mode
+Menu 6. Set the Working Mode
+Menu 7. Set Open Door Detection
+Menu 8. Set Audible and Visual Response
+Menu 9. Set Wiegand Input-Output Formats
+
+Kodlamaya geçmeden şunlarıda belirteyim:
+Çalışma modlarımız:
+1. Standalone Mode
+
+Bu modda Wiegand Input/Output haberleşmesi olmayacak.
+Digital Inputlar bu modda çalışacak.
+1.Dig_In : Exit Button : Direkt olarak kapıyı açabilir.
+2.Dig_In : Door Contact: Kapının Açık/Kapalı konumu algılamak için kullanacağız. Bu giriş LOW olduğunda kapı açık konumda olduğunu anlayacağız.
+
+2. Controller Mode:
+Bu modun Standalone modundan tek farkı Wiegand girişinden harici bir reader bağlanabilecek.
+Bu modda cihaza Wiegand girişinden harici bir Reader bağlanabilecek. Yani dahili inputları olan RFID, PIN ve QR okuyucularının yanı sıra, harici bağlanan Reader da UID gönderebilecek. 
+Bu mod set edildiğinde Wiegand Output Enable- Low a çekilmeli ki Wiegand direction-input olsun.
+Cihaz bu moda set edildiği zaman "Menu 9" Wiegand Data Formats ayarlayabilecek. Bu data formats alınacak Wiegand paketlerinin formatı olacak. 
+Digital Inputlar bu modda çalışacak.
+1.Dig_In : Exit Button : Direkt olarak kapıyı açabilir.
+2.Dig_In : Door Contact: Kapının Açık/Kapalı konumu algılamak için kullanacağız. Bu giriş LOW olduğunda kapı açık konumda olduğunu anlayacağız.
+
+3. Reader Mode:
+Cihaz bu moda set edildiği zaman sadece "Menu 9" konfigürasyonu yapılabilecek. Yani Wiegand Data Formats ayarlanabilecek. Bu data formats gönderilecek Wiegand paketlerinin formatı olacak. 
+Çünkü cihaz bu modda inputlarından okuduğu ID leri hiç bir işlem yapmadan Wiegand Outputundan gönderecek. 
+Bunu yapmadan önce Wiegand Output Enable pinini High yapacak. Bu pin bu modda sürekli High olacak. Bunu Wiegand direction-Output olarak ayarlamak için yapacak.
+Digital Inputlar bu modda çalışmayacak.
+
+Bunları ekleyelim sonra da online çalışmayı konuşalım. Uzak sunucu üzerinden verification çalışmayı ekleyelim.
+
+
+Online Operation:
+Bölüm1:
+BLE (BLUETOOTH LOW ENERGY) PROTOKOLÜ : Bluetooth privisioning işlemini daha önce yazılıma eklemiş olabiliriz. Kontrol et.
+Bu bölüm, cihazın mobil uygulama ile Bluetooth Low Energy (BLE) üzerinden gerçekleştirdiği eşleşme ve Wi-Fi yapılandırma protokolünü tanımlar.
+1.1: BLE Anahtar Kavramlar:
+•deviceId: deviceId parametresi cihazın benzersiz kimliğini temsil eder.
+•pairKey / deviceKey: BLE eşleşmesi sırasında üretilen çift ve cihaz anahtarlarıdır; sonraki HTTP isteklerinde kullanılır.
+•macAddress: Cihazın MAC Adresidir.
+•rssi: Kablosuz ağın sinyal gücünü belirtir (Received Signal Strength Indicator).
+•frequency: Kablosuz ağın frekans bandını belirtir (2.4 GHz, 5 GHz).
+•name: Kablosuz ağın adıdır (SSID).
+Bluetooth Name ve DeviceID için aşağıdaki konfigürasyonu kullanalım:
+
+String ble_name;
+
+void initDeviceId() {
+  // WiFi.macAddress() bazen 0 dönebilir, bu yüzden EfuseMac kullanıyoruz.
+  uint64_t chipid = ESP.getEfuseMac();
+
+  char idStr[32];
+  // chipid'nin alt 3 byte'ını (24 bit) alarak unique ID oluştur.
+  // Genellikle MAC adresinin son kısmına denk gelir.
+  uint32_t low = (uint32_t)chipid;
+
+  sprintf(idStr, "SMART_%06X", (low & 0xFFFFFF)); // SMART_XXXXXX formatı
+  device_id = String(idStr);
+
+  char nameStr[64];
+  sprintf(nameStr, "Onloi_%s", idStr);
+  ble_name = String(nameStr);
+  DEBUG_PRINT("Generated Device ID: ");
+  DEBUG_PRINTLN(device_id);
+  DEBUG_PRINT("Generated BLE Name: ");
+  DEBUG_PRINTLN(ble_name);
+}
+
+ 
+1.2: BLE Komut Değerleri:
+handshake : Bağlantı kurulumu sırasında gerçekleştirilen kimlik doğrulama sürecidir.
+pair : Uygulama ile cihaz arasında güvenli bağlantı kurmak için kullanılır.
+getSsids : Kullanılabilir Wi-Fi ağ listesini (SSID) çeker.
+connectWifi : Wi-Fi bağlantısının kurulup kurulmadığını kontrol eder.
+
+//1.3: Tarama (Scan)
+//Cihaz, keşfedilebilir modda tutulmalıdır. Cihaz yalnızca ilk eşleşme sırasında veya kullanıcı fabrika ayarlarına sıfırlama yaptıktan sonra görünür olmalıdır. Cihaz adı "Onloi Lock" olarak yayınlanır; böylece Mobil App bunu bir Onloi cihazı olarak tanıyabilir.
+
+//1.4: Bağlanma (Connect)
+//Bağlantı, iki cihaz arasında otomatik olarak kurulur; herhangi bir hazırlık gerekmez.
+
+//1.5: Servis Keşfi (Service Discovery)
+//Bağlantı kurulduktan sonra Mobil App, Cihaz'ın servis ve karakteristiklerini sorgular. Cihaz, bağlantı gerçekleşir gerçekleşmez servis ve karakteristik bilgilerini Mobil App e gönderir.
+
+//1.6: El Sıkışma (Handshake)
+//Adım 1 — Mobil App, bağlantı kurulduğunda Cihazın bir karakteristiğine aşağıdaki JSON'u yazar:
+{
+"command": "handshake"
+}
+//Adım 2 — Cihaz, yanıt olarak aşağıdaki JSON'u bir karakteristik üzerinden Mobil App gönderir:
+{
+"command": "handshake",
+"deviceId": "<string>",
+"createdAt": <timestamp>
+}
+
+//1.7: Eşleşme (Pair)
+//Adım 1 — Mobil App, Cihazın bir karakteristiğine aşağıdaki JSON'u yazar. Cihaz, "deviceKey" ve "pairKey" değerlerini sonraki HTTP istekleri için kaydeder:
+{
+"command": "pair",
+"deviceKey": "<string>",
+"pairKey": "<string>"
+}
+//Adım 2 — Cihaz, yanıt olarak aşağıdaki JSON'u Mobil App e gönderir:
+{
+"command": "pair",
+"result": "succeeded" | "failed"
+}
+
+//1.8: Cihazı Wi-Fi'ye Bağlama
+//Adım 1 — Mobil App, SSID listesi almak için Cihaza aşağıdaki JSON'u yazar:
+{
+"command": "getSsids"
+}
+//Adım 2 — Cihaz, kullanılabilir Wi-Fi ağlarını listeler:
+{
+"command": "getSsids",
+"result": {
+"0": {
+"macAddress": "<string>",
+"rssi": <number>,
+"frequency": 2.4 | 5 | 6,
+"name": "<string>"
+}
+}
+}
+//Adım 3 — Mobil App, seçilen ağa bağlanmak için Cihaza aşağıdaki JSON'u yazar:
+{
+"command": "connectWifi",
+"ssid": "<string>",
+"macAddress": "<string>",
+"pass": "<string>"
+}
+//Adım 4 — Cihaz, bağlantı sonucunu bildirir:
+{
+"command": "connectWifi",
+"result": "succeeded" | "failed"
+}
+
+//Bölüm2: HTTP Tabanlı JSON haberleşme Protokolü
+
+//2.1: İletişim Akışıhttps://api.onloi.com/api/device/runtime)
+//Cihaz ← Komutlar ← Server (https://api.onloi.com/api/device/runtime)
+//Cihaz → CMD_Response → Server (https://api.onloi.com/api/device/runtime)
+
+//2.2: Temel Parametreler
+//Parametre - Tür - Açıklama
+//deviceId - string - Cihazın benzersiz kimlik numarasıdır. SMART_XXXXXX şeklinde ön eki bulunur.
+//pairKey - string - BLE eşleşmesi sırasında üretilen çift anahtarı; her HTTP isteğinde gönderilir
+//deviceKey - string - BLE eşleşmesi sırasında üretilen cihaz anahtarı; her HTTP isteğinde gönderilir
+
+//command - string - İstek türünü belirten komut anahtar kelimesi
+//data - mixed - Komuta göre değişen veri alanı (string veya number)
+
+//2.3: Ortak HTTP İstek Bilgileri
+//Method: POST
+//URL: https://api.onloi.com/api/device/runtime
+//Content-Type: application/json
+//Kimlik Doğr.: pairKey + deviceKey — istek gövdesinde taşınır
+
+//2.4: Ortak İstek Gövde Şablonu
+{
+"action": "run",
+"name": "device",
+"args": {
+"command": "<komut>",
+"pairKey": "<string>",
+"deviceKey": "<string>",
+"deviceId": "<string>",
+"data": "<değer>",
+"createdAt": <unix_ms>
+}
+}
+
+
+//2.6: Doğrulama / Şifre - Kart Sorgulama (pass)
+//Cihaz, girilen geçici bir parolayı (Tuş takımı vs.) veya okutulan bir UID'yi (Kart vb.) doğrulamak için sunucuya sorar.
+
+//Desteklenen Veri (data) Tipleri:
+
+//KEYPAD:123456 (Şifre girildiğinde)
+//RFID:AABBCCDD (Kart/UID okutulduğunda)
+//QR:Veri (QR kod okutulduğunda)
+//İstek (JSON):
+
+json
+{
+  "action": "run",
+  "name": "device",
+  "args": {
+    "command": "open",
+    "data": "RFID:AABBCCDD",
+    "devicekey": "...",
+    "deviceid": "SMART_XXXXXX",
+    "createdat": 1700000000000,
+    "pairKey": "..."
+  }
+}
+//Sunucu Yanıtı:
+
+//HTTP 200 OK: Geçerli / Yetkili (kapı açılır.)
+//HTTP 403 Forbidden: Yetkisiz / Geçersiz. (Kapı Açılmaz)
+//Diğer Hatalar: Cihaz durumu OFFLINE ya da ERROR olarak işaretlenir.
+
+
+//Sunucu üzerinden HTTP 200 OK dönmesiyle işlem döngüsü tamamlanmış olur.
+
+Example 1 – Log with RFID1:
+curl --header "Content-Type: application/json" \
+--request POST \
+--data '{
+  "action": "run",
+  "name": "device",
+  "args": {
+    "command": "pass",
+    "data": "RFID:AABBCCDD",
+    "devicekey": "...",
+    "deviceid": "SMART_XXXXXX",
+    "createdat": 1700000000000,
+    "pairKey": "..."
+  }
+}' https://onloi.universeio.com/nowhere
+ 
+Example 2 – Log with Keypad1:
+curl --header "Content-Type: application/json" \
+--request POST \
+--data '{
+  "action": "run",
+  "name": "device",
+  "args": {
+    "command": "pass",
+    "data": "RFID:AABBCCDD",
+    "devicekey": "...",
+    "deviceid": "SMART_XXXXXX",
+    "createdat": 1700000000000,
+    "pairKey": "..."
+  }
+}' https://onloi.universeio.com/nowhere
+
+//3.0: Komut Özet Tablosu
+
+//event_log - ESP32 → Server - Erişim olaylarını (kapı açma, hata vb.) sunucuya iletir
+//cmd_response - ESP32 → Server - Sunucudan gelen komutlara işlem sonucunu bildirir
+//set_language - Server → ESP32 - Kilidin bildirim dilini ayarlar
+//find_device - Server → ESP32 - Kilidi sesli/titreşimli konumlandırır (beep)
+//query_settings - Server → ESP32 - Mevcut ses ve dil ayarlarını sorgular
+//query_time - Server → ESP32 - Güncel UTC zamanını ESP32'ye sorgular
+//factory_reset - ESP32 → Server - Cihaz fabrika sıfırlamasını sunucuya bildirir
+
+
+Offline ve online çalışma senaryoları:
+
+1. Cihaz en başından ve ya daha sonradan(yani offline çalıştı ve kullanıcılar lokal database e kaydedilmişti.) online moda geçebilir.
+2. Cihaz online iken (yani herhangi bir Wi-Fi ağına başarılı bir şekilde bağlandığında) sadece sunucu üzerinden verification yapabilir. Lokal database üzerinden verification yapamaz. 
+3. Online modda çalıştıktan sonra tekrar offline modda çalışmak istenirse cihaz resetlenecektir. 
+
+Pinlerde bir kaç değişiklik olacak:
+
+GPIO  	Purpose
+GPIO36	RFID_MISO
+GPIO39	QR_RX
+GPIO34	RS485_RX
+GPIO35	RFID_IRQ
+GPIO32	TSM_SDA
+GPIO33	TSM_SCL
+GPIO25	QR_TX
+GPIO26	RS485_TX
+GPIO27	TSM_OUT
+GPIO14	TSM_INT
+GPIO12	WS2812B_RGB_DIN
+GPIO13	ShiftReg-Latch2
+GPIO9	
+GPIO10	
+GPIO11	
+GPIO6	
+GPIO7	
+GPIO8	
+GPIO15	RFID_SCK
+GPIO2	Buzzer-PWM
+GPIO0	RFID_CS
+GPIO4	ShiftReg-Clock
+GPIO16	ShiftReg-Data
+GPIO17	ShiftReg-Latch1
+GPIO5	RFID_MOSI
+GPIO18	RS485_DE
+GPIO19	DIGITAL_INPUT1
+GPIO21	DIGITAL_INPUT2
+GPIO3	
+GPIO1	
+GPIO22	Wiegand-D0
+GPIO23	Wiegand-D1
+
+74HC595-1	Purpose
+QA	LED_EN_9
+QB	LED_EN_1
+QC	LED_EN_4
+QD	TSM_RST
+QE	LED_EN_5
+QF	LED_EN_6
+QG	LED_EN_3
+QH	LED_EN_2
+74HC595-2	
+QA	LED_EN_8
+QB	LED_EN_10
+QC	LED_EN_7
+QD	LED_EN_11
+QE	LED_EN_12
+QF	Wiegand_OUT_EN
+QG	RFID_RST
+QH	RELAY-1
+
+RGB Led - WS2812B ve Buzzer Senaryoları:
+
+	1. Working Mode
+
+- After the access controller is powered on, its LED status indicator turns green and blinks for 1 time firstly. Then it turns red and blinks
+for 3 times, and the buzzer buzzes a beep sound indicating the initialization process is completed.
+
+- When using the access control terminal, it will send out different sound prompt and the LED indicator on it has different statues. For the
+detailed information, refer to the table below.
+
+Sound Prompt		Led Indicator						Description
+					Green and Blinking Slowly			The access controller is working normally.
+One Beep												Pressing keys prompt, Swiping card prompt, Swiping QR prompt
+Two Rapid Beeps		Solid Green							The operation of pressing keys, swiping card or swiping QR valid.
+Three Slow Beeps	Solid Red							The operation of pressing keys, swiping card or swiping QR invalid.
+Two Rapid Beeps											The operation of entering the programming mode is succesful.
+Three Slow Beeps										The operation of entering the programming mode is failed.
+Beep for 10 Seconds										Delayed door alarm (the door is opened over the time limitation)
+
+	2. Programming  Mode
+- After entering the programming mode, LED status indicator turns blue and blinks rapidly.
+- After exiting the programming mode(with "*#") , the buzzer buzes two rapid beeps for switching the programming mode to the normalde mode.
+
+	2.1. Update Master Code
+	
+Sound Prompt		Led Indicator						Description
+3 Slow Beeps		Solid red during the beeps			The operation of update master code is failed.
+2 Rapid Beeps		Solid green during the beeps		The operation of update master code is successful.
+
+	2.2. Add Master Card
+	
+Sound Prompt		Led Indicator						Description	
+3 Slow Beeps									Enter another user ID for the current user ID has been applied.
+2 Rapid Beeps									The user ID is valid, wait for swiping.
+1 Beep											Swipe the card or QR.
+
+	2.3. Adding User
+	
+Sound Prompt		Led Indicator						Description
+3 Slow Beeps		Solid yellow during the beeps		Enter another user ID for the current user ID has been applied.
+2 Rapid Beeps		Solid green during the beeps		The user ID is valid, wait for swiping.
+1 Beep													Swipe the card or QR.
+
+- When adding cards continuously, different beeps stand for different meanings.
+
+Sound Prompt		Led Indicator						Description
+1 Beep													Swipe the card or QR.
+5 Slow Beeps		Solid red during the beeps			The card or QR is failed to be added for it has been registered.
+3 Slow Beeps		Solid yellow during the beeps		The user ID exists.
+2 Rapid Beeps		Solid green during the beeps		The card or QR is successfully added.
+
+	2.4. Deleting User
+
+Sound Prompt		Led Indicator						Description
+3 Slow Beeps		Solid red during the beeps			The operation of deleting card or QR is failed.
+2 Rapid Beeps		Solid green during the beeps		The operation of deleting card or QR is successful. 
+1 Beep													Swipe the card or QR.
+
+	2.5. Set Relay Configuration********************************************************************************************************
+
+Sound Prompt		Led Indicator						Description
+3 Slow Beeps		Solid red during the beeps			The operation of deleting card or QR is failed.
+2 Rapid Beeps		Solid green during the beeps		The operation of deleting card or QR is successful. 
+1 Beep													Swipe the card or QR.
+
+	2.6. Set Access Mode********************************************************************************************************
+
+Sound Prompt		Led Indicator						Description
+3 Slow Beeps		Solid red during the beeps			The relay time failed to be set between 1-99.
+2 Rapid Beeps		Solid green during the beeps		The relay time was successfully set to between 1-99 . 
+1 Beep				Solid blue during the beeps			The relay set to ON toggle Mode succesfully.
+
+	2.7. Set the Working Mode********************************************************************************************************
+
+Sound Prompt		Led Indicator						Description
+3 Slow Beeps		Solid red during the beeps			The working mode setting to failed.
+2 Rapid Beeps		Solid green during the beeps		The working mode has been successfully set. 
+1 Beep				Solid blue during the beeps			Choose one of the operating modes.
+
+	2.8. Set Open Door Detection********************************************************************************************************
+
+Sound Prompt		Led Indicator						Description
+3 Slow Beeps		Solid red during the beeps			The open door detection setting to failed.
+2 Rapid Beeps		Solid green during the beeps		The open door detection has been successfully set. 
+1 Beep				Solid blue during the beeps			Set the open door detection to on/off.
+
+	2.9. Set Audible and Visual Response********************************************************************************************************
+
+Sound Prompt		Led Indicator						Description
+3 Slow Beeps		Solid red during the beeps			The Sound and Led operation setting to failed.
+2 Rapid Beeps		Solid green during the beeps		The Sound and Led operation successfully setting. 
+1 Beep				Solid blue during the beeps			Set the Sound and Led operation.
+
+	2.10. Set Wiegand Input-Output Formats********************************************************************************************************
+
+Sound Prompt		Led Indicator						Description
+3 Slow Beeps		Solid red during the beeps			The Wiegand Input/Output bits setting to failed.
+2 Rapid Beeps		Solid green during the beeps		The Wiegand Input/Output bits successfully setting. 
+1 Beep				Solid blue during the beeps			Set the Wiegand Input/Output bits.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
