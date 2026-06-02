@@ -1,0 +1,30 @@
+Project: Wired and Wireless Smart Bluetooth Gateway
+Description: Bu proje, piyasada bulunan ve yalnızca yakın mesafe haberleşme (Bluetooth Low Energy - BLE) yeteneğine sahip Onloi kilitlerinin global internet ağına entegre etmeyi amaçlayan evrensel bir ağ geçidi (Gateway) çözümüdür. Sistem, marka bağımsız BLE uç cihazlarını tek bir merkezde toplayarak, bu cihazların bulut tabanlı otomasyon senaryoları üzerinden yönetilebilmesini sağlar.Temel Çalışma Prensibi: Geliştirilen Gateway donanımı, sistem mimarisinde "merkezi köprü" (Central Bridge) rolü üstlenmektedir. Cihaz, kendi üzerinde herhangi bir karar mekanizması veya yerel otomasyon (Local Linkage) barındırmaz. Temel işlevi, çift yönlü ve kesintisiz bir veri çevirmenliği yapmaktır:
+Veri Toplama: Çevredeki BLE uç cihazlarından (örneğin bir Onloi kilidin) gelen verileri GATT protokolü üzerinden okur.
+Buluta Aktarım: Toplanan bu lokal verileri, Wi-Fi üzerinden MQTT protokolünü kullanarak uzak sunucuya (Cloud) iletir.
+Aksiyon Yönetimi: Bulut sunucusunda çalışan otomasyon algoritmaları doğrultusunda üretilen kararları alır ve ilgili BLE uç cihazına (örneğin akıllı bir kilide) komut olarak geri iletir.
+FAZ1: BluetoothMCU: ESP32-WROOM-32E-N4Internet Connection: Wi-FiWifi haberleşme desteği: 802.11 b/g/n/e/i(802.11n, speeds up to 150 Mbps)
+Wifi frekans: 2.4~2.5 GH
+Led Indicator:Multi-Mode GatewayBlue LED: Bluetooth Status IndicatorRed Led: Wi-Fi Status IndıcatorBluetoothBlue LED: Bluetooth Status IndıcatorRed LED: Wi-Fi Status IndicatorConnections:USB Type-C: Power 5V-1ASwitch: Switch/Reset Key
+
+Bluetooth Performance
+
+Bluetooth version: Bluetooth 5.0 low energy(support 1M/2M/Coded LE PHY)
+Bluetooth Roles: Oberserver role for scanningCentral role for connecting
+Bluetooth scan PHY: Legacy BLE 4.2 1M PHYBluetooth 5 1M PHYBluetooth 5 2M PHYBluetooth 5 Coded PHY (long range)
+Active scanning: Request scan response packets (By default)Can be disabled (passive scanning)
+Filter Beacon Protocols: Onloi Beacon – 
+Beacon Data Format: JSON array formatHexadecimal format
+Bluetooth Smarts – Connect
+Bluetooth Connection PHY:Automatic (1M/2M/Coded PHY)
+Connection BLE peripheral:Gateway connects to a BLE peripheral and sets up a communication process between the BLE peripheral and the Server. Only MQTT supports data transfer between the BLE peripheral and Server (Bluetooth Communication topic).
+Network
+Internet Connection: WLAN to InternetNetwork failover
+Server Access Protocols: MQTT (SSL/TLS, socks5 proxy)HTTP (SSL/TLS)TCPUDP
+Device Management
+Web GUI: A Web user interface for configuring the gateway.User can access the Web GUI via Wi-Fi (AP mode) or Ethernet (WAN IP).
+Cloud Management: Monitoring and configuring the gateway remotely by Cloud management commands. Only MQTT supports (Remote Management topic)
+System Logs: Record the important operations and events when the gateway Works
+System Monitor: Gateway Running timeCPU temperatureCPU UsageMemory UsageNetwork/Server Connection Status
+Time: ISO 8601 (JSON Format)Unix Time (Hex Format)Sync System time with NTP Server(s)
+Restart:Schedule the gateway to restart automatically at a certain time

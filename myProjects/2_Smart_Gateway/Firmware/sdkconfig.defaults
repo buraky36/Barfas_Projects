@@ -1,0 +1,11 @@
+# Enable Bluetooth
+CONFIG_BT_ENABLED=y
+CONFIG_BT_NIMBLE_ENABLED=y
+
+# Select partition table (using custom partitions.csv)
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_FILENAME="partitions.csv"
+
+# ESP32-C6 specifics
+CONFIG_IDF_TARGET="esp32c6"
