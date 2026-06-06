@@ -496,7 +496,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "OE0113-WiFi_QR_Mifare_Reader_V1.1.kicad_pro",
+    "filename": "BLE_SmartGateway_V1.0.kicad_pro",
     "version": 3
   },
   "net_settings": {
