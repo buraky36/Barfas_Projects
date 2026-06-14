@@ -14,11 +14,26 @@
 #include "hw_config.h"
 #include "driver/gpio.h"
 #include <string.h>
+#include "esp_chip_info.h"
+
+// ============================================================
+// Firmware Version
+// ============================================================
+#define FW_VERSION_MAJOR  1
+#define FW_VERSION_MINOR  0
+#define FW_VERSION_PATCH  0
+#define FW_VERSION_STR    "v1.0.0"
+#define FW_BUILD_DATE     __DATE__
+#define FW_BUILD_TIME     __TIME__
+// ============================================================
 
 uint8_t active_hw_version = HW_VERSION_QR_ONLY; // Default
 
 void app_main(void) {
-  printf("Starting Access Control Terminal\n");
+  printf("\n============================================\n");
+  printf(" Access Control Terminal Firmware %s\n", FW_VERSION_STR);
+  printf(" Build: %s %s\n", FW_BUILD_DATE, FW_BUILD_TIME);
+  printf("============================================\n\n");
 
   // ESP-IDF core services
   esp_event_loop_create_default();
