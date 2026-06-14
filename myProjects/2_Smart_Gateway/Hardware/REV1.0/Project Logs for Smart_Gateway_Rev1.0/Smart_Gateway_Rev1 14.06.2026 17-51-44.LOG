@@ -1,0 +1,17 @@
+Added Component: Designator=D?(LED_0603_GRN)
+Add component (AddParameter): Name = "Manufacturer"; Value = "HONGLITRONIC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "PSC-1608U52GC-G4"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "0603(1608 Metric)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "GREEN"; VariantName = "[No Variations]"
+Added Component: Designator=R?(RES_0603)
+Add component (AddParameter): Name = "Manufacturer"; Value = "YAGEO"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "RC0603FR-073K74L"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "0603 (1608 Metric)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "3.3K"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=D?-1
+Added Pin To Net: NetName=3V3 Pin=R?-2
+Added Pin To Net: NetName=NetD?_2 Pin=D?-2
+Added Pin To Net: NetName=NetD?_2 Pin=R?-1
+Added Net: Name=NetD?_2
+Added Member To Class: ClassName=TOP Member=Component D? PSC-1608U52GC-G4
+Added Member To Class: ClassName=TOP Member=Component R? 0603SAF3301T5E

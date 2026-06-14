@@ -1,0 +1,14 @@
+Removed Pin From Net: NetName=3V3 Pin=SW1-1
+Removed Pin From Net: NetName=GPIO11 Pin=SW1-4
+Change Component Comment : Designator=SW1 Old Comment=430152095836 New Comment=SKSCLAE010
+Change component parameters: Designator = "SW1" ("SW1"); Footprint = "SMD_TACT_SW_6x6_9.50mm"; UniqueID = "\GMDUKPTZ" ("\GMDUKPTZ")
+Change component parameters (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet Link"; Value = "https://www.mouser.com/datasheet/2/15/SKSC-1370794.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Height"; Value = "1.4mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Name"; Value = "ALPS Electric"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Part_Number"; Value = "SKSCLAE010"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Part Number"; Value = "688-SKSCLAE010"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.com/Search/Refine.aspx?Keyword=688-SKSCLAE010"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GPIO11 Pin=SW1-1
+Added Pin To Net: NetName=3V3 Pin=SW1-4

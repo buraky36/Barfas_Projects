@@ -1,0 +1,4 @@
+Change Net Name : Old Net Name=GPIO12_N New Net Name=USBB_D_N
+Change Net Name : Old Net Name=GPIO13_P New Net Name=USBB_D_P
+Added Differential Pair: Name=USBB_D
+Added Class: Name=USBB

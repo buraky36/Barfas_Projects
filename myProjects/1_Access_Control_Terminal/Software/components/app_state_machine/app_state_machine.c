@@ -12,6 +12,8 @@
 #include "mfrc522.h"
 #include "nv_storage.h"
 #include "wifi_manager.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

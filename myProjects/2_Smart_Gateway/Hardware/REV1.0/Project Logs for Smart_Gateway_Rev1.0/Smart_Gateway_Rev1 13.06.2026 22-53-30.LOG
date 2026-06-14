@@ -1,0 +1,52 @@
+Removed Pin From Net: NetName=USB_DP Pin=D2-2
+Removed Pin From Net: NetName=USB_DN Pin=D3-2
+Removed Pin From Net: NetName=USB_DN Pin=D9-2
+Removed Pin From Net: NetName=USB_DP Pin=J3-A6
+Removed Pin From Net: NetName=USB_DN Pin=J3-A7
+Added Component: Designator=D4(SOD-123)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Nexperia USA Inc."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "PMEG4010EGWJ"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOD123"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier 1"; Value = "DIGIKEY"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier 2"; Value = "MOUSER"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier 3"; Value = "OZDISAN"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number 1"; Value = "1727-7336-2-ND"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number 2"; Value = "841-PMEG4010EGWJ"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number 3"; Value = "1N5819HW-7-F"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "40V 1A"; VariantName = "[No Variations]"
+Added Component: Designator=D10(SOD-123)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Nexperia USA Inc."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "PMEG4010EGWJ"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOD123"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier 1"; Value = "DIGIKEY"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier 2"; Value = "MOUSER"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier 3"; Value = "OZDISAN"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number 1"; Value = "1727-7336-2-ND"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number 2"; Value = "841-PMEG4010EGWJ"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number 3"; Value = "1N5819HW-7-F"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "40V 1A"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=5V Pin=D4-1
+Added Pin To Net: NetName=VBUSA Pin=D4-2
+Added Pin To Net: NetName=5V Pin=D10-1
+Added Pin To Net: NetName=VBUSB Pin=D10-2
+Change Net Name : Old Net Name=USB_DN New Net Name=USB_D_N
+Change Net Name : Old Net Name=USB_DP New Net Name=USB_D_P
+Added Pin To Net: NetName=GPIO12_N Pin=J3-A7
+Added Pin To Net: NetName=GPIO12_N Pin=J3-B7
+Added Pin To Net: NetName=GPIO12_N Pin=U2-13
+Added Net: Name=GPIO12_N
+Added Pin To Net: NetName=GPIO13_P Pin=J3-A6
+Added Pin To Net: NetName=GPIO13_P Pin=J3-B6
+Added Pin To Net: NetName=GPIO13_P Pin=U2-14
+Added Net: Name=GPIO13_P
+Added Pin To Net: NetName=USB_DN Pin=D3-2
+Added Pin To Net: NetName=USB_DN Pin=D9-2
+Added Net: Name=USB_DN
+Added Pin To Net: NetName=USB_DP Pin=D2-2
+Added Net: Name=USB_DP
+Added Differential Pair: Name=USB_D
+Added Member To Class: ClassName=TOP Member=Component D4 PMEG4010EGWJ
+Added Member To Class: ClassName=TOP Member=Component D10 PMEG4010EGWJ
+Added Room: Name=TOP
+Added Class: Name=USBA
+Added Class: Name=USBB

@@ -1,0 +1,68 @@
+Change Component Footprint: Designator=D1 Old Footprint=SMB-Bi New Footprint=SODFL3718X130N
+Change Component Footprint: Designator=D2 Old Footprint=SMB-Bi New Footprint=SODFL3718X130N
+Change Component Footprint: Designator=D3 Old Footprint=SMB-Bi New Footprint=SODFL3718X130N
+Change Component Footprint: Designator=D7 Old Footprint=SMB-Bi New Footprint=SODFL3718X130N
+Change Component Footprint: Designator=D8 Old Footprint=SMB-Bi New Footprint=SODFL3718X130N
+Change Component Footprint: Designator=D9 Old Footprint=SMB-Bi New Footprint=SODFL3718X130N
+Change Component Comment : Designator=D1 Old Comment=SM6T6V8CAY New Comment=ATV02W5V0B-HF
+Change Component Comment : Designator=D2 Old Comment=SM6T6V8CAY New Comment=ATV02W5V0B-HF
+Change Component Comment : Designator=D3 Old Comment=SM6T6V8CAY New Comment=ATV02W5V0B-HF
+Change Component Comment : Designator=D7 Old Comment=SM6T6V8CAY New Comment=ATV02W5V0B-HF
+Change Component Comment : Designator=D8 Old Comment=SM6T6V8CAY New Comment=ATV02W5V0B-HF
+Change Component Comment : Designator=D9 Old Comment=SM6T6V8CAY New Comment=ATV02W5V0B-HF
+Change component parameters: Designator = "D1" ("D1"); Footprint = "SMB-Bi"; UniqueID = "\DPFMMSQX" ("\DPFMMSQX")
+Change component parameters (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet Link"; Value = "https://www.mouser.com/datasheet/2/80/ATV02W-HF_series_RevC-1480797.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Height"; Value = "1.3mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Name"; Value = "Comchip Technology"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Part_Number"; Value = "ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Part Number"; Value = "750-ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Comchip-Technology/ATV02W5V0B-HF?qs=vdiGlTBG6JtbR3aZU%2F7xAQ%3D%3D"; VariantName = "[No Variations]"
+Change component parameters: Designator = "D2" ("D2"); Footprint = "SMB-Bi"; UniqueID = "\ELXDPULJ" ("\ELXDPULJ")
+Change component parameters (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet Link"; Value = "https://www.mouser.com/datasheet/2/80/ATV02W-HF_series_RevC-1480797.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Height"; Value = "1.3mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Name"; Value = "Comchip Technology"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Part_Number"; Value = "ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Part Number"; Value = "750-ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Comchip-Technology/ATV02W5V0B-HF?qs=vdiGlTBG6JtbR3aZU%2F7xAQ%3D%3D"; VariantName = "[No Variations]"
+Change component parameters: Designator = "D3" ("D3"); Footprint = "SMB-Bi"; UniqueID = "\NWOOSQDG" ("\NWOOSQDG")
+Change component parameters (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet Link"; Value = "https://www.mouser.com/datasheet/2/80/ATV02W-HF_series_RevC-1480797.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Height"; Value = "1.3mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Name"; Value = "Comchip Technology"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Part_Number"; Value = "ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Part Number"; Value = "750-ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Comchip-Technology/ATV02W5V0B-HF?qs=vdiGlTBG6JtbR3aZU%2F7xAQ%3D%3D"; VariantName = "[No Variations]"
+Change component parameters: Designator = "D7" ("D7"); Footprint = "SMB-Bi"; UniqueID = "\SBSLTDXF" ("\SBSLTDXF")
+Change component parameters (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet Link"; Value = "https://www.mouser.com/datasheet/2/80/ATV02W-HF_series_RevC-1480797.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Height"; Value = "1.3mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Name"; Value = "Comchip Technology"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Part_Number"; Value = "ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Part Number"; Value = "750-ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Comchip-Technology/ATV02W5V0B-HF?qs=vdiGlTBG6JtbR3aZU%2F7xAQ%3D%3D"; VariantName = "[No Variations]"
+Change component parameters: Designator = "D8" ("D8"); Footprint = "SMB-Bi"; UniqueID = "\EKXSMAWK" ("\EKXSMAWK")
+Change component parameters (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet Link"; Value = "https://www.mouser.com/datasheet/2/80/ATV02W-HF_series_RevC-1480797.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Height"; Value = "1.3mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Name"; Value = "Comchip Technology"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Part_Number"; Value = "ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Part Number"; Value = "750-ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Comchip-Technology/ATV02W5V0B-HF?qs=vdiGlTBG6JtbR3aZU%2F7xAQ%3D%3D"; VariantName = "[No Variations]"
+Change component parameters: Designator = "D9" ("D9"); Footprint = "SMB-Bi"; UniqueID = "\KUUVQGSK" ("\KUUVQGSK")
+Change component parameters (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet Link"; Value = "https://www.mouser.com/datasheet/2/80/ATV02W-HF_series_RevC-1480797.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Height"; Value = "1.3mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Name"; Value = "Comchip Technology"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Part_Number"; Value = "ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Part Number"; Value = "750-ATV02W5V0B-HF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Comchip-Technology/ATV02W5V0B-HF?qs=vdiGlTBG6JtbR3aZU%2F7xAQ%3D%3D"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=USB_DP Pin=D8-2
+Added Member To Class: ClassName=TOP Member=Component R3 RES

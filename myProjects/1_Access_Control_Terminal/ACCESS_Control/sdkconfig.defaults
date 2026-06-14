@@ -1,3 +1,0 @@
-# Enable Bluetooth for ble_prov.c
-CONFIG_BT_ENABLED=y
-CONFIG_BT_NIMBLE_ENABLED=y

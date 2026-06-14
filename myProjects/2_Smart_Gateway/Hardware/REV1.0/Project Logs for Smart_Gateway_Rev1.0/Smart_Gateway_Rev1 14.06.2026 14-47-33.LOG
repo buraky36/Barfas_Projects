@@ -1,0 +1,47 @@
+Removed Pin From Net: NetName=EARTH Pin=J2-S1
+Removed Pin From Net: NetName=EARTH Pin=J2-S2
+Removed Pin From Net: NetName=EARTH Pin=J2-S3
+Removed Pin From Net: NetName=EARTH Pin=J2-S4
+Removed Pin From Net: NetName=GPIO11 Pin=SW1-2
+Removed Pin From Net: NetName=3V3 Pin=SW1-3
+Removed Pin From Net: NetName=3V3 Pin=SW1-4
+Change Component Footprint: Designator=SW1 Old Footprint=SKSCLAE010 New Footprint=TS32735BKB160RAHSMTTR
+Change Component Comment : Designator=SW1 Old Comment=SKSCLAE010 New Comment=TS32-7-35-BK-B-260-RA-SMT-TR
+Change Component Designator: OldDesignator=R3 NewDesignator=R15
+Change component parameters: Designator = "SW1" ("SW1"); Footprint = "SKSCLAE010"; UniqueID = "\YXUJLNGV" ("\YXUJLNGV")
+Change component parameters (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet Link"; Value = "https://www.sameskydevices.com/product/resource/ts32.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Height"; Value = "3.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Name"; Value = "Same Sky"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer_Part_Number"; Value = "TS32-7-35-BK-B-260-RA-SMT-TR"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Part Number"; Value = "179-TS32735B260RASMT"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Same-Sky/TS32-7-35-BK-B-260-RA-SMT-TR?qs=efUn273yAhd1rev%2FGN0tPg%3D%3D"; VariantName = "[No Variations]"
+Added Component: Designator=R3(RES_0603)
+Add component (AddParameter): Name = "Manufacturer"; Value = "ROYALOHM"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "0603SAF1002T5E"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Added Component: Designator=R16(RES_0805)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "RC0805FR-072M2L"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "2.2M"; VariantName = "[No Variations]"
+Added Component: Designator=R33(RES_0805)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "RC0805FR-072M2L"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "2.2M"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=R3-1
+Added Pin To Net: NetName=GPIO11 Pin=R3-2
+Added Pin To Net: NetName=GND Pin=R16-1
+Added Pin To Net: NetName=GND Pin=R33-1
+Added Pin To Net: NetName=3V3 Pin=SW1-2
+Change Net Name : Old Net Name=EARTH New Net Name=EARTH2
+Added Pin To Net: NetName=EARTH Pin=J2-S1
+Added Pin To Net: NetName=EARTH Pin=J2-S2
+Added Pin To Net: NetName=EARTH Pin=J2-S3
+Added Pin To Net: NetName=EARTH Pin=J2-S4
+Added Pin To Net: NetName=EARTH Pin=R16-2
+Added Pin To Net: NetName=EARTH Pin=R33-2
+Added Net: Name=EARTH
+Added Member To Class: ClassName=TOP Member=Component R15 RES
+Added Member To Class: ClassName=TOP Member=Component R16 RES
+Added Member To Class: ClassName=TOP Member=Component R33 RES

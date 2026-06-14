@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=VBUSA Pin=D7-2
+Added Pin To Net: NetName=USB_D_P Pin=D2-2
+Added Pin To Net: NetName=USB_D_N Pin=D3-2
+Added Pin To Net: NetName=VBUSB Pin=D7-2
+Added Pin To Net: NetName=USBB_D_P Pin=D8-2
+Added Pin To Net: NetName=USBB_D_N Pin=D9-2
