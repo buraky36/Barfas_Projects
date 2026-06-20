@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "driver/gpio.h"
 
 
 static const char *TAG = "APP_SM";
@@ -345,6 +346,14 @@ void app_state_machine_tick(void) {
     last_heartbeat = now_us;
   }
 
+  static int64_t last_wg_dbg = 0;
+  if (now_us - last_wg_dbg > 1000000) { // Print every 1 second
+      last_wg_dbg = now_us;
+      int d0 = gpio_get_level(PIN_WIEGAND_D0);
+      int d1 = gpio_get_level(PIN_WIEGAND_D1);
+      ESP_LOGI(TAG, "WG_PINS -> D0: %d, D1: %d", d0, d1);
+  }
+
   static int64_t last_anim_tick = 0;
   if (current_state == STATE_IDLE && now_us - last_anim_tick > 3000000) {
     // Only play the idle animation when the 20-second keypad activity window
@@ -363,7 +372,8 @@ void app_state_machine_tick(void) {
   if (wifi_manager_is_connected() && !config.is_online) {
     config.is_online = true;
     nv_storage_set_config(&config);
-    ESP_LOGI(TAG, "WiFi connected! Switched permanently to Online Mode.");
+    nv_storage_delete_all_users(); // Wipe local users when switching to Online
+    ESP_LOGI(TAG, "WiFi connected! Switched permanently to Online Mode. Local users wiped.");
   }
 
   // Dig_In Hardware Handlers
@@ -575,7 +585,7 @@ void app_state_machine_tick(void) {
     if (active_hw_version != HW_VERSION_QR_ONLY) {
       rfid_ok = mfrc522_check_card(&rfid_uid);
     }
-    bool weigand_ok = (config.working_mode != 1) && hal_wiegand_available();
+    bool weigand_ok = (config.working_mode == 2) && hal_wiegand_available();
     if (rfid_ok || weigand_ok) {
       if (hal_shift_reg_is_blocking_anim_playing())
         break;
@@ -583,6 +593,26 @@ void app_state_machine_tick(void) {
       uint8_t bit_len = 0;
       uint32_t card_id =
           (rfid_uid != 0) ? rfid_uid : hal_wiegand_read(&bit_len);
+          
+      if (rfid_uid == 0 && bit_len != config.wiegand_format) {
+          ESP_LOGW(TAG, "Wiegand format mismatch: expected %d, got %d. Ignored.", config.wiegand_format, bit_len);
+          break;
+      }
+
+      if (rfid_uid == 0 && bit_len == 34) {
+          user_record_t tmp_usr;
+          char master_str[24];
+          if (nv_storage_find_user_by_wiegand34(card_id, &tmp_usr)) {
+              uint32_t db_id = (uint32_t)strtoul(tmp_usr.card_id, NULL, 10);
+              ESP_LOGI(TAG, "Wiegand 34 Smart Match: Replaced Wiegand ID %lu with Registered User ID %lu", (unsigned long)card_id, (unsigned long)db_id);
+              card_id = db_id;
+          } else if (nv_storage_find_master_by_wiegand34(card_id, master_str)) {
+              uint32_t db_id = (uint32_t)strtoul(master_str, NULL, 10);
+              ESP_LOGI(TAG, "Wiegand 34 Smart Match: Replaced Wiegand ID %lu with Master ID %lu", (unsigned long)card_id, (unsigned long)db_id);
+              card_id = db_id;
+          }
+      }
+
       char card_str[24];
       snprintf(card_str, sizeof(card_str), "%lu", (unsigned long)card_id);
 
@@ -769,7 +799,7 @@ void app_state_machine_tick(void) {
     if (active_hw_version != HW_VERSION_QR_ONLY) {
       rfid_ok = mfrc522_check_card(&rfid_uid);
     }
-    bool weigand_ok = (config.working_mode != 1) && hal_wiegand_available();
+    bool weigand_ok = hal_wiegand_available();
     if (rfid_ok || weigand_ok) {
       hal_shift_reg_wakeup_keypad();
       uint8_t bit_len = 0;
@@ -1283,31 +1313,22 @@ void app_state_machine_tick(void) {
             }
             break;
           case PROG_STATE_WORKING_MODE:
-            if (val == 1 || val == 2 || val == 3) {
+            if (val == 7 || val == 8 || val == 9) {
               uint8_t old_mode = config.working_mode;
-              config.working_mode = val;
+              uint8_t new_mode = (val == 7) ? 1 : ((val == 8) ? 2 : 3);
+              config.working_mode = new_mode;
               ok = true;
-              ESP_LOGI(TAG, "Config: Working Mode = %d", val);
               
-              if ((old_mode == 3 && val != 3) || (old_mode != 3 && val == 3)) {
+              const char* mode_str = (new_mode == 1) ? "Standalone" : ((new_mode == 2) ? "Controller" : "Wiegand Reader");
+              ESP_LOGI(TAG, "Config: Working Mode changed to %s", mode_str);
+              
+              if ((old_mode == 3 && new_mode != 3) || (old_mode != 3 && new_mode == 3)) {
                   nv_storage_set_config(&config);
                   ESP_LOGW(TAG, "Working Mode crossed Reader Mode boundary. Rebooting to apply network stack changes!");
                   hal_io_buzzer_beep(2700, 100, 5);
                   vTaskDelay(pdMS_TO_TICKS(1000));
                   esp_restart();
               }
-            } else if (val == 8) {
-              if (config.is_online)
-                ok = false; // Rejected, must factory reset
-              else {
-                config.is_online = false;
-                ok = true;
-                ESP_LOGI(TAG, "Config: Switched to Offline Mode");
-              }
-            } else if (val == 9) {
-              config.is_online = true;
-              ok = true;
-              ESP_LOGI(TAG, "Config: Switched to Online Mode");
             }
             break;
           case PROG_STATE_AUDIO_VISUAL:
@@ -1394,7 +1415,7 @@ void app_state_machine_tick(void) {
 #if ACTIVE_HW_VERSION != HW_VERSION_QR_ONLY
     rfid_ok = mfrc522_check_card(&rfid_uid);
 #endif
-    bool weigand_ok = (config.working_mode != 1) && hal_wiegand_available();
+    bool weigand_ok = hal_wiegand_available();
     if (rfid_ok || weigand_ok) {
       hal_shift_reg_wakeup_keypad();
       uint8_t bit_len = 0;
@@ -1579,12 +1600,62 @@ void app_state_machine_tick(void) {
 
     break;
   }
-  case STATE_DOOR_OPEN:
+  case STATE_DOOR_OPEN: {
+    uint32_t rfid_uid = 0;
+    bool rfid_ok = false;
+    if (active_hw_version != HW_VERSION_QR_ONLY) {
+      rfid_ok = mfrc522_check_card(&rfid_uid);
+    }
+    bool weigand_ok = (config.working_mode == 2) && hal_wiegand_available();
+    
+    if (rfid_ok || weigand_ok) {
+        uint8_t bit_len = 0;
+        uint32_t card_id = (rfid_uid != 0) ? rfid_uid : hal_wiegand_read(&bit_len);
+        
+        bool format_ok = true;
+        if (rfid_uid == 0 && bit_len != config.wiegand_format) {
+            format_ok = false;
+        }
+        
+        if (format_ok) {
+            if (rfid_uid == 0 && bit_len == 34) {
+                user_record_t tmp_usr;
+                char master_str[24];
+                if (nv_storage_find_user_by_wiegand34(card_id, &tmp_usr)) {
+                    card_id = (uint32_t)strtoul(tmp_usr.card_id, NULL, 10);
+                } else if (nv_storage_find_master_by_wiegand34(card_id, master_str)) {
+                    card_id = (uint32_t)strtoul(master_str, NULL, 10);
+                }
+            }
+            
+            char card_str[24];
+            snprintf(card_str, sizeof(card_str), "%lu", (unsigned long)card_id);
+            
+            bool valid = false;
+            if (nv_storage_is_master_credential(card_str)) {
+                valid = true;
+            } else {
+                user_record_t u;
+                valid = nv_storage_find_user_by_card(card_str, &u);
+            }
+            
+            if (valid) {
+                ESP_LOGI(TAG, "Valid card scanned during DOOR_OPEN. Extending timer.");
+                hal_io_buzzer_beep(2700, 100, 2);
+                state_timer_start = esp_timer_get_time(); // Reset timer to extend open time
+            } else {
+                ESP_LOGW(TAG, "Invalid card scanned during DOOR_OPEN.");
+                hal_io_buzzer_beep(1000, 300, 3);
+            }
+        }
+    }
+
     if (elapsed_ms >= (config.relay_time * 1000)) {
       hal_io_relay_set(false);
       app_set_state(STATE_IDLE);
     }
     break;
+  }
   case STATE_ALARM:
     // Simplified alarm clear
     if (config.alarm_time > 0 && elapsed_ms >= (config.alarm_time * 60000)) {

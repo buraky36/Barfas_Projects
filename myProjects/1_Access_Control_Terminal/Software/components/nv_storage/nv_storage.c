@@ -209,6 +209,38 @@ bool nv_storage_find_user_by_card(const char *card_id_str, user_record_t *out_us
     return found;
 }
 
+bool nv_storage_find_user_by_wiegand34(uint32_t wg34_id, user_record_t *out_user) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_USERS, NVS_READONLY, &handle) != ESP_OK) return false;
+    
+    char key[16];
+    size_t size = sizeof(user_record_t);
+    bool found = false;
+    
+    uint32_t wg_masked = wg34_id & 0xFF00FFFF;
+
+    for (uint16_t i = 1; i <= 9988; i++) {
+        if (!(user_active_map[i / 8] & (1 << (i % 8)))) continue;
+
+        snprintf(key, sizeof(key), "u%u", i);
+        size = sizeof(user_record_t);
+        if (nvs_get_blob(handle, key, out_user, &size) == ESP_OK) {
+            if (out_user->is_active && strlen(out_user->card_id) > 0) {
+                uint32_t db_id = (uint32_t)strtoul(out_user->card_id, NULL, 10);
+                if (db_id > 0) {
+                    uint32_t db_le = ((db_id & 0xFF) << 24) | (((db_id >> 8) & 0xFF) << 16) | (((db_id >> 16) & 0xFF) << 8) | ((db_id >> 24) & 0xFF);
+                    if ((db_le & 0xFF00FFFF) == wg_masked) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    nvs_close(handle);
+    return found;
+}
+
 bool nv_storage_find_user_by_qr(const char *qr_str, user_record_t *out_user) {
     nvs_handle_t handle;
     if (nvs_open(NAMESPACE_USERS, NVS_READONLY, &handle) != ESP_OK) return false;
@@ -242,6 +274,29 @@ bool nv_storage_is_master_credential(const char *cred) {
     for (uint8_t i = 0; i < conf.master_card_count; i++) {
         if (strcmp(conf.master_cards[i], cred) == 0) {
             return true;
+        }
+    }
+    return false;
+}
+
+bool nv_storage_find_master_by_wiegand34(uint32_t wg34_id, char *out_master) {
+    sys_config_t conf;
+    nv_storage_get_config(&conf);
+    
+    uint32_t wg_masked = wg34_id & 0xFF00FFFF;
+
+    for (uint8_t i = 0; i < conf.master_card_count; i++) {
+        if (strlen(conf.master_cards[i]) > 0) {
+            uint32_t db_id = (uint32_t)strtoul(conf.master_cards[i], NULL, 10);
+            if (db_id > 0) {
+                uint32_t db_le = ((db_id & 0xFF) << 24) | (((db_id >> 8) & 0xFF) << 16) | (((db_id >> 16) & 0xFF) << 8) | ((db_id >> 24) & 0xFF);
+                if ((db_le & 0xFF00FFFF) == wg_masked) {
+                    if (out_master) {
+                        strcpy(out_master, conf.master_cards[i]);
+                    }
+                    return true;
+                }
+            }
         }
     }
     return false;

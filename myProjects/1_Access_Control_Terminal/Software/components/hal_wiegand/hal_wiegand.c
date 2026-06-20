@@ -49,7 +49,9 @@ void hal_wiegand_init(void) {
 
 void hal_wiegand_set_direction(bool is_output) {
     current_is_output = is_output;
-    hal_shift_reg_set_wiegand_en(is_output);
+    // Donanım OE (Output Enable) mantığı ile çalışıyorsa, hattı açmak için 1 (true) gerekebilir. 
+    // Geçici olarak her iki durumda da (Input/Output) Shift Register pinini TRUE yapıyoruz.
+    hal_shift_reg_set_wiegand_en(true);
     
     if (is_output) {
         gpio_isr_handler_remove(PIN_WIEGAND_D0);
@@ -147,6 +149,7 @@ bool hal_wiegand_available(void) {
             wg_data = 0;
             wg_bit_count = 0;
             wg_available = true;
+            ESP_LOGI(TAG, "Wiegand Input Received: Raw Data = 0x%08llX (Bits: %d)", (unsigned long long)wg_ready_data, wg_ready_bit_count);
         }
     }
     return wg_available;

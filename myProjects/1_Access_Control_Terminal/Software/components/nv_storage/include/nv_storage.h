@@ -42,6 +42,7 @@ bool nv_storage_get_api_keys(char *device_key, char *pair_key);
 
 // Master Credential Ops
 bool nv_storage_is_master_credential(const char *cred);
+bool nv_storage_find_master_by_wiegand34(uint32_t wg34_id, char *out_master);
 int32_t nv_storage_get_master_id(const char *cred);
 bool nv_storage_add_master_credential(uint16_t id, const char *cred);
 void nv_storage_clear_master_credentials(void);
@@ -55,5 +56,6 @@ uint16_t nv_storage_get_free_user_id(void);
 bool nv_storage_find_user_by_pin(const char *input_pin_buffer, user_record_t *out_user);
 bool nv_storage_find_user_by_card(const char *card_id_str, user_record_t *out_user);
 bool nv_storage_find_user_by_qr(const char *qr_str, user_record_t *out_user);
+bool nv_storage_find_user_by_wiegand34(uint32_t wg34_id, user_record_t *out_user);
 
 #endif
