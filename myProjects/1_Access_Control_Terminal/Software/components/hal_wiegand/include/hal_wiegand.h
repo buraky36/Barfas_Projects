@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 #define WIEGAND_D0_PIN 22
 #define WIEGAND_D1_PIN 23
@@ -18,6 +19,8 @@ void hal_wiegand_write(uint32_t data, uint8_t bit_len, bool parity_en);
 
 // For Controller Mode: Read Wiegand data
 bool hal_wiegand_available(void);
+uint16_t hal_wiegand_peek_bit_count(void);
 uint32_t hal_wiegand_read(uint8_t *bit_len_out);
+bool hal_wiegand_read_string(char *out_str, size_t max_len, uint16_t *bit_len_out);
 
 #endif

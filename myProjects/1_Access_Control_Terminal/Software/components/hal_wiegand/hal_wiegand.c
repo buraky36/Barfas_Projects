@@ -6,6 +6,7 @@
 #include "freertos/task.h"
 #include "rom/ets_sys.h"
 #include "esp_log.h"
+#include <string.h>
 
 static const char *TAG = "HAL_WIEGAND";
 
@@ -14,27 +15,30 @@ void hal_shift_reg_set_wiegand_en(bool state);
 
 static bool current_is_output = false;
 
-// Input buffers
-static uint64_t wg_data = 0;
-static uint8_t wg_bit_count = 0;
+#define MAX_WG_BITS 512
+static uint8_t wg_data_buf[MAX_WG_BITS / 8] = {0};
+static uint16_t wg_bit_count = 0;
 static int64_t wg_last_bit_time = 0;
 
-static uint64_t wg_ready_data = 0;
-static uint8_t wg_ready_bit_count = 0;
+static uint8_t wg_ready_data_buf[MAX_WG_BITS / 8] = {0};
+static uint16_t wg_ready_bit_count = 0;
 static bool wg_available = false;
 
 static void IRAM_ATTR wiegand_d0_isr_handler(void* arg) {
     int64_t now = esp_timer_get_time();
-    wg_data <<= 1;
-    wg_bit_count++;
+    if (wg_bit_count < MAX_WG_BITS) {
+        wg_data_buf[wg_bit_count / 8] &= ~(1 << (7 - (wg_bit_count % 8)));
+        wg_bit_count++;
+    }
     wg_last_bit_time = now;
 }
 
 static void IRAM_ATTR wiegand_d1_isr_handler(void* arg) {
     int64_t now = esp_timer_get_time();
-    wg_data <<= 1;
-    wg_data |= 1;
-    wg_bit_count++;
+    if (wg_bit_count < MAX_WG_BITS) {
+        wg_data_buf[wg_bit_count / 8] |= (1 << (7 - (wg_bit_count % 8)));
+        wg_bit_count++;
+    }
     wg_last_bit_time = now;
 }
 
@@ -71,7 +75,7 @@ void hal_wiegand_set_direction(bool is_output) {
         gpio_set_intr_type(PIN_WIEGAND_D0, GPIO_INTR_NEGEDGE);
         gpio_set_intr_type(PIN_WIEGAND_D1, GPIO_INTR_NEGEDGE);
         
-        wg_data = 0;
+        memset(wg_data_buf, 0, sizeof(wg_data_buf));
         wg_bit_count = 0;
         wg_available = false;
         
@@ -140,16 +144,33 @@ void hal_wiegand_write(uint32_t data, uint8_t bit_len, bool parity_en) {
     hal_wiegand_write_raw(transmit_data, total_bits);
 }
 
+uint16_t hal_wiegand_peek_bit_count(void) {
+    if (!wg_available) return 0;
+    return wg_ready_bit_count;
+}
+
 bool hal_wiegand_available(void) {
     if (!current_is_output && wg_bit_count > 0) {
         // 50ms timeout
         if ((esp_timer_get_time() - wg_last_bit_time) > 50000) { 
-            wg_ready_data = wg_data;
+            memcpy(wg_ready_data_buf, wg_data_buf, sizeof(wg_data_buf));
             wg_ready_bit_count = wg_bit_count;
-            wg_data = 0;
+            memset(wg_data_buf, 0, sizeof(wg_data_buf));
             wg_bit_count = 0;
             wg_available = true;
-            ESP_LOGI(TAG, "Wiegand Input Received: Raw Data = 0x%08llX (Bits: %d)", (unsigned long long)wg_ready_data, wg_ready_bit_count);
+            
+            if (wg_ready_bit_count <= 64) {
+                uint64_t tmp = 0;
+                for (int i = 0; i < wg_ready_bit_count; i++) {
+                    tmp <<= 1;
+                    if (wg_ready_data_buf[i / 8] & (1 << (7 - (i % 8)))) {
+                        tmp |= 1;
+                    }
+                }
+                ESP_LOGI(TAG, "Wiegand Input Received: Raw Data = 0x%08llX (Bits: %d)", (unsigned long long)tmp, wg_ready_bit_count);
+            } else {
+                ESP_LOGI(TAG, "Wiegand Input Received: Long Payload (Bits: %d)", wg_ready_bit_count);
+            }
         }
     }
     return wg_available;
@@ -158,19 +179,44 @@ bool hal_wiegand_available(void) {
 uint32_t hal_wiegand_read(uint8_t *bits) {
     if (!wg_available) return 0;
     
+    uint64_t tmp = 0;
+    for (int i = 0; i < wg_ready_bit_count; i++) {
+        tmp <<= 1;
+        if (wg_ready_data_buf[i / 8] & (1 << (7 - (i % 8)))) {
+            tmp |= 1;
+        }
+    }
+    
     uint32_t card_id = 0;
     
     // Auto-strip parity if the length indicates standard formats
     if (wg_ready_bit_count == 26) {
-        card_id = (wg_ready_data >> 1) & 0xFFFFFF; 
+        card_id = (tmp >> 1) & 0xFFFFFF; 
     } else if (wg_ready_bit_count == 34) {
-        card_id = (wg_ready_data >> 1) & 0xFFFFFFFF;
+        card_id = (tmp >> 1) & 0xFFFFFFFF;
     } else {
-        card_id = wg_ready_data & 0xFFFFFFFF; // raw data fallback
+        card_id = tmp & 0xFFFFFFFF;
     }
     
     if (bits) *bits = wg_ready_bit_count;
     wg_available = false;
+    
     return card_id;
 }
 
+bool hal_wiegand_read_string(char *out_str, size_t max_len, uint16_t *bit_len_out) {
+    if (!wg_available) return false;
+    
+    if (bit_len_out) *bit_len_out = wg_ready_bit_count;
+    
+    size_t byte_len = wg_ready_bit_count / 8;
+    if (byte_len >= max_len) byte_len = max_len - 1;
+    
+    for (size_t i = 0; i < byte_len; i++) {
+        out_str[i] = wg_ready_data_buf[i];
+    }
+    out_str[byte_len] = '\0';
+    
+    wg_available = false;
+    return true;
+}

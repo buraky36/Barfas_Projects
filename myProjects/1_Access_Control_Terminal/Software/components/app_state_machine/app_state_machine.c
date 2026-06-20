@@ -346,13 +346,7 @@ void app_state_machine_tick(void) {
     last_heartbeat = now_us;
   }
 
-  static int64_t last_wg_dbg = 0;
-  if (now_us - last_wg_dbg > 1000000) { // Print every 1 second
-      last_wg_dbg = now_us;
-      int d0 = gpio_get_level(PIN_WIEGAND_D0);
-      int d1 = gpio_get_level(PIN_WIEGAND_D1);
-      ESP_LOGI(TAG, "WG_PINS -> D0: %d, D1: %d", d0, d1);
-  }
+  
 
   static int64_t last_anim_tick = 0;
   if (current_state == STATE_IDLE && now_us - last_anim_tick > 3000000) {
@@ -586,6 +580,20 @@ void app_state_machine_tick(void) {
       rfid_ok = mfrc522_check_card(&rfid_uid);
     }
     bool weigand_ok = (config.working_mode == 2) && hal_wiegand_available();
+    
+    if (weigand_ok && hal_wiegand_peek_bit_count() > 64) {
+        if (hal_shift_reg_is_blocking_anim_playing()) break;
+        hal_shift_reg_wakeup_keypad();
+        
+        char wg_qr_str[64];
+        uint16_t wg_qr_len = 0;
+        if (hal_wiegand_read_string(wg_qr_str, sizeof(wg_qr_str), &wg_qr_len)) {
+            ESP_LOGI(TAG, "Wiegand QR Received: %s", wg_qr_str);
+            process_auth_pass_command("QR", wg_qr_str);
+        }
+        weigand_ok = false;
+    }
+
     if (rfid_ok || weigand_ok) {
       if (hal_shift_reg_is_blocking_anim_playing())
         break;
@@ -594,10 +602,7 @@ void app_state_machine_tick(void) {
       uint32_t card_id =
           (rfid_uid != 0) ? rfid_uid : hal_wiegand_read(&bit_len);
           
-      if (rfid_uid == 0 && bit_len != config.wiegand_format) {
-          ESP_LOGW(TAG, "Wiegand format mismatch: expected %d, got %d. Ignored.", config.wiegand_format, bit_len);
-          break;
-      }
+
 
       if (rfid_uid == 0 && bit_len == 34) {
           user_record_t tmp_usr;
@@ -800,11 +805,85 @@ void app_state_machine_tick(void) {
       rfid_ok = mfrc522_check_card(&rfid_uid);
     }
     bool weigand_ok = hal_wiegand_available();
+    
+    if (weigand_ok && hal_wiegand_peek_bit_count() > 64) {
+        char wg_qr_str[64];
+        uint16_t wg_qr_len = 0;
+        if (hal_wiegand_read_string(wg_qr_str, sizeof(wg_qr_str), &wg_qr_len)) {
+            ESP_LOGI(TAG, "[MASTER_MODE] Wiegand QR read: %s", wg_qr_str);
+            state_timer_start = esp_timer_get_time();
+            
+            if (nv_storage_is_master_credential(wg_qr_str)) {
+                if (current_state == STATE_MASTER_ADD_MODE && elapsed_ms < 5000) {
+                  app_set_state(STATE_MASTER_DELETE_MODE);
+                } else if (current_state == STATE_MASTER_DELETE_MODE && elapsed_ms < 5000) {
+                  if (nv_storage_delete_all_users()) {
+                    app_set_temp_led(LED_COLOR_GREEN, LED_MODE_SOLID, 1000);
+                    hal_io_buzzer_beep(2700, 100, 2);
+                  }
+                  app_set_state(STATE_IDLE);
+                } else {
+                  app_set_state(STATE_IDLE);
+                  hal_io_buzzer_beep(2700, 100, 2);
+                }
+            } else {
+                if (current_state == STATE_MASTER_ADD_MODE) {
+                  user_record_t new_user = {0};
+                  new_user.user_id = (pending_user_id > 0)
+                                         ? pending_user_id
+                                         : nv_storage_get_free_user_id();
+                  new_user.is_active = true;
+                  strncpy(new_user.qr_id, wg_qr_str, sizeof(new_user.qr_id) - 1);
+                  if (nv_storage_add_user(&new_user)) {
+                    app_set_temp_led(LED_COLOR_GREEN, LED_MODE_SOLID, 1000);
+                    hal_io_buzzer_beep(2700, 100, 2);
+                  } else {
+                    app_set_temp_led(LED_COLOR_RED, LED_MODE_SOLID, 3000);
+                    hal_io_buzzer_beep(1000, 300, 3);
+                    hal_shift_reg_play_anim(ANIM_ERROR_FLASH, 3000);
+                  }
+                  pending_user_id = 0;
+                  input_len = 0;
+                } else {
+                  user_record_t u;
+                  if (nv_storage_find_user_by_qr(wg_qr_str, &u)) {
+                    nv_storage_delete_user(u.user_id);
+                    ESP_LOGI(TAG, "[MASTER_MODE] Wiegand QR User DELETED: UserID:%d", u.user_id);
+                    app_set_temp_led(LED_COLOR_GREEN, LED_MODE_SOLID, 1000);
+                    hal_io_buzzer_beep(2700, 100, 2);
+                  } else {
+                    ESP_LOGW(TAG, "[MASTER_MODE] Wiegand QR %s NOT FOUND", wg_qr_str);
+                    app_set_temp_led(LED_COLOR_RED, LED_MODE_SOLID, 3000);
+                    hal_io_buzzer_beep(1000, 300, 3);
+                  }
+                }
+            }
+        }
+        weigand_ok = false;
+    }
+    
     if (rfid_ok || weigand_ok) {
       hal_shift_reg_wakeup_keypad();
       uint8_t bit_len = 0;
       uint32_t card_id =
           (rfid_uid != 0) ? rfid_uid : hal_wiegand_read(&bit_len);
+          
+
+      
+      if (rfid_uid == 0 && bit_len == 34) {
+          user_record_t tmp_usr;
+          char master_str[24];
+          if (nv_storage_find_user_by_wiegand34(card_id, &tmp_usr)) {
+              uint32_t db_id = (uint32_t)strtoul(tmp_usr.card_id, NULL, 10);
+              ESP_LOGI(TAG, "Wiegand 34 Smart Match: Replaced Wiegand ID %lu with Registered User ID %lu", (unsigned long)card_id, (unsigned long)db_id);
+              card_id = db_id;
+          } else if (nv_storage_find_master_by_wiegand34(card_id, master_str)) {
+              uint32_t db_id = (uint32_t)strtoul(master_str, NULL, 10);
+              ESP_LOGI(TAG, "Wiegand 34 Smart Match: Replaced Wiegand ID %lu with Master ID %lu", (unsigned long)card_id, (unsigned long)db_id);
+              card_id = db_id;
+          }
+      }
+
       char card_str[24];
       snprintf(card_str, sizeof(card_str), "%lu", (unsigned long)card_id);
       state_timer_start = esp_timer_get_time();
@@ -1608,47 +1687,65 @@ void app_state_machine_tick(void) {
     }
     bool weigand_ok = (config.working_mode == 2) && hal_wiegand_available();
     
+    if (weigand_ok && hal_wiegand_peek_bit_count() > 64) {
+        char wg_qr_str[64];
+        uint16_t wg_qr_len = 0;
+        if (hal_wiegand_read_string(wg_qr_str, sizeof(wg_qr_str), &wg_qr_len)) {
+            ESP_LOGI(TAG, "Wiegand QR Received in DOOR_OPEN: %s", wg_qr_str);
+            if (nv_storage_is_master_credential(wg_qr_str)) {
+                ESP_LOGI(TAG, "Master QR scanned during DOOR_OPEN. Entering Master Mode.");
+                hal_io_relay_set(false);
+                hal_shift_reg_play_anim(ANIM_MASTER_WAVE, 0);
+                app_set_state(STATE_MASTER_ADD_MODE);
+            } else {
+                user_record_t u;
+                if (nv_storage_find_user_by_qr(wg_qr_str, &u)) {
+                    ESP_LOGI(TAG, "Valid Wiegand QR scanned during DOOR_OPEN. Extending timer.");
+                    hal_io_buzzer_beep(2700, 100, 2);
+                    state_timer_start = esp_timer_get_time();
+                } else {
+                    ESP_LOGW(TAG, "Invalid Wiegand QR scanned during DOOR_OPEN.");
+                    hal_io_buzzer_beep(1000, 300, 3);
+                }
+            }
+        }
+        weigand_ok = false;
+    }
+    
     if (rfid_ok || weigand_ok) {
         uint8_t bit_len = 0;
         uint32_t card_id = (rfid_uid != 0) ? rfid_uid : hal_wiegand_read(&bit_len);
         
-        bool format_ok = true;
-        if (rfid_uid == 0 && bit_len != config.wiegand_format) {
-            format_ok = false;
+        if (rfid_uid == 0 && bit_len == 34) {
+            user_record_t tmp_usr;
+            char master_str[24];
+            if (nv_storage_find_user_by_wiegand34(card_id, &tmp_usr)) {
+                card_id = (uint32_t)strtoul(tmp_usr.card_id, NULL, 10);
+            } else if (nv_storage_find_master_by_wiegand34(card_id, master_str)) {
+                card_id = (uint32_t)strtoul(master_str, NULL, 10);
+            }
         }
         
-        if (format_ok) {
-            if (rfid_uid == 0 && bit_len == 34) {
-                user_record_t tmp_usr;
-                char master_str[24];
-                if (nv_storage_find_user_by_wiegand34(card_id, &tmp_usr)) {
-                    card_id = (uint32_t)strtoul(tmp_usr.card_id, NULL, 10);
-                } else if (nv_storage_find_master_by_wiegand34(card_id, master_str)) {
-                    card_id = (uint32_t)strtoul(master_str, NULL, 10);
-                }
-            }
-            
-            char card_str[24];
+        char card_str[24];
             snprintf(card_str, sizeof(card_str), "%lu", (unsigned long)card_id);
             
-            bool valid = false;
             if (nv_storage_is_master_credential(card_str)) {
-                valid = true;
+                ESP_LOGI(TAG, "Master card scanned during DOOR_OPEN. Entering Master Mode.");
+                hal_io_relay_set(false);
+                hal_shift_reg_play_anim(ANIM_MASTER_WAVE, 0);
+                app_set_state(STATE_MASTER_ADD_MODE);
             } else {
                 user_record_t u;
-                valid = nv_storage_find_user_by_card(card_str, &u);
-            }
-            
-            if (valid) {
-                ESP_LOGI(TAG, "Valid card scanned during DOOR_OPEN. Extending timer.");
-                hal_io_buzzer_beep(2700, 100, 2);
-                state_timer_start = esp_timer_get_time(); // Reset timer to extend open time
-            } else {
-                ESP_LOGW(TAG, "Invalid card scanned during DOOR_OPEN.");
-                hal_io_buzzer_beep(1000, 300, 3);
+                if (nv_storage_find_user_by_card(card_str, &u)) {
+                    ESP_LOGI(TAG, "Valid card scanned during DOOR_OPEN. Extending timer.");
+                    hal_io_buzzer_beep(2700, 100, 2);
+                    state_timer_start = esp_timer_get_time(); // Reset timer to extend open time
+                } else {
+                    ESP_LOGW(TAG, "Invalid card scanned during DOOR_OPEN.");
+                    hal_io_buzzer_beep(1000, 300, 3);
+                }
             }
         }
-    }
 
     if (elapsed_ms >= (config.relay_time * 1000)) {
       hal_io_relay_set(false);
