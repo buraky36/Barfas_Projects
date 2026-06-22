@@ -145,7 +145,9 @@ static const char* setup_html =
 "</body>"
 "</html>";
 
-// URL decoding function
+
+
+// URL decoding function (safe for in-place decoding)
 static void url_decode(char *dst, const char *src)
 {
     char a, b;
@@ -169,24 +171,6 @@ static void url_decode(char *dst, const char *src)
         }
     }
     *dst = '\0';
-}
-
-static esp_err_t get_query_val(const char *query, const char *key, char *val, size_t val_max_len)
-{
-    char *pos = strstr(query, key);
-    if (!pos) return ESP_ERR_NOT_FOUND;
-    pos += strlen(key);
-    if (*pos == '=') pos++;
-    
-    char temp[256] = {0};
-    int i = 0;
-    while (*pos && *pos != '&' && i < sizeof(temp)-1) {
-        temp[i++] = *pos++;
-    }
-    temp[i] = '\0';
-    
-    url_decode(val, temp);
-    return ESP_OK;
 }
 
 static esp_err_t get_handler(httpd_req_t *req)
@@ -232,11 +216,21 @@ static esp_err_t post_config_handler(httpd_req_t *req)
     
     char temp_port[10] = {0};
     
-    get_query_val(content, "ssid", new_config.wifi_ssid, sizeof(new_config.wifi_ssid));
-    get_query_val(content, "pass", new_config.wifi_pass, sizeof(new_config.wifi_pass));
-    get_query_val(content, "mqtt_uri", new_config.mqtt_uri, sizeof(new_config.mqtt_uri));
-    get_query_val(content, "mqtt_port", temp_port, sizeof(temp_port));
-    get_query_val(content, "device_id", new_config.device_id, sizeof(new_config.device_id));
+    if (httpd_query_key_value(content, "ssid", new_config.wifi_ssid, sizeof(new_config.wifi_ssid)) == ESP_OK) {
+        url_decode(new_config.wifi_ssid, new_config.wifi_ssid);
+    }
+    if (httpd_query_key_value(content, "pass", new_config.wifi_pass, sizeof(new_config.wifi_pass)) == ESP_OK) {
+        url_decode(new_config.wifi_pass, new_config.wifi_pass);
+    }
+    if (httpd_query_key_value(content, "mqtt_uri", new_config.mqtt_uri, sizeof(new_config.mqtt_uri)) == ESP_OK) {
+        url_decode(new_config.mqtt_uri, new_config.mqtt_uri);
+    }
+    if (httpd_query_key_value(content, "mqtt_port", temp_port, sizeof(temp_port)) == ESP_OK) {
+        url_decode(temp_port, temp_port);
+    }
+    if (httpd_query_key_value(content, "device_id", new_config.device_id, sizeof(new_config.device_id)) == ESP_OK) {
+        url_decode(new_config.device_id, new_config.device_id);
+    }
     
     new_config.mqtt_port = atoi(temp_port);
     new_config.is_configured = true;
@@ -272,6 +266,34 @@ static esp_err_t post_config_handler(httpd_req_t *req)
     return ESP_OK;
 }
 
+
+// GET handler for /config (Redirects to / to avoid 405 error if user refreshes or visits via history)
+static esp_err_t get_config_handler(httpd_req_t *req)
+{
+    ESP_LOGI(TAG, "GET Request received at '/config', redirecting to '/'");
+    httpd_resp_set_status(req, "302 Found");
+    httpd_resp_set_hdr(req, "Location", "/");
+    return httpd_resp_send(req, NULL, 0);
+}
+
+// Captive Portal catch-all for unknown paths (404)
+static esp_err_t not_found_handler(httpd_req_t *req, httpd_err_code_t err)
+{
+    ESP_LOGW(TAG, "404 Not Found at '%s'. Redirecting to '/'", req->uri);
+    httpd_resp_set_status(req, "302 Found");
+    httpd_resp_set_hdr(req, "Location", "/");
+    return httpd_resp_send(req, NULL, 0);
+}
+
+// Captive Portal catch-all for unknown methods (405) like HEAD
+static esp_err_t method_not_allowed_handler(httpd_req_t *req, httpd_err_code_t err)
+{
+    ESP_LOGW(TAG, "405 Method Not Allowed at '%s'. Redirecting to '/'", req->uri);
+    httpd_resp_set_status(req, "302 Found");
+    httpd_resp_set_hdr(req, "Location", "/");
+    return httpd_resp_send(req, NULL, 0);
+}
+
 esp_err_t web_server_start(void)
 {
     if (server != NULL) {
@@ -305,6 +327,17 @@ esp_err_t web_server_start(void)
         .user_ctx  = NULL
     };
     httpd_register_uri_handler(server, &post_config_uri);
+
+    httpd_uri_t get_config_uri = {
+        .uri       = "/config",
+        .method    = HTTP_GET,
+        .handler   = get_config_handler,
+        .user_ctx  = NULL
+    };
+    httpd_register_uri_handler(server, &get_config_uri);
+
+    httpd_register_err_handler(server, HTTPD_404_NOT_FOUND, not_found_handler);
+    httpd_register_err_handler(server, HTTPD_405_METHOD_NOT_ALLOWED, method_not_allowed_handler);
 
     ESP_LOGI(TAG, "HTTP Web Server started successfully.");
     return ESP_OK;

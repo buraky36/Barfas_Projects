@@ -7,6 +7,7 @@
 #include "host/util/util.h"
 #include "services/gap/ble_svc_gap.h"
 #include "ble_manager.h"
+extern void mqtt_manager_publish_notification(const uint8_t *mac, const uint8_t *data, size_t data_len);
 
 static const char *TAG = "BLE_MGR";
 
@@ -19,6 +20,78 @@ static bool s_connected = false;
 static uint16_t s_conn_handle = 0;
 
 static int ble_gap_event(struct ble_gap_event *event, void *arg);
+
+// -- NEW GLOBAL STATE FOR GATT CLIENT --
+static SemaphoreHandle_t s_gatt_semaphore = NULL;
+static ble_lock_cmd_t s_current_cmd;
+static bool s_gatt_op_success = false;
+static bool s_svc_found = false;
+static bool s_char_found = false;
+
+static int ble_on_write(uint16_t conn_handle, const struct ble_gatt_error *error, struct ble_gatt_attr *attr, void *arg)
+{
+    ESP_LOGI(TAG, "Write complete; status=%d", error->status);
+    if (error->status == 0) {
+        s_gatt_op_success = true;
+    }
+    xSemaphoreGive(s_gatt_semaphore);
+    return 0;
+}
+
+static int ble_on_disc_char(uint16_t conn_handle, const struct ble_gatt_error *error, const struct ble_gatt_chr *chr, void *arg)
+{
+    if (error->status == 0) {
+        ESP_LOGI(TAG, "Found characteristic. Val handle: %d", chr->val_handle);
+        s_char_found = true;
+        // Write to it
+        int rc = ble_gattc_write_flat(conn_handle, chr->val_handle, s_current_cmd.cmd_data, s_current_cmd.cmd_len, ble_on_write, NULL);
+        if (rc != 0) {
+            ESP_LOGE(TAG, "Failed to initiate write; rc=%d", rc);
+            xSemaphoreGive(s_gatt_semaphore);
+        }
+    } else if (error->status == BLE_HS_EDONE) {
+        if (!s_char_found) {
+            ESP_LOGE(TAG, "Characteristic not found in service.");
+            xSemaphoreGive(s_gatt_semaphore);
+        }
+    } else {
+        ESP_LOGE(TAG, "Characteristic discovery failed; status=%d", error->status);
+        xSemaphoreGive(s_gatt_semaphore);
+    }
+    return 0;
+}
+
+static int ble_on_disc_svc(uint16_t conn_handle, const struct ble_gatt_error *error, const struct ble_gatt_svc *service, void *arg)
+{
+    if (error->status == 0) {
+        ESP_LOGI(TAG, "Found service. Start handle: %d, End handle: %d", service->start_handle, service->end_handle);
+        s_svc_found = true;
+        s_char_found = false; // Reset for char discovery
+        // Start char discovery
+        ble_uuid_any_t char_uuid;
+        int rc = ble_uuid_from_str(&char_uuid, s_current_cmd.char_uuid);
+        if (rc == 0) {
+            rc = ble_gattc_disc_chrs_by_uuid(conn_handle, service->start_handle, service->end_handle, &char_uuid.u, ble_on_disc_char, NULL);
+            if (rc != 0) {
+                ESP_LOGE(TAG, "Failed to initiate char discovery; rc=%d", rc);
+                xSemaphoreGive(s_gatt_semaphore);
+            }
+        } else {
+            ESP_LOGE(TAG, "Invalid Char UUID string: %s", s_current_cmd.char_uuid);
+            xSemaphoreGive(s_gatt_semaphore);
+        }
+    } else if (error->status == BLE_HS_EDONE) {
+        if (!s_svc_found) {
+            ESP_LOGE(TAG, "Service not found.");
+            xSemaphoreGive(s_gatt_semaphore);
+        }
+    } else {
+        ESP_LOGE(TAG, "Service discovery failed; status=%d", error->status);
+        xSemaphoreGive(s_gatt_semaphore);
+    }
+    return 0;
+}
+
 
 // Start scanning
 static void ble_app_scan(void)
@@ -75,18 +148,8 @@ static int ble_gap_event(struct ble_gap_event *event, void *arg)
                 return 0;
             }
 
-            // Onloi Beacon filtering check
-            // (Filters by name containing "Onloi", or custom manufacturer data)
-            bool is_onloi = false;
-            
-            if (fields.name_len > 0 && strncmp((char *)fields.name, "Onloi", 5) == 0) {
-                is_onloi = true;
-            } else if (fields.mfg_data_len > 0) {
-                // If it has manufacturer data, treat as a candidate
-                is_onloi = true;
-            }
-
-            if (is_onloi) {
+            // Forward ALL discovered devices to MQTT for global lock support
+            if (1) {
                 ble_scan_report_t report;
                 memcpy(report.mac, event->disc.addr.val, BLE_MAC_LEN);
                 report.rssi = event->disc.rssi;
@@ -110,18 +173,45 @@ static int ble_gap_event(struct ble_gap_event *event, void *arg)
                 ESP_LOGI(TAG, "Connected successfully to peripheral! Conn Handle: %d", event->connect.conn_handle);
                 s_connected = true;
                 s_conn_handle = event->connect.conn_handle;
-                // Wait for commands to write, or perform service discovery
+                
+                // Start Service Discovery
+                s_svc_found = false;
+                ble_uuid_any_t svc_uuid;
+                int rc = ble_uuid_from_str(&svc_uuid, s_current_cmd.service_uuid);
+                if (rc == 0) {
+                    rc = ble_gattc_disc_svc_by_uuid(s_conn_handle, &svc_uuid.u, ble_on_disc_svc, NULL);
+                    if (rc != 0) {
+                        ESP_LOGE(TAG, "Failed to initiate service discovery; rc=%d", rc);
+                        xSemaphoreGive(s_gatt_semaphore);
+                    }
+                } else {
+                    ESP_LOGE(TAG, "Invalid Service UUID string: %s", s_current_cmd.service_uuid);
+                    xSemaphoreGive(s_gatt_semaphore);
+                }
             } else {
                 ESP_LOGE(TAG, "Connection failed; status=%d", event->connect.status);
                 s_connected = false;
+                xSemaphoreGive(s_gatt_semaphore);
                 ble_app_scan(); // Resume scan
             }
             break;
+
+        case BLE_GAP_EVENT_NOTIFY_RX: {
+            ESP_LOGI(TAG, "Notification received from handle %d, length %d", event->notify_rx.attr_handle, OS_MBUF_PKTLEN(event->notify_rx.om));
+            uint8_t data[128];
+            uint16_t len = OS_MBUF_PKTLEN(event->notify_rx.om);
+            if (len > sizeof(data)) len = sizeof(data);
+            os_mbuf_copydata(event->notify_rx.om, 0, len, data);
+            
+            mqtt_manager_publish_notification(s_current_cmd.mac, data, len);
+            break;
+        }
 
         case BLE_GAP_EVENT_DISCONNECT:
             ESP_LOGI(TAG, "Disconnected from peripheral; reason=%d", event->disconnect.reason);
             s_connected = false;
             s_conn_handle = 0;
+            xSemaphoreGive(s_gatt_semaphore);
             ble_app_scan(); // Resume scan
             break;
 
@@ -163,9 +253,15 @@ static void ble_cmd_listener_task(void *pvParameters)
             // Stop scanning to connect
             ble_app_scan_cancel();
             
+            // Setup global state for this operation
+            memcpy(&s_current_cmd, &cmd, sizeof(ble_lock_cmd_t));
+            s_gatt_op_success = false;
+            // Empty the semaphore just in case it was given previously by an erroneous state
+            xSemaphoreTake(s_gatt_semaphore, 0);
+
             ble_addr_t peer_addr;
             memcpy(peer_addr.val, cmd.mac, BLE_MAC_LEN);
-            peer_addr.type = BLE_ADDR_PUBLIC; // or BLE_ADDR_RANDOM depending on peripheral type
+            peer_addr.type = cmd.addr_type; // Use provided address type (0=Public, 1=Random)
 
             ESP_LOGI(TAG, "Connecting to target lock device...");
             int rc = ble_gap_connect(s_own_addr_type, &peer_addr, 30000, NULL, ble_gap_event, NULL);
@@ -175,20 +271,25 @@ static void ble_cmd_listener_task(void *pvParameters)
                 continue;
             }
 
-            // Wait for connection to establish and write command (simplified representation of GATT write)
-            // In a real device, you wait for connect, discover characteristics, write, and disconnect.
-            vTaskDelay(pdMS_TO_TICKS(1500)); // Simulate connection and writing
-            
-            if (s_connected) {
-                ESP_LOGI(TAG, "Writing command data to lock characteristic...");
-                // ble_gattc_write_flat(...) is normally called here.
-                
-                // Terminate connection
-                ESP_LOGI(TAG, "Command written. Disconnecting...");
-                ble_gap_terminate(s_conn_handle, BLE_ERR_REM_USER_CONN_TERM);
+            // Wait for GATT operation to complete (timeout e.g. 10 seconds)
+            if (xSemaphoreTake(s_gatt_semaphore, pdMS_TO_TICKS(10000)) == pdTRUE) {
+                if (s_gatt_op_success) {
+                    ESP_LOGI(TAG, "GATT Write Operation completed successfully.");
+                } else {
+                    ESP_LOGE(TAG, "GATT Write Operation failed.");
+                }
             } else {
-                ESP_LOGE(TAG, "Could not establish connection to write command.");
-                ble_app_scan(); // Ensure scanning is running
+                ESP_LOGE(TAG, "GATT Operation timed out.");
+            }
+
+            // Terminate connection if still connected
+            if (s_connected) {
+                ble_gap_terminate(s_conn_handle, BLE_ERR_REM_USER_CONN_TERM);
+                // Give it a moment to disconnect, disconnect event will resume scan
+                vTaskDelay(pdMS_TO_TICKS(500));
+            } else {
+                ble_gap_conn_cancel(); // Cancel pending connection attempt
+                ble_app_scan(); // Resume scan if already disconnected
             }
         }
     }
@@ -207,8 +308,9 @@ esp_err_t ble_manager_init(void)
     
     ble_scan_queue = xQueueCreate(10, sizeof(ble_scan_report_t));
     ble_cmd_queue = xQueueCreate(5, sizeof(ble_lock_cmd_t));
+    s_gatt_semaphore = xSemaphoreCreateBinary();
 
-    if (ble_scan_queue == NULL || ble_cmd_queue == NULL) {
+    if (ble_scan_queue == NULL || ble_cmd_queue == NULL || s_gatt_semaphore == NULL) {
         ESP_LOGE(TAG, "Failed to create BLE queues.");
         return ESP_ERR_NO_MEM;
     }

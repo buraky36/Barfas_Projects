@@ -5,14 +5,18 @@
 #include "cJSON.h"
 #include "ble_manager.h"
 #include "mqtt_manager.h"
+extern int ota_manager_start_update(const char *url);
 
 static const char *TAG = "MQTT_MGR";
 
 static esp_mqtt_client_handle_t client = NULL;
 static bool s_mqtt_connected = false;
 static char s_device_id[32] = {0};
-static char s_pub_topic[128] = {0};
-static char s_sub_topic[128] = {0};
+static char s_pub_scan_topic[128] = {0};
+static char s_pub_status_topic[128] = {0};
+static char s_pub_notify_topic[128] = {0};
+static char s_sub_cmd_topic[128] = {0};
+static char s_sub_ota_topic[128] = {0};
 
 // Helper: Convert byte array to hex string
 static void bytes_to_hex(const uint8_t *src, size_t src_len, char *dst)
@@ -57,8 +61,14 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             s_mqtt_connected = true;
             
             // Subscribe to remote command topic
-            int msg_id = esp_mqtt_client_subscribe(client, s_sub_topic, 1);
-            ESP_LOGI(TAG, "Subscribed to command topic '%s' (Msg ID: %d)", s_sub_topic, msg_id);
+            esp_mqtt_client_subscribe(client, s_sub_cmd_topic, 1);
+            esp_mqtt_client_subscribe(client, s_sub_ota_topic, 1);
+            ESP_LOGI(TAG, "Subscribed to topics '%s' and '%s'", s_sub_cmd_topic, s_sub_ota_topic);
+            
+            // Publish online status
+            char status_payload[64];
+            sprintf(status_payload, "{\"status\":\"online\", \"version\":\"1.0.0\"}");
+            esp_mqtt_client_publish(client, s_pub_status_topic, status_payload, 0, 1, 1); // retained
             break;
 
         case MQTT_EVENT_DISCONNECTED:
@@ -84,34 +94,50 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             
             ESP_LOGI(TAG, "Payload: %s", payload);
 
-            // Parse incoming JSON command
-            cJSON *root = cJSON_Parse(payload);
-            if (root != NULL) {
-                cJSON *mac_item = cJSON_GetObjectItem(root, "mac");
-                cJSON *cmd_item = cJSON_GetObjectItem(root, "command");
+            // Check topic
+            if (strncmp(event->topic, s_sub_cmd_topic, event->topic_len) == 0) {
+                cJSON *root = cJSON_Parse(payload);
+                if (root != NULL) {
+                    cJSON *mac_item = cJSON_GetObjectItem(root, "mac");
+                    cJSON *addr_type_item = cJSON_GetObjectItem(root, "addr_type");
+                    cJSON *cmd_item = cJSON_GetObjectItem(root, "command");
+                    cJSON *srv_uuid_item = cJSON_GetObjectItem(root, "service_uuid");
+                    cJSON *chr_uuid_item = cJSON_GetObjectItem(root, "char_uuid");
 
-                if (cJSON_IsString(mac_item) && cJSON_IsString(cmd_item)) {
-                    ble_lock_cmd_t ble_cmd;
-                    memset(&ble_cmd, 0, sizeof(ble_lock_cmd_t));
+                    if (cJSON_IsString(mac_item) && cJSON_IsString(cmd_item) &&
+                        cJSON_IsString(srv_uuid_item) && cJSON_IsString(chr_uuid_item)) {
+                        ble_lock_cmd_t ble_cmd;
+                        memset(&ble_cmd, 0, sizeof(ble_lock_cmd_t));
 
-                    mac_str_to_bytes(mac_item->valuestring, ble_cmd.mac);
-                    ble_cmd.cmd_len = hex_to_bytes(cmd_item->valuestring, ble_cmd.cmd_data, sizeof(ble_cmd.cmd_data));
+                        mac_str_to_bytes(mac_item->valuestring, ble_cmd.mac);
+                        ble_cmd.addr_type = (addr_type_item && cJSON_IsNumber(addr_type_item)) ? addr_type_item->valueint : 0;
+                        strncpy(ble_cmd.service_uuid, srv_uuid_item->valuestring, sizeof(ble_cmd.service_uuid) - 1);
+                        strncpy(ble_cmd.char_uuid, chr_uuid_item->valuestring, sizeof(ble_cmd.char_uuid) - 1);
+                        ble_cmd.cmd_len = hex_to_bytes(cmd_item->valuestring, ble_cmd.cmd_data, sizeof(ble_cmd.cmd_data));
 
-                    ESP_LOGI(TAG, "Decoded incoming lock command: MAC=" MACSTR ", CmdLen=%d", 
-                             MAC2STR(ble_cmd.mac), ble_cmd.cmd_len);
+                        ESP_LOGI(TAG, "Decoded incoming lock command");
 
-                    // Push command request to BLE Manager queue
-                    if (ble_cmd_queue != NULL) {
-                        if (xQueueSend(ble_cmd_queue, &ble_cmd, pdMS_TO_TICKS(1000)) != pdTRUE) {
-                            ESP_LOGE(TAG, "Failed to push command to ble_cmd_queue (queue full).");
+                        // Push command request to BLE Manager queue
+                        if (ble_cmd_queue != NULL) {
+                            if (xQueueSend(ble_cmd_queue, &ble_cmd, pdMS_TO_TICKS(1000)) != pdTRUE) {
+                                ESP_LOGE(TAG, "Failed to push command to ble_cmd_queue (queue full).");
+                            }
                         }
+                    } else {
+                        ESP_LOGE(TAG, "Invalid fields in JSON command payload.");
                     }
-                } else {
-                    ESP_LOGE(TAG, "Invalid fields in JSON command payload.");
+                    cJSON_Delete(root);
                 }
-                cJSON_Delete(root);
-            } else {
-                ESP_LOGE(TAG, "Failed to parse JSON command payload.");
+            } else if (strncmp(event->topic, s_sub_ota_topic, event->topic_len) == 0) {
+                cJSON *root = cJSON_Parse(payload);
+                if (root != NULL) {
+                    cJSON *url_item = cJSON_GetObjectItem(root, "url");
+                    if (cJSON_IsString(url_item)) {
+                        ESP_LOGI(TAG, "Received OTA command. URL: %s", url_item->valuestring);
+                        ota_manager_start_update(url_item->valuestring);
+                    }
+                    cJSON_Delete(root);
+                }
             }
             
             free(payload);
@@ -167,7 +193,7 @@ static void mqtt_publisher_task(void *pvParameters)
             char *json_str = cJSON_PrintUnformatted(root);
             if (json_str != NULL) {
                 ESP_LOGI(TAG, "[PUBLISH] Sending scan report: %s", json_str);
-                esp_mqtt_client_publish(client, s_pub_topic, json_str, 0, 1, 0);
+                esp_mqtt_client_publish(client, s_pub_scan_topic, json_str, 0, 1, 0);
                 free(json_str);
             }
             
@@ -181,13 +207,23 @@ esp_err_t mqtt_manager_init(const char *uri, uint16_t port, const char *device_i
     ESP_LOGI(TAG, "Initializing MQTT Client...");
     
     strncpy(s_device_id, device_id, sizeof(s_device_id));
-    sprintf(s_pub_topic, "/gateway/%s/scan_report", s_device_id);
-    sprintf(s_sub_topic, "/gateway/%s/command", s_device_id);
+    sprintf(s_pub_scan_topic, "/gateway/%s/scan_report", s_device_id);
+    sprintf(s_pub_status_topic, "/gateway/%s/status", s_device_id);
+    sprintf(s_pub_notify_topic, "/gateway/%s/notify", s_device_id);
+    sprintf(s_sub_cmd_topic, "/gateway/%s/command", s_device_id);
+    sprintf(s_sub_ota_topic, "/gateway/%s/ota", s_device_id);
 
     // Setup MQTT config
     esp_mqtt_client_config_t mqtt_cfg = {
         .broker.address.uri = uri,
         .broker.address.port = port,
+        .session.last_will = {
+            .topic = s_pub_status_topic,
+            .msg = "{\"status\":\"offline\"}",
+            .msg_len = 0,
+            .qos = 1,
+            .retain = 1
+        }
     };
 
     client = esp_mqtt_client_init(&mqtt_cfg);
@@ -238,4 +274,33 @@ esp_err_t mqtt_manager_stop(void)
 bool mqtt_manager_is_connected(void)
 {
     return s_mqtt_connected;
+}
+
+void mqtt_manager_publish_notification(const uint8_t *mac, const uint8_t *data, size_t data_len)
+{
+    if (!s_mqtt_connected || client == NULL) return;
+
+    cJSON *root = cJSON_CreateObject();
+    if (root == NULL) return;
+
+    char mac_str[18];
+    sprintf(mac_str, "%02x:%02x:%02x:%02x:%02x:%02x",
+            mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    
+    char hex_data[128] = {0};
+    size_t limit = data_len > 60 ? 60 : data_len;
+    for (size_t i = 0; i < limit; i++) {
+        sprintf(hex_data + (i * 2), "%02X", data[i]);
+    }
+
+    cJSON_AddStringToObject(root, "mac", mac_str);
+    cJSON_AddStringToObject(root, "data", hex_data);
+
+    char *json_str = cJSON_PrintUnformatted(root);
+    if (json_str != NULL) {
+        ESP_LOGI(TAG, "[PUBLISH NOTIFY] %s", json_str);
+        esp_mqtt_client_publish(client, s_pub_notify_topic, json_str, 0, 1, 0);
+        free(json_str);
+    }
+    cJSON_Delete(root);
 }

@@ -13,6 +13,15 @@
 #include "mqtt_manager.h"
 #include "web_server.h"
 
+// Define to 1 to use DevKit RGB LED, 0 to use Production Discrete LEDs
+#define CONFIG_USE_RGB_LED 1
+
+#if CONFIG_USE_RGB_LED
+#include "led_strip.h"
+#define BLINK_GPIO 8
+static led_strip_handle_t led_strip;
+#endif
+
 static const char *TAG = "CORE_MGR";
 
 // GPIO Configs based on C6 Guide
@@ -34,6 +43,17 @@ static void init_gpios(void)
 {
     ESP_LOGI(TAG, "Initializing Status LEDs and Configuration Button...");
     
+#if CONFIG_USE_RGB_LED
+    led_strip_config_t strip_config = {
+        .strip_gpio_num = BLINK_GPIO,
+        .max_leds = 1, // at least one LED on board
+    };
+    led_strip_rmt_config_t rmt_config = {
+        .resolution_hz = 10 * 1000 * 1000, // 10MHz
+    };
+    ESP_ERROR_CHECK(led_strip_new_rmt_device(&strip_config, &rmt_config, &led_strip));
+    led_strip_clear(led_strip);
+#else
     // LEDs config
     gpio_config_t io_conf = {
         .pin_bit_mask = (1ULL << LED_WIFI) | (1ULL << LED_BLE),
@@ -44,6 +64,11 @@ static void init_gpios(void)
     };
     gpio_config(&io_conf);
     
+    // Default LEDs off
+    gpio_set_level(LED_WIFI, 0);
+    gpio_set_level(LED_BLE, 0);
+#endif
+
     // Button config
     gpio_config_t btn_conf = {
         .pin_bit_mask = (1ULL << KEY_SW),
@@ -53,10 +78,6 @@ static void init_gpios(void)
         .intr_type = GPIO_INTR_DISABLE
     };
     gpio_config(&btn_conf);
-    
-    // Default LEDs off
-    gpio_set_level(LED_WIFI, 0);
-    gpio_set_level(LED_BLE, 0);
 }
 
 // LED Status blink task
@@ -65,37 +86,58 @@ static void led_indicator_task(void *pvParameters)
     while (1) {
         switch (s_sys_state) {
             case SYS_STATE_UNCONFIGURED:
-                // AP Mode: Red Wi-Fi LED blinks slowly (500ms)
+#if CONFIG_USE_RGB_LED
+                led_strip_set_pixel(led_strip, 0, 0, 0, 150); // Blue
+                led_strip_refresh(led_strip);
+                vTaskDelay(pdMS_TO_TICKS(500));
+                led_strip_clear(led_strip);
+                vTaskDelay(pdMS_TO_TICKS(500));
+#else
                 gpio_set_level(LED_WIFI, 1);
                 vTaskDelay(pdMS_TO_TICKS(500));
                 gpio_set_level(LED_WIFI, 0);
                 vTaskDelay(pdMS_TO_TICKS(500));
-                
-                // BLE LED is off in unconfigured mode
                 gpio_set_level(LED_BLE, 0);
+#endif
                 break;
                 
             case SYS_STATE_STA_CONNECTING:
-                // Connecting STA Mode: Red LED blinks fast (150ms)
+#if CONFIG_USE_RGB_LED
+                led_strip_set_pixel(led_strip, 0, 150, 150, 0); // Yellow
+                led_strip_refresh(led_strip);
+                vTaskDelay(pdMS_TO_TICKS(200));
+                led_strip_clear(led_strip);
+                vTaskDelay(pdMS_TO_TICKS(200));
+#else
                 gpio_set_level(LED_WIFI, 1);
                 vTaskDelay(pdMS_TO_TICKS(150));
                 gpio_set_level(LED_WIFI, 0);
                 vTaskDelay(pdMS_TO_TICKS(150));
+#endif
                 break;
                 
             case SYS_STATE_STA_CONNECTED:
-                // Connected STA: Red LED is solid on
+#if CONFIG_USE_RGB_LED
+                led_strip_set_pixel(led_strip, 0, 0, 150, 0); // Green
+                led_strip_refresh(led_strip);
+                vTaskDelay(pdMS_TO_TICKS(1000));
+#else
                 gpio_set_level(LED_WIFI, 1);
-                
-                // BLE LED blinks slowly (1000ms) to indicate scanning/active BLE state
                 gpio_set_level(LED_BLE, 1);
                 vTaskDelay(pdMS_TO_TICKS(1000));
                 gpio_set_level(LED_BLE, 0);
                 vTaskDelay(pdMS_TO_TICKS(1000));
+#endif
                 break;
                 
             case SYS_STATE_STA_FAILED:
-                // Connection failed: Fast double blinks on Red LED, then 1s pause
+#if CONFIG_USE_RGB_LED
+                led_strip_set_pixel(led_strip, 0, 150, 0, 0); // Red
+                led_strip_refresh(led_strip);
+                vTaskDelay(pdMS_TO_TICKS(500));
+                led_strip_clear(led_strip);
+                vTaskDelay(pdMS_TO_TICKS(500));
+#else
                 gpio_set_level(LED_WIFI, 1);
                 vTaskDelay(pdMS_TO_TICKS(100));
                 gpio_set_level(LED_WIFI, 0);
@@ -104,6 +146,7 @@ static void led_indicator_task(void *pvParameters)
                 vTaskDelay(pdMS_TO_TICKS(100));
                 gpio_set_level(LED_WIFI, 0);
                 vTaskDelay(pdMS_TO_TICKS(1000));
+#endif
                 break;
         }
     }
@@ -128,8 +171,13 @@ static void button_monitor_task(void *pvParameters)
                 ESP_LOGE(TAG, "Factory reset button held for 5 seconds! Resetting configuration...");
                 
                 // Turn on both LEDs solid to indicate reset action
+#if CONFIG_USE_RGB_LED
+                led_strip_set_pixel(led_strip, 0, 150, 0, 0); // Solid Red
+                led_strip_refresh(led_strip);
+#else
                 gpio_set_level(LED_WIFI, 1);
                 gpio_set_level(LED_BLE, 1);
+#endif
                 
                 config_manager_reset();
                 

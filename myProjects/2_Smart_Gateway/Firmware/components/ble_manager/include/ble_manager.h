@@ -12,6 +12,7 @@
 
 typedef struct {
     uint8_t mac[BLE_MAC_LEN];
+    uint8_t addr_type; // 0: Public, 1: Random
     int8_t rssi;
     uint8_t data[BLE_MAX_DATA_LEN];
     uint8_t data_len;
@@ -20,9 +21,13 @@ typedef struct {
 
 typedef struct {
     uint8_t mac[BLE_MAC_LEN];
+    uint8_t addr_type; // 0: Public, 1: Random
+    char service_uuid[37]; // e.g. "0000ffe0-0000-1000-8000-00805f9b34fb"
+    char char_uuid[37];
     uint8_t cmd_data[32];
     uint8_t cmd_len;
 } ble_lock_cmd_t;
+
 
 // Queue to send scanned BLE data to MQTT Manager
 extern QueueHandle_t ble_scan_queue;
