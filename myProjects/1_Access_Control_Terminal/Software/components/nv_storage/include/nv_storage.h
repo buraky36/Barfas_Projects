@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 typedef struct {
     uint16_t user_id;
@@ -36,9 +37,30 @@ void nv_storage_init(void);
 void nv_storage_get_config(sys_config_t *config);
 void nv_storage_set_config(sys_config_t *config);
 
-// API Keys (Onloi Protocol)
+// API Keys (Legacy)
 bool nv_storage_save_api_keys(const char *device_key, const char *pair_key);
 bool nv_storage_get_api_keys(char *device_key, char *pair_key);
+
+// Onloi Provisioning Token
+bool nv_storage_save_prov_token(const char *token);
+bool nv_storage_get_prov_token(char *token, size_t max_len);
+void nv_storage_clear_prov_token(void);
+
+// Onloi MQTT Configuration
+typedef struct {
+    char host[128];
+    uint16_t port;
+    char client_id[64];
+    char username[64];
+    char password[64];
+    char secret[128];
+    uint16_t session_epoch;
+    bool is_claimed;
+} onloi_mqtt_config_t;
+
+bool nv_storage_save_onloi_mqtt_config(const onloi_mqtt_config_t *config);
+bool nv_storage_get_onloi_mqtt_config(onloi_mqtt_config_t *config);
+void nv_storage_clear_onloi_mqtt_config(void);
 
 // Master Credential Ops
 bool nv_storage_is_master_credential(const char *cred);

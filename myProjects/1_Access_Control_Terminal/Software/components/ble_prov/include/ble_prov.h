@@ -2,6 +2,6 @@
 #define BLE_PROV_H
 
 void ble_prov_init(void);
-void ble_prov_send_response(const char *json_data);
+void ble_prov_tick(void);
 
 #endif // BLE_PROV_H

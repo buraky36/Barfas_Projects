@@ -385,6 +385,62 @@ bool nv_storage_get_api_keys(char *device_key, char *pair_key) {
     return true;
 }
 
+bool nv_storage_save_prov_token(const char *token) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_CFG, NVS_READWRITE, &handle) != ESP_OK) return false;
+    if (token) nvs_set_str(handle, "prov_tok", token);
+    esp_err_t err = nvs_commit(handle);
+    nvs_close(handle);
+    return err == ESP_OK;
+}
+
+bool nv_storage_get_prov_token(char *token, size_t max_len) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_CFG, NVS_READONLY, &handle) != ESP_OK) return false;
+    esp_err_t err = nvs_get_str(handle, "prov_tok", token, &max_len);
+    nvs_close(handle);
+    return err == ESP_OK;
+}
+
+void nv_storage_clear_prov_token(void) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_CFG, NVS_READWRITE, &handle) == ESP_OK) {
+        nvs_erase_key(handle, "prov_tok");
+        nvs_commit(handle);
+        nvs_close(handle);
+    }
+}
+
+bool nv_storage_save_onloi_mqtt_config(const onloi_mqtt_config_t *config) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_CFG, NVS_READWRITE, &handle) != ESP_OK) return false;
+    nvs_set_blob(handle, "mqtt_cfg", config, sizeof(onloi_mqtt_config_t));
+    esp_err_t err = nvs_commit(handle);
+    nvs_close(handle);
+    return err == ESP_OK;
+}
+
+bool nv_storage_get_onloi_mqtt_config(onloi_mqtt_config_t *config) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_CFG, NVS_READONLY, &handle) != ESP_OK) return false;
+    size_t size = sizeof(onloi_mqtt_config_t);
+    esp_err_t err = nvs_get_blob(handle, "mqtt_cfg", config, &size);
+    nvs_close(handle);
+    if (err == ESP_OK && size == sizeof(onloi_mqtt_config_t)) {
+        return true;
+    }
+    return false;
+}
+
+void nv_storage_clear_onloi_mqtt_config(void) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_CFG, NVS_READWRITE, &handle) == ESP_OK) {
+        nvs_erase_key(handle, "mqtt_cfg");
+        nvs_commit(handle);
+        nvs_close(handle);
+    }
+}
+
 uint16_t nv_storage_get_free_user_id(void) {
     for (uint16_t i = 1; i <= 9988; i++) {
         if (!(user_active_map[i / 8] & (1 << (i % 8)))) {

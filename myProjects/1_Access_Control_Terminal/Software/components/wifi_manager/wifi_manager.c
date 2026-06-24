@@ -133,6 +133,26 @@ bool wifi_manager_is_scan_ready(char *json_out, int max_len) {
     return true;
 }
 
+bool wifi_manager_is_scan_done(void) {
+    return s_scan_completed;
+}
+
+uint16_t wifi_manager_get_ap_count(void) {
+    return s_ap_count;
+}
+
+bool wifi_manager_get_ap_record(uint16_t index, uint8_t *bssid, int8_t *rssi, uint8_t *primary, char *ssid) {
+    if (index >= s_ap_count) return false;
+    if (bssid) memcpy(bssid, s_ap_records[index].bssid, 6);
+    if (rssi) *rssi = s_ap_records[index].rssi;
+    if (primary) *primary = s_ap_records[index].primary;
+    if (ssid) {
+        strncpy(ssid, (char*)s_ap_records[index].ssid, 32);
+        ssid[32] = '\0';
+    }
+    return true;
+}
+
 void wifi_manager_tick(void) {
     if (s_pending_get_time) {
         s_pending_get_time = false;

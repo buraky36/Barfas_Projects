@@ -1,5 +1,6 @@
 #include "app_state_machine.h"
 #include "ble_prov.h"
+#include "api_client.h"
 #include "esp_event.h"
 #include "hal_io.h"
 #include "hal_qr.h"
@@ -136,6 +137,7 @@ void app_main(void) {
       // Network and BLE
       wifi_manager_init();
       ble_prov_init();
+      api_client_init();
   } else {
       printf("Wiegand Reader Mode Active: Wi-Fi and BLE are DISABLED for security and power saving.\n");
   }
@@ -148,11 +150,8 @@ void app_main(void) {
     
     if (current_mode != 3) {
         wifi_manager_tick();
-
-        static char wifi_scan_buf[2048];
-        if (wifi_manager_is_scan_ready(wifi_scan_buf, sizeof(wifi_scan_buf))) {
-          ble_prov_send_response(wifi_scan_buf);
-        }
+        ble_prov_tick();
+        api_client_tick();
     }
 
     // Crucial for FreeRTOS: allow IDLE task to run and prevent WDT timeouts
