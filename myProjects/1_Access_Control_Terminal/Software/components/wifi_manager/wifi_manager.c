@@ -21,9 +21,17 @@ static void event_handler(void* arg, esp_event_base_t event_base, int32_t event_
     if (event_base == WIFI_EVENT) {
         if (event_id == WIFI_EVENT_STA_START) {
             ESP_LOGI(TAG, "STA Started");
+            wifi_config_t conf;
+            if (esp_wifi_get_config(WIFI_IF_STA, &conf) == ESP_OK && strlen((char*)conf.sta.ssid) > 0) {
+                ESP_LOGI(TAG, "Found saved Wi-Fi credentials. Trying to connect to: %s", conf.sta.ssid);
+                esp_wifi_connect();
+            } else {
+                ESP_LOGI(TAG, "No saved Wi-Fi credentials found. Waiting for BLE Provisioning...");
+            }
         } else if (event_id == WIFI_EVENT_STA_DISCONNECTED) {
             s_connected = false;
-            ESP_LOGW(TAG, "Disconnected from AP");
+            ESP_LOGW(TAG, "Disconnected from AP. Retrying connection in background...");
+            esp_wifi_connect();
         } else if (event_id == WIFI_EVENT_SCAN_DONE) {
             uint16_t number = 20;
             esp_wifi_scan_get_ap_num(&s_ap_count);

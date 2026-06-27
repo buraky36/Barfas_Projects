@@ -296,8 +296,9 @@ bool mfrc522_check_card(uint32_t *uid) {
         return false; // Checksum failed or incomplete data
     }
     
-    uint32_t current_uid = ((uint32_t)backData[0] << 24) | ((uint32_t)backData[1] << 16) |
-                           ((uint32_t)backData[2] << 8) | (uint32_t)backData[3];
+    // Parse as Little Endian to match Wiegand 34 output natively!
+    uint32_t current_uid = ((uint32_t)backData[3] << 24) | ((uint32_t)backData[2] << 16) |
+                           ((uint32_t)backData[1] << 8) | (uint32_t)backData[0];
 
     // Filter duplicates: if same card, wait 1 second before reporting again
     // 1000ms cooldown

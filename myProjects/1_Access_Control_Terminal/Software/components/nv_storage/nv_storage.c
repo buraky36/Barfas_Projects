@@ -22,7 +22,8 @@ static void nv_storage_save_active_map(void) {
 
 void nv_storage_init(void) {
     esp_err_t err = nvs_flash_init();
-    if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+    if (err != ESP_OK) {
+        ESP_LOGW(TAG, "NVS Init failed (%s), erasing NVS and retrying...", esp_err_to_name(err));
         ESP_ERROR_CHECK(nvs_flash_erase());
         err = nvs_flash_init();
     }

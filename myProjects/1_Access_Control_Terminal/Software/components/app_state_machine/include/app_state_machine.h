@@ -13,7 +13,8 @@ typedef enum {
     STATE_ALARM,
     STATE_USER_PIN_CHANGE,
     STATE_MASTER_ADD_MODE,
-    STATE_MASTER_DELETE_MODE
+    STATE_MASTER_DELETE_MODE,
+    STATE_ONLINE_CARD_ENROLL
 } app_state_t;
 
 void app_state_machine_init(void);
@@ -23,6 +24,7 @@ void app_state_machine_tick(void);
 void app_set_state(app_state_t new_state);
 void app_trigger_door_open(void);
 void app_trigger_alarm(void);
+void app_trigger_access_denied(void);
 uint8_t app_get_working_mode(void);
 
 // Poll inputs explicitly from sensors

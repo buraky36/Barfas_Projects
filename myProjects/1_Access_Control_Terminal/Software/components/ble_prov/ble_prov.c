@@ -5,6 +5,9 @@
 #include "esp_system.h"
 #include "esp_timer.h"
 #include "host/ble_hs.h"
+#include "host/ble_uuid.h"
+#include "services/gap/ble_svc_gap.h"
+#include "services/gatt/ble_svc_gatt.h"
 #include "nimble/nimble_port.h"
 #include "nimble/nimble_port_freertos.h"
 #include "nv_storage.h"
@@ -248,7 +251,7 @@ static const struct ble_gatt_svc_def gatt_svcs[] = {
             },
             {
                 .uuid = &gatt_svr_chr_tx_uuid.u,
-                .access_cb = NULL, // Handled manually via notifications
+                .access_cb = gatts_access_rx_cb, // MUST NOT BE NULL IN NIMBLE
                 .flags = BLE_GATT_CHR_F_NOTIFY,
                 .val_handle = &char_val_handle_tx,
             },
@@ -329,9 +332,17 @@ void ble_prov_init(void) {
     ESP_LOGI(TAG, "Generated BLE Name: %s", ble_name_str);
 
     nimble_port_init();
+    
+    int rc;
     ble_gatts_count_cfg(gatt_svcs);
-    ble_gatts_add_svcs(gatt_svcs);
+    rc = ble_gatts_add_svcs(gatt_svcs);
+    if (rc != 0) ESP_LOGE(TAG, "ble_gatts_add_svcs failed: %d", rc);
+    
     ble_hs_cfg.sync_cb = ble_app_on_sync;
+    
+    rc = ble_svc_gap_device_name_set(ble_name_str);
+    if (rc != 0) ESP_LOGE(TAG, "ble_svc_gap_device_name_set failed: %d", rc);
+    
     nimble_port_freertos_init(ble_host_task);
 }
 

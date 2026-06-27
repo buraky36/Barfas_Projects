@@ -40,8 +40,10 @@ static esp_mqtt_client_handle_t mqtt_client = NULL;
 static bool mqtt_connected = false;
 static uint16_t mqtt_seq = 0;
 static char device_id_str[32] = {0};
-static char device_code_str[32] = "AC_V1";
+static char device_code_str[32] = "OK0355";
 static onloi_mqtt_config_t s_mqtt_cfg;
+static uint64_t time_offset_ms = 0;
+static uint32_t current_enroll_req_id = 0;
 
 static char topic_cmd[128];
 static char topic_reply[128];
@@ -87,7 +89,11 @@ static void publish_mqtt_frame(uint8_t msg_type, uint8_t cmd, const uint8_t *pay
     frame[7] = payload_len & 0xFF;
     frame[8] = 0x00; // STATUS
 
-    uint64_t ts = (uint64_t)(esp_timer_get_time() / 1000ULL);
+    uint64_t ts = 0;
+    if (time_offset_ms != 0) {
+        // Backend expects Local Time (UTC+3) instead of standard UTC 0
+        ts = (uint64_t)(esp_timer_get_time() / 1000ULL) + time_offset_ms + 10800000ULL;
+    }
     for (int i = 0; i < 8; i++) {
         frame[9 + i] = (ts >> (56 - i * 8)) & 0xFF;
     }
@@ -156,10 +162,37 @@ static void process_mqtt_message(const char *topic, size_t topic_len, const char
         } else if (cmd == CMD_FACTORY_RESET) {
             send_mqtt_ack(requestId, 0x01, CMD_FACTORY_RESET, 0x00);
             app_set_state(STATE_FACTORY_RESET);
+        } else if (cmd == CMD_NFC_ENROLL_START) {
+            current_enroll_req_id = requestId;
+            send_mqtt_ack(requestId, 0x01, CMD_NFC_ENROLL_START, 0x00); // RECEIVED
+            app_set_state(STATE_ONLINE_CARD_ENROLL);
+            send_mqtt_ack(requestId, 0x03, CMD_NFC_ENROLL_START, 0x00); // COMPLETED
+        } else {
+            ESP_LOGW(TAG, "Unhandled MQTT Command 0x%02X, sending ACK to unblock server", cmd);
+            send_mqtt_ack(requestId, 0x01, cmd, 0x00); // Send RECEIVED
+            send_mqtt_ack(requestId, 0x03, cmd, 0x00); // Send COMPLETED to unblock
         }
     } else if (msg_type == MSG_TYPE_RESPONSE) {
         if (cmd == CMD_TIME_SYNC) {
-            ESP_LOGI(TAG, "Time sync response received.");
+            if (payload_len >= 8) {
+                const uint8_t *payload = frame + 17;
+                uint64_t server_ts = 0;
+                for (int i = 0; i < 8; i++) {
+                    server_ts = (server_ts << 8) | payload[i];
+                }
+                uint64_t local_ts = (uint64_t)(esp_timer_get_time() / 1000ULL);
+                time_offset_ms = server_ts - local_ts;
+                ESP_LOGI(TAG, "Time synced! Offset: %llu ms, Server Time: %llu", time_offset_ms, server_ts);
+            }
+        } else if (cmd == CMD_PIN_ENTERED || cmd == CMD_NFC_SCANNED || cmd == CMD_QR_SCANNED) {
+            uint8_t status = frame[8]; // STATUS byte
+            if (status == 0x00) {
+                ESP_LOGI(TAG, "Server Approved Access via CMD 0x%02X! Opening door...", cmd);
+                app_trigger_door_open();
+            } else {
+                ESP_LOGW(TAG, "Server Denied Access via CMD 0x%02X! Status: 0x%02X", cmd, status);
+                app_trigger_access_denied();
+            }
         }
     }
 }
@@ -180,6 +213,8 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
 
             uint8_t sess_payload[3] = { 0x01, 85, 0x00 };
             publish_mqtt_frame(MSG_TYPE_EVENT, CMD_SESSION_START, sess_payload, 3, topic_lifecycle, true);
+            
+            api_client_send_get_time();
             break;
         case MQTT_EVENT_DISCONNECTED:
             ESP_LOGI(TAG, "MQTT Disconnected.");
@@ -229,7 +264,11 @@ static esp_err_t _http_event_handle(esp_http_client_event_t *evt) {
     return ESP_OK;
 }
 
-static void execute_claim(const char *prov_token) {
+static bool s_claim_in_progress = false;
+
+static void execute_claim_task(void *pvParameters) {
+    char *prov_token = (char *)pvParameters;
+
     cJSON *root = cJSON_CreateObject();
     cJSON_AddStringToObject(root, "deviceId", device_id_str);
     cJSON_AddStringToObject(root, "deviceCode", device_code_str);
@@ -251,17 +290,20 @@ static void execute_claim(const char *prov_token) {
     esp_http_client_set_header(client, "Content-Type", "application/json");
     esp_http_client_set_post_field(client, post_data, strlen(post_data));
 
-    esp_err_t err = esp_http_client_perform(client);
-    if (err == ESP_OK && esp_http_client_get_status_code(client) == 200) {
-        int content_len = esp_http_client_get_content_length(client);
-        char *resp_buf = malloc(content_len + 1);
-        if (resp_buf) {
-            esp_http_client_read_response(client, resp_buf, content_len);
-            resp_buf[content_len] = '\0';
-            ESP_LOGI(TAG, "Claim Response: %s", resp_buf);
+    esp_err_t err = esp_http_client_open(client, strlen(post_data));
+    if (err == ESP_OK) {
+        esp_http_client_write(client, post_data, strlen(post_data));
+        esp_http_client_fetch_headers(client);
 
-            cJSON *res = cJSON_Parse(resp_buf);
-            if (res) {
+        int status_code = esp_http_client_get_status_code(client);
+        if (status_code == 200 || status_code == 201) {
+            char *resp_buf = calloc(1, 1024);
+            if (resp_buf) {
+                int read_len = esp_http_client_read_response(client, resp_buf, 1023);
+                if (read_len > 0) {
+                    ESP_LOGI(TAG, "Claim Response: %s", resp_buf);
+                    cJSON *res = cJSON_Parse(resp_buf);
+                    if (res) {
                 cJSON *mqtt = cJSON_GetObjectItem(res, "mqtt");
                 if (mqtt) {
                     strncpy(s_mqtt_cfg.host, cJSON_GetObjectItem(mqtt, "host")->valuestring, 127);
@@ -277,16 +319,36 @@ static void execute_claim(const char *prov_token) {
                     nv_storage_clear_prov_token();
                     ESP_LOGI(TAG, "Claim successful! Configs saved.");
                     start_mqtt();
+                    }
+                    cJSON_Delete(res);
+                    } // closes if (res)
+                } else {
+                    ESP_LOGE(TAG, "Failed to read response or response empty.");
                 }
-                cJSON_Delete(res);
+                free(resp_buf);
             }
-            free(resp_buf);
+        } else {
+            ESP_LOGE(TAG, "Claim Request Rejected by Server (HTTP %d)", status_code);
+            char *err_buf = calloc(1, 512);
+            if (err_buf) {
+                esp_http_client_read_response(client, err_buf, 511);
+                ESP_LOGE(TAG, "Server Error Response: %s", err_buf);
+                free(err_buf);
+            }
+            // Clear token to prevent infinite loops on 400 Bad Request
+            if (status_code >= 400 && status_code < 500) {
+                nv_storage_clear_prov_token();
+                ESP_LOGW(TAG, "Invalid token cleared.");
+            }
         }
     } else {
-        ESP_LOGE(TAG, "Claim Request Failed: %d", esp_http_client_get_status_code(client));
+        ESP_LOGE(TAG, "Claim Request Failed entirely: %s", esp_err_to_name(err));
     }
     esp_http_client_cleanup(client);
     free(post_data);
+    free(prov_token);
+    s_claim_in_progress = false;
+    vTaskDelete(NULL);
 }
 
 void api_client_init(void) {
@@ -306,8 +368,12 @@ void api_client_tick(void) {
                 } else {
                     char token[65] = {0};
                     if (nv_storage_get_prov_token(token, sizeof(token)) && strlen(token) > 0) {
-                        ESP_LOGI(TAG, "Found provisioning token, executing claim...");
-                        execute_claim(token);
+                        if (!s_claim_in_progress) {
+                            ESP_LOGI(TAG, "Found provisioning token, executing claim in background...");
+                            s_claim_in_progress = true;
+                            char *token_copy = strdup(token);
+                            xTaskCreate(execute_claim_task, "claim_task", 6144, token_copy, 5, NULL);
+                        }
                     }
                 }
             } else if (mqtt_client == NULL) {
@@ -318,9 +384,11 @@ void api_client_tick(void) {
 }
 
 int api_client_send_pass_event(const char* data_val) {
-    if (!mqtt_connected) return -1;
-    
-    // Convert prefix to CMD
+    if (!mqtt_connected) {
+        ESP_LOGW(TAG, "Failed to send MQTT Event! Code: -1");
+        return -1;
+    }
+
     uint8_t cmd = 0;
     const char *payload_data = NULL;
 
@@ -341,21 +409,90 @@ int api_client_send_pass_event(const char* data_val) {
     uint8_t len = strlen(payload_data);
     if (len > 120) len = 120;
     
-    payload[0] = len;
-    memcpy(payload + 1, payload_data, len);
-    
-    uint32_t reqId = mqtt_seq;
-    payload[1 + len] = (reqId >> 24) & 0xFF;
-    payload[1 + len + 1] = (reqId >> 16) & 0xFF;
-    payload[1 + len + 2] = (reqId >> 8) & 0xFF;
-    payload[1 + len + 3] = reqId & 0xFF;
+    if (cmd == CMD_QR_SCANNED) {
+        // Protocol states QR uses 2-byte BE length + data, NO reqId
+        payload[0] = 0x00;
+        payload[1] = len;
+        memcpy(payload + 2, payload_data, len);
+        publish_mqtt_frame(MSG_TYPE_EVENT, cmd, payload, 2 + len, topic_event, false);
+    } else if (cmd == CMD_NFC_SCANNED) {
+        // NFC payload is raw bytes representing the UID + 4-byte reqId
+        uint32_t card_id = strtoul(payload_data, NULL, 10);
+        payload[0] = 4; // uidLen is 4 bytes
+        payload[1] = (card_id >> 24) & 0xFF;
+        payload[2] = (card_id >> 16) & 0xFF;
+        payload[3] = (card_id >> 8) & 0xFF;
+        payload[4] = card_id & 0xFF;
+        
+        uint32_t reqId = mqtt_seq;
+        payload[5] = (reqId >> 24) & 0xFF;
+        payload[6] = (reqId >> 16) & 0xFF;
+        payload[7] = (reqId >> 8) & 0xFF;
+        payload[8] = reqId & 0xFF;
 
-    publish_mqtt_frame(MSG_TYPE_EVENT, cmd, payload, 1 + len + 4, topic_event, false);
-    return 200; // Simulated success
+        publish_mqtt_frame(MSG_TYPE_EVENT, cmd, payload, 1 + 4 + 4, topic_event, false);
+    } else {
+        // PIN uses 1-byte length + ASCII data + 4-byte reqId
+        payload[0] = len;
+        memcpy(payload + 1, payload_data, len);
+        
+        uint32_t reqId = mqtt_seq;
+        payload[1 + len] = (reqId >> 24) & 0xFF;
+        payload[1 + len + 1] = (reqId >> 16) & 0xFF;
+        payload[1 + len + 2] = (reqId >> 8) & 0xFF;
+        payload[1 + len + 3] = reqId & 0xFF;
+
+        publish_mqtt_frame(MSG_TYPE_EVENT, cmd, payload, 1 + len + 4, topic_event, false);
+    }
+    return 200;
+}
+
+void api_client_send_nfc_enrolled_event(uint32_t card_id) {
+    if (!mqtt_connected) return;
+    
+    uint8_t payload[11];
+    
+    // Echo the requestId received from CMD_NFC_ENROLL_START (0x44)
+    payload[0] = (current_enroll_req_id >> 24) & 0xFF;
+    payload[1] = (current_enroll_req_id >> 16) & 0xFF;
+    payload[2] = (current_enroll_req_id >> 8) & 0xFF;
+    payload[3] = current_enroll_req_id & 0xFF;
+    
+    // Extra bytes as per backend request (status / padding)
+    payload[4] = 0x00;
+    payload[5] = 0x01;
+    
+    // uidLen
+    payload[6] = 0x04;
+    
+    // UID bytes
+    payload[7] = (card_id >> 24) & 0xFF;
+    payload[8] = (card_id >> 16) & 0xFF;
+    payload[9] = (card_id >> 8) & 0xFF;
+    payload[10] = card_id & 0xFF;
+    
+    publish_mqtt_frame(MSG_TYPE_EVENT, CMD_NFC_ENROLLED, payload, 11, topic_event, false);
 }
 
 int api_client_send_get_time(void) {
     if (!mqtt_connected) return -1;
     publish_mqtt_frame(MSG_TYPE_REQUEST, CMD_TIME_SYNC, NULL, 0, topic_cmd, false);
     return 200;
+}
+
+void api_client_send_lock_opened_event(void) {
+    if (!mqtt_connected) return;
+    
+    // Send a MSG_TYPE_EVENT (0x03) with CMD_LOCK_OPENED (0x10)
+    // The payload can be empty or a simple 1-byte marker. We'll send an empty payload (len=0).
+    // If the server requires reqId in the payload like pass events, we can send a 4-byte reqId payload.
+    // For now, let's send just the reqId as payload to be safe (4 bytes total).
+    uint8_t payload[4];
+    uint32_t reqId = mqtt_seq;
+    payload[0] = (reqId >> 24) & 0xFF;
+    payload[1] = (reqId >> 16) & 0xFF;
+    payload[2] = (reqId >> 8) & 0xFF;
+    payload[3] = reqId & 0xFF;
+
+    publish_mqtt_frame(MSG_TYPE_EVENT, CMD_LOCK_OPENED, payload, 4, topic_event, false);
 }

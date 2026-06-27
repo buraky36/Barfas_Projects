@@ -1,6 +1,6 @@
 {
   "board": {
-    "active_layer": 5,
+    "active_layer": 2,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
@@ -11,7 +11,7 @@
       "images": 0.6,
       "pads": 1.0,
       "shapes": 0.30000001192092896,
-      "tracks": 0.20000000298023224,
+      "tracks": 0.8999999761581421,
       "vias": 1.0,
       "zones": 0.9599999785423279
     },
@@ -32,7 +32,6 @@
       "vias",
       "footprint_text",
       "footprint_anchors",
-      "ratsnest",
       "grid",
       "footprints_front",
       "footprints_back",

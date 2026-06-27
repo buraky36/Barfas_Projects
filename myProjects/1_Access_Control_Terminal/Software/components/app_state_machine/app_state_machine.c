@@ -81,6 +81,8 @@ static const char *state_to_string(app_state_t state) {
     return "MASTER_ADD_MODE";
   case STATE_MASTER_DELETE_MODE:
     return "MASTER_DELETE_MODE";
+  case STATE_ONLINE_CARD_ENROLL:
+    return "ONLINE_CARD_ENROLL";
   default:
     return "UNKNOWN";
   }
@@ -171,7 +173,11 @@ void app_set_state(app_state_t new_state) {
     hal_io_led_set(LED_COLOR_YELLOW, LED_MODE_BLINK_FAST);
     pin_change_state = PIN_CHANGE_OLD;
     input_len = 0;
-    hal_io_buzzer_beep(2000, 200, 1);
+    memset(input_buffer, 0, sizeof(input_buffer));
+    break;
+  case STATE_ONLINE_CARD_ENROLL:
+    hal_io_led_set(LED_COLOR_YELLOW, LED_MODE_BLINK_FAST);
+    hal_io_buzzer_beep(2700, 100, 2);
     break;
   case STATE_MASTER_ADD_MODE:
     hal_io_led_set(LED_COLOR_BLUE, LED_MODE_BLINK_SLOW);
@@ -219,6 +225,7 @@ void app_trigger_door_open(void) {
     relay_state = !relay_state;
     if (relay_state) {
       app_set_state(STATE_DOOR_OPEN);
+      if (config.is_online) api_client_send_lock_opened_event();
     } else {
       hal_io_relay_set(false);
       app_set_state(STATE_IDLE);
@@ -226,10 +233,16 @@ void app_trigger_door_open(void) {
   } else {
     relay_state = true;
     app_set_state(STATE_DOOR_OPEN);
+    if (config.is_online) api_client_send_lock_opened_event();
   }
 }
 
 void app_trigger_alarm(void) { app_set_state(STATE_ALARM); }
+
+void app_trigger_access_denied(void) {
+  hal_io_buzzer_beep(1000, 300, 3); // 3 Slow Beeps
+  hal_shift_reg_play_anim(ANIM_ERROR_FLASH, 3000);
+}
 
 static bool app_is_access_granted(const char *prefix) {
   if (config.access_mode == 6)
@@ -273,15 +286,20 @@ static void process_auth_pass_command(const char *prefix, const char *data) {
 
   if (config.is_online) {
     if (wifi_manager_is_connected()) {
-      ESP_LOGI(TAG, "Online Mode Auth: %s", payload);
-      // Send only the raw credential value (card ID, PIN, or QR string)
-      int code = api_client_send_pass_event(data);
-      if (code == 200) {
-        ESP_LOGI(TAG, "Online Server Granted Access!");
-        hal_io_buzzer_beep(2700, 100, 2); // 2 Rapid Beeps
-        app_trigger_door_open();
+      if (strncmp(prefix, "RFID", 4) == 0) {
+        uint32_t decimal_val = (uint32_t)strtoul(data, NULL, 10);
+        ESP_LOGI(TAG, "Online Mode Auth: %s (Hex: %08lX)", payload, (unsigned long)decimal_val);
       } else {
-        ESP_LOGW(TAG, "Online Server Denied Access! Code: %d", code);
+        ESP_LOGI(TAG, "Online Mode Auth: %s", payload);
+      }
+      // Send the prefixed payload (e.g., QR:K3LI8T) so api_client can parse it
+      int code = api_client_send_pass_event(payload);
+      if (code == 200) {
+        ESP_LOGI(TAG, "Online Event Sent! Waiting for server...");
+        hal_io_buzzer_beep(2700, 100, 1); // 1 short beep to acknowledge read
+        // Note: Do NOT open the door here. The server will send an MQTT CMD_REMOTE_OPEN (0x40) to open it.
+      } else {
+        ESP_LOGW(TAG, "Failed to send MQTT Event! Code: %d", code);
         app_set_temp_led(LED_COLOR_RED, LED_MODE_SOLID, 3000);
         hal_io_buzzer_beep(1000, 300, 3); // 3 Slow Beeps
         hal_shift_reg_play_anim(ANIM_ERROR_FLASH, 3000);
@@ -491,6 +509,7 @@ void app_state_machine_tick(void) {
             if (nv_storage_get_user(uid, &pin_change_user)) {
               app_set_state(STATE_USER_PIN_CHANGE);
             } else {
+              ESP_LOGW(TAG, "Master code incorrect, or user not found for PIN change!");
               app_set_temp_led(LED_COLOR_RED, LED_MODE_SOLID, 3000);
               hal_io_buzzer_beep(1000, 300, 3); // 3 Slow Beeps
               hal_shift_reg_play_anim(ANIM_ERROR_FLASH, 3000);
@@ -504,7 +523,11 @@ void app_state_machine_tick(void) {
           ESP_LOGI(TAG, "Reader Mode: PIN entry completed, sent '#' (0x0B)");
           input_len = 0;
         } else {
-          process_auth_pass_command("KEYPAD", input_buffer);
+          if (input_len >= 4) {
+            process_auth_pass_command("KEYPAD", input_buffer);
+          } else if (input_len > 0) {
+            ESP_LOGW(TAG, "PIN too short (%d digits), minimum is 4. Discarding.", input_len);
+          }
           input_len = 0;
         }
       } else {
@@ -1759,6 +1782,36 @@ void app_state_machine_tick(void) {
       app_set_state(STATE_IDLE);
     }
     break;
+  case STATE_ONLINE_CARD_ENROLL: {
+    if (elapsed_ms > 30000) {
+      // Timeout after 30 seconds
+      ESP_LOGW(TAG, "Online Card Enroll timeout");
+      hal_io_buzzer_beep(1000, 300, 3);
+      app_set_state(STATE_IDLE);
+    } else {
+      uint32_t rfid_uid = 0;
+      bool rfid_ok = false;
+      if (active_hw_version != HW_VERSION_QR_ONLY) {
+        rfid_ok = mfrc522_check_card(&rfid_uid);
+      }
+      bool weigand_ok = (config.working_mode == 2) && hal_wiegand_available();
+
+      if (rfid_ok || weigand_ok) {
+        uint8_t bit_len = 0;
+        uint32_t card_id = (rfid_uid != 0) ? rfid_uid : hal_wiegand_read(&bit_len);
+
+        ESP_LOGI(TAG, "Online Enroll Card Read: %lu", (unsigned long)card_id);
+        hal_io_buzzer_beep(2700, 100, 2);
+        
+        // Send MQTT event
+        api_client_send_nfc_enrolled_event(card_id);
+        
+        app_set_temp_led(LED_COLOR_GREEN, LED_MODE_SOLID, 1000);
+        app_set_state(STATE_IDLE);
+      }
+    }
+    break;
+  }
   default:
     break;
   }

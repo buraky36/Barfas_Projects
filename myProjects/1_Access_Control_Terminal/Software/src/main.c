@@ -21,9 +21,9 @@
 // Firmware Version
 // ============================================================
 #define FW_VERSION_MAJOR  1
-#define FW_VERSION_MINOR  0
-#define FW_VERSION_PATCH  0
-#define FW_VERSION_STR    "v1.0.0"
+#define FW_VERSION_MINOR  5
+#define FW_VERSION_PATCH  2
+#define FW_VERSION_STR    "v1.5.2"
 #define FW_BUILD_DATE     __DATE__
 #define FW_BUILD_TIME     __TIME__
 // ============================================================
