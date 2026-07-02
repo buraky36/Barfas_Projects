@@ -218,92 +218,96 @@ VariationCount=0
 ParamVariationCount=0
 
 [GeneratedDocument1]
-DocumentPath=Project Outputs for MTAMR_BOT_R03\Design Rule Check - Smart_Gateway_Rev1.html
+DocumentPath=Project Outputs for MTAMR_BOT_R03\ASSY-FILES\BOM\Bill of Materials-Smart_Gateway_Rev1.0.xlsx
 DItemRevisionGUID=
 
 [GeneratedDocument2]
-DocumentPath=Project Outputs for Free Documents\NC Drill\Smart_Gateway_Rev1.0.DRR
+DocumentPath=Project Outputs for MTAMR_BOT_R03\Design Rule Check - Smart_Gateway_Rev1.html
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.EXTREP
+DocumentPath=Project Outputs for Free Documents\NC Drill\Smart_Gateway_Rev1.0.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument4]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GBL
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument5]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GBO
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument6]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GBP
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument7]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GBS
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GBP
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GD1
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument9]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GG1
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GD1
 DItemRevisionGUID=
 
 [GeneratedDocument10]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GM
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GG1
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GM1
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GM
 DItemRevisionGUID=
 
 [GeneratedDocument12]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GTL
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GM1
 DItemRevisionGUID=
 
 [GeneratedDocument13]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GTO
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument14]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GTP
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GTO
 DItemRevisionGUID=
 
 [GeneratedDocument15]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GTS
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GTP
 DItemRevisionGUID=
 
 [GeneratedDocument16]
-DocumentPath=Project Outputs for Free Documents\NC Drill\Smart_Gateway_Rev1.0.LDP
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.GTS
 DItemRevisionGUID=
 
 [GeneratedDocument17]
-DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.REP
+DocumentPath=Project Outputs for Free Documents\NC Drill\Smart_Gateway_Rev1.0.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument18]
+DocumentPath=Project Outputs for Free Documents\Gerber\Smart_Gateway_Rev1.0.REP
+DItemRevisionGUID=
+
+[GeneratedDocument19]
 DocumentPath=Project Outputs for Free Documents\NC Drill\Smart_Gateway_Rev1.0.TXT
 DItemRevisionGUID=
 
 [Parameter1]
-Name=PRJ_Engineer
-Value=Burak YALIM
+Name=PRJ_Revision
+Value=V1.0
 
 [Parameter2]
-Name=PRJ_Name
-Value=MTAMR_BOT
+Name=VariantName
+Value=BLE
 
 [Parameter3]
-Name=PRJ_Revision
-Value=V02
+Name=PRJ_Name
+Value=Smart Bluetooth Gateway
 
 [Parameter4]
-Name=PRJ_SCH_Rev
-Value=AA
+Name=PRJ_Engineer
+Value=Burak YALIM
 
 [Configuration1]
 Name=Sources

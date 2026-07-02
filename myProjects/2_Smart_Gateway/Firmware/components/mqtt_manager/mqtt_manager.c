@@ -3,6 +3,7 @@
 #include "esp_mac.h"
 #include "mqtt_client.h"
 #include "cJSON.h"
+#include "esp_app_desc.h"
 #include "ble_manager.h"
 #include "mqtt_manager.h"
 extern int ota_manager_start_update(const char *url);
@@ -66,8 +67,9 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             ESP_LOGI(TAG, "Subscribed to topics '%s' and '%s'", s_sub_cmd_topic, s_sub_ota_topic);
             
             // Publish online status
-            char status_payload[64];
-            sprintf(status_payload, "{\"status\":\"online\", \"version\":\"1.0.0\"}");
+            char status_payload[128];
+            const esp_app_desc_t *app_desc = esp_app_get_description();
+            sprintf(status_payload, "{\"status\":\"online\", \"version\":\"%s\"}", app_desc->version);
             esp_mqtt_client_publish(client, s_pub_status_topic, status_payload, 0, 1, 1); // retained
             break;
 
