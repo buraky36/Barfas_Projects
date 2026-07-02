@@ -7,6 +7,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "config_manager.h"
+#include "gateway_version.h"
 #include "web_server.h"
 
 static const char *TAG = "WEB_SERVER";
@@ -140,7 +141,7 @@ static const char* setup_html =
 "    </div>"
 "    <button type=\"submit\">Kaydet ve Bağlan</button>"
 "  </form>"
-"  <div class=\"footer\">Barfas Smart Gateway © 2026</div>"
+"  <div class=\"footer\">Barfas Smart Gateway v" GATEWAY_VERSION_STR " © 2026</div>"
 "</div>"
 "</body>"
 "</html>";

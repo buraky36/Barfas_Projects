@@ -8,6 +8,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "config_manager.h"
+#include "gateway_version.h"
 #include "wifi_manager.h"
 #include "ble_manager.h"
 #include "mqtt_manager.h"
@@ -195,7 +196,7 @@ static void button_monitor_task(void *pvParameters)
 void app_main(void)
 {
     ESP_LOGI(TAG, "==================================================");
-    ESP_LOGI(TAG, "     Barfas Smart BLE Gateway v1.0 starting      ");
+    ESP_LOGI(TAG, "     Barfas Smart BLE Gateway v%s starting      ", GATEWAY_VERSION_STR);
     ESP_LOGI(TAG, "==================================================");
 
     init_gpios();
