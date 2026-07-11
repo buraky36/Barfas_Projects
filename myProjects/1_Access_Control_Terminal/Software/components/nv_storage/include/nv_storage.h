@@ -37,6 +37,10 @@ void nv_storage_init(void);
 void nv_storage_get_config(sys_config_t *config);
 void nv_storage_set_config(sys_config_t *config);
 
+// Hardware Version Ops
+uint8_t nv_storage_get_hw_version(void);
+void nv_storage_set_hw_version(uint8_t hw_version);
+
 // API Keys (Legacy)
 bool nv_storage_save_api_keys(const char *device_key, const char *pair_key);
 bool nv_storage_get_api_keys(char *device_key, char *pair_key);
@@ -61,6 +65,20 @@ typedef struct {
 bool nv_storage_save_onloi_mqtt_config(const onloi_mqtt_config_t *config);
 bool nv_storage_get_onloi_mqtt_config(onloi_mqtt_config_t *config);
 void nv_storage_clear_onloi_mqtt_config(void);
+
+#pragma pack(push, 1)
+typedef struct {
+    uint64_t timestamp;
+    uint8_t accessMethod;
+    uint16_t localId;
+    uint8_t result;
+} offline_log_t;
+#pragma pack(pop)
+
+void nv_storage_init_offline_logs(void);
+void nv_storage_add_offline_log(offline_log_t log);
+void nv_storage_get_offline_logs(offline_log_t *logs, uint8_t *count);
+void nv_storage_clear_offline_logs(uint8_t count);
 
 // Master Credential Ops
 bool nv_storage_is_master_credential(const char *cred);

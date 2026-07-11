@@ -8,7 +8,9 @@
 #include "esp_crt_bundle.h"
 #include "esp_timer.h"
 #include "wifi_manager.h"
+#include "hw_config.h"
 #include "../app_state_machine/include/app_state_machine.h"
+#include "ota_manager.h"
 #include <string.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -28,6 +30,8 @@ static const char *CLAIM_URL = "https://api.onloi.com/v1/devices/claim";
 #define CMD_TIME_SYNC 0x33
 #define CMD_REMOTE_OPEN 0x40
 #define CMD_FACTORY_RESET 0x50
+#define CMD_WIFI_RESET 0x58
+#define CMD_DISCONNECTED 0x59
 #define CMD_ACK 0x05
 #define CMD_PIN_ENTERED 0x12
 #define CMD_NFC_SCANNED 0x13
@@ -40,7 +44,6 @@ static esp_mqtt_client_handle_t mqtt_client = NULL;
 static bool mqtt_connected = false;
 static uint16_t mqtt_seq = 0;
 static char device_id_str[32] = {0};
-static char device_code_str[32] = "OK0355";
 static onloi_mqtt_config_t s_mqtt_cfg;
 static uint64_t time_offset_ms = 0;
 static uint32_t current_enroll_req_id = 0;
@@ -159,21 +162,75 @@ static void process_mqtt_message(const char *topic, size_t topic_len, const char
             send_mqtt_ack(requestId, 0x01, CMD_REMOTE_OPEN, 0x00); // RECEIVED
             app_trigger_door_open();
             send_mqtt_ack(requestId, 0x03, CMD_REMOTE_OPEN, 0x00); // COMPLETED
+        } else if (cmd == CMD_REMOTE_CLOSE) {
+            send_mqtt_ack(requestId, 0x01, CMD_REMOTE_CLOSE, 0x00); // RECEIVED
+            app_trigger_door_close();
+            send_mqtt_ack(requestId, 0x03, CMD_REMOTE_CLOSE, 0x00); // COMPLETED
         } else if (cmd == CMD_FACTORY_RESET) {
             send_mqtt_ack(requestId, 0x01, CMD_FACTORY_RESET, 0x00);
             app_set_state(STATE_FACTORY_RESET);
+        } else if (cmd == CMD_WIFI_RESET) {
+            send_mqtt_ack(requestId, 0x01, CMD_WIFI_RESET, 0x00);
+            wifi_manager_clear_credentials();
+            send_mqtt_ack(requestId, 0x03, CMD_WIFI_RESET, 0x00);
+            vTaskDelay(pdMS_TO_TICKS(500));
+            esp_restart();
+        } else if (cmd == CMD_DISCONNECTED) {
+            send_mqtt_ack(requestId, 0x01, CMD_DISCONNECTED, 0x00);
+            api_client_reset_claim_status();
+            send_mqtt_ack(requestId, 0x03, CMD_DISCONNECTED, 0x00);
+            vTaskDelay(pdMS_TO_TICKS(500));
+            esp_restart();
         } else if (cmd == CMD_NFC_ENROLL_START) {
             current_enroll_req_id = requestId;
             send_mqtt_ack(requestId, 0x01, CMD_NFC_ENROLL_START, 0x00); // RECEIVED
             app_set_state(STATE_ONLINE_CARD_ENROLL);
             send_mqtt_ack(requestId, 0x03, CMD_NFC_ENROLL_START, 0x00); // COMPLETED
+            api_client_send_nfc_enroll_ready_event();
+        } else if (cmd == CMD_OTA_START) {
+            send_mqtt_ack(requestId, 0x01, CMD_OTA_START, 0x00);
+            
+            if (payload_len >= 5) {
+                char url[256] = {0};
+                size_t url_len = payload_len - 4;
+                if (url_len > sizeof(url) - 1) url_len = sizeof(url) - 1;
+                memcpy(url, &payload[4], url_len);
+                
+                ESP_LOGI(TAG, "OTA Start command received. URL: %s", url);
+                if (ota_manager_start(url)) {
+                    // We don't send COMPLETED yet. Device will reboot upon success.
+                } else {
+                    send_mqtt_ack(requestId, 0x03, CMD_OTA_START, 0x01); // Failed to start
+                }
+            } else {
+                ESP_LOGE(TAG, "OTA Start command has no URL payload");
+                send_mqtt_ack(requestId, 0x03, CMD_OTA_START, 0x02); // Error
+            }
         } else {
             ESP_LOGW(TAG, "Unhandled MQTT Command 0x%02X, sending ACK to unblock server", cmd);
             send_mqtt_ack(requestId, 0x01, cmd, 0x00); // Send RECEIVED
             send_mqtt_ack(requestId, 0x03, cmd, 0x00); // Send COMPLETED to unblock
         }
     } else if (msg_type == MSG_TYPE_RESPONSE) {
-        if (cmd == CMD_TIME_SYNC) {
+        if (cmd == CMD_OFFLINE_LOG_BATCH) {
+            if (payload_len >= 3) {
+                const uint8_t *payload = frame + 17;
+                uint16_t accepted = (payload[0] << 8) | payload[1];
+                uint8_t errCode = payload[2];
+                if (errCode == 0x00) {
+                    nv_storage_clear_offline_logs((uint8_t)accepted);
+                    ESP_LOGI(TAG, "Offline logs successfully uploaded: %d", accepted);
+                    
+                    uint8_t remaining = 0;
+                    nv_storage_get_offline_logs(NULL, &remaining);
+                    if (remaining > 0) {
+                        api_client_send_offline_logs();
+                    }
+                } else {
+                    ESP_LOGW(TAG, "Server rejected offline logs, err: %02X", errCode);
+                }
+            }
+        } else if (cmd == CMD_TIME_SYNC) {
             if (payload_len >= 8) {
                 const uint8_t *payload = frame + 17;
                 uint64_t server_ts = 0;
@@ -215,6 +272,12 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             publish_mqtt_frame(MSG_TYPE_EVENT, CMD_SESSION_START, sess_payload, 3, topic_lifecycle, true);
             
             api_client_send_get_time();
+            
+            uint8_t offline_log_count = 0;
+            nv_storage_get_offline_logs(NULL, &offline_log_count);
+            if (offline_log_count > 0) {
+                api_client_send_offline_logs();
+            }
             break;
         case MQTT_EVENT_DISCONNECTED:
             ESP_LOGI(TAG, "MQTT Disconnected.");
@@ -355,6 +418,18 @@ void api_client_init(void) {
     generate_device_id();
 }
 
+void api_client_reset_claim_status(void) {
+    if (mqtt_client) {
+        esp_mqtt_client_stop(mqtt_client);
+        esp_mqtt_client_destroy(mqtt_client);
+        mqtt_client = NULL;
+    }
+    s_mqtt_cfg.is_claimed = false;
+    mqtt_connected = false;
+    nv_storage_clear_onloi_mqtt_config();
+    ESP_LOGI(TAG, "Claim status reset. Ready for new provision.");
+}
+
 void api_client_tick(void) {
     static int64_t last_check = 0;
     int64_t now = esp_timer_get_time() / 1000;
@@ -447,10 +522,22 @@ int api_client_send_pass_event(const char* data_val) {
     return 200;
 }
 
+void api_client_send_nfc_enroll_ready_event(void) {
+    if (!mqtt_connected) return;
+    
+    uint8_t payload[4];
+    payload[0] = (current_enroll_req_id >> 24) & 0xFF;
+    payload[1] = (current_enroll_req_id >> 16) & 0xFF;
+    payload[2] = (current_enroll_req_id >> 8) & 0xFF;
+    payload[3] = current_enroll_req_id & 0xFF;
+    
+    publish_mqtt_frame(MSG_TYPE_EVENT, CMD_NFC_ENROLL_READY, payload, 4, topic_event, false);
+}
+
 void api_client_send_nfc_enrolled_event(uint32_t card_id) {
     if (!mqtt_connected) return;
     
-    uint8_t payload[11];
+    uint8_t payload[9];
     
     // Echo the requestId received from CMD_NFC_ENROLL_START (0x44)
     payload[0] = (current_enroll_req_id >> 24) & 0xFF;
@@ -458,20 +545,16 @@ void api_client_send_nfc_enrolled_event(uint32_t card_id) {
     payload[2] = (current_enroll_req_id >> 8) & 0xFF;
     payload[3] = current_enroll_req_id & 0xFF;
     
-    // Extra bytes as per backend request (status / padding)
-    payload[4] = 0x00;
-    payload[5] = 0x01;
-    
     // uidLen
-    payload[6] = 0x04;
+    payload[4] = 0x04;
     
     // UID bytes
-    payload[7] = (card_id >> 24) & 0xFF;
-    payload[8] = (card_id >> 16) & 0xFF;
-    payload[9] = (card_id >> 8) & 0xFF;
-    payload[10] = card_id & 0xFF;
+    payload[5] = (card_id >> 24) & 0xFF;
+    payload[6] = (card_id >> 16) & 0xFF;
+    payload[7] = (card_id >> 8) & 0xFF;
+    payload[8] = card_id & 0xFF;
     
-    publish_mqtt_frame(MSG_TYPE_EVENT, CMD_NFC_ENROLLED, payload, 11, topic_event, false);
+    publish_mqtt_frame(MSG_TYPE_EVENT, CMD_NFC_ENROLLED, payload, 9, topic_event, false);
 }
 
 int api_client_send_get_time(void) {
@@ -495,4 +578,47 @@ void api_client_send_lock_opened_event(void) {
     payload[3] = reqId & 0xFF;
 
     publish_mqtt_frame(MSG_TYPE_EVENT, CMD_LOCK_OPENED, payload, 4, topic_event, false);
+}
+
+void api_client_send_local_factory_reset_event(void) {
+    if (!mqtt_connected) return;
+    publish_mqtt_frame(MSG_TYPE_EVENT, CMD_LOCAL_FACTORY_RESET, NULL, 0, topic_event, true);
+    ESP_LOGI(TAG, "Published LOCAL_FACTORY_RESET event.");
+}
+
+void api_client_send_offline_logs(void) {
+    if (!mqtt_connected) return;
+    uint8_t count = 0;
+    nv_storage_get_offline_logs(NULL, &count);
+    if (count == 0) return;
+    
+    offline_log_t *logs = malloc(count * sizeof(offline_log_t));
+    if (!logs) return;
+    nv_storage_get_offline_logs(logs, &count);
+    
+    size_t payload_len = 1 + (count * 12);
+    uint8_t *payload = malloc(payload_len);
+    if (!payload) {
+        free(logs);
+        return;
+    }
+    
+    payload[0] = count;
+    for (int i=0; i<count; i++) {
+        uint8_t *entry = &payload[1 + (i * 12)];
+        uint64_t ts = logs[i].timestamp;
+        for (int j=0; j<8; j++) {
+            entry[j] = (ts >> (56 - (j * 8))) & 0xFF;
+        }
+        entry[8] = logs[i].accessMethod;
+        entry[9] = (logs[i].localId >> 8) & 0xFF;
+        entry[10] = logs[i].localId & 0xFF;
+        entry[11] = logs[i].result;
+    }
+    
+    publish_mqtt_frame(MSG_TYPE_EVENT, CMD_OFFLINE_LOG_BATCH, payload, payload_len, topic_event, true);
+    ESP_LOGI(TAG, "Published OFFLINE_LOG_BATCH event with %d logs.", count);
+    
+    free(payload);
+    free(logs);
 }

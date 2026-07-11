@@ -14,6 +14,7 @@
 #include "services/gap/ble_svc_gap.h"
 #include "services/gatt/ble_svc_gatt.h"
 #include "wifi_manager.h"
+#include "../api_client/include/api_client.h"
 #include <string.h>
 #include <sys/time.h>
 
@@ -24,8 +25,6 @@ static uint16_t conn_handle = BLE_HS_CONN_HANDLE_NONE;
 static uint16_t char_val_handle_tx;
 static uint8_t nimble_port_own_addr_type;
 static char device_id_str[32] = "SMART_000000";
-static char ble_name_str[64] = "Onloi_SMARTaccess_000000";
-static char device_code_str[32] = "OK0355";
 
 #define SOF_BYTE 0x4F
 #define VER_BYTE 0x02
@@ -137,6 +136,10 @@ static void handle_ble_command(uint8_t cmd, uint16_t seq, const uint8_t *payload
                 }
                 nv_storage_save_prov_token(token_hex);
                 ESP_LOGI(TAG, "Provision token saved: %s", token_hex);
+                
+                // Reset the old MQTT claim state so the new token will trigger the Claim API
+                api_client_reset_claim_status();
+                
                 uint8_t result = 0x00;
                 send_ble_response(CMD_PROVISION, seq, 0x00, &result, 1);
             } else {
@@ -323,13 +326,7 @@ void ble_prov_init(void) {
     uint32_t low = ((uint32_t)mac[3] << 16) | ((uint32_t)mac[4] << 8) | mac[5];
     snprintf(device_id_str, sizeof(device_id_str), "SMART_%06lX", (unsigned long)low);
 
-    if (active_hw_version == HW_VERSION_QR_ONLY) {
-        snprintf(ble_name_str, sizeof(ble_name_str), "Onloi_QR_%s", device_id_str);
-    } else {
-        snprintf(ble_name_str, sizeof(ble_name_str), "Onloi_RFID_%s", device_id_str);
-    }
-
-    ESP_LOGI(TAG, "Generated BLE Name: %s", ble_name_str);
+    ESP_LOGI(TAG, "Using BLE Name: %s", ble_name_str);
 
     nimble_port_init();
     

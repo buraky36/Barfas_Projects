@@ -16,19 +16,88 @@
 #include "driver/gpio.h"
 #include <string.h>
 #include "esp_chip_info.h"
+#include "esp_mac.h"
+#include "esp_log.h"
+#include "nvs_flash.h"
+#include "esp_system.h"
 
 // ============================================================
 // Firmware Version
 // ============================================================
 #define FW_VERSION_MAJOR  1
-#define FW_VERSION_MINOR  5
+#define FW_VERSION_MINOR  6
 #define FW_VERSION_PATCH  2
-#define FW_VERSION_STR    "v1.5.2"
+#define FW_VERSION_STR    "v1.6.2"
 #define FW_BUILD_DATE     __DATE__
 #define FW_BUILD_TIME     __TIME__
 // ============================================================
 
-uint8_t active_hw_version = HW_VERSION_QR_ONLY; // Default
+char device_code_str[32] = {0};
+char ble_name_str[64] = {0};
+uint8_t active_hw_version = HW_VERSION_PIN_QR; // Default
+
+static void app_generate_hw_info(void) {
+    uint8_t mac[6];
+    esp_read_mac(mac, ESP_MAC_BT);
+    uint16_t mac_last_2 = (mac[4] << 8) | mac[5];
+    
+    if (active_hw_version == HW_VERSION_PIN_QR) {
+        strcpy(device_code_str, "OE0110");
+    } else if (active_hw_version == HW_VERSION_PIN_RFID) {
+        strcpy(device_code_str, "OE0111");
+    } else if (active_hw_version == HW_VERSION_RFID_ONLY) {
+        strcpy(device_code_str, "OE0112");
+    } else {
+        strcpy(device_code_str, "UNKNOWN");
+    }
+    
+    snprintf(ble_name_str, sizeof(ble_name_str), "SMART_%s_%04X", device_code_str, mac_last_2);
+    ESP_LOGI("MAIN", "Project Code: %s, BLE Name: %s", device_code_str, ble_name_str);
+}
+
+static void serial_cli_task(void *pvParameters) {
+    char buf[128];
+    int pos = 0;
+    while(1) {
+        int c = fgetc(stdin);
+        if (c != EOF && c != '\r' && c != '\n') {
+            if (pos < sizeof(buf) - 1) {
+                buf[pos++] = c;
+            }
+        } else if (c == '\n' || c == '\r') {
+            if (pos > 0) {
+                buf[pos] = '\0';
+                if (strcmp(buf, "buraky36_fab_reset") == 0) {
+                    printf("\n[CLI] Triggering Factory Reset via State Machine...\n");
+                    app_set_state(STATE_FACTORY_RESET);
+                } else if (strcmp(buf, "buraky36_user_list_view") == 0) {
+                    printf("\n--- USER LIST ---\n");
+                    int count = 0;
+                    for (int i=1; i<=9988; i++) {
+                        user_record_t usr;
+                        if (nv_storage_get_user(i, &usr)) {
+                            printf("User %d: PIN=%s, CARD=%s, QR=%s\n", i, usr.pin, usr.card_id, usr.qr_id);
+                            count++;
+                        }
+                    }
+                    printf("Total Users: %d\n", count);
+                    printf("--- END OF LIST ---\n");
+                } else if (strcmp(buf, "buraky36_master_list_view") == 0) {
+                    printf("\n--- MASTER LIST ---\n");
+                    sys_config_t cfg;
+                    nv_storage_get_config(&cfg);
+                    for (int i=0; i<cfg.master_card_count; i++) {
+                        printf("Master %d (ID %d): %s\n", i+1, cfg.master_ids[i], cfg.master_cards[i]);
+                    }
+                    printf("Total Masters: %d\n", cfg.master_card_count);
+                    printf("--- END OF LIST ---\n");
+                }
+                pos = 0;
+            }
+        }
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
+}
 
 void app_main(void) {
   printf("\n============================================\n");
@@ -43,7 +112,8 @@ void app_main(void) {
   hal_io_init();
   hal_shift_reg_init(); // MUST be before touch and RFID due to RST pins
   nv_storage_init();
-  hal_touch_init();
+  
+  bool has_tsm12 = hal_touch_init();
   
   // MFRC522 RST is driven by Shift Register U2 QG (MASK_U2_RFID_RST).
   // After hal_shift_reg_init() all outputs are 0x00 → RST is LOW (active reset).
@@ -52,13 +122,34 @@ void app_main(void) {
   hal_shift_reg_set_rfid_rst(true);
   vTaskDelay(pdMS_TO_TICKS(50)); // 50ms: safe margin after hard reset release
 
-  if (mfrc522_init()) {
-      active_hw_version = HW_VERSION_RFID_ONLY;
+  bool has_mfrc522 = mfrc522_init();
+
+  uint8_t detected_hw = HW_VERSION_PIN_QR;
+  if (has_tsm12 && has_mfrc522) {
+      detected_hw = HW_VERSION_PIN_RFID;
       printf("Hardware Detected: PIN + RFID\n");
-  } else {
-      active_hw_version = HW_VERSION_QR_ONLY;
+  } else if (!has_tsm12 && has_mfrc522) {
+      detected_hw = HW_VERSION_RFID_ONLY;
+      printf("Hardware Detected: RFID ONLY\n");
+  } else if (has_tsm12 && !has_mfrc522) {
+      detected_hw = HW_VERSION_PIN_QR;
       printf("Hardware Detected: PIN + QR\n");
+  } else {
+      detected_hw = HW_VERSION_PIN_QR; // fallback
+      printf("Hardware Detected: NONE! Falling back to PIN + QR\n");
   }
+
+  uint8_t saved_hw = nv_storage_get_hw_version();
+  if (saved_hw == 0 || saved_hw > 3) {
+      saved_hw = detected_hw;
+      nv_storage_set_hw_version(saved_hw);
+      printf("Hardware version saved to NVS for the first time: %d\n", saved_hw);
+  } else if (saved_hw != detected_hw) {
+      printf("WARNING: Hardware mismatch! Saved: %d, Detected: %d. Using saved configuration.\n", saved_hw, detected_hw);
+  }
+
+  active_hw_version = saved_hw;
+  app_generate_hw_info();
 
   hal_wiegand_init();
   hal_qr_init();
@@ -88,7 +179,7 @@ void app_main(void) {
     }
 
     // 2. Test MFRC522 directly if attached
-    if (active_hw_version != HW_VERSION_QR_ONLY) {
+    if (active_hw_version != HW_VERSION_PIN_QR) {
         uint32_t rfid_uid_test = 0;
         if (mfrc522_check_card(&rfid_uid_test)) {
             printf("[MFRC522] Card Scanned! UID (Decimal): %lu\n", (unsigned long)rfid_uid_test);
@@ -141,6 +232,8 @@ void app_main(void) {
   } else {
       printf("Wiegand Reader Mode Active: Wi-Fi and BLE are DISABLED for security and power saving.\n");
   }
+
+  xTaskCreate(serial_cli_task, "serial_cli", 4096, NULL, 5, NULL);
 
   // Main Super-Loop
   while (1) {

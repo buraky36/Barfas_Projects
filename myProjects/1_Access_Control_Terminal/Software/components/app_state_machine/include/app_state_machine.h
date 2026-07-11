@@ -9,6 +9,7 @@ typedef enum {
     STATE_IDLE,
     STATE_PROGRAMMING,
     STATE_FACTORY_RESET,
+    STATE_OTA_UPDATING,
     STATE_DOOR_OPEN,
     STATE_ALARM,
     STATE_USER_PIN_CHANGE,
@@ -23,6 +24,7 @@ void app_state_machine_tick(void);
 // Used by the logic to change states and trigger outputs
 void app_set_state(app_state_t new_state);
 void app_trigger_door_open(void);
+void app_trigger_door_close(void);
 void app_trigger_alarm(void);
 void app_trigger_access_denied(void);
 uint8_t app_get_working_mode(void);

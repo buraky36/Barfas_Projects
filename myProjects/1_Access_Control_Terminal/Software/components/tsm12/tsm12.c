@@ -67,86 +67,79 @@ static void tsm12_write_reg(uint8_t reg, uint8_t val) {
   gpio_set_level(TSM12_EN_PIN, 1); // EN HIGH — release
 }
 
-void tsm12_init(void) {
-  // RST is now handled via Shift Register (U1_QD). The shift register init
-  // should happen BEFORE tsm12_init() in main.c.
+bool tsm12_init(void) {
   hal_shift_reg_set_tsm_rst(true);
   vTaskDelay(pdMS_TO_TICKS(100));
   hal_shift_reg_set_tsm_rst(false);
   vTaskDelay(pdMS_TO_TICKS(200));
 
-  // EN: Output — reference driver initially sets to 0 (or we just use it during
-  // transactions) IMPORTANT: The user states "TSM12_I2C_EN pini yazılımda
-  // şuanda nasıl kullanılıyorsa yani I2C haberleşmesi başlamadan hemen önce aç
-  // kapa gibi kalsın." So we init it here.
   gpio_set_direction(TSM12_EN_PIN, GPIO_MODE_OUTPUT);
   gpio_set_level(TSM12_EN_PIN, 0);
   vTaskDelay(pdMS_TO_TICKS(200));
 
-  // INT: Input — hardware interrupt line
+  static bool i2c_installed = false;
+  if (!i2c_installed) {
+      i2c_config_t conf = {
+          .mode = I2C_MODE_MASTER,
+          .sda_io_num = I2C_MASTER_SDA_IO,
+          .scl_io_num = I2C_MASTER_SCL_IO,
+          .sda_pullup_en = GPIO_PULLUP_ENABLE,
+          .scl_pullup_en = GPIO_PULLUP_ENABLE,
+          .master.clk_speed = I2C_MASTER_FREQ_HZ,
+      };
+      i2c_param_config(I2C_MASTER_NUM, &conf);
+      i2c_driver_install(I2C_MASTER_NUM, conf.mode, 0, 0, 0);
+      i2c_installed = true;
+  }
+
+  bool found_tsm12 = false;
+  for (int retry = 0; retry < 5; retry++) {
+      gpio_set_level(TSM12_EN_PIN, 0);
+      i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+      i2c_master_start(cmd);
+      i2c_master_write_byte(cmd, (TSM12_I2C_ADDR << 1) | I2C_MASTER_WRITE, true);
+      i2c_master_stop(cmd);
+      esp_err_t ret = i2c_master_cmd_begin(I2C_MASTER_NUM, cmd, pdMS_TO_TICKS(20));
+      i2c_cmd_link_delete(cmd);
+      gpio_set_level(TSM12_EN_PIN, 1);
+      
+      if (ret == ESP_OK) {
+          found_tsm12 = true;
+          printf("[TSM12] FOUND device at 7-bit=0x%02X\n", TSM12_I2C_ADDR);
+          break;
+      }
+      vTaskDelay(pdMS_TO_TICKS(50));
+  }
+
+  if (!found_tsm12) {
+      printf("[TSM12] Not found on I2C bus!\n");
+      return false;
+  }
+
   gpio_config_t int_conf = {
-      .intr_type = GPIO_INTR_ANYEDGE, // Trigger on both press and release
+      .intr_type = GPIO_INTR_ANYEDGE,
       .mode = GPIO_MODE_INPUT,
       .pin_bit_mask = (1ULL << TSM12_INT_PIN),
       .pull_up_en = 1,
   };
   gpio_config(&int_conf);
-
-  // Install ISR service if not already installed
   gpio_install_isr_service(0);
 
-  // Create queue and task before adding ISR
-  tsm12_queue = xQueueCreate(10, sizeof(uint16_t));
-  // Provide reference to tsm12_task later in the file, wait, we need to forward
-  // declare it or define it above. Actually I'll define tsm12_task before
-  // tsm12_init. Let's add forward declaration.
-  extern void tsm12_task(void *arg);
-  xTaskCreate(tsm12_task, "tsm12_task", 4096, NULL, 10, &tsm12_task_handle);
-
-  gpio_isr_handler_add(TSM12_INT_PIN, tsm12_isr_handler, NULL);
-
-  // --- I2C Setup ---
-  i2c_config_t conf = {
-      .mode = I2C_MODE_MASTER,
-      .sda_io_num = I2C_MASTER_SDA_IO,
-      .scl_io_num = I2C_MASTER_SCL_IO,
-      .sda_pullup_en = GPIO_PULLUP_ENABLE,
-      .scl_pullup_en = GPIO_PULLUP_ENABLE,
-      .master.clk_speed = I2C_MASTER_FREQ_HZ,
-  };
-  i2c_param_config(I2C_MASTER_NUM, &conf);
-  i2c_driver_install(I2C_MASTER_NUM, conf.mode, 0, 0, 0);
-
-  // --- I2C Address Scanner (With EN Handshake) ---
-  printf("[TSM12] Scanning I2C bus (SDA=GPIO%d, SCL=GPIO%d)...\n",
-         I2C_MASTER_SDA_IO, I2C_MASTER_SCL_IO);
-
-  for (uint8_t addr = 0x08; addr < 0x78; addr++) {
-    gpio_set_level(TSM12_EN_PIN, 0); // EN LOW — enable
-    i2c_cmd_handle_t cmd = i2c_cmd_link_create();
-    i2c_master_start(cmd);
-    i2c_master_write_byte(cmd, (addr << 1) | I2C_MASTER_WRITE, true);
-    i2c_master_stop(cmd);
-    esp_err_t ret =
-        i2c_master_cmd_begin(I2C_MASTER_NUM, cmd, pdMS_TO_TICKS(20));
-    i2c_cmd_link_delete(cmd);
-    gpio_set_level(TSM12_EN_PIN, 1); // EN HIGH — release
-    if (ret == ESP_OK) {
-      printf("[TSM12] FOUND device at 7-bit=0x%02X\n", addr);
-    }
+  if (tsm12_queue == NULL) {
+      tsm12_queue = xQueueCreate(10, sizeof(uint16_t));
+  }
+  
+  if (tsm12_task_handle == NULL) {
+      extern void tsm12_task(void *arg);
+      xTaskCreate(tsm12_task, "tsm12_task", 4096, NULL, 10, &tsm12_task_handle);
+      gpio_isr_handler_add(TSM12_INT_PIN, tsm12_isr_handler, NULL);
   }
 
-  // --- Register Initialization (Sequence from Smart_Lock_TFC) ---
-  // RepCnt loops are removed for clarity as I2C writes are checked by
-  // tsm12_write_reg
-
-  // CTRL2 Init
   tsm12_write_reg(TSM12_REG_CTRL2, 0x0F);
   vTaskDelay(pdMS_TO_TICKS(50));
   tsm12_write_reg(TSM12_REG_CTRL2, 0x07);
   vTaskDelay(pdMS_TO_TICKS(5));
 
-  // Sensitivity setting
   tsm12_write_reg(TSM12_REG_SENS1, TSM12_SENSITIVITY);
   tsm12_write_reg(TSM12_REG_SENS2, TSM12_SENSITIVITY);
   tsm12_write_reg(TSM12_REG_SENS3, TSM12_SENSITIVITY);
@@ -154,7 +147,6 @@ void tsm12_init(void) {
   tsm12_write_reg(TSM12_REG_SENS5, TSM12_SENSITIVITY);
   tsm12_write_reg(TSM12_REG_SENS6, TSM12_SENSITIVITY);
 
-  // Other Control Registers
   tsm12_write_reg(TSM12_REG_CTRL1, 0x02);
   tsm12_write_reg(TSM12_REG_CH_HOLD1, 0x00);
   tsm12_write_reg(TSM12_REG_CH_HOLD2, 0x00);
@@ -163,6 +155,8 @@ void tsm12_init(void) {
 
   vTaskDelay(pdMS_TO_TICKS(10));
   printf("[TSM12] Init complete. Configured per reference project.\n");
+  
+  return true;
 }
 
 // Mapping of bit indices to actual button values based on real hardware raw
@@ -223,7 +217,7 @@ void tsm12_task(void *arg) {
       // bit:          0   1   2   3   4   5   6   7   8   9  10  11
       static const uint8_t led_remap_qr  [12] = { 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11};
       static const uint8_t led_remap_rfid[12] = {11,  5,  2,  9,  1,  8,  3,  0,  4,  6, 10,  7};
-      const uint8_t *remap = (active_hw_version == HW_VERSION_RFID_ONLY)
+      const uint8_t *remap = (active_hw_version == HW_VERSION_PIN_RFID)
                              ? led_remap_rfid : led_remap_qr;
       uint16_t led_mask = 0;
       for (int k = 0; k < 12; k++) {

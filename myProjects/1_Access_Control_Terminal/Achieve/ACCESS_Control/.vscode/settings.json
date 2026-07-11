@@ -1,0 +1,6 @@
+{
+    "C_Cpp.default.configurationProvider": "platformio.platformio-ide",
+    "C_Cpp.default.compileCommands": "C:/.piobuild/ACCESS_Control/esp32-c3-devkitc-02/compile_commands.json",
+    "C_Cpp.default.cStandard": "gnu17",
+    "C_Cpp.default.cppStandard": "gnu++23"
+}

@@ -9,7 +9,7 @@
 #define TOUCH_INT_PIN 14
 #define TOUCH_OUT_PIN 27
 
-void hal_touch_init(void);
+bool hal_touch_init(void);
 
 bool hal_touch_has_interrupt(void);
 
