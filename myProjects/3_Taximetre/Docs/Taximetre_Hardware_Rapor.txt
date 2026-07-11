@@ -1,0 +1,13 @@
+1- GSM modülü:
+HALE burada Telit LE910R1-EAG kullanmış. Bizde Quectel EC25EUXGA-128-SGNS
+LE910R1-EAG Cat 1 bis(10 Mpbs) hücresel erişim teknolojisini kullanıyor. EC25 Cat 4(150Mbps).
+Her iki modülde dahili GPS bulunmakta.
+Her iki modülde 2G backup ile kırsalda ya da otopark gibi LTE bantlarının çekmediği konumlarda avantajlı.
+EC25 te 3G kapsamı da var fakat Türkiye de dahil Almanya da 3G bantlarını tamamen kapatılmıştır.
+Maliyet açısında EC25 Cat 1 bis bir modüle göre 8-10 USD daha pahalı olacaktır.
+EC25 Main+Diversity olmak üzere 2 adet GSM antenine ihtiyac duyuyor. Bu da taximetre için büyük dezavantaj.
+Özetle EC25 in 150Mbps lik bant hızı taksimetrenin göndereceği 100Kb lık veri için gereksiz gözüküyor.
+EC25 ten devam mı edelim ? Yoksa Quectel de farklı bir modül mü seçelim ?
+
+2-  CAN Transceiver:
+HALE CAN transceiver olarak NXP markasının
