@@ -4,6 +4,7 @@
 #include "esp_system.h"
 #include "esp_mac.h"
 #include "esp_wifi.h"
+#include "esp_app_desc.h"
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -195,8 +196,9 @@ static void button_monitor_task(void *pvParameters)
 
 void app_main(void)
 {
+    const esp_app_desc_t *app_desc = esp_app_get_description();
     ESP_LOGI(TAG, "==================================================");
-    ESP_LOGI(TAG, "     Barfas Smart BLE Gateway v%s starting      ", GATEWAY_VERSION_STR);
+    ESP_LOGI(TAG, "  Barfas Smart BLE Gateway v%s starting  ", app_desc->version);
     ESP_LOGI(TAG, "==================================================");
 
     init_gpios();
