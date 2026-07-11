@@ -71,6 +71,8 @@ static const char *state_to_string(app_state_t state) {
     return "PROGRAMMING";
   case STATE_FACTORY_RESET:
     return "FACTORY_RESET";
+  case STATE_OTA_UPDATING:
+    return "OTA_UPDATING";
   case STATE_DOOR_OPEN:
     return "DOOR_OPEN";
   case STATE_ALARM:
@@ -143,7 +145,7 @@ void app_set_state(app_state_t new_state) {
 
   switch (new_state) {
   case STATE_IDLE:
-    hal_io_led_set(LED_COLOR_GREEN, LED_MODE_BLINK_SLOW);
+    hal_io_led_set(LED_COLOR_RED, LED_MODE_BLINK_SLOW);
     input_len = 0;
     is_entering_master = false;
     break;
@@ -158,6 +160,13 @@ void app_set_state(app_state_t new_state) {
     hal_io_led_set(LED_COLOR_ORANGE, LED_MODE_SOLID);
     hal_shift_reg_play_anim(ANIM_FACTORY_RESET, 0);
     hal_io_buzzer_beep(2700, 1000, 1);
+    if (config.is_online) {
+        api_client_send_local_factory_reset_event();
+    }
+    break;
+  case STATE_OTA_UPDATING:
+    hal_io_led_set(LED_COLOR_WHITE, LED_MODE_BLINK_FAST);
+    hal_io_buzzer_beep(2700, 200, 2);
     break;
   case STATE_DOOR_OPEN:
     // "Solid Green during beeps" -> the buzzer already plays, let's set solid
@@ -234,6 +243,17 @@ void app_trigger_door_open(void) {
     relay_state = true;
     app_set_state(STATE_DOOR_OPEN);
     if (config.is_online) api_client_send_lock_opened_event();
+  }
+}
+
+void app_trigger_door_close(void) {
+  if (config.relay_time == 0) {
+    relay_state = false;
+    hal_io_relay_set(false);
+    app_set_state(STATE_IDLE);
+    ESP_LOGI(TAG, "Door remotely closed (Toggle mode).");
+  } else {
+    ESP_LOGW(TAG, "Ignored REMOTE_CLOSE because device is not in toggle mode.");
   }
 }
 
@@ -333,6 +353,17 @@ static void process_auth_pass_command(const char *prefix, const char *data) {
     hal_io_buzzer_beep(1000, 300, 3); // 3 Slow Beeps
     hal_shift_reg_play_anim(ANIM_ERROR_FLASH, 3000);
   }
+  
+  offline_log_t log = {0};
+  log.timestamp = (uint64_t)(esp_timer_get_time() / 1000ULL); // Time since boot, ideal would be real time but device might not have it
+  if (strcmp(prefix, "KEYPAD") == 0) log.accessMethod = 0x01;
+  else if (strcmp(prefix, "RFID") == 0) log.accessMethod = 0x02;
+  else if (strcmp(prefix, "QR") == 0) log.accessMethod = 0x04;
+  else log.accessMethod = 0x00;
+  
+  log.localId = found ? u.user_id : 0;
+  log.result = found ? 0x00 : 0x01;
+  nv_storage_add_offline_log(log);
 }
 
 void app_state_machine_tick(void) {
@@ -344,7 +375,7 @@ void app_state_machine_tick(void) {
   if (led_revert_timer_ms > 0 && now_us / 1000 >= led_revert_timer_ms) {
     led_revert_timer_ms = 0;
     if (current_state == STATE_IDLE)
-      hal_io_led_set(LED_COLOR_GREEN, LED_MODE_BLINK_SLOW);
+      hal_io_led_set(LED_COLOR_RED, LED_MODE_BLINK_SLOW);
     else if (current_state == STATE_PROGRAMMING)
       hal_io_led_set(LED_COLOR_BLUE, LED_MODE_BLINK_FAST);
     else if (current_state == STATE_ALARM)
@@ -371,7 +402,7 @@ void app_state_machine_tick(void) {
     // Only play the idle animation when the 20-second keypad activity window
     // has expired (i.e., no key has been pressed recently).
     if (!hal_shift_reg_is_keypad_active()) {
-      if (active_hw_version == HW_VERSION_QR_ONLY) {
+      if (active_hw_version == HW_VERSION_PIN_QR) {
         hal_shift_reg_play_anim(ANIM_IDLE_SNAKE, '\0');
       } else {
         hal_shift_reg_play_anim(ANIM_IDLE_WAVE, '\0');
@@ -467,28 +498,6 @@ void app_state_machine_tick(void) {
       }
 
       ESP_LOGI(TAG, "[IDLE] Key pressed: %c", key);
-
-      /*
-       * Factory Reset Backdoor
-       * ----------------------
-       * Press '0' five consecutive times within the first 10 seconds
-       * after power-on to trigger a factory reset.
-       * Any other key press during this window cancels the sequence.
-       */
-      if (elapsed_ms < 10000) {
-        static int zero_count = 0;
-        if (key == '0' && zero_count >= 0) {
-          zero_count++;
-          hal_io_buzzer_beep(2700, 50, 1);
-          if (zero_count == 5) {
-            ESP_LOGW(TAG, "5x ZERO ENTERED AT BOOT! FACTORY RESET!");
-            app_set_state(STATE_FACTORY_RESET);
-          }
-          break; // Consume the key, don't pass to normal logic
-        } else {
-          zero_count = -1; // Wrong key entered, cancels the backdoor
-        }
-      }
 
       if (key == '*') {
         is_entering_master = true;
@@ -599,7 +608,7 @@ void app_state_machine_tick(void) {
 
     uint32_t rfid_uid = 0;
     bool rfid_ok = false;
-    if (active_hw_version != HW_VERSION_QR_ONLY) {
+    if (active_hw_version != HW_VERSION_PIN_QR) {
       rfid_ok = mfrc522_check_card(&rfid_uid);
     }
     bool weigand_ok = (config.working_mode == 2) && hal_wiegand_available();
@@ -824,7 +833,7 @@ void app_state_machine_tick(void) {
 
     uint32_t rfid_uid = 0;
     bool rfid_ok = false;
-    if (active_hw_version != HW_VERSION_QR_ONLY) {
+    if (active_hw_version != HW_VERSION_PIN_QR) {
       rfid_ok = mfrc522_check_card(&rfid_uid);
     }
     bool weigand_ok = hal_wiegand_available();
@@ -1101,8 +1110,9 @@ void app_state_machine_tick(void) {
           // 9→26→# or 9→34→#  : Wiegand card format
           // 9→4→#  or 9→8→#   : PIN output format
           // 9→0→#  or 9→1→#   : Parity (disable/enable)
+          // 9→9→#             : Factory Reset (99#)
           prog_state = PROG_STATE_WIEGAND;
-          ESP_LOGI(TAG, "Menu 9: Wiegand Format");
+          ESP_LOGI(TAG, "Menu 9: Wiegand Format / Factory Reset");
           hal_io_buzzer_beep(2700, 50, 1);
         } else {
           hal_io_buzzer_beep(1000, 200, 1);
@@ -1466,6 +1476,13 @@ void app_state_machine_tick(void) {
               config.wiegand_parity_en = (val == 1);
               ok = true;
               ESP_LOGI(TAG, "Config: Wiegand Parity = %s", val ? "ON" : "OFF");
+            } else if (val == 9) {
+              // 9 -> 9 -> # => 99# : Factory Reset
+              ESP_LOGW(TAG, "Factory Reset triggered from Keypad (99#)");
+              app_set_state(STATE_FACTORY_RESET);
+              ok = true;
+              // We must break out of programming state, so return directly or just break;
+              // Since app_set_state changes the main state, the next tick will handle it.
             }
             break;
           case PROG_STATE_WIEGAND_PIN:
@@ -1514,7 +1531,7 @@ void app_state_machine_tick(void) {
     // High-Speed RF/QR Handlers
     uint32_t rfid_uid = 0;
     bool rfid_ok = false;
-#if ACTIVE_HW_VERSION != HW_VERSION_QR_ONLY
+#if ACTIVE_HW_VERSION != HW_VERSION_PIN_QR
     rfid_ok = mfrc522_check_card(&rfid_uid);
 #endif
     bool weigand_ok = hal_wiegand_available();
@@ -1705,7 +1722,7 @@ void app_state_machine_tick(void) {
   case STATE_DOOR_OPEN: {
     uint32_t rfid_uid = 0;
     bool rfid_ok = false;
-    if (active_hw_version != HW_VERSION_QR_ONLY) {
+    if (active_hw_version != HW_VERSION_PIN_QR) {
       rfid_ok = mfrc522_check_card(&rfid_uid);
     }
     bool weigand_ok = (config.working_mode == 2) && hal_wiegand_available();
@@ -1727,8 +1744,10 @@ void app_state_machine_tick(void) {
                     hal_io_buzzer_beep(2700, 100, 2);
                     state_timer_start = esp_timer_get_time();
                 } else {
-                    ESP_LOGW(TAG, "Invalid Wiegand QR scanned during DOOR_OPEN.");
-                    hal_io_buzzer_beep(1000, 300, 3);
+                    if (!config.is_online) {
+                        ESP_LOGW(TAG, "Invalid Wiegand QR scanned during DOOR_OPEN.");
+                        hal_io_buzzer_beep(1000, 300, 3);
+                    }
                 }
             }
         }
@@ -1764,13 +1783,15 @@ void app_state_machine_tick(void) {
                     hal_io_buzzer_beep(2700, 100, 2);
                     state_timer_start = esp_timer_get_time(); // Reset timer to extend open time
                 } else {
-                    ESP_LOGW(TAG, "Invalid card scanned during DOOR_OPEN.");
-                    hal_io_buzzer_beep(1000, 300, 3);
+                    if (!config.is_online) {
+                        ESP_LOGW(TAG, "Invalid card scanned during DOOR_OPEN.");
+                        hal_io_buzzer_beep(1000, 300, 3);
+                    }
                 }
             }
         }
 
-    if (elapsed_ms >= (config.relay_time * 1000)) {
+    if (config.relay_time > 0 && elapsed_ms >= (config.relay_time * 1000)) {
       hal_io_relay_set(false);
       app_set_state(STATE_IDLE);
     }
@@ -1791,7 +1812,7 @@ void app_state_machine_tick(void) {
     } else {
       uint32_t rfid_uid = 0;
       bool rfid_ok = false;
-      if (active_hw_version != HW_VERSION_QR_ONLY) {
+      if (active_hw_version != HW_VERSION_PIN_QR) {
         rfid_ok = mfrc522_check_card(&rfid_uid);
       }
       bool weigand_ok = (config.working_mode == 2) && hal_wiegand_available();

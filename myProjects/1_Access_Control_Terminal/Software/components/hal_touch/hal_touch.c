@@ -10,8 +10,8 @@ static const char key_map_rfid[12] = {'#',  '6',  '3',  '*',  '2',  '9',  '4',  
 static uint16_t last_mask = 0;
 static char injected_key = '\0';
 
-void hal_touch_init(void) {
-    tsm12_init();
+bool hal_touch_init(void) {
+    return tsm12_init();
 }
 
 void hal_touch_inject(char key) {
@@ -42,7 +42,7 @@ bool hal_touch_read_key(char *key_out) {
             if (new_bits == 0) new_bits = mask; // Fallback: all bits already set (same keys held)
             for (int i = 0; i < 12; i++) {
                 if (new_bits & (1 << i)) {
-                    const char *key_map = (active_hw_version == HW_VERSION_RFID_ONLY)
+                    const char *key_map = (active_hw_version == HW_VERSION_PIN_RFID)
                                           ? key_map_rfid : key_map_qr;
                     if (key_out) *key_out = key_map[i];
                     last_mask = mask;

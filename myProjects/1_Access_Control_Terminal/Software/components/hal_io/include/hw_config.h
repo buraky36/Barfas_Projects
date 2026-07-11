@@ -4,8 +4,12 @@
 #include <stdint.h>
 
 // Hardware Versions
-#define HW_VERSION_QR_ONLY 1
-#define HW_VERSION_RFID_ONLY 2
+#define HW_VERSION_PIN_QR     1  // OE0110
+#define HW_VERSION_PIN_RFID   2  // OE0111
+#define HW_VERSION_RFID_ONLY  3  // OE0112
+
+extern char device_code_str[32];
+extern char ble_name_str[64];
 
 // The active hardware version is determined dynamically at boot
 extern uint8_t active_hw_version;

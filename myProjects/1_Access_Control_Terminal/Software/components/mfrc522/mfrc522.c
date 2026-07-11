@@ -155,21 +155,32 @@ bool mfrc522_init(void) {
   };
   // Strengthen GPIO0 (CS pin) against its internal pull-down
   gpio_set_drive_capability(PIN_NUM_CS, GPIO_DRIVE_CAP_3);
-  spi_bus_initialize(SPI2_HOST, &buscfg, SPI_DMA_CH_AUTO);
-  spi_bus_add_device(SPI2_HOST, &devcfg, &spi);
-  gpio_set_drive_capability(PIN_NUM_CS, GPIO_DRIVE_CAP_3); // re-apply after SPI driver init
+  static bool spi_installed = false;
+  if (!spi_installed) {
+      spi_bus_initialize(SPI2_HOST, &buscfg, SPI_DMA_CH_AUTO);
+      spi_bus_add_device(SPI2_HOST, &devcfg, &spi);
+      gpio_set_drive_capability(PIN_NUM_CS, GPIO_DRIVE_CAP_3); // re-apply after SPI driver init
+      spi_installed = true;
+  }
 
-  // MFRC522 Soft Reset
-  write_reg(CommandReg, PCD_RESETPHASE);
-  vTaskDelay(pdMS_TO_TICKS(50));
+  bool found_mfrc = false;
+  for (int retry = 0; retry < 5; retry++) {
+      // MFRC522 Soft Reset
+      write_reg(CommandReg, PCD_RESETPHASE);
+      vTaskDelay(pdMS_TO_TICKS(50));
 
-  // Communication Check: Read Version Register
-  uint8_t version = read_reg(VersionReg);
-  printf("[MFRC522] SPI Init. Version Register: 0x%02X\n", version);
-  
-  if (version == 0x00 || version == 0xFF) {
-      printf("[MFRC522] Hardware not found! Reverting to PIN+QR mode.\n");
-      // Optional: de-init SPI bus here if we want to free it, but it might be shared
+      // Communication Check: Read Version Register
+      uint8_t version = read_reg(VersionReg);
+      if (version != 0x00 && version != 0xFF) {
+          found_mfrc = true;
+          printf("[MFRC522] SPI Init. Version Register: 0x%02X\n", version);
+          break;
+      }
+      vTaskDelay(pdMS_TO_TICKS(50));
+  }
+
+  if (!found_mfrc) {
+      printf("[MFRC522] Hardware not found!\n");
       return false; 
   }
 

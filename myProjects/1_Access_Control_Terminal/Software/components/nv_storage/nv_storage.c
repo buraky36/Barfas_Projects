@@ -11,6 +11,10 @@ static const char *NAMESPACE_USERS = "users";
 
 static uint8_t user_active_map[1250]; // 1250 bytes * 8 bits = 10000 bits. Bit 1 represents UserID 1, etc.
 
+#define MAX_OFFLINE_LOGS 250
+static offline_log_t s_offline_logs[MAX_OFFLINE_LOGS];
+static uint8_t s_log_count = 0;
+
 static void nv_storage_save_active_map(void) {
     nvs_handle_t handle;
     if (nvs_open(NAMESPACE_CFG, NVS_READWRITE, &handle) == ESP_OK) {
@@ -60,6 +64,87 @@ void nv_storage_init(void) {
         }
         nv_storage_save_active_map();
         ESP_LOGI(TAG, "Active user map rebuilt successfully.");
+    }
+    
+    nv_storage_init_offline_logs();
+}
+
+void nv_storage_init_offline_logs(void) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_CFG, NVS_READONLY, &handle) == ESP_OK) {
+        size_t len = sizeof(s_offline_logs);
+        if (nvs_get_blob(handle, "off_logs", s_offline_logs, &len) == ESP_OK) {
+            s_log_count = len / sizeof(offline_log_t);
+            if (s_log_count > MAX_OFFLINE_LOGS) s_log_count = MAX_OFFLINE_LOGS;
+            ESP_LOGI(TAG, "Loaded %d offline logs from NVS", s_log_count);
+        } else {
+            s_log_count = 0;
+        }
+        nvs_close(handle);
+    }
+}
+
+static void nv_storage_save_offline_logs(void) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_CFG, NVS_READWRITE, &handle) == ESP_OK) {
+        if (s_log_count > 0) {
+            nvs_set_blob(handle, "off_logs", s_offline_logs, s_log_count * sizeof(offline_log_t));
+        } else {
+            nvs_erase_key(handle, "off_logs");
+        }
+        nvs_commit(handle);
+        nvs_close(handle);
+    }
+}
+
+void nv_storage_add_offline_log(offline_log_t log) {
+    if (s_log_count < MAX_OFFLINE_LOGS) {
+        s_offline_logs[s_log_count++] = log;
+    } else {
+        // Shift array to drop the oldest log if full
+        memmove(s_offline_logs, &s_offline_logs[1], (MAX_OFFLINE_LOGS - 1) * sizeof(offline_log_t));
+        s_offline_logs[MAX_OFFLINE_LOGS - 1] = log;
+    }
+    nv_storage_save_offline_logs();
+    ESP_LOGI(TAG, "Offline log added. Total: %d", s_log_count);
+}
+
+void nv_storage_get_offline_logs(offline_log_t *logs, uint8_t *count) {
+    *count = s_log_count;
+    if (s_log_count > 0 && logs != NULL) {
+        memcpy(logs, s_offline_logs, s_log_count * sizeof(offline_log_t));
+    }
+}
+
+void nv_storage_clear_offline_logs(uint8_t count) {
+    if (count == 0) return;
+    if (count >= s_log_count) {
+        s_log_count = 0;
+    } else {
+        uint8_t remaining = s_log_count - count;
+        memmove(s_offline_logs, &s_offline_logs[count], remaining * sizeof(offline_log_t));
+        s_log_count = remaining;
+    }
+    nv_storage_save_offline_logs();
+    ESP_LOGI(TAG, "Cleared %d offline logs. Remaining: %d", count, s_log_count);
+}
+
+uint8_t nv_storage_get_hw_version(void) {
+    nvs_handle_t handle;
+    uint8_t hw_version = 0;
+    if (nvs_open(NAMESPACE_CFG, NVS_READONLY, &handle) == ESP_OK) {
+        nvs_get_u8(handle, "hw_ver", &hw_version);
+        nvs_close(handle);
+    }
+    return hw_version;
+}
+
+void nv_storage_set_hw_version(uint8_t hw_version) {
+    nvs_handle_t handle;
+    if (nvs_open(NAMESPACE_CFG, NVS_READWRITE, &handle) == ESP_OK) {
+        nvs_set_u8(handle, "hw_ver", hw_version);
+        nvs_commit(handle);
+        nvs_close(handle);
     }
 }
 

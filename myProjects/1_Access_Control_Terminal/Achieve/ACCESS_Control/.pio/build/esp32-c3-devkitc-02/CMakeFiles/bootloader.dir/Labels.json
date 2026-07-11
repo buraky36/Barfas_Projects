@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/CMakeFiles/bootloader"
+		},
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/CMakeFiles/bootloader.rule"
+		},
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/CMakeFiles/bootloader-complete.rule"
+		},
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule"
+		},
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule"
+		},
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule"
+		},
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule"
+		},
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule"
+		},
+		{
+			"file" : "C:/Users/Seyithan/Desktop/BARFAS/mySoftwares/Smart_Access_Terminal/c_projects/Software/Smart_Access_Control_Terminal/ACCESS_Control/.pio/build/esp32-c3-devkitc-02/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"bootloader"
+		],
+		"name" : "bootloader"
+	}
+}
