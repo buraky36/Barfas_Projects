@@ -7,6 +7,7 @@ EC25 te 3G kapsamı da var fakat Türkiye de dahil Almanya da 3G bantlarını ta
 Maliyet açısında EC25 Cat 1 bis bir modüle göre 8-10 USD daha pahalı olacaktır.
 EC25 Main+Diversity olmak üzere 2 adet GSM antenine ihtiyac duyuyor. Bu da taximetre için büyük dezavantaj.
 Özetle EC25 in 150Mbps lik bant hızı taksimetrenin göndereceği 100Kb lık veri için gereksiz gözüküyor.
+Quectelden önerim EG912Y-EU modülüdür.
 EC25 ten devam mı edelim ? Yoksa Quectel de farklı bir modül mü seçelim ?
 
 2-  CAN Transceiver:
