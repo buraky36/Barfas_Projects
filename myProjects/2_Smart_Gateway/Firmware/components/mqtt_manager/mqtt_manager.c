@@ -18,6 +18,9 @@ static char s_pub_status_topic[128] = {0};
 static char s_pub_notify_topic[128] = {0};
 static char s_sub_cmd_topic[128] = {0};
 static char s_sub_ota_topic[128] = {0};
+static char s_sub_claim_topic[128] = {0};
+static char s_sub_unclaim_topic[128] = {0};
+static char s_sub_keyrot_topic[128] = {0};
 
 // Helper: Convert byte array to hex string
 static void bytes_to_hex(const uint8_t *src, size_t src_len, char *dst)
@@ -64,7 +67,10 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             // Subscribe to remote command topic
             esp_mqtt_client_subscribe(client, s_sub_cmd_topic, 1);
             esp_mqtt_client_subscribe(client, s_sub_ota_topic, 1);
-            ESP_LOGI(TAG, "Subscribed to topics '%s' and '%s'", s_sub_cmd_topic, s_sub_ota_topic);
+            esp_mqtt_client_subscribe(client, s_sub_claim_topic, 1);
+            esp_mqtt_client_subscribe(client, s_sub_unclaim_topic, 1);
+            esp_mqtt_client_subscribe(client, s_sub_keyrot_topic, 1);
+            ESP_LOGI(TAG, "Subscribed to all Gateway topics");
             
             // Publish online status
             char status_payload[128];
@@ -191,6 +197,10 @@ static void mqtt_publisher_task(void *pvParameters)
             cJSON_AddNumberToObject(root, "rssi", report.rssi);
             cJSON_AddStringToObject(root, "data", hex_data);
             cJSON_AddBoolToObject(root, "is_onloi", report.is_onloi_beacon);
+            if (report.is_onloi_beacon) {
+                cJSON_AddStringToObject(root, "deviceCode", report.device_code);
+                cJSON_AddBoolToObject(root, "claimed", report.claimed);
+            }
 
             char *json_str = cJSON_PrintUnformatted(root);
             if (json_str != NULL) {
@@ -214,6 +224,9 @@ esp_err_t mqtt_manager_init(const char *uri, uint16_t port, const char *device_i
     sprintf(s_pub_notify_topic, "/gateway/%s/notify", s_device_id);
     sprintf(s_sub_cmd_topic, "/gateway/%s/command", s_device_id);
     sprintf(s_sub_ota_topic, "/gateway/%s/ota", s_device_id);
+    sprintf(s_sub_claim_topic, "/gateway/%s/device_claim", s_device_id);
+    sprintf(s_sub_unclaim_topic, "/gateway/%s/device_unclaim", s_device_id);
+    sprintf(s_sub_keyrot_topic, "/gateway/%s/key_rotate", s_device_id);
 
     // Setup MQTT config
     esp_mqtt_client_config_t mqtt_cfg = {

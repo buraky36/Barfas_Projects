@@ -7,6 +7,7 @@
 #include "host/util/util.h"
 #include "services/gap/ble_svc_gap.h"
 #include "ble_manager.h"
+#include "ble_server.h"
 extern void mqtt_manager_publish_notification(const uint8_t *mac, const uint8_t *data, size_t data_len);
 
 static const char *TAG = "BLE_MGR";
@@ -151,14 +152,27 @@ static int ble_gap_event(struct ble_gap_event *event, void *arg)
             // Forward ALL discovered devices to MQTT for global lock support
             if (1) {
                 ble_scan_report_t report;
+                memset(&report, 0, sizeof(report));
                 memcpy(report.mac, event->disc.addr.val, BLE_MAC_LEN);
                 report.rssi = event->disc.rssi;
                 report.data_len = event->disc.length_data > BLE_MAX_DATA_LEN ? BLE_MAX_DATA_LEN : event->disc.length_data;
                 memcpy(report.data, event->disc.data, report.data_len);
-                report.is_onloi_beacon = true;
+                report.is_onloi_beacon = false;
 
-                ESP_LOGI(TAG, "[SCAN] Discovered Onloi Beacon: MAC=" MACSTR ", RSSI=%d, DataLen=%d", 
-                         MAC2STR(report.mac), report.rssi, report.data_len);
+                // Parse Manufacturer Data: 0x4F 0x4B (OK) + 6 byte deviceCode + 1 byte claimed
+                if (fields.mfg_data != NULL && fields.mfg_data_len >= 9) {
+                    if (fields.mfg_data[0] == 0x4F && fields.mfg_data[1] == 0x4B) {
+                        report.is_onloi_beacon = true;
+                        memcpy(report.device_code, &fields.mfg_data[2], 6);
+                        report.device_code[6] = '\0';
+                        report.claimed = (fields.mfg_data[8] == 0x01);
+                    }
+                }
+
+                ESP_LOGI(TAG, "[SCAN] Discovered Beacon: MAC=" MACSTR ", RSSI=%d, Onloi=%d, Code=%s, Claimed=%d", 
+                         MAC2STR(report.mac), report.rssi, report.is_onloi_beacon, 
+                         report.is_onloi_beacon ? report.device_code : "N/A", 
+                         report.claimed);
                 
                 // Send to MQTT Queue without blocking
                 if (ble_scan_queue != NULL) {
@@ -233,6 +247,9 @@ static void ble_on_sync(void)
     
     ESP_LOGI(TAG, "BLE Host synced. Starting default scan.");
     ble_app_scan();
+    
+    // Also start peripheral advertising for onboarding
+    ble_server_start_adv();
 }
 
 static void ble_on_reset(int reason)
@@ -329,6 +346,12 @@ esp_err_t ble_manager_init(void)
     if (rc != 0) {
         ESP_LOGE(TAG, "Failed to set device name; rc=%d", rc);
         return ESP_FAIL;
+    }
+
+    esp_err_t server_err = ble_server_init();
+    if (server_err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to initialize BLE GATT server");
+        return server_err;
     }
 
     return ESP_OK;

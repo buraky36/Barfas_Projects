@@ -17,6 +17,8 @@ typedef struct {
     uint8_t data[BLE_MAX_DATA_LEN];
     uint8_t data_len;
     bool is_onloi_beacon;
+    char device_code[7]; // e.g., "OKGWX1" + null terminator
+    bool claimed;
 } ble_scan_report_t;
 
 typedef struct {

@@ -13,7 +13,6 @@
 #include "wifi_manager.h"
 #include "ble_manager.h"
 #include "mqtt_manager.h"
-#include "web_server.h"
 
 // Define to 1 to use DevKit RGB LED, 0 to use Production Discrete LEDs
 #define CONFIG_USE_RGB_LED 1
@@ -262,21 +261,15 @@ void app_main(void)
             esp_restart();
         }
     } else {
-        // Device is not configured, boot in AP mode and start web server for setup
+        // Device is not configured, boot in BLE peripheral mode for onboarding
         s_sys_state = SYS_STATE_UNCONFIGURED;
-        ESP_LOGI(TAG, "Device is unconfigured. Starting provisioning Access Point...");
+        ESP_LOGI(TAG, "Device is unconfigured. Starting BLE Manager for Onboarding...");
         
-        // Generate AP SSID based on MAC address
-        uint8_t mac[6];
-        char ap_ssid[32];
-        esp_read_mac(mac, ESP_MAC_WIFI_SOFTAP);
-        snprintf(ap_ssid, sizeof(ap_ssid), "Smart_Gateway_%02X%02X", mac[4], mac[5]);
-        
-        err = wifi_manager_start_ap(ap_ssid);
+        err = ble_manager_init();
         if (err == ESP_OK) {
-            web_server_start();
+            ble_manager_start();
         } else {
-            ESP_LOGE(TAG, "Failed to start SoftAP.");
+            ESP_LOGE(TAG, "BLE Manager initialization failed.");
             s_sys_state = SYS_STATE_STA_FAILED;
         }
     }

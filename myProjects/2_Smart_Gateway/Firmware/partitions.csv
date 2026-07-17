@@ -1,5 +1,5 @@
 # Name,   Type, SubType, Offset,  Size, Flags
-nvs,      data, nvs,     ,        0x6000,
+nvs,      data, nvs,     ,        0x10000,
 phy_init, data, phy,     ,        0x1000,
 otadata,  data, ota,     ,        0x2000,
 ota_0,    app,  ota_0,   ,        3M,

@@ -1,0 +1,29 @@
+Smart Gateway Firmware Surum Notlari
+Tarih: 17.07.2026
+
+Versiyon: 1.3.0
+
+Bu guncelleme, guvenlik mimarisi (KEX) ve uctan uca sifreleme (E2EE) altyapisi basliklarinda kapsami genis olan degisiklikleri icermektedir. Yapilan detayli degisiklikler asagida listelenmistir:
+
+1. Kriptografi ve Guvenlik Altyapisi (crypto_manager)
+- Sisteme mbedtls kutuphanesi entegre edildi ve donanimsal kripto motoru aktif edildi.
+- AES-256-GCM (Kimlik Dogrulamali Sifreleme), HMAC-SHA256, Ed25519 ve X25519 (ECDH) sifreleme modulleri yazildi.
+- Kurulum sirasinda gecici oturum anahtari (Session Key) uretmek icin X25519 ve HKDF_SHA256 altyapisi kuruldu.
+
+2. Cift Modlu (Dual Mode) BLE Altyapisi
+- Cihaz ayni anda hem Central (Tarayici) hem de Peripheral (Yayin Yapan) olarak calisabilecek sekilde NimBLE yiginina guncellendi.
+- BLE Cihaz Ismi (GAP Name) 'OG610' olarak guncellendi.
+
+3. Onboarding (Ilk Kurulum) Katmani Eklentileri
+- Kurulum modunda 'OG610' ismi ve ozel Onloi UUID'si ile advertising yapisi kuruldu.
+- KEX_INIT (0x71) Paketi: Telefondan gelen gecici public key islenerek cihaz uzerinde ECDH ile Session Key uretme islemi eklendi.
+- KEX_DELIVER (0x72) Paketi: Gelen AES-GCM sifreli JSON Wi-Fi ve Claim verisinin (SSID, Password, Token) desifre edilmesi ve cJSON ile ayiklanmasi yapildi.
+- BLE Byte-Level iletisimi icin Ozel 'ble_frame_parser' modulu eklendi (SOF, VER, TYPE, CMD, CRC dogrulamalari).
+
+4. MQTT Komut Yolu ve Mimari Optimizasyonu (Transparent Bridge)
+- Gateway'in alt cihazlara gonderilen paketleri KEX surecine dahil etmeden dogrudan 'Seffaf Kopru (Transparent Bridge)' mantigiyla iletmesi kodlandi. (Bu sayede cihaz performansi artirildi ve RAM kullanimi optimize edildi).
+- Random/Gizli MAC adreslerine baglanti destegi eklendi.
+
+5. Diger Optimizasyonlar
+- API_Manager uzerinden Cihaz Claim islemi ve HTTP URL Decode islemleri hatasiz hale getirildi.
+- cJSON bilesen gereksinimleri CMake uzerinde duzeltildi ve tum kutuphaneler arasi bagimlilik sorunlari (linker errors) giderildi.

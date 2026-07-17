@@ -1,0 +1,2641 @@
+  Onloi BLE Gateway Protokolü v1.0 :root { --blue: #1e3a5f; --blue-light: #2d5282; --green: #16a34a; --orange: #d97706; --red: #dc2626; --gray: #6b7280; --border: #e5e7eb; --bg: #f9fafb; --code-bg:#1e293b; --code-fg:#e2e8f0; --radius: 6px; } \*, \*::before, \*::after { box-sizing: border-box; margin: 0; padding: 0; } html { font-size: 15px; } body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #111827; line-height: 1.6; background: #fff; max-width: 900px; margin: 0 auto; padding: 32px 24px 80px; } /\* Cover \*/ .cover { text-align: center; padding: 60px 0 48px; border-bottom: 2px solid var(--border); margin-bottom: 40px; } .cover h1 { font-size: 2rem; color: var(--blue); margin-bottom: 8px; } .cover .version { font-size: 1rem; color: var(--gray); } /\* ToC \*/ .toc { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 40px; } .toc h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gray); margin-bottom: 12px; } .toc ol { padding-left: 20px; } .toc li { margin: 4px 0; } .toc a { color: var(--blue-light); text-decoration: none; } .toc a:hover { text-decoration: underline; } /\* Sections \*/ section { margin-bottom: 48px; } h2 { font-size: 1.35rem; color: var(--blue); border-bottom: 2px solid var(--border); padding-bottom: 8px; margin-bottom: 20px; } h3.sub-h { font-size: 1.05rem; color: var(--blue-light); margin: 22px 0 10px; } /\* Intro / prose blocks (outside step cards) \*/ .intro { margin-bottom: 18px; } .intro p { margin: 10px 0; font-size: 0.95rem; color: #374151; } .intro ul, .intro ol.plain { margin: 8px 0 12px 22px; } .intro li { margin: 5px 0; font-size: 0.93rem; color: #374151; } .intro strong { color: #111827; } .ascii-diagram { background: #0f172a; color: #cbd5e1; font-family: 'Fira Code', 'Cascadia Code', 'Courier New', monospace; font-size: 0.78rem; line-height: 1.55; padding: 18px 20px; border-radius: var(--radius); overflow-x: auto; white-space: pre; margin: 12px 0; } /\* Step card \*/ .step { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 24px; overflow: hidden; } .step-header { display: flex; align-items: center; gap: 12px; background: var(--blue); color: #fff; padding: 10px 16px; } .step-num { background: rgba(255,255,255,.2); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; } .step-title { font-weight: 600; font-size: 1rem; flex: 1; } .badge { font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; flex-shrink: 0; white-space: nowrap; } .badge-ble { background: #7c3aed; color: #fff; } .badge-bleframe { background: #5b21b6; color: #fff; } .badge-https { background: #059669; color: #fff; } .badge-mqtt { background: #d97706; color: #fff; } .badge-mqttframe { background: #b45309; color: #fff; } .badge-firmware { background: #0e7490; color: #fff; } .step-desc { padding: 12px 16px 0; color: #374151; font-size: 0.95rem; } .step-body { padding: 12px 16px 16px; } /\* HTTP block \*/ .http-block { margin-top: 8px; } .http-req { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; } .http-method { font-size: 0.78rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; font-family: monospace; flex-shrink: 0; } .http-method.get { background: #d1fae5; color: #065f46; } .http-method.post { background: #dbeafe; color: #1e40af; } .http-method.put { background: #fef3c7; color: #92400e; } .http-method.delete { background: #fee2e2; color: #991b1b; } .http-url { font-family: monospace; font-size: 0.9rem; color: var(--blue-light); } .http-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--gray); margin: 10px 0 4px; } .http-status { color: var(--green); font-weight: 600; } /\* MQTT block \*/ .mqtt-block { margin-top: 8px; } .mqtt-topic-row { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; } .mqtt-dir { font-size: 0.78rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; font-family: monospace; flex-shrink: 0; } .mqtt-dir.pub { background: #fef3c7; color: #92400e; } .mqtt-dir.sub { background: #ede9fe; color: #5b21b6; } .mqtt-topic { font-family: monospace; font-size: 0.9rem; color: var(--blue-light); word-break: break-all; } /\* Code blocks \*/ pre.code { background: var(--code-bg); color: var(--code-fg); font-family: 'Fira Code', 'Cascadia Code', 'Courier New', monospace; font-size: 0.82rem; line-height: 1.55; padding: 14px 16px; border-radius: var(--radius); overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 4px 0 8px; } pre.code.json { color: #a5f3fc; } pre.code.hex { color: #fde68a; letter-spacing: .03em; } pre.code.c { color: #e2e8f0; white-space: pre; word-break: normal; } .code-desc { font-size: 0.88rem; color: #374151; margin: 8px 0 2px; } /\* Frame block \*/ .frame-block { margin-top: 8px; } .frame-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #f1f5f9; border-radius: var(--radius); padding: 8px 12px; margin-bottom: 8px; } .frame-direction { font-weight: 600; color: var(--blue); font-size: 0.9rem; } .frame-cmd { font-size: 0.88rem; color: #374151; } .frame-cmd code { background: #e0e7ff; color: #3730a3; padding: 1px 5px; border-radius: 3px; font-size: 0.83rem; } .frame-type { font-size: 0.83rem; color: var(--gray); } .frame-status { font-size: 0.83rem; font-weight: 600; color: var(--orange); } .hex-label { font-size: 0.78rem; font-weight: 600; color: var(--gray); margin: 6px 0 2px; text-transform: uppercase; letter-spacing: .04em; } .empty-payload { font-size: 0.87rem; color: var(--gray); font-style: italic; margin: 4px 0 8px; } /\* Payload table \*/ .payload-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 4px 0 8px; } .payload-table th { background: var(--blue); color: #fff; text-align: left; padding: 6px 10px; font-weight: 600; font-size: 0.78rem; } .payload-table td { padding: 5px 10px; border-bottom: 1px solid var(--border); vertical-align: top; } .payload-table tr:last-child td { border-bottom: none; } .payload-table tr:nth-child(even) td { background: var(--bg); } .payload-table code { background: #f1f5f9; color: #1e3a5f; padding: 1px 4px; border-radius: 3px; font-size: 0.82rem; } /\* Misc \*/ .arrow-label { font-size: 0.8rem; font-weight: 700; color: var(--blue-light); text-transform: uppercase; letter-spacing: .04em; margin: 14px 0 4px; padding-left: 2px; } .note { background: #fefce8; border-left: 3px solid #facc15; padding: 8px 12px; border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.86rem; color: #713f12; margin: 6px 0 2px; } .note.warn { background: #fef2f2; border-left-color: #dc2626; color: #7f1d1d; } .note.info { background: #eff6ff; border-left-color: #3b82f6; color: #1e3a8a; } .ble-info-block { padding: 4px 0; } .ble-info-block p { margin: 8px 0; font-size: 0.93rem; } /\* Annotated frame \*/ .annotated-frame { margin: 4px 0 10px; } .byte-row { display: flex; flex-wrap: wrap; align-items: center; gap: 2px; background: #0f172a; padding: 12px 14px; border-radius: 6px 6px 0 0; font-family: 'Fira Code', 'Cascadia Code', 'Courier New', monospace; } .byte-chip { display: inline-block; padding: 3px 5px; border-radius: 3px; font-size: 0.78rem; font-weight: 600; letter-spacing: .03em; cursor: default; line-height: 1.3; transition: transform .1s, box-shadow .1s; } .byte-chip:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,.5); z-index: 1; position: relative; } .byte-gap { display: inline-block; width: 8px; } .byte-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; background: #1e293b; padding: 7px 14px; border-bottom: 1px solid #334155; font-size: 0.75rem; color: #94a3b8; } .leg-item { display: flex; align-items: center; gap: 4px; } .leg-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; } /\* Decoded table (attached below chip row) \*/ .decoded-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; border: 1px solid var(--border); border-top: none; border-radius: 0 0 6px 6px; overflow: hidden; } .decoded-table th { background: #1e293b; color: #94a3b8; text-align: left; padding: 5px 10px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; } .decoded-table td { padding: 5px 10px; border-bottom: 1px solid var(--border); vertical-align: top; } .decoded-table tr:last-child td { border-bottom: none; } .decoded-table tr:nth-child(even) td { background: #f8fafc; } .decoded-table code { background: #f1f5f9; color: #1e3a5f; padding: 1px 5px; border-radius: 3px; font-size: 0.82rem; } /\* Print \*/ @media print { body { max-width: 100%; padding: 16px; font-size: 13px; } .step { break-inside: avoid; } pre.code { font-size: 0.75rem; } h2 { break-after: avoid; } .byte-row { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .byte-chip { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+
+Onloi BLE Gateway Protokolü
+===========================
+
+Developer Referans Dökümantasyonu  ·  v1.0  ·  16.07.2026
+
+### İçindekiler
+
+1.  [Genel Mimari ve Bileşenler](#sec-arch)
+2.  [BLE İletişim/Güvenlik Yöntemleri — Karşılaştırma ve Seçim Gerekçesi](#sec-security-compare)
+3.  [GW Kurulumu (Onboarding)](#sec-onboarding)
+4.  [Alt Cihaz Ekleme — GW Üzerinden](#sec-add-via-gw)
+5.  [Alt Cihaz Ekleme — Doğrudan App Üzerinden](#sec-add-direct)
+6.  [Komut Yönlendirme Mantığı (Command Routing)](#sec-routing)
+7.  [MQTT Topic'lerinin Genişletilmesi](#sec-mqtt-topics)
+8.  [Telemetri Akışı (Alt Cihaz → GW → Sunucu)](#sec-telemetry)
+9.  [Sunucu/App → Alt Cihaz Komut Akışı](#sec-cmd-flow)
+10.  [GW için OTA](#sec-ota)
+11.  [Güvenlik ve Kenar Durumlar](#sec-edge)
+12.  [Frame/Mesaj Formatı Referansı](#sec-frame-ref)
+13.  [Donanım Göstergeleri (LED)](#sec-led)
+14.  [Gömülü (Firmware) Taraf İçin Bağlantı ve Yetkilendirme Rehberi](#sec-firmware)
+
+1\. Genel Mimari ve Bileşenler
+------------------------------
+
+Sistem dört bileşenden oluşur. Her biri farklı bir bağlantı/erişim kısıtına sahiptir ve bu kısıtlar, aşağıda tanımlanan güvenlik modelinin temel gerekçesidir.
+
+*   **Sunucu (Server/Backend)** — Kimlik/yetkilendirme, cihaz–hesap eşleşmesi ve **local key** dağıtımının tek gerçek kaynağı (single source of truth). MQTT broker'ı barındırır/yönetir.
+*   **Gateway (GW)** — Wi-Fi ile internete çıkan, sunucuyla MQTT üzerinden haberleşen köprü cihaz. Etrafındaki BLE alt cihazlarını tarar, bağlanır, GATT read/write/notify yapar. Kendisi de ilk kurulumda mobil app ile BLE üzerinden eşleştirilir (WiFi provisioning).
+*   **Alt Cihazlar (Lock / Sensor / vb.)** — Sadece BLE ile çalışır, internete çıkamaz. GW üzerinden (relay) veya GW erişilemezse mobil app ile doğrudan BLE üzerinden yönetilir.
+*   **Mobil App** — Normal akışta Sunucu → MQTT → GW → BLE yolunu kullanır. GW çevrimdışıysa ve alt cihaz menzildeyse, kullanıcı fark etmeden doğrudan BLE'ye geçer (şeffaf fallback).
+
+Aşağıdaki şema, veri yollarını ve her bağlantının hangi bölümde detaylandırıldığını gösterir:
+
+┌────────────────────┐ │ SUNUCU │ │ (Auth · Device DB │ │ · local key store)│ └──────────┬─────────┘ MQTT (TLS) │ HTTPS (TLS) ┌───────────────────┼───────────────────┐ │ │ │ pub/sub topics REST (claim, key REST (login, (bkz. Bölüm 6) fetch, ota vb.) key fetch vb.) │ │ │ ┌────────▼────────┐ │ ┌───────▼────────┐ │ GATEWAY │◄─────────┘ │ MOBİL APP │ │ (WiFi + BLE) │ │ (BLE + HTTPS) │ └───┬─────────┬───┘ └───────┬────────┘ │ │ │ BLE (relay)│ │ BLE (ilk kurulum, │ local-key │ │ WiFi provisioning, │ ile şifreli│ │ app-layer session) │ │ └───────────────────────────────────┘ │ GW ↔ App (nadiren, örn. ayar değişimi) ▼ ┌───────────────────────┐ BLE doğrudan (GW erişilemezse) │ ALT CİHAZ(LAR) │◄────────────────────────────────────── │ Lock / Sensor / vb. │ local-key ile şifreli, app-layer │ (local key ile │ session — GW ile birebir aynı │ authenticate olur) │ protokol └───────────────────────┘
+
+Kırmızı çizgi yok — dikkat edilmesi gereken nokta: **alt cihaza giden BLE bağlantısı hem GW'den hem mobil app'ten gelebilir** ve cihaz firmware'i bu iki kaynağı BLE seviyesinde ayırt etmez; sadece uygulama katmanındaki local-key doğrulamasına bakar (bkz. Bölüm 13).
+
+1b. BLE İletişim/Güvenlik Yöntemleri — Karşılaştırma ve Seçim Gerekçesi
+-----------------------------------------------------------------------
+
+BLE'de iki taraf arasında veri alışverişini korumak için üç ana yaklaşım vardır. Aşağıda üçü de kısaca tanımlanır ve neden 3. yöntemin seçildiği gerekçelendirilir.
+
+### 1\. Native BLE Bonding / Pairing (SMP)
+
+OS'un kendi Security Manager Protocol'ü ile bir Long Term Key (LTK) üretilip OS keystore'unda saklanır. Sonraki bağlantılar bu LTK ile otomatik şifrelenir.
+
+*   **Artı:** Hazır, test edilmiş, ekstra kod gerektirmez.
+*   **Eksi:** LTK OS keystore'unda kilitlidir (app erişemez, başka cihaza taşınamaz/paylaşılamaz); iOS/Android arasında davranış farkı vardır; sistem seviyesi pairing dialogları kullanıcı deneyimini bozar; bir cihazın aynı anda birden fazla "trusted" merkeze (GW + N telefon) bağlanması multi-bond slot yönetimi gerektirir ve bazı çip/stack'lerde sınırlıdır.
+
+### 2\. Şifresiz Düz BLE Bağlantısı (Plaintext GATT)
+
+Pairing yok, şifreleme yok — tüm veri açık metin olarak GATT üzerinden akar.
+
+*   **Artı:** En basit, hiç kriptografi gerektirmez.
+*   **Eksi:** Menzildeki herhangi biri trafiği dinleyebilir ya da sahte komut enjekte edebilir — üretim ortamı için kabul edilemez.
+
+### 3\. Uygulama Katmanı (Application-Layer) Şifreleme — "Local Key" Modeli (seçilen yöntem)
+
+Native BLE pairing/bonding hiç kullanılmaz. Bunun yerine cihaz ile client (GW veya telefon) arasında bir **local key** üretilip (ECDH ile) anlaşılır; tüm veri, düz (unbonded) bir GATT bağlantısı üzerinden AES ile uygulama katmanında şifrelenmiş biçimde taşınır. BLE'nin kendisi sadece bir taşıma kanalıdır.
+
+### Neden 3. yöntemi seçtik?
+
+*   Aynı cihaza birden fazla yetkili taraf (GW + telefon(lar)) aynı anda erişebilmeli; key'in merkezi olarak sunucuda saklanıp dağıtılabilmesi gerekiyor — native bonding'de LTK'ya bu şekilde merkezi/paylaşılabilir erişim mümkün değil.
+*   GW üzerinden eklenen bir cihaza, telefonun **hiç fiziksel temas etmeden** (sunucudan key alarak) erişebilmesi gerekiyor — bu sadece app-layer modelle mümkün; native bonding'de LTK'yı GW'den telefona "devretmek" teknik olarak yapılamaz.
+*   iOS (CoreBluetooth) ve Android (BluetoothGatt) arasında native bonding API'leri farklı UX ve kısıtlamalara sahiptir; kendi protokolümüz iki platformda bire bir aynı davranışı garanti eder.
+*   Key rotasyonu, çoklu kullanıcı paylaşımı (device sharing), uzaktan yetki iptali gibi ihtiyaçlar native BLE'nin sağladığı esneklikten fazlasını gerektiriyor; kendi şifreleme protokolümüz bunu doğal olarak destekler.
+
+Yöntem
+
+Key nerede saklanır
+
+Çoklu-terminal desteği
+
+Platform tutarlılığı
+
+Kod yükü
+
+Native Bonding (SMP)
+
+OS keystore (cihaz başına kilitli)
+
+Sınırlı / stack bağımlı
+
+Düşük (iOS/Android farklı)
+
+Yok (OS sağlar)
+
+Plaintext GATT
+
+—
+
+Sınırsız (ama güvensiz)
+
+Yüksek
+
+Yok
+
+**App-layer / Local Key**
+
+Sunucu (merkezi) + cihaz + yetkili client'lar
+
+**Sınırsız, merkezi yönetilir**
+
+**Yüksek (bizim kodumuz)**
+
+Orta (ECDH + AES katmanı)
+
+Not: GW ile alt cihazların ayrı BLE peripheral'ları olması nedeniyle, GW için native bonding tercih edilseydi bile bu, app'in alt cihazlarla doğrudan BLE ilişkisini teknik olarak etkilemezdi (bond tabloları peripheral bazında bağımsızdır). Ancak proje genelinde **tek kod tabanı, tek güvenlik modeli** tutarlılığı için ECDH tabanlı app-layer model, sistemin her katmanında (GW kurulumu dahil) kullanılır.
+
+2\. GW Kurulumu (Onboarding)
+----------------------------
+
+GW'nin ilk kurulumu, sistemdeki **tek** güvenlik modeli olan app-layer/local-key yaklaşımıyla yapılır — native BLE bonding hiç kullanılmaz. GW henüz Wi-Fi'ye bağlı olmadığından sunucudan bir local key çekemez; bu yüzden mobil app ile GW arasında geçici bir oturum anahtarı, o anki BLE bağlantısı üzerinden **ephemeral ECDH** ile türetilir.
+
+1BLE Tarama — GW'yi BulBLE
+
+Kullanıcı "Gateway Ekle"ye basar. Mobil, GW'nin advertising verisini arar.
+
+GW, kurulum modundayken (henüz claim edilmemiş) kendine özel bir Service UUID ile advertise eder:
+
+// iOS
+centralManager.scanForPeripherals(withServices: \[CBUUID(string: "6E400101-B5A3-F393-E0A9-E50E24DCCA9E")\])
+
+// Android
+scanner.startScan(listOf(ScanFilter.Builder()
+    .setServiceUuid(ParcelUuid.fromString("6E400101-B5A3-F393-E0A9-E50E24DCCA9E"))
+    .build()), settings, callback)
+
+Advertising payload'ındaki manufacturer data içinde GW'nin `deviceCode`'u (model kodu, örn. `OKGWX1`) açık (şifresiz) biçimde ve 1 byte'lık `claimed` flag'i bulunur (bkz. Bölüm 11.7 / Bölüm 13). `deviceCode` bir modele ait olduğu için (tek bir cihaza özel değildir) açıkta taşınması bir gizlilik sorunu oluşturmaz; mobil, bağlanmadan **önce** bu koddan GW'nin adını/görselini gösterebilir. GW için bu flag 0x00 (unclaimed) olduğu sürece listede görünür.
+
+2BLE Bağlantı — GATT KeşfiBLE
+
+Kullanıcı listeden GW'yi seçer. BLE bağlantısı kurulur — pairing/bonding YOK.
+
+1\. connect(peripheralId)
+2. discoverService("6E400101-B5A3-F393-E0A9-E50E24DCCA9E")
+3. RX: "6E400102-..." → Mobil YAZAR
+4. TX: "6E400103-..." → Mobil OKUR (notify aç)
+5. TX karakteristiğine SUBSCRIBE
+
+Bağlantı düz (unbonded) bir GATT bağlantısıdır. Bir sonraki adımda uygulama katmanı (Onloi binary frame + ECDH) başlar.
+
+3KEX\_INIT — Ephemeral ECDH Anahtar DeğişimiBLE Frame
+
+GW henüz claim edilmemiş, dolayısıyla kalıcı bir local key'i yok. Mobil ve GW, bu bağlantıya özel geçici bir oturum anahtarı türetmek için X25519 ECDH yapar. Bu anahtar sadece Wi-Fi kimlik bilgilerini şifrelemek için kullanılır.
+
+Mobil → GW (RX)
+
+Mobil → GWCMD: KEX\_INIT `0x71`MSG\_TYPE: REQUEST (0x01)
+
+Offset
+
+Alan
+
+Tip
+
+Boyut
+
+Açıklama
+
+`0`
+
+`ephemeralPubKey`
+
+bytes
+
+32
+
+Mobil'in bu bağlantıya özel X25519 public key'i
+
+`32`
+
+`role`
+
+uint8
+
+1
+
+`0x02` = Mobil App (`0x01` = GW kullanır — bkz. Bölüm 3)
+
+Frame parse
+
+4F020171000A002100000001954CD99EA9E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E10232EA
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x01`
+
+REQUEST
+
+`CMD`
+
+`0x71`
+
+KEX\_INIT
+
+`SEQ`
+
+`10`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`33`
+
+33 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`33 byte`
+
+Payload tablosuna bak
+
+`CRC16`
+
+`0x32 EA`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+GW → Mobil (TX)
+
+GW → MobilCMD: KEX\_INIT `0x71`MSG\_TYPE: RESPONSE (0x02)
+
+Offset
+
+Alan
+
+Tip
+
+Boyut
+
+Örnek
+
+Açıklama
+
+`0`
+
+`ephemeralPubKey`
+
+bytes
+
+32
+
+ 
+
+GW'nin bu bağlantıya özel X25519 public key'i
+
+`32`
+
+`deviceId`
+
+ASCII
+
+16
+
+`99120583417`
+
+GW'nin benzersiz kimliği, null ile doldurulmuş
+
+`48`
+
+`deviceCode`
+
+ASCII
+
+8
+
+`OKGWX1`
+
+GW model kodu
+
+Frame parse
+
+4F020271000A003800000001954CD99EA9B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7B7393931323035383334313700000000004F4B4757583100001128
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x02`
+
+RESPONSE
+
+`CMD`
+
+`0x71`
+
+KEX\_INIT
+
+`SEQ`
+
+`10`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`56`
+
+56 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`56 byte`
+
+Payload tablosuna bak
+
+`CRC16`
+
+`0x11 28`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+İki taraf da artık `sessionKey = HKDF-SHA256(X25519(myPriv, peerPub), salt=deviceId)` hesaplar. Bu anahtar sadece bu BLE bağlantısı için geçerlidir ve WiFi kimlik bilgilerini şifrelemek dışında kullanılmaz.
+
+MITM azaltma (opsiyonel, önerilir): GW kutusu/ekranında basılı bir PIN veya QR kod kullanılarak, kullanıcının mobil'e bu PIN'i girmesi/QR'ı taratması istenebilir. PIN, hesaplanan `sessionKey`'in bir kısmının (örn. SHA-256 ilk 6 hanesi) numeric comparison ile doğrulanmasında kullanılır. Bu, ECDH'nin aktif MITM saldırılarına karşı zayıf noktasını (pasif dinlemeye karşı zaten güvenli) kapatır.
+
+4GET\_SSIDS / CONNECT\_WIFI — Şifreli Wi-Fi KurulumuBLE Frame
+
+Mobil, GW'nin gördüğü Wi-Fi ağlarını ister; kullanıcı birini seçer ve şifreyi girer. Artık PAYLOAD alanı düz metin değil, `sessionKey` ile AES-GCM şifrelidir.
+
+Mobil → GW (RX) — CMD: GET\_SSIDS 0x03
+
+Payload: boş (0 byte) — bu istek şifreleme gerektirmez, sadece SEQ ile taze tutulur.
+
+GW → Mobil (TX) — CMD: GET\_SSIDS 0x03, RESPONSE
+
+Alan
+
+Tip
+
+Açıklama
+
+`nonce`
+
+bytes\[12\]
+
+AES-GCM nonce (SEQ tabanlı, bkz. Bölüm 11)
+
+`ciphertext`
+
+bytes
+
+`AES-GCM(sessionKey, nonce, plaintext=[count, {mac,rssi,band,ssidLen,ssid}...])`
+
+`authTag`
+
+bytes\[16\]
+
+GCM doğrulama etiketi
+
+Mobil → GW (RX) — CMD: CONNECT\_WIFI 0x04
+
+Alan
+
+Tip
+
+Açıklama
+
+`nonce`
+
+bytes\[12\]
+
+AES-GCM nonce
+
+`ciphertext`
+
+bytes
+
+`AES-GCM(sessionKey, nonce, plaintext=[ssidLen, ssid, macAddress, passLen, password])` — düz metin alan yapısı orijinal Onloi CONNECT\_WIFI ile birebir aynı, sadece taşıma şifreli
+
+`authTag`
+
+bytes\[16\]
+
+GCM doğrulama etiketi
+
+Alan yapıları (ssidLen/ssid/macAddress/passLen/password) Bölüm 11'deki genel frame referansı ile aynıdır — tek fark, PAYLOAD'ın artık ham değil, şifreli olmasıdır. Bu tasarım kararı, Bölüm 5'te vurgulanan "aynı komut formatı, farklı taşıma güvenliği" ilkesinin GW onboarding'deki karşılığıdır.
+
+Başarı sonrası (`result=0x00`) GW BLE bağlantısını kapatabilir ve Wi-Fi'ye bağlanmayı dener. `sessionKey` bu bağlantıyla birlikte atılır (kalıcı değildir).
+
+5HTTPS Claim — GW'yi Hesaba BağlaHTTPS
+
+GW, Wi-Fi'ye bağlandıktan sonra doğrudan (BLE olmadan) sunucuya bağlanır ve kendisini hesaba kaydeder. Bu isteği GW firmware'i atar; deviceId+deviceCode'u kullanıcı hesabına eşleyen bilgi (örn. kutudaki QR/seri no ile mobil'in önceden sunucuya bildirdiği "beklenen deviceId") sunucu tarafında zaten mevcuttur.
+
+POST https://api.onloi.com/v1/gateways/claim
+
+Request Body
+
+{
+  "deviceId": "99120583417",
+  "deviceCode": "OKGWX1",
+  "firmwareVersion": "1.0.0"
+}
+
+Response 200 OK
+
+{
+  "mqtt": {
+    "host": "mqtt.api.onloi.com",
+    "port": 8883,
+    "clientId": "gw-99120583417",
+    "username": "gw-99120583417",
+    "password": "<kısa ömürlü MQTT şifresi>",
+    "topicPrefix": "/gateway/99120583417"
+  },
+  "gatewayAuthToken": "<GW'nin sonraki REST isteklerinde kullanacağı kalıcı token>"
+}
+
+Bu istek TLS ile korunur; ekstra bir app-layer şifrelemeye gerek yoktur (GW ↔ Sunucu arasında zaten TLS var, ECDH modeli sadece BLE bağlantıları için gereklidir).
+
+6GW Local Key Üretimi ve SenkronizasyonuHTTPS
+
+GW artık online. Kendisi için kalıcı bir local key üretir (tıpkı alt cihazlarda olduğu gibi) ve sunucuya senkronize eder. Bundan sonra GW ↔ App arasındaki (nadiren gereken) doğrudan BLE işlemleri bu kalıcı key ile şifrelenir; tekrar ECDH yapmaya gerek kalmaz.
+
+POST https://api.onloi.com/v1/gateways/99120583417/local-key
+
+Request Body (Authorization: Bearer <gatewayAuthToken>)
+
+{
+  "localKey": "<32 byte AES-256 key, base64>",
+  "keyVersion": 1
+}
+
+Response 204 No Content
+
+Sunucu bu key'i `gateways` tablosunda `deviceId` ile ilişkilendirerek saklar. Mobil app, kullanıcı bu GW'ye erişim yetkisine sahip olduğunda bu key'i sunucudan çekebilir (bkz. Bölüm 6, `/gateway/{device_id}/settings` benzeri korumalı bir endpoint).
+
+7MQTT Bağlantısı — GW ÇevrimiçiMQTT
+
+GW, aldığı kimlik bilgileriyle MQTT broker'a bağlanır ve LWT (Last Will and Testament) kaydını yapar.
+
+PUBLISH/gateway/99120583417/status
+
+{ "status": "online", "version": "1.0.0", "localKeyVersion": 1 }
+
+Bundan sonra app ile GW arasındaki rutin haberleşme Sunucu → MQTT üzerinden yapılır, doğrudan BLE değil. LED durumu 🟡 Sarı → 🟢 Yeşil'e döner (bkz. Bölüm 12).
+
+3\. Alt Cihaz Ekleme — GW Üzerinden
+-----------------------------------
+
+GW her zaman etrafını tarar ve gördüğü BLE cihazlarını `scan_report` ile sunucuya bildirir (temel tarama davranışı, aşağıda genişletilmiş haliyle). Kullanıcı bu listeden bir cihaz seçtiğinde GW, o cihaza bağlanıp local key exchange'i yapar.
+
+1GW Taraması — scan\_reportMQTT
+
+GW, BLE advertising paketlerini dinler ve gördüğü her cihazı anlık olarak sunucuya raporlar. Alt cihazın manufacturer data'sı, GW'ninkiyle **aynı formatta** açık (şifresiz) bir `deviceCode` taşır (bkz. Bölüm 11.7) — bu sayede GW, cihaza hiç bağlanmadan (KEX\_INIT yapmadan) sadece pasif dinlemeyle onun model kodunu okuyup raporlayabilir.
+
+PUBLISH/gateway/99120583417/scan\_report
+
+{
+  "mac": "11:22:33:44:55:66",
+  "rssi": -58,
+  "data": "0201061BFF4F4B4F4B3033313000...",
+  "deviceCode": "OK0310",
+  "is\_onloi": true,
+  "claimed": false
+}
+
+Yeni alan: `deviceCode` — GW, `data` içindeki ham manufacturer data'yı kendisi parse ederek (Bölüm 11.7'deki sabit offsetlerden) çıkarır ve ayrı bir alan olarak ekler; sunucunun/mobilin ham hex'i tekrar parse etmesine gerek kalmaz. Mobil app, `deviceCode`'u kendi katalogunda (model → isim/görsel eşlemesi) arayarak taranan listede **bağlanmadan önce** cihazın adını ve görselini gösterebilir — talep edilen davranış budur. `is_onloi`: manufacturer data'daki Onloi imzasından anlaşılır. `claimed`: aynı manufacturer data içindeki 1 byte'lık "bound" flag'inden okunur (bkz. Bölüm 10, Bölüm 13). Sunucu, `claimed:true` olan ve başka bir hesaba ait cihazları mobil'e **listelemez** — bu filtre hem SDK/app seviyesinde hem sunucu seviyesinde uygulanır (defence in depth).
+
+2Kullanıcı Cihaz Seçer → Claim İsteğiMQTT
+
+Kullanıcı, sunucudan gelen (scan\_report'tan türetilmiş) listeden bir cihaz seçer. Mobil, sunucuya "bu cihazı bu GW üzerinden claim et" isteği gönderir; sunucu bunu GW'ye MQTT ile iletir.
+
+POST https://api.onloi.com/v1/devices/claim-via-gateway
+
+Request Body
+
+{ "gatewayId": "99120583417", "mac": "11:22:33:44:55:66", "addrType": 0 }
+
+SUBSCRIBE (GW)/gateway/99120583417/device\_claim
+
+{
+  "requestId": "clm\_8f21a0",
+  "mac": "11:22:33:44:55:66",
+  "addr\_type": 0,
+  "service\_uuid": "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"
+}
+
+Yeni topic: `/gateway/{device_id}/device_claim` — GW'ye "şu MAC'i claim et" komutu verir. GW bu isteği aldığında Adım 3-5'i uygular.
+
+3GW → Alt Cihaz BLE BağlantısıBLE
+
+GW, hedef MAC'e BLE ile bağlanır ve Onloi GATT servisini keşfeder (bkz. Onloi Smart Lock Protocol Adım 1-2, birebir aynı).
+
+GW için bu, mobil'in yaptığı taramayla aynı GATT keşif adımlarıdır — sadece taramayı/bağlantıyı ESP-IDF/NimBLE (veya benzeri) BLE central stack'i üzerinden GW firmware'i yapar.
+
+4KEX\_INIT — GW ↔ Alt Cihaz ECDHBLE Frame
+
+Alt cihaz henüz unclaimed olduğu için GW, Bölüm 2 Adım 3'teki ile **birebir aynı** KEX\_INIT (`0x71`) frame'ini kullanır — tek fark `role` alanının `0x01` (GW) olmasıdır.
+
+Yön
+
+CMD
+
+role
+
+Not
+
+GW → Alt Cihaz
+
+`KEX_INIT 0x71` REQUEST
+
+`0x01`
+
+GW'nin ephemeral X25519 pubkey'i
+
+Alt Cihaz → GW
+
+`KEX_INIT 0x71` RESPONSE
+
+—
+
+Cihazın ephemeral pubkey'i + deviceId + deviceCode
+
+Byte-seviyesi kırılım Bölüm 2 Adım 3 ve Bölüm 11'deki referans ile birebir aynı yapıdadır.
+
+5KEY\_DELIVER — Local Key TeslimiBLE Frame
+
+GW, güvenli rastgele sayı üreticisiyle 256-bit'lik bir `localKey` üretir, KEX\_INIT'ten türetilen geçici oturum anahtarıyla şifreleyip cihaza yollar.
+
+GW → Alt Cihaz (RX)
+
+GW → Alt CihazCMD: KEY\_DELIVER `0x72`MSG\_TYPE: REQUEST (0x01)
+
+Offset
+
+Alan
+
+Tip
+
+Boyut
+
+Açıklama
+
+`0`
+
+`purpose`
+
+uint8
+
+1
+
+`0x01` = CLAIM (yeni key), `0x02` = ROTATE (bkz. Bölüm 10)
+
+`1`
+
+`nonce`
+
+bytes
+
+12
+
+AES-GCM nonce
+
+`13`
+
+`ciphertext`
+
+bytes
+
+32
+
+`AES-GCM(claimSessionKey, nonce, localKey)`
+
+`45`
+
+`authTag`
+
+bytes
+
+16
+
+GCM doğrulama etiketi
+
+Frame parse
+
+4F020172000B003D00000001954CD99EA9019C9C9C9C9C9C9C9C9C9C9C9CD4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D42F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2B22
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x01`
+
+REQUEST
+
+`CMD`
+
+`0x72`
+
+KEY\_DELIVER
+
+`SEQ`
+
+`11`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`61`
+
+61 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`61 byte`
+
+Payload tablosuna bak
+
+`CRC16`
+
+`0x2B 22`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+Alt Cihaz → GW (TX)
+
+Alt Cihaz → GWCMD: KEY\_DELIVER `0x72`MSG\_TYPE: RESPONSE (0x02)
+
+Frame parse
+
+4F020272000B000100000001954CD99EA90046F6
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x02`
+
+RESPONSE
+
+`CMD`
+
+`0x72`
+
+KEY\_DELIVER
+
+`SEQ`
+
+`11`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`1`
+
+1 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`1 byte`
+
+0x00 = local key başarıyla kaydedildi, device artık claimed
+
+`CRC16`
+
+`0x46 F6`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+Cihaz bu noktadan sonra `claimed=1` flag'iyle advertise etmeye başlar (bkz. Bölüm 10, Bölüm 13).
+
+6GW → Sunucu: Key Senkronizasyonu ve Claim OnayıMQTT
+
+GW, ürettiği local key'i ve cihaz kimliğini sunucuya bildirir. Sunucu bunu kalıcı olarak saklar ve hesaba bağlar.
+
+PUBLISH/gateway/99120583417/device\_claim/ack
+
+{
+  "requestId": "clm\_8f21a0",
+  "mac": "11:22:33:44:55:66",
+  "deviceId": "40119203871",
+  "deviceCode": "OK0310",
+  "localKey": "<32 byte AES-256 key, base64>",
+  "keyVersion": 1,
+  "result": "ok"
+}
+
+Yeni topic: `/gateway/{device_id}/device_claim/ack` — sunucu bu mesajı alınca `deviceId`'yi kullanıcı hesabına bağlar, `localKey`'i saklar ve mobil'e "cihaz eklendi" bildirimini gönderir. Bu andan itibaren mobil app da sunucudan bu key'i çekebilir (Bölüm 4).
+
+4\. Alt Cihaz Ekleme — Doğrudan App Üzerinden (GW'den Bağımsız)
+---------------------------------------------------------------
+
+Kullanıcı henüz bir GW'ye sahip değilse veya cihazı GW menzili dışında eklemek istiyorsa, mobil app KEX\_INIT/KEY\_DELIVER adımlarını **doğrudan kendisi** BLE ile yürütür — GW akışıyla birebir aynı frame'ler, sadece taraflardan biri (GW yerine) mobil'dir.
+
+1Mobil BLE Taraması ve KEX\_INIT/KEY\_DELIVERBLE Frame
+
+Onloi Smart Lock Protocol Adım 1-2'deki tarama/bağlantı akışı uygulanır; ardından Bölüm 3 Adım 4-5'teki **aynı** KEX\_INIT (`role=0x02`) ve KEY\_DELIVER frame'leri, GW yerine mobil tarafından yürütülür.
+
+Fark sadece şu: `localKey`'i artık mobil app üretir (güvenli RNG ile) ve cihaza `KEY_DELIVER` ile teslim eder.
+
+İki yol (GW üzerinden / doğrudan app) da **aynı CMD kataloğunu** kullanır. Bu, cihaz firmware'inin kimden bağlandığını (GW mi telefon mu) hiç bilmesine gerek olmadığını gösterir — yalnızca doğru local key ile mi konuşulduğu önemlidir (bkz. Bölüm 13).
+
+2Mobil → Sunucu: Key SenkronizasyonuHTTPS
+
+Mobil, ürettiği local key'i sunucuya yükler.
+
+POST https://api.onloi.com/v1/devices/claim-direct
+
+Request Body
+
+{
+  "deviceId": "40119203871",
+  "deviceCode": "OK0310",
+  "localKey": "<32 byte AES-256 key, base64>",
+  "keyVersion": 1
+}
+
+Response 200 OK
+
+{ "result": "ok" }
+
+3GW Menüsünden Cihazın TanınmasıMQTT
+
+Kullanıcı daha sonra GW'yi de edinirse (veya cihaz zaten bir GW menzilindeyse), GW bu cihazı taramasında görür (`scan_report`, `is_onloi:true, claimed:true`). GW bu cihaza komut göndermek istediğinde, kendi local key'ine sahip olmadığı için önce sunucudan çeker.
+
+GET https://api.onloi.com/v1/gateways/99120583417/devices/40119203871/local-key
+
+Response 200 OK
+
+{ "localKey": "<32 byte AES-256 key, base64>", "keyVersion": 1 }
+
+Sunucu bu isteği, GW'nin kullanıcı hesabına ait olduğunu ve kullanıcının bu cihaza erişim yetkisi olduğunu doğruladıktan sonra yanıtlar. Böylece GW, cihaza **hiç fiziksel temas etmeden** (SESSION\_INIT ile, bkz. Bölüm 5/11) bağlanabilir hale gelir.
+
+5\. Komut Yönlendirme Mantığı (Command Routing)
+-----------------------------------------------
+
+App bir komut göndermeden önce, hedef alt cihaza ulaşmak için **iki olası yol** vardır. App bunlardan hangisini kullanacağına GW'nin çevrimiçi/çevrimdışı durumuna bakarak karar verir — kullanıcı bu kararın farkına varmaz.
+
+Komut gönderilecek │ ▼ GW son bilinen durumu ONLINE mi? ──── (MQTT LWT + heartbeat, aşağıya bak) │ │ EVET HAYIR │ │ ▼ ▼ Sunucu → MQTT → GW → BLE Mobil doğrudan BLE ile (Bölüm 8, Yol A) alt cihaza bağlanır (Bölüm 8, Yol B) │ │ └────────┬──────────────┘ ▼ Alt cihaza SESSION\_INIT (0x70) ile authenticate ol │ ▼ AYNI CMD kataloğu ile komut gönder (örn. REMOTE\_OPEN 0x40) — sadece taşıma değişti
+
+**Önemli ilke:** Bu iki yol, alt cihaza ulaşırken kullandığı taşıma katmanı (MQTT+BLE-relay vs. doğrudan BLE) dışında **birebir aynı frame formatını** kullanır. GW için de mobil için de hedef cihazla konuşma protokolü SESSION\_INIT → (yetkilendirilmiş) CMD akışıdır; cihaz firmware'i zaten kimin bağlandığını ayırt etmez (bkz. Bölüm 13).
+
+1GW Online/Offline TespitiMQTT
+
+App, GW'nin durumunu iki mekanizmanın birleşimiyle takip eder: MQTT LWT (broker taraflı, anlık) ve uygulama seviyesi heartbeat (sunucu taraflı, ek doğrulama).
+
+SUBSCRIBE/gateway/99120583417/status
+
+{ "status": "online", "version": "1.0.0", "localKeyVersion": 1 }
+
+GW bağlantısı beklenmedik şekilde koparsa (soket TCP RST/timeout), broker LWT mekanizmasıyla otomatik olarak `{"status":"offline"}` basar. Bu, GW'nin kendi isteğiyle kapanması ile ağ kopması arasındaki farkı sunucuya bildirmenin standart yoludur.
+
+Sinyal
+
+Periyot
+
+Amaç
+
+MQTT Keep-Alive (PINGREQ/PINGRESP)
+
+30 sn (broker seviyesi)
+
+TCP bağlantısının canlılığı — LWT bunun üzerine kuruludur
+
+Uygulama heartbeat (`status` topic'inde periyodik `online` publish)
+
+60 sn
+
+GW'nin sadece bağlı değil, aynı zamanda çalışır durumda olduğunu teyit eder
+
+Sunucu "son görülme" penceresi
+
+90 sn (heartbeat×1.5)
+
+Bu süre içinde ne LWT offline ne yeni heartbeat gelmezse sunucu GW'yi "muhtemelen offline" işaretler
+
+Sunucu, GW için tuttuğu durumu (`online`/`offline`/`unknown`) mobil'in komut gönderme isteğine verdiği yanıtta (veya bir push bildirimiyle) mobil'e bildirir; yönlendirme kararını nihayetinde mobil app verir.
+
+2SESSION\_INIT — Her Yeni Bağlantıda Yeniden DoğrulamaBLE Frame
+
+Native bonding olmadığı için her yeni GATT bağlantısı "soğuk"tur — cihaz karşı tarafı tanımaz. Bağlanan taraf (GW veya mobil), zaten sahip olduğu `localKey`'i kullanarak bu bağlantıyı SESSION\_INIT ile "ısıtır". Bu adım hem GW-relay hem direct-BLE yolunda birebir aynıdır.
+
+Bağlanan taraf (GW veya Mobil) → Alt Cihaz (RX)
+
+GW/Mobil → Alt CihazCMD: SESSION\_INIT `0x70`MSG\_TYPE: REQUEST (0x01)
+
+Offset
+
+Alan
+
+Tip
+
+Boyut
+
+Açıklama
+
+`0`
+
+`ephemeralPubKey`
+
+bytes
+
+32
+
+Bu bağlantıya özel X25519 public key (forward secrecy için)
+
+`32`
+
+`connNonce`
+
+bytes
+
+8
+
+Taze, rastgele nonce
+
+`40`
+
+`proof`
+
+bytes
+
+16
+
+`HMAC-SHA256(localKey, ephemeralPubKey‖connNonce‖deviceId)[0:16]` — localKey'in ifşa edilmeden ispatı
+
+Frame parse
+
+4F020170002A003800000001954CD99EA96A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A6A11223344556677889F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F4340
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x01`
+
+REQUEST
+
+`CMD`
+
+`0x70`
+
+SESSION\_INIT
+
+`SEQ`
+
+`42`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`56`
+
+56 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`56 byte`
+
+Payload tablosuna bak
+
+`CRC16`
+
+`0x43 40`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+Alt Cihaz → GW/Mobil (TX) — Başarılı
+
+Alt Cihaz → GW/MobilCMD: SESSION\_INIT `0x70`MSG\_TYPE: RESPONSE (0x02)STATUS: OK (0x00)
+
+Offset
+
+Alan
+
+Tip
+
+Boyut
+
+Açıklama
+
+`0`
+
+`ephemeralPubKey`
+
+bytes
+
+32
+
+Cihazın bu bağlantıya özel X25519 public key'i
+
+`32`
+
+`ackProof`
+
+bytes
+
+16
+
+`HMAC-SHA256(localKey, deviceEphemeralPubKey‖connNonce)[0:16]`
+
+Frame parse
+
+4F020270002A003000000001954CD99EA9C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C3C35D5D5D5D5D5D5D5D5D5D5D5D5D5D5D5DBB02
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x02`
+
+RESPONSE
+
+`CMD`
+
+`0x70`
+
+SESSION\_INIT
+
+`SEQ`
+
+`42`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`48`
+
+48 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`48 byte`
+
+Payload tablosuna bak — AUTHENTICATED
+
+`CRC16`
+
+`0xBB 02`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+İki taraf artık `sessionKey = HKDF-SHA256(X25519(myEph, peerEph), salt=connNonce)` hesaplar. Bu bağlantı artık **AUTHENTICATED** durumdadır; bundan sonraki her frame'in PAYLOAD'ı bu `sessionKey` ile AES-GCM şifrelenir, nonce SEQ'ten türetilir (bkz. Bölüm 11).
+
+Alt Cihaz → GW/Mobil (TX) — Başarısız
+
+Alt Cihaz → GW/MobilCMD: SESSION\_INIT `0x70`MSG\_TYPE: RESPONSE (0x02)STATUS: AUTH\_FAILED (0x01)
+
+Payload: boş (0 byte)
+
+Frame parse
+
+4F020270002A000001000001954CD99EA92A51
+
+SOFVERTYPECMDSEQLENSTTSCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x02`
+
+RESPONSE
+
+`CMD`
+
+`0x70`
+
+SESSION\_INIT
+
+`SEQ`
+
+`42`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`0`
+
+0 byte payload
+
+`STATUS`
+
+`0x01`
+
+Hata kodu 0x01
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`CRC16`
+
+`0x2A 51`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+`proof` yanlışsa (yanlış/eski local key, veya cihaz henüz claimed değilse) cihaz STATUS `0x01` döner ve bağlantıyı Bölüm 13'teki timeout mekanizmasıyla kapatır.
+
+3Yol A / Yol B — Aynı Komutun İki TaşımasıMQTT Frame
+
+SESSION\_INIT sonrası, örneğin bir uzaktan kilit açma komutu (`REMOTE_OPEN 0x40`) iki yoldan biriyle iletilir; frame'in kendisi (CMD, PAYLOAD şifreleme yöntemi) değişmez.
+
+Yol A — GW Online
+
+Yol B — GW Offline (fallback)
+
+Taşıma
+
+App → Sunucu (HTTPS) → MQTT `/command` → GW → BLE
+
+App → doğrudan BLE
+
+SESSION\_INIT kim yapar
+
+GW
+
+Mobil App
+
+localKey nereden gelir
+
+GW'de zaten var (Bölüm 3) veya sunucudan çekilir (Bölüm 4 Adım 3)
+
+Sunucudan mobil'e çekilir (kullanıcı yetkisi doğrulanarak)
+
+Frame formatı
+
+**Birebir aynı** — SOF..CRC16, aynı CMD kataloğu
+
+Bu tasarımın pratik sonucu: alt cihaz firmware'i, komutun GW'den mi telefondan mı geldiğini bilmesine **gerek kalmadan** tek bir kod yoluyla her ikisini de işler.
+
+6\. MQTT Topic'lerinin Genişletilmesi
+-------------------------------------
+
+Aşağıdaki 5 temel topic korunur ve genişletilir; ayrıca local-key modelini desteklemek için 6 yeni topic eklenir. Tüm topic'ler `/gateway/{device_id}/...` önekini kullanır ve QoS 1 ile publish/subscribe edilir.
+
+### 6.1 Temel Topic'ler (Genişletilmiş)
+
+Topic
+
+Yön
+
+Değişiklik
+
+`/gateway/{device_id}/status`
+
+GW → Sunucu
+
+`localKeyVersion` alanı eklendi (Bölüm 2 Adım 7)
+
+`/gateway/{device_id}/scan_report`
+
+GW → Sunucu
+
+`is_onloi` artık local-key farkındalığıyla ilişkili; yeni `deviceCode` ve `claimed` alanları eklendi (Bölüm 3 Adım 1, Bölüm 11.7)
+
+`/gateway/{device_id}/notify`
+
+GW → Sunucu
+
+`data` alanı artık AUTHENTICATED bir bağlantıdan gelen **şifreli** bir Onloi frame'in ham hex hali; GW decrypt etmez, olduğu gibi relay eder (bkz. Bölüm 7)
+
+`/gateway/{device_id}/command`
+
+Sunucu → GW
+
+`mac, addr_type, service_uuid, char_uuid` alanları korunur; `command` alanındaki hex artık local key ile şifreli bir Onloi frame'dir (bkz. Bölüm 8)
+
+`/gateway/{device_id}/ota`
+
+Sunucu → GW
+
+Değişmedi; imza doğrulaması eklendi (bkz. Bölüm 9)
+
+### 6.2 Yeni Topic'ler
+
+1device\_claim / device\_claim/ackMQTT
+
+Bir alt cihazı GW üzerinden claim etme isteği ve sonucu (detaylı akış: Bölüm 3).
+
+SUBSCRIBE (GW)/gateway/{device\_id}/device\_claim
+
+{ "requestId": "clm\_8f21a0", "mac": "11:22:33:44:55:66", "addr\_type": 0, "service\_uuid": "6E400001-..." }
+
+PUBLISH (GW)/gateway/{device\_id}/device\_claim/ack
+
+{ "requestId": "clm\_8f21a0", "mac": "11:22:33:44:55:66", "deviceId": "40119203871", "deviceCode": "OK0310", "localKey": "<base64>", "keyVersion": 1, "result": "ok" }
+
+2device\_unclaim / device\_unclaim/ackMQTT
+
+Bir alt cihazın hesaptan kaldırılması (bkz. Bölüm 10). GW cihaza bağlanıp `UNCLAIM (0x73)` frame'ini gönderir, cihazın local key'ini siler.
+
+SUBSCRIBE (GW)/gateway/{device\_id}/device\_unclaim
+
+{ "requestId": "unc\_2b91f4", "targetDeviceId": "40119203871" }
+
+PUBLISH (GW)/gateway/{device\_id}/device\_unclaim/ack
+
+{ "requestId": "unc\_2b91f4", "targetDeviceId": "40119203871", "result": "ok" }
+
+Sunucu, ack alınca `targetDeviceId` için sakladığı local key'i siler ve hesap eşleşmesini kaldırır.
+
+3key\_rotate / key\_rotate/ackMQTT
+
+Bir alt cihazın local key'inin periyodik veya olay tabanlı (bkz. Bölüm 10) rotasyonu.
+
+SUBSCRIBE (GW)/gateway/{device\_id}/key\_rotate
+
+{ "requestId": "rot\_71ac02", "targetDeviceId": "40119203871", "currentKeyVersion": 1 }
+
+PUBLISH (GW)/gateway/{device\_id}/key\_rotate/ack
+
+{ "requestId": "rot\_71ac02", "targetDeviceId": "40119203871", "newLocalKey": "<base64>", "keyVersion": 2, "result": "ok" }
+
+4sub\_ota / sub\_ota/ackMQTT
+
+Alt cihazlar için OTA (varsa) — GW'nin kendi OTA'sından (Bölüm 9) ayrı, çünkü hedef farklı bir BLE cihazdır ve GW sadece aracıdır.
+
+SUBSCRIBE (GW)/gateway/{device\_id}/sub\_ota
+
+{ "targetDeviceId": "40119203871", "url": "https://cdn.onloi.com/fw/OK0310/1.4.0.bin", "sha256": "<hex>", "signature": "<base64, sunucu private key ile imzalı>" }
+
+PUBLISH (GW)/gateway/{device\_id}/sub\_ota/ack
+
+{ "targetDeviceId": "40119203871", "status": "started" }
+
+GW, dosyayı kendisi indirip BLE üzerinden parçalar halinde alt cihaza aktarır (BLE MTU sınırlı olduğundan). Bu akışın frame detayları ürün-özel olduğundan bu dökümanın kapsamı dışındadır; burada sadece MQTT sözleşmesi tanımlanmıştır.
+
+7\. Telemetri Akışı (Alt Cihaz → GW → Sunucu)
+---------------------------------------------
+
+Alt cihaz, kendi başına bir olay yaşadığında (kilit açıldı, PIN girildi, buton basıldı vb.) AUTHENTICATED bağlantısı üzerinden bir **EVENT** frame'i notify eder. Bu bölüm, bu ham verinin GW üzerinden sunucuya ulaşana kadar hangi katmanda deşifre edileceğini netleştirir.
+
+1Alt Cihaz — Şifreli EVENT NotifyBLE Frame
+
+Örnek: Kullanıcı kilidi anahtarla (yerel) açtı. Cihaz, mevcut AUTHENTICATED bağlantısı üzerinden bir `LOCK_OPENED (0x10)` EVENT frame'i gönderir.
+
+Alt Cihaz → GW (TX notify)CMD: LOCK\_OPENED `0x10`MSG\_TYPE: EVENT (0x03)
+
+Alan
+
+Tip
+
+Açıklama
+
+`nonce`
+
+bytes\[12\]
+
+AES-GCM nonce (SEQ tabanlı)
+
+`ciphertext`
+
+bytes\[3\]
+
+`AES-GCM(sessionKey, nonce, plaintext=[accessMethod, localId(2)])` — alan yapısı orijinal Onloi LOCK\_OPENED ile aynı
+
+`authTag`
+
+bytes\[16\]
+
+GCM doğrulama etiketi
+
+Frame parse
+
+4F020310005B001F00000001954CD99EA93333333333333333333333330E9AFF888888888888888888888888888888880FBB
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x03`
+
+EVENT
+
+`CMD`
+
+`0x10`
+
+LOCK\_OPENED
+
+`SEQ`
+
+`91`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`31`
+
+31 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`31 byte`
+
+Payload tablosuna bak — AES-GCM şifreli
+
+`CRC16`
+
+`0x0F BB`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+2GW — Kör Relay (Blind Relay)MQTT
+
+GW, aldığı frame'in CRC'sini doğrular (bit hatası kontrolü) ama **PAYLOAD'ı decrypt etmez**. Ham frame'i hex string olarak `notify` topic'ine basar.
+
+PUBLISH/gateway/99120583417/notify
+
+{
+  "mac": "11:22:33:44:55:66",
+  "targetDeviceId": "40119203871",
+  "sessionEphemeralPubKeys": { "peer": "<GW eph pub, hex>", "device": "<device eph pub, hex>" },
+  "connNonce": "<hex, SESSION\_INIT'ten>",
+  "data": "4F0203100...0FBB"
+}
+
+**Tasarım kararı ve gerekçesi:** GW, `notify` akışında decrypt işlemi yapmaz; sadece ham (şifreli) frame'i ve o bağlantının SESSION\_INIT'inde değişilen ephemeral public key'leri/nonce'ı birlikte relay eder. Sunucu, elindeki `localKey` ile aynı `sessionKey`'i (`HKDF(X25519(...), connNonce)`) bağımsız olarak türetip PAYLOAD'ı kendisi çözer. Bunun 3 nedeni var: (1) İş mantığı ve kriptografi tek bir yerde (sunucu) toplanır — firmware/GW güncellemesi gerektirmeden değiştirilebilir; (2) GW'nin decrypt edip anlamlandırdığı hassas veriyi kendi belleğinde/loglarında tutma riski azalır; (3) Aynı ilke, komut yönünde de simetrik olarak uygulanır (Bölüm 8) — GW hiçbir zaman düz metin görmez, sadece opak baytları taşır.
+
+3Sunucu — Decrypt ve İşlemeHTTPS
+
+Sunucu, `targetDeviceId` ile ilişkili `localKey`'i bulur, `sessionKey`'i türetir, CRC ve GCM auth tag'i doğrular, PAYLOAD'ı çözer ve olayı (örn. "kilit açıldı") kullanıcıya push bildirimi olarak iletir / veritabanına yazar.
+
+Eğer GW bir alt cihazın `localKey`'ine sahip değilse (Bölüm 4 senaryosu, henüz sunucudan çekmediyse) SESSION\_INIT'i GW başlatamaz; bu durumda GW o cihazdan gelen notify'ları da alamaz (bağlı değildir). Böyle bir cihazın telemetrisi sadece mobil app doğrudan bağlıyken toplanır.
+
+8\. Sunucu/App → Alt Cihaz Komut Akışı
+--------------------------------------
+
+Bu bölüm, Bölüm 5'te tanımlanan iki yolun (GW-relay / direct-BLE) uçtan uca komut akışını, şifrelemenin nerede yapıldığını netleştirerek gösterir.
+
+1Yol A — GW Online (Sunucu → MQTT → GW → BLE)MQTT Frame
+
+Örnek: Kullanıcı mobil'den "uzaktan aç" butonuna basar. GW online olduğu için komut Sunucu üzerinden gider.
+
+POST https://api.onloi.com/v1/devices/40119203871/remote-open
+
+Request Body (Authorization: Bearer <kullanıcı JWT>)
+
+{ "requestId": "ro\_9a41c2" }
+
+Sunucu, kullanıcının bu cihaza yetkisi olduğunu doğrular, cihazın `localKey`'ini bulur, cihazın hâlâ AUTHENTICATED bir GW bağlantısı olup olmadığına bakar (yoksa önce GW'nin SESSION\_INIT yapmasını tetikler), sonra PAYLOAD'ı `sessionKey` ile şifreleyip GW'ye yollar:
+
+SUBSCRIBE (GW)/gateway/99120583417/command
+
+{
+  "mac": "11:22:33:44:55:66",
+  "addr\_type": 0,
+  "service\_uuid": "6E400001-B5A3-F393-E0A9-E50E24DCCA9E",
+  "char\_uuid": "6E400002-B5A3-F393-E0A9-E50E24DCCA9E",
+  "command": "4F02044000...7A06"
+}
+
+`command` alanı artık düz bir "aç" komutu değil, sunucunun ürettiği **tam bir Onloi frame**'inin hex hali — CMD `REMOTE_OPEN (0x40)`, MSG\_TYPE `COMMAND (0x04)`, PAYLOAD ise `sessionKey` ile AES-GCM şifreli. GW bunu olduğu gibi karakteristiğe yazar; içeriğini bilmesine gerek yoktur.
+
+Frame parse (sunucunun ürettiği, GW'nin şeffaf ilettiği frame)
+
+4F020440003A001D00000001954CD99EA9777777777777777777777777A19E9E9E9E9E9E9E9E9E9E9E9E9E9E9E9E7A06
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x04`
+
+COMMAND
+
+`CMD`
+
+`0x40`
+
+REMOTE\_OPEN
+
+`SEQ`
+
+`58`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`29`
+
+29 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`29 byte`
+
+Payload tablosuna bak — AES-GCM şifreli
+
+`CRC16`
+
+`0x7A 06`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+Alt Cihaz → GW (TX) → GW → Sunucu (notify relay, Bölüm 7'deki gibi)
+
+4F020240003A001D00000001954CD99EA9777777777777777777777777004C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C46F7
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x02`
+
+RESPONSE
+
+`CMD`
+
+`0x40`
+
+REMOTE\_OPEN
+
+`SEQ`
+
+`58`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`29`
+
+29 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`29 byte`
+
+Payload tablosuna bak — AES-GCM şifreli, result=0x00 (açıldı)
+
+`CRC16`
+
+`0x46 F7`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+GW bu RESPONSE'u da (Bölüm 7 Adım 2'deki gibi) kör relay ile `notify` topic'ine basar; sunucu decrypt edip mobil'e "kilit açıldı" sonucunu döner.
+
+2Yol B — GW Offline (Mobil → Doğrudan BLE)BLE Frame
+
+Aynı senaryo, ama GW çevrimdışı ve alt cihaz mobil'in BLE menzilinde.
+
+Adım
+
+Açıklama
+
+1
+
+Mobil, sunucudan cihazın `localKey`'ini çeker (Bölüm 4 Adım 3'teki ile aynı endpoint)
+
+2
+
+Mobil, cihaza BLE ile bağlanır, GATT keşfi yapar
+
+3
+
+Mobil, SESSION\_INIT (`0x70`) ile AUTHENTICATED olur (Bölüm 5 Adım 2 — birebir aynı frame)
+
+4
+
+Mobil, `REMOTE_OPEN (0x40)` frame'ini **kendisi üretir ve kendi türettiği `sessionKey` ile şifreler** — sunucu bu akışa dahil değildir, sadece sonucu (Bölüm 8 Adım 3) bilgilendirme amaçlı öğrenir
+
+5
+
+Cihaz doğrudan mobil'e RESPONSE döner; mobil kendi `sessionKey`'i ile decrypt eder ve sonucu ekranda gösterir
+
+Frame'in kendisi (CMD 0x40, MSG\_TYPE COMMAND, şifreli PAYLOAD yapısı) Yol A ile **birebir aynıdır** — sadece kim ürettiği/şifrelediği ve taşıdığı değişir.
+
+3Yol B Sonrası — Sunucuyu BilgilendirmeHTTPS
+
+Mobil, offline modda gerçekleştirdiği işlemi (audit log/geçmiş için) internet'e döndüğünde sunucuya bildirir.
+
+POST https://api.onloi.com/v1/devices/40119203871/events
+
+Request Body
+
+{ "requestId": "ro\_9a41c2", "event": "REMOTE\_OPEN", "result": "ok", "via": "direct\_ble", "timestamp": 1774032000000 }
+
+Bu, ilkedeki (Bölüm 5) "kullanıcı fark etmeden fallback" davranışını tamamlar: aynı buton, aynı sonuç, farklı taşıma — sunucu geçmişi de nihayetinde tutarlı kalır.
+
+9\. GW için OTA
+---------------
+
+Mevcut `/ota` topic'i korunur; imza/checksum doğrulaması eklenir. Bu, GW'nin sahte/kötü amaçlı bir firmware'i flaşlamasını önler.
+
+1Sunucu — OTA KomutuMQTT
+
+Sunucu, GW'ye güncelleme bilgisini yollar. Payload'a `sha256` ve `signature` alanları eklendi.
+
+SUBSCRIBE (GW)/gateway/99120583417/ota
+
+{
+  "url": "https://cdn.onloi.com/fw/gateway/OKGWX1/1.1.0.bin",
+  "version": "1.1.0",
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85",
+  "signature": "<base64, Onloi imzalama private key'i ile Ed25519 imza>"
+}
+
+Cihaz bu komutu aldığında bağlantılarını durdurur, dosyayı indirir, aşağıdaki adımları uygular ve otomatik olarak yeniden başlar. İşlem 10-30 saniye sürebilir (değişmedi).
+
+2GW — İmza ve Checksum DoğrulamasıFirmware
+
+GW, dosyayı flaşlamadan önce bütünlüğünü ve kaynağını doğrular.
+
+Adım
+
+Kontrol
+
+Başarısızlıkta
+
+1
+
+Dosyayı indir (HTTPS, TLS sertifika doğrulamalı)
+
+OTA iptal, sunucuya `{"status":"failed","reason":"download_error"}`
+
+2
+
+İndirilen dosyanın SHA-256'sını hesapla, `sha256` alanıyla karşılaştır
+
+OTA iptal, `reason:"checksum_mismatch"`
+
+3
+
+`signature`'ı, firmware'e gömülü Onloi public key ile Ed25519 doğrula (imzalanan veri: `sha256‖version`)
+
+OTA iptal, `reason:"signature_invalid"` — bu, MQTT kanalının veya sunucunun ele geçirilmiş olma ihtimaline karşı son savunma hattıdır
+
+4
+
+Flaşla, A/B partition varsa yeni partition'a yaz, bootloader'ı güncelle
+
+—
+
+5
+
+Yeniden başlat, yeni firmware ile `status` topic'inde `version` güncellenmiş olarak online ol
+
+Açılışta sağlık kontrolü başarısızsa eski partition'a otomatik rollback (varsa)
+
+İmza doğrulaması olmadan sadece checksum kontrolü yeterli değildir — checksum, veri bütünlüğünü garanti eder ama kaynağı doğrulamaz (biri sahte bir .bin + onun gerçek sha256'sını gönderebilir). İmza, dosyanın gerçekten Onloi tarafından imzalandığını garanti eder.
+
+10\. Güvenlik ve Kenar Durumlar
+-------------------------------
+
+1Key RotasyonuMQTT
+
+Bir cihaz her yeniden claim edildiğinde (veya periyodik/olay tabanlı olarak) local key yenilenmelidir.
+
+Tetikleyici
+
+Akış
+
+Cihaz yeniden claim edildi (önce unclaim edilmiş, sonra tekrar eklendi)
+
+Bölüm 3/4'teki KEX\_INIT + KEY\_DELIVER (`purpose=0x01 CLAIM`) akışı sıfırdan çalışır
+
+Kullanıcı "cihaz paylaşımını iptal et" veya "tüm oturumları kapat" dedi
+
+Sunucu `/key_rotate` topic'i ile GW'yi (veya mobil'i) tetikler; GW cihaza **zaten AUTHENTICATED** bir bağlantı üzerinden `KEY_DELIVER (purpose=0x02 ROTATE)` gönderir
+
+Periyodik güvenlik politikası (örn. 90 günde bir)
+
+Sunucu, süresi gelen cihazlar için otomatik `/key_rotate` tetikler
+
+ROTATE, CLAIM'den farklı olarak yeni bir ECDH bootstrap'ı gerektirmez — çünkü taraf zaten geçerli bir `sessionKey`'e (mevcut local key ile authenticate olmuş) sahiptir. Yeni key, bu mevcut `sessionKey` ile şifrelenip iletilir. Rotasyon sonrası eski key sunucuda `keyVersion-1` olarak kısa süre (grace period) tutulabilir, böylece rotasyon anında bağlı olmayan taraflar (örn. offline bir telefon) key'i senkronize edene kadar eski frame'lerini reddedilmeden tamamlayabilir.
+
+2Cihaz Reset / Unclaim SenaryosuFirmware
+
+İki farklı reset türü vardır ve karıştırılmamalıdır.
+
+Tür
+
+Nasıl tetiklenir
+
+Etki
+
+**Soft Unclaim** (app-layer, bu döküman kapsamında)
+
+`UNCLAIM (0x73)` frame'i, AUTHENTICATED bağlantı üzerinden
+
+Sadece `localKey` ve `claimed` flag'i temizlenir. Cihaz yapılandırması (WiFi vb. GW için) korunur.
+
+**Hard Factory Reset** (mevcut Onloi protokolü, `FACTORY_RESET 0x50` / `LOCAL_FACTORY_RESET 0x61`)
+
+Sunucu komutu veya cihaz üzerindeki fiziksel buton kombinasyonu
+
+Her şey silinir: `localKey`, WiFi ayarları, eşleşme geçmişi — cihaz sıfırdan Bölüm 2/3'teki gibi tekrar kurulmalıdır
+
+Kullanıcı "cihazı hesabımdan kaldır" dediğinde varsayılan davranış Soft Unclaim'dir — cihaz fiziksel olarak elden çıkmadığı için WiFi gibi ayarları tekrar girmeye zorlamak gereksizdir.
+
+3Replay / Nonce KorumasıFirmware
+
+Her bağlantı (peer context) için son görülen SEQ değeri saklanır; gelen her frame bu değerden büyük olmalıdır.
+
+Katman
+
+Koruma
+
+Bağlantı seviyesi (SESSION\_INIT sonrası)
+
+Her AUTHENTICATED bağlantı için `lastSeq` tutulur, gelen frame'in SEQ'i ≤ lastSeq ise `STATUS: REPLAY_DETECTED (0x02)` ile reddedilir (bkz. Bölüm 11, Bölüm 13)
+
+Şifreleme seviyesi
+
+AES-GCM nonce'ı SEQ'ten deterministik türetilir (`nonce = connNonce XOR SEQ`); bu, aynı nonce'ın iki farklı PAYLOAD için asla tekrar kullanılmamasını garanti eder — GCM güvenliği için kritiktir
+
+Bağlantılar arası
+
+SEQ sayaçları bağlantıya özeldir (connection-scoped), her yeni SESSION\_INIT sıfırdan başlar — bu yüzden connNonce her seferinde tazedir ve önceki bağlantıdan capture edilmiş bir frame yeni bağlantıda replay edilemez
+
+4Çakışma Yönetimi — GW ve App Aynı Anda Bağlanmaya ÇalışırsaFirmware
+
+Alt cihaz donanımı (tipik BLE SoC'lerde) genelde 1-4 arası eşzamanlı GATT bağlantısını destekler. Sistem tasarımı olarak iki politika tanımlanır; ürün gereksinimlerine göre biri seçilir.
+
+Politika
+
+Davranış
+
+Artı/Eksi
+
+**A — Çoklu bağlantıya izin ver** (varsayılan öneri)
+
+GW ve N telefon aynı anda AUTHENTICATED olabilir; her biri kendi `peer context`'inde (bkz. Bölüm 13) izlenir
+
+\+ Kullanıcı deneyimi kesintisiz + BLE stack limiti dahilinde  
+− Donanım bağlantı limitini paylaşmaları gerekir
+
+B — Tek aktif bağlantı, kuyruk/retry
+
+Yeni bağlantı isteği gelirse cihaz meşgulse `STATUS: BUSY (0x06)` döner; istemci exponential backoff ile tekrar dener
+
+\+ Basit kaynak yönetimi  
+− GW ile app arasında öncelik çakışması kullanıcı deneyimini bozabilir
+
+Öncelik kuralı (Politika B seçilirse): **GW'nin bağlantısı önceliklidir** — çünkü GW, sunucu tarafından yönetilen ve zaman kritik komutları (uzaktan açma gibi) taşıyan tarafdır. Mobil'in doğrudan BLE denemesi, GW zaten bağlıysa retry/backoff ile bekler; GW zaten offline'sa (Bölüm 5) bu çakışma hiç oluşmaz.
+
+5Advertising / Görünürlük KurallarıBLE
+
+Bir cihazın "unbound" mu "bound" mu olduğu, hem taramada gösterilecek listeyi hem de claim isteklerinin sunucu tarafında kabul/reddini belirler.
+
+Katman
+
+Kural
+
+Firmware (advertising payload)
+
+Manufacturer data içinde açık `deviceCode` (6 byte ASCII) ve 1 byte'lık `claimed` flag'i (`0x00`\=unclaimed, `0x01`\=claimed) taşınır — bkz. Bölüm 11.7, Bölüm 13 kod örneği
+
+SDK/Mobil app
+
+Tarama sonuçlarını filtrelerken `claimed=0x01` olan ve kullanıcının zaten sahip olmadığı cihazları listeden çıkarır (UX katmanı, "defence in depth"'in ilk halkası); `deviceCode`'u model kataloğunda arayarak isim/görsel gösterir
+
+GW firmware
+
+`scan_report`'a `deviceCode` ve `claimed` alanlarını ekler (Bölüm 3 Adım 1); kendi filtrelemesini yapmaz, ham veriyi taşır
+
+Sunucu (asıl yetkili katman)
+
+Bir `device_claim` isteği geldiğinde, hedef `deviceId` zaten başka bir hesaba bound ise isteği **reddeder** — bu, UI filtresi atlatılsa bile (örn. ham BLE taraması yapan kötü niyetli bir app) claim'in gerçekleşmesini önleyen son savunma hattıdır
+
+11\. Frame/Mesaj Formatı Referansı
+----------------------------------
+
+GW protokolü, Onloi Smart Lock Protocol'ün **aynı** binary frame yapısını kullanır — yeni bir format icat edilmemiştir. Bu bölüm, genel frame yapısını ve GW modeli için eklenen yeni CMD kodlarını tanımlar.
+
+### 11.1 Genel Frame Yapısı
+
+Offset
+
+Alan
+
+Boyut
+
+Açıklama
+
+`0`
+
+`SOF`
+
+1
+
+Sabit `0x4F` ("O") — frame başlangıç işareti
+
+`1`
+
+`VER`
+
+1
+
+Protokol versiyonu — `0x02`
+
+`2`
+
+`MSG_TYPE`
+
+1
+
+Bkz. 11.2
+
+`3`
+
+`CMD`
+
+1
+
+Bkz. 11.3
+
+`4`
+
+`SEQ`
+
+2 (BE)
+
+Sıra numarası — replay koruması, RESPONSE'ta REQUEST ile aynı değeri taşır
+
+`6`
+
+`PAYLOAD_LEN`
+
+2 (BE)
+
+PAYLOAD'ın byte uzunluğu (N)
+
+`8`
+
+`STATUS`
+
+1
+
+Bkz. 11.4 — REQUEST'te `0x00`, RESPONSE'ta sonuç kodu
+
+`9`
+
+`TIMESTAMP`
+
+8 (BE)
+
+Unix ms — cihaz taraflı 0 gönderebilir
+
+`17`
+
+`PAYLOAD`
+
+N
+
+CMD'ye özel veri — AUTHENTICATED bağlantılarda AES-256-GCM şifreli (bkz. 11.5)
+
+`17+N`
+
+`CRC16`
+
+2 (BE)
+
+CRC16-CCITT (poly `0x1021`, init `0xFFFF`), SOF'tan PAYLOAD'ın son byte'ına kadar hesaplanır
+
+### 11.2 MSG\_TYPE Değerleri
+
+Değer
+
+Ad
+
+Kullanım
+
+`0x01`
+
+REQUEST
+
+İstemci (GW/App) → Cihaz, cevap beklenir
+
+`0x02`
+
+RESPONSE
+
+Cihaz → İstemci, bir REQUEST veya COMMAND'a cevap
+
+`0x03`
+
+EVENT
+
+Cihaz → İstemci, kendiliğinden gönderilen bildirim (notify)
+
+`0x04`
+
+COMMAND
+
+Sunucu/App → Cihaz (GW-relay veya direct), bir eylemi tetikler
+
+### 11.3 Yeni CMD Kodları (0x70–0x7F Aralığı)
+
+Mevcut Onloi Smart Lock CMD kataloğu (`0x01`–`0x61`) değişmeden korunur. GW/local-key modeli için ayrılan yeni aralık:
+
+CMD
+
+Ad
+
+Amaç
+
+Tanımlandığı Bölüm
+
+`0x70`
+
+SESSION\_INIT
+
+Zaten claimed bir cihazla yeni bir BLE bağlantısını local key'e dayalı ECDH proof ile authenticate eder
+
+Bölüm 5
+
+`0x71`
+
+KEX\_INIT
+
+Henüz claimed olmayan bir cihaz/GW ile pre-shared secret olmadan ephemeral ECDH bootstrap yapar
+
+Bölüm 2, Bölüm 3
+
+`0x72`
+
+KEY\_DELIVER
+
+Yeni/rotasyonlanmış `localKey`'i mevcut oturum anahtarı altında şifrelenmiş olarak teslim eder (`purpose`: CLAIM/ROTATE)
+
+Bölüm 3, Bölüm 10
+
+`0x73`
+
+UNCLAIM
+
+Cihazın local key'ini ve claimed durumunu temizler (soft reset)
+
+Bölüm 10
+
+### 11.4 STATUS Kodları
+
+Değer
+
+Ad
+
+Anlamı
+
+`0x00`
+
+OK
+
+Başarılı
+
+`0x01`
+
+AUTH\_FAILED
+
+SESSION\_INIT/KEX\_INIT proof doğrulaması başarısız — yanlış/eksik local key
+
+`0x02`
+
+REPLAY\_DETECTED
+
+Gelen SEQ, bu bağlantı için beklenen değerden büyük değil
+
+`0x03`
+
+ALREADY\_CLAIMED
+
+KEX\_INIT/CLAIM, zaten claimed bir cihaza uygulanmaya çalışıldı — önce UNCLAIM gerekir
+
+`0x04`
+
+NOT\_CLAIMED
+
+SESSION\_INIT, henüz claimed olmayan bir cihaza gönderildi — önce KEX\_INIT+KEY\_DELIVER gerekir
+
+`0x05`
+
+TIMEOUT
+
+Karşı taraf beklenen sürede yanıt vermedi (bkz. Bölüm 13)
+
+`0x06`
+
+BUSY
+
+Cihaz, eşzamanlı bağlantı politikası nedeniyle yeni bir AUTHENTICATED oturum kabul edemiyor (bkz. Bölüm 10)
+
+### 11.5 Şifreleme Katmanı (AUTHENTICATED Bağlantılarda)
+
+Bileşen
+
+Değer
+
+Simetrik şifre
+
+AES-256-GCM (128-bit auth tag)
+
+Anahtar türetme
+
+`sessionKey = HKDF-SHA256(X25519(myEphPriv, peerEphPub), salt=connNonce, info="onloi-gw-session-v1")`
+
+Nonce türetme
+
+`nonce[12] = connNonce[0:12] XOR BE64(SEQ)` — her SEQ için benzersiz, deterministik
+
+PAYLOAD yapısı (şifreli frame'lerde)
+
+`ciphertext` (plaintext ile aynı boyut) `‖ authTag(16)` — nonce ayrıca taşınmıyorsa bağlantı context'inden (`connNonce`+`SEQ`) türetilir
+
+Local key üretimi
+
+256-bit, kriptografik güvenli RNG (`esp_fill_random` / `mbedtls_ctr_drbg` veya platform muadili)
+
+### 11.6 UNCLAIM (0x73) — Referans Frame
+
+İstemci → Cihaz (AUTHENTICATED bağlantı üzerinden)
+
+İstemci → CihazCMD: UNCLAIM `0x73`MSG\_TYPE: REQUEST (0x01)
+
+Alan
+
+Tip
+
+Açıklama
+
+`reason`
+
+uint8 (şifreli)
+
+`0x01`\=kullanıcı talebi, `0x02`\=güvenlik politikası (örn. çok sayıda AUTH\_FAILED)
+
+Frame parse
+
+4F020173000F001D00000001954CD99EA951515151515151515151515101E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E73DC6
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x01`
+
+REQUEST
+
+`CMD`
+
+`0x73`
+
+UNCLAIM
+
+`SEQ`
+
+`15`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`29`
+
+29 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`29 byte`
+
+Payload tablosuna bak — AES-GCM şifreli, reason=0x01 (kullanıcı talebi)
+
+`CRC16`
+
+`0x3D C6`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+Cihaz → İstemci
+
+Cihaz → İstemciCMD: UNCLAIM `0x73`MSG\_TYPE: RESPONSE (0x02)
+
+Frame parse
+
+4F020273000F001D00000001954CD99EA9515151515151515151515151002D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D6AA9
+
+SOFVERTYPECMDSEQLENSTTSPAYLOADCRC
+
+Alan
+
+Değer
+
+Açıklama
+
+`SOF`
+
+`0x4F`
+
+"O" — frame başlangıç işareti
+
+`VER`
+
+`0x02`
+
+Protokol versiyonu 2
+
+`MSG_TYPE`
+
+`0x02`
+
+RESPONSE
+
+`CMD`
+
+`0x73`
+
+UNCLAIM
+
+`SEQ`
+
+`15`
+
+Sıra numarası — reply'de aynı değer döner
+
+`PAYLOAD_LEN`
+
+`29`
+
+29 byte payload
+
+`STATUS`
+
+`0x00`
+
+0x00 = OK
+
+`TIMESTAMP`
+
+`8 byte`
+
+Unix ms — cihaz gönderirken 0 gönderebilir
+
+`PAYLOAD`
+
+`29 byte`
+
+Payload tablosuna bak — AES-GCM şifreli, result=0x00
+
+`CRC16`
+
+`0x6A A9`
+
+CRC16-CCITT (SOF→payload son byte üzerinden)
+
+Başarılı UNCLAIM sonrası cihaz `claimed=0x00` flag'iyle advertise etmeye döner (bkz. Bölüm 10 Adım 5, Bölüm 13).
+
+### 11.7 Advertising / Manufacturer Data Formatı
+
+Hem GW hem alt cihazlar, BLE bağlantısı kurulmadan (pasif tarama sırasında) da tanınabilir olmalı — mobil app'in taranan listede cihazın adını/görselini gösterebilmesi için buna ihtiyaç vardır. Bu yüzden tüm Onloi cihazları (GW dahil), advertising paketinin **Manufacturer Specific Data** alanında aşağıdaki sabit yapıyı yayınlar:
+
+Offset
+
+Alan
+
+Boyut
+
+Açıklama
+
+`0`
+
+`signature`
+
+2
+
+Sabit `0x4F 0x4B` ("OK") — Onloi cihazı imzası, `is_onloi` tespiti bundan yapılır
+
+`2`
+
+`deviceCode`
+
+6
+
+ASCII model kodu (örn. `OK0310`, GW için `OKGWX1`) — **açık (şifresiz)** yayınlanır
+
+`8`
+
+`claimed`
+
+1
+
+`0x00` = unclaimed, `0x01` = claimed (bkz. Bölüm 10 / Bölüm 13)
+
+**Neden `deviceCode` açık taşınabiliyor, `deviceId` taşınamıyor:** `deviceCode` bir _modele_ aittir (aynı model üretilen tüm cihazlarda birebir aynıdır) — dolayısıyla açıkta yayınlanması tek bir fiziksel cihazı deşifre etmez, sadece "bu bir Onloi kilidi/sensörü" bilgisini verir. `deviceId` ise cihaza özel benzersiz bir seri numarasıdır; bunun advertising'de açık taşınması, pasif dinleyen birinin belirli bir cihazı (ve dolayısıyla sahibini) konumsal olarak takip edebilmesine yol açardı. Bu yüzden `deviceId` yalnızca kurulmuş (ve ECDH ile şifrelenmiş) bir bağlantı üzerinden KEX\_INIT/SESSION\_INIT ile paylaşılır (bkz. Bölüm 2 Adım 3, Bölüm 5 Adım 2).
+
+Bu format sayesinde GW, `scan_report`'a (Bölüm 3 Adım 1) `deviceCode`'u hiç bağlanmadan ekleyebilir; mobil app da GW'yi ilk kurulumda ararken (Bölüm 2 Adım 1) aynı şekilde bağlanmadan önce hangi GW modeliyle karşı karşıya olduğunu görebilir.
+
+12\. Donanım Göstergeleri (LED)
+-------------------------------
+
+Mevcut GW LED durumları korunur; alt cihaz claim/pairing durumları için ek kombinasyonlar tanımlanır (üründe ayrı bir LED yoksa, aynı LED üzerinde farklı yanıp sönme desenleriyle ayırt edilir).
+
+### 12.1 GW LED Durumları (Değişmedi)
+
+LED
+
+Durum
+
+Anlamı
+
+🔵 Mavi (yanıp sönen)
+
+Kurulum bekleniyor
+
+Telefondan GW'ye bağlanılıp Wi-Fi bilgisi girilmeli (Bölüm 2)
+
+🟡 Sarı (yanıp sönen)
+
+Bağlanılıyor
+
+Wi-Fi & MQTT'ye bağlanılıyor
+
+🟢 Yeşil (sabit)
+
+Hazır
+
+İnternet ve MQTT bağlantısı başarılı, sistem hazır
+
+🔴 Kırmızı
+
+Hata
+
+Wi-Fi şifresi yanlış veya internet yok
+
+### 12.2 Alt Cihaz LED Durumları (Yeni)
+
+LED
+
+Durum
+
+Anlamı
+
+🔵 Mavi (yanıp sönen, hızlı)
+
+Unclaimed / Keşfedilebilir
+
+Cihaz, KEX\_INIT bekliyor — advertising `claimed=0x00`
+
+🟣 Mor (2 kısa yanıp sönme)
+
+Claim İşlemi Devam Ediyor
+
+KEX\_INIT/KEY\_DELIVER akışı sürüyor
+
+🟢 Yeşil (1 kısa yanıp sönme)
+
+Claim Başarılı
+
+KEY\_DELIVER RESPONSE `0x00` alındı, `claimed=0x01`'e geçildi
+
+🔴 Kırmızı (1 kısa yanıp sönme)
+
+Auth Başarısız
+
+SESSION\_INIT/KEX\_INIT `STATUS: AUTH_FAILED` döndü — bağlantı Bölüm 13'teki timeout ile kesilecek
+
+⚪ Beyaz (sabit, kısa süreli)
+
+Unclaim Edildi
+
+UNCLAIM başarıyla işlendi, cihaz fabrika-benzeri (ama Wi-Fi hariç) durumuna döndü
+
+Not (seri üretim/Production versiyonu): Ayrı Wi-Fi ve BLE LED'leri olan modellerde GW durumları Wi-Fi LED'inde, alt cihaz claim durumları ilgili cihazın kendi (genelde tek) LED'inde gösterilir.
+
+13\. Gömülü (Firmware) Taraf İçin Bağlantı ve Yetkilendirme Rehberi
+-------------------------------------------------------------------
+
+Bu bölüm, alt cihazın (ve gerekirse GW'nin) firmware'ini yazan gömülü yazılım mühendisine hitap eder. Kod örnekleri ESP-IDF/NimBLE tarzı gerçekçi API isimleri kullanır; derlenebilir tam bir program değildir ama mantıksal akışı doğrudan projeye uyarlanabilecek netlikte yansıtır.
+
+1Peer Context ve Durum MakinesiFirmware
+
+"Soft-level eşleştirme" sonrası firmware ne yapmalı: Cihaz, GATT bağlantısı kurulduğunda gelen tarafın (GW mi, telefon mu, hiç tanınmayan biri mi olduğunu) **BLE seviyesinde ayırt edemez** — sadece uygulama seviyesi handshake mesajının (SESSION\_INIT) doğru local key ile şifrelenip şifrelenmediğine bakarak karar verir. Durum makinesi: `UNAUTHENTICATED → (geçerli SESSION_INIT alındı) → AUTHENTICATED → (komut/notify serbest)`.
+
+Her bağlantı (connection handle) için bir `peer_ctx_t` tutulur — bu, aynı anda birden fazla bağlantı (GW + N telefon) yönetimini de çözer: her biri kendi state, session\_key ve son SEQ'ini kendi struct'ında taşır.
+
+typedef enum {
+    PEER\_STATE\_UNAUTHENTICATED = 0,  /\* Baglandi ama local key ile dogrulanmadi \*/
+    PEER\_STATE\_AUTHENTICATED   = 1,  /\* SESSION\_INIT/KEX\_INIT basarili, session\_key hazir \*/
+} peer\_state\_t;
+
+typedef struct {
+    uint16\_t      conn\_handle;       /\* NimBLE baglanti tanitcisi \*/
+    peer\_state\_t  state;
+    uint8\_t       peer\_eph\_pub\[32\];  /\* Karsi tarafin X25519 public key'i \*/
+    uint8\_t       session\_key\[32\];   /\* HKDF cikisi -- sadece AUTHENTICATED'te gecerli \*/
+    uint8\_t       conn\_nonce\[8\];
+    uint16\_t      last\_seq;          /\* Replay korumasi \*/
+    int64\_t       connected\_at\_ms;
+    esp\_timer\_handle\_t unauth\_timer;
+    bool          unauth\_timer\_armed;
+} peer\_ctx\_t;
+
+/\* GW + N telefon ayni anda baglanabilir (Politika A, bkz. Bolum 10 Adim 4).
+   Politika B (tek aktif baglanti) secilirse MAX\_PEERS=1 yapip yeni istekleri
+   STATUS\_BUSY (0x06) ile reddetmek yeterlidir. \*/
+#define MAX\_PEERS 4
+static peer\_ctx\_t s\_peers\[MAX\_PEERS\];
+
+2GATT Connect/Disconnect — Peer Context Yaşam DöngüsüFirmware
+
+Yeni bir GATT bağlantısı geldiğinde bir peer context ayrılır ve UNAUTHENTICATED olarak başlatılır; bağlantı koptuğunda context serbest bırakılır.
+
+static peer\_ctx\_t \*peer\_ctx\_alloc(uint16\_t conn\_handle) {
+    for (int i = 0; i < MAX\_PEERS; i++) {
+        if (s\_peers\[i\].conn\_handle == 0) {
+            memset(&s\_peers\[i\], 0, sizeof(peer\_ctx\_t));
+            s\_peers\[i\].conn\_handle = conn\_handle;
+            s\_peers\[i\].state = PEER\_STATE\_UNAUTHENTICATED;
+            s\_peers\[i\].connected\_at\_ms = esp\_timer\_get\_time() / 1000;
+            return &s\_peers\[i\];
+        }
+    }
+    return NULL;  /\* MAX\_PEERS dolu -- yeni GATT connect STATUS\_BUSY ile reddedilecek \*/
+}
+
+static void peer\_ctx\_free(uint16\_t conn\_handle) {
+    for (int i = 0; i < MAX\_PEERS; i++) {
+        if (s\_peers\[i\].conn\_handle == conn\_handle) {
+            unauth\_timeout\_disarm(&s\_peers\[i\]);
+            memset(&s\_peers\[i\], 0, sizeof(peer\_ctx\_t));
+            break;
+        }
+    }
+}
+
+static int gap\_event\_handler(struct ble\_gap\_event \*event, void \*arg) {
+    switch (event->type) {
+    case BLE\_GAP\_EVENT\_CONNECT:
+        if (event->connect.status == 0) {
+            uint16\_t conn\_handle = event->connect.conn\_handle;
+            peer\_ctx\_t \*ctx = peer\_ctx\_alloc(conn\_handle);
+            if (!ctx) {
+                ble\_gap\_terminate(conn\_handle, BLE\_ERR\_REM\_USER\_CONN\_TERM);
+                break;
+            }
+            unauth\_timeout\_arm(ctx);   /\* bkz. 13.7 \*/
+        }
+        break;
+    case BLE\_GAP\_EVENT\_DISCONNECT:
+        peer\_ctx\_free(event->disconnect.conn.conn\_handle);
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+3SESSION\_INIT İşlemeFirmware
+
+GATT connect callback → bağlantı kaydı oluştur (state=UNAUTHENTICATED) → SESSION\_INIT write geldiğinde local key ile doğrula → başarılıysa state=AUTHENTICATED yap ve ECDH'den türetilmiş session key'i bu bağlantı için sakla → bundan sonraki her notify/write işleminde bu session key kullanılır.
+
+/\* Gelen SESSION\_INIT (0x70) REQUEST frame'ini isler.
+   Cihaz karsi tarafin kim oldugunu (GW mi telefon mu) hic bilmez;
+   sadece proof'un gecerli local\_key ile uretilip uretilmedigine bakar. \*/
+static void handle\_session\_init(peer\_ctx\_t \*ctx, const onloi\_frame\_t \*frame) {
+    const uint8\_t \*peer\_eph\_pub = frame->payload;               /\* \[0:32\]  \*/
+    const uint8\_t \*conn\_nonce   = frame->payload + 32;           /\* \[32:40\] \*/
+    const uint8\_t \*proof        = frame->payload + 40;           /\* \[40:56\] \*/
+
+    uint8\_t hmac\_input\[32 + 8 + DEVICE\_ID\_LEN\];
+    uint8\_t expected\_proof\[32\];
+    memcpy(hmac\_input, peer\_eph\_pub, 32);
+    memcpy(hmac\_input + 32, conn\_nonce, 8);
+    memcpy(hmac\_input + 40, g\_device\_id, DEVICE\_ID\_LEN);
+
+    mbedtls\_md\_hmac(mbedtls\_md\_info\_from\_type(MBEDTLS\_MD\_SHA256),
+                     g\_local\_key, sizeof(g\_local\_key),
+                     hmac\_input, sizeof(hmac\_input), expected\_proof);
+
+    if (memcmp(proof, expected\_proof, 16) != 0) {
+        send\_response(ctx, CMD\_SESSION\_INIT, STATUS\_AUTH\_FAILED, NULL, 0);
+        return;   /\* state UNAUTHENTICATED'te kalir -- 13.7'deki timer hala aktif \*/
+    }
+
+    /\* Proof dogru: bu baglantiya ozel ephemeral X25519 anahtar ciftini uret,
+       ECDH ile ortak secret'i hesapla, HKDF ile session\_key turet. \*/
+    uint8\_t my\_eph\_priv\[32\], my\_eph\_pub\[32\], shared\_secret\[32\];
+    x25519\_generate\_keypair(my\_eph\_priv, my\_eph\_pub);
+    x25519\_scalarmult(shared\_secret, my\_eph\_priv, peer\_eph\_pub);
+    hkdf\_sha256(conn\_nonce, 8, shared\_secret, 32,
+                (const uint8\_t \*)"onloi-gw-session-v1", 20,
+                ctx->session\_key, 32);
+
+    memcpy(ctx->peer\_eph\_pub, peer\_eph\_pub, 32);
+    memcpy(ctx->conn\_nonce, conn\_nonce, 8);
+    ctx->last\_seq = frame->seq;
+    ctx->state = PEER\_STATE\_AUTHENTICATED;
+    unauth\_timeout\_disarm(ctx);
+
+    uint8\_t resp\_payload\[48\];
+    memcpy(resp\_payload, my\_eph\_pub, 32);
+    hmac\_sha256\_truncated(ctx->session\_key, my\_eph\_pub, 32, conn\_nonce, 8,
+                           resp\_payload + 32, 16);
+    send\_response(ctx, CMD\_SESSION\_INIT, STATUS\_OK, resp\_payload, sizeof(resp\_payload));
+}
+
+4Notification/Indication Yayınlama KuralıFirmware
+
+Cihaz, characteristic notify/indicate göndermeden önce, o bağlantının AUTHENTICATED state'te olup olmadığını kontrol etmelidir. UNAUTHENTICATED bir bağlantıya asla EVENT/notify gönderilmez — bu, henüz doğrulanmamış bir dinleyiciye bilgi sızdırmayı önler.
+
+/\* Her GATT notify/indicate yayinlamadan once cagrilir -- prensip:
+   sadece AUTHENTICATED baglantilar EVENT alabilir. \*/
+static bool peer\_can\_receive\_notify(const peer\_ctx\_t \*ctx) {
+    return ctx != NULL && ctx->state == PEER\_STATE\_AUTHENTICATED;
+}
+
+void onloi\_notify\_event(uint8\_t cmd, const uint8\_t \*plain\_payload, size\_t len) {
+    for (int i = 0; i < MAX\_PEERS; i++) {
+        peer\_ctx\_t \*ctx = &s\_peers\[i\];
+        if (!peer\_can\_receive\_notify(ctx)) {
+            continue;   /\* UNAUTHENTICATED baglantilara asla EVENT gonderilmez \*/
+        }
+        uint8\_t nonce\[12\], ciphertext\[MAX\_PAYLOAD\], tag\[16\];
+        derive\_nonce(ctx->conn\_nonce, ctx->last\_seq + 1, nonce);
+        aes\_gcm\_encrypt(ctx->session\_key, nonce, plain\_payload, len, ciphertext, tag);
+
+        onloi\_frame\_t frame;
+        build\_frame(&frame, MSG\_TYPE\_EVENT, cmd, ++ctx->last\_seq,
+                    STATUS\_OK, ciphertext, len, tag);
+        gatt\_send\_notification(ctx->conn\_handle, &frame);
+    }
+}
+
+5Replay/Nonce KontrolüFirmware
+
+Gelen her frame'in SEQ alanı, o peer context'te tutulan son SEQ'ten büyük olmalıdır; değilse frame reddedilir.
+
+static bool seq\_is\_fresh(peer\_ctx\_t \*ctx, uint16\_t incoming\_seq) {
+    /\* uint16 taşması (wraparound) için işaretli fark kullanılır \*/
+    int16\_t diff = (int16\_t)(incoming\_seq - ctx->last\_seq);
+    if (diff <= 0) {
+        return false;   /\* eski veya tekrarlanan SEQ -- STATUS\_REPLAY\_DETECTED \*/
+    }
+    ctx->last\_seq = incoming\_seq;
+    return true;
+}
+
+/\* Her gelen frame'in en basinda cagrilir. \*/
+static int on\_frame\_received(peer\_ctx\_t \*ctx, onloi\_frame\_t \*frame) {
+    if (ctx->state == PEER\_STATE\_AUTHENTICATED && !seq\_is\_fresh(ctx, frame->seq)) {
+        send\_response(ctx, frame->cmd, STATUS\_REPLAY\_DETECTED, NULL, 0);
+        return -1;
+    }
+    return dispatch\_frame(ctx, frame);
+}
+
+6Advertising DavranışıFirmware
+
+Manufacturer data, sabit `deviceCode` (model kodu) ve cihazın `claimed` durumuna göre değişen 1 byte'lık bir "bound" flag'i taşır (bkz. Bölüm 11.7). `deviceCode` modele özel olduğu için açık taşınır; bu sayede mobil app/GW, cihaza bağlanmadan sadece pasif tarama ile onun model adını/görselini gösterebilir.
+
+/\* deviceCode modelin ROM'una gomulu sabit bir ASCII kod, ornegin "OK0310".
+   claimed flag'i manufacturer data'nin son byte'ina yazilir. \*/
+static void update\_advertising\_data(void) {
+    uint8\_t mfg\_data\[9\] = {
+        0x4F, 0x4B,                              /\* "OK" -- Onloi imzasi \*/
+        g\_device\_code\[0\], g\_device\_code\[1\],      /\* deviceCode\[0:6\] -- acik, modele ozel \*/
+        g\_device\_code\[2\], g\_device\_code\[3\],
+        g\_device\_code\[4\], g\_device\_code\[5\],
+        g\_claimed ? 0x01 : 0x00,                 /\* claimed flag \*/
+    };
+
+    struct ble\_hs\_adv\_fields fields = {0};
+    fields.mfg\_data = mfg\_data;
+    fields.mfg\_data\_len = sizeof(mfg\_data);
+    fields.name = (uint8\_t \*)g\_ble\_device\_name;
+    fields.name\_len = strlen(g\_ble\_device\_name);
+    fields.name\_is\_complete = 1;
+    ble\_gap\_adv\_set\_fields(&fields);
+
+    /\* ESP-IDF/Bluedroid stack kullaniliyorsa muadili:
+       esp\_ble\_gap\_config\_adv\_data(&adv\_data); \*/
+}
+
+/\* CLAIM/UNCLAIM sonrasi cagrilir -- Bolum 10 Adim 5. \*/
+void on\_claim\_state\_changed(bool claimed) {
+    g\_claimed = claimed;
+    update\_advertising\_data();
+    ble\_gap\_adv\_stop();
+    ble\_gap\_adv\_start(BLE\_OWN\_ADDR\_PUBLIC, NULL, BLE\_HS\_FOREVER,
+                       &adv\_params, gap\_event\_handler, NULL);
+}
+
+7UNAUTHENTICATED Bağlantıların Timeout ile KesilmesiFirmware
+
+Belirli bir süre (5 saniye) içinde geçerli SESSION\_INIT/KEX\_INIT gelmezse bağlantı firmware tarafından otomatik kesilir (DoS/boşta bağlantı önleme).
+
+#define UNAUTH\_TIMEOUT\_MS 5000
+
+static void unauth\_timeout\_cb(void \*arg) {
+    peer\_ctx\_t \*ctx = (peer\_ctx\_t \*)arg;
+    if (ctx->state == PEER\_STATE\_UNAUTHENTICATED) {
+        /\* 5 saniyede gecerli SESSION\_INIT/KEX\_INIT gelmedi --
+           DoS/bosta baglanti onleme amaciyla baglantiyi kes. \*/
+        ble\_gap\_terminate(ctx->conn\_handle, BLE\_ERR\_REM\_USER\_CONN\_TERM);
+    }
+}
+
+static void unauth\_timeout\_arm(peer\_ctx\_t \*ctx) {
+    const esp\_timer\_create\_args\_t args = {
+        .callback = unauth\_timeout\_cb,
+        .arg = ctx,
+        .name = "onloi\_unauth\_to",
+    };
+    esp\_timer\_create(&args, &ctx->unauth\_timer);
+    esp\_timer\_start\_once(ctx->unauth\_timer, UNAUTH\_TIMEOUT\_MS \* 1000);
+    ctx->unauth\_timer\_armed = true;
+}
+
+static void unauth\_timeout\_disarm(peer\_ctx\_t \*ctx) {
+    if (ctx->unauth\_timer\_armed) {
+        esp\_timer\_stop(ctx->unauth\_timer);
+        esp\_timer\_delete(ctx->unauth\_timer);
+        ctx->unauth\_timer\_armed = false;
+    }
+}
+
+Bu 7 adım birlikte, Bölüm 1b'de savunulan tasarım kararının firmware karşılığını oluşturur: cihaz hiçbir zaman "kiminle konuştuğunu" bilmek zorunda değildir; sadece "doğru anahtarla mı konuşuluyor" sorusuna güvenli ve tutarlı bir şekilde cevap verir.
