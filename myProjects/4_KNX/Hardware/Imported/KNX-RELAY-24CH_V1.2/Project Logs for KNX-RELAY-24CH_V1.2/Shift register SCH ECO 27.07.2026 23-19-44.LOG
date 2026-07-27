@@ -1,0 +1,36 @@
+Removed Parameter OZD:74HC595PW,118 from Part U15
+Removed Parameter OZD:74HC595PW,118 from Part U16
+Removed Parameter OZD:74HC595PW,118 from Part U17
+Removed Parameter OZD:74HC595PW,118 from Part U18
+Removed Parameter OZD:74HC595PW,118 from Part U19
+Removed Parameter OZD:74HC595PW,118 from Part U20
+Removed Parameter OZD:CC0603KRX7R9BB104 from Part C33
+Removed Parameter OZD:CC0603KRX7R9BB104 from Part C34
+Removed Parameter OZD:CC0603KRX7R9BB104 from Part C35
+Removed Parameter OZD:CC0603KRX7R9BB104 from Part C36
+Removed Parameter OZD:CC0603KRX7R9BB104 from Part C62
+Removed Parameter OZD:CC0603KRX7R9BB104 from Part C63
+Change Value of Parameter Manufacturer in Part C33 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part C33 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part C34 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part C34 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part C35 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part C35 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part C36 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part C36 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part C62 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part C62 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part C63 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part C63 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part U15 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part U15 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part U16 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part U16 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part U17 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part U17 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part U18 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part U18 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part U19 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part U19 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part U20 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part U20 Old=MP New=Manufacturer Part Number

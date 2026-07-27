@@ -1,0 +1,6 @@
+Added Pin To Net: NetName=ShiftReg_{\O\E\}\ Pin=IC1-20
+Added Pin To Net: NetName=ShiftReg_Latch Pin=IC1-21
+Added Pin To Net: NetName=ShiftRegCLK Pin=IC1-22
+Added Pin To Net: NetName=ShiftRegCLK Pin=U2-11
+Added Pin To Net: NetName=ShiftReg_Latch Pin=U2-12
+Added Pin To Net: NetName=ShiftReg_{\O\E\}\ Pin=U2-13

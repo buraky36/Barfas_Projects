@@ -1,0 +1,10 @@
+Output: Generates pick and place files
+Type  : Pick Place
+From  : Variant [[No Variations]] of PCB Document [KNX_MCU_16CH_V1.2.PcbDoc]
+   Generated File[Pick Place for KNX_MCU_16CH_V1.2.txt]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 22:47:23 On 27.07.2026

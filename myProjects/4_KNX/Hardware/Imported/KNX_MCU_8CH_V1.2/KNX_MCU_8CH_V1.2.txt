@@ -1,0 +1,10 @@
+Board Information Report
+Filename     : C:\Users\hp\Desktop\Barfas_Projects\Barfas_Projects\myProjects\4_KNX\Hardware\Imported\KNX_MCU_8CH_V1.2\KNX_MCU_8CH_V1.2.PcbDoc
+Date         : 25.07.2026
+Time         : 19:58:31
+Time Elapsed : 00:00:00
+
+General
+    Board Size, 101.3mmx64.8mm
+    Components on board, 109
+count : 2

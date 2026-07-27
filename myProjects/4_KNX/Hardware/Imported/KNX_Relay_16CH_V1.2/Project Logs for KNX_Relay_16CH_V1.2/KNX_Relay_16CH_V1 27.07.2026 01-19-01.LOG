@@ -1,0 +1,3 @@
+Change Footprint: Footprint Not Found CP_Radial_D12.5mm_P5.00mm
+Added Member To Class: ClassName=KNX_Relay_16CH_V0.2 Member=Component C4 1500uf/35V
+Added Member To Class: ClassName=KNX_Relay_16CH_V0.2 Member=Component C5 1500uf/35V

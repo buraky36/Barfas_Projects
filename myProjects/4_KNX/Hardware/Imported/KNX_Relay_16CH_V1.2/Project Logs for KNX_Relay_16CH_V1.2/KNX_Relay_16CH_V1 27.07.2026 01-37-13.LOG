@@ -1,0 +1,4 @@
+Change Footprint: Footprint Not Found CP_Radial_D12.5mm_P5.00mm
+Change Net Name : Old Net Name=GNDD New Net Name=GND
+Change Net Name : Old Net Name=Shift_{\O\E\}\ New Net Name=Shift_O\E\
+Added Rule: Name=Schematic Supply Nets_3

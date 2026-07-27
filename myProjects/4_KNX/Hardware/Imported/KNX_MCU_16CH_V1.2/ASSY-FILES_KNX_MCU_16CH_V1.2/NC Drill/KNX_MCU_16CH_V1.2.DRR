@@ -1,0 +1,22 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: KNX_MCU_16CH_V1.2.PcbDoc   27.07.2026  00:38:47
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : F.Cu to B.Cu
+ASCII RoundHoles File : KNX_MCU_16CH_V1.2.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      0.3mm (12mil)                                             Round             133       PTH        858.23mm (33.79inch)
+T2      0.35mm (14mil)                                            Round             63        PTH        500.88mm (19.72inch)
+T3      0.5mm (20mil)                                             Round             88        PTH        881.82mm (34.72inch)
+T4      0.9mm (35mil)                                             Round             2         PTH        2.54mm (0.10inch)
+T5      0.991mm (39mil)                                           Round             3         PTH        7.21mm (0.28inch)
+T6      1mm (39mil)                                               Round             13        PTH        215.83mm (8.50inch)
+T7      1.06mm (42mil)                                            Round             12        PTH        57.00mm (2.24inch)
+T8      1.1mm (43mil)                                             Round             2         PTH        5.08mm (0.20inch)
+T9      3mm (118mil)                                              Round             4         PTH        274.02mm (10.79inch)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              320
+
+Total Processing Time (hh:mm:ss) : 00:00:01

@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [KNX_MCU_24CH_V1.2.PcbDoc]
+   Generated File[KNX_MCU_24CH_V1.2.TXT]
+   Generated File[KNX_MCU_24CH_V1.2.LDP]
+   Generated File[KNX_MCU_24CH_V1.2.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 00:40:20 On 27.07.2026

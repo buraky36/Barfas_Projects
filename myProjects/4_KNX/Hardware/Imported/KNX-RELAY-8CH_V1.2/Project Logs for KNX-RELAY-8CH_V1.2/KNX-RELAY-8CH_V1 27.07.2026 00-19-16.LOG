@@ -1,0 +1,11 @@
+Add component: Footprint Not Found CON8_2X4_USZ_FCI_GLE
+Add Pin To Net: Unknown Pin: Pin J11-1
+Add Pin To Net: Unknown Pin: Pin J11-3
+Add Pin To Net: Unknown Pin: Pin J11-5
+Add Pin To Net: Unknown Pin: Pin J11-7
+Change Net Name : Old Net Name=GNDD New Net Name=GND
+Change Net Name : Old Net Name=Shift_{\O\E\}\ New Net Name=Shift_O\E\
+Add Class Member: Failed to add class member : Component J11 EH254V-12-08P
+Added Rule: Name=Schematic Supply Nets
+Added Rule: Name=Schematic Supply Nets_1
+Added Rule: Name=Schematic Supply Nets_2

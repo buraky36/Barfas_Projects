@@ -1,0 +1,12 @@
+Change Value of Parameter Manufacturer in Part R91 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part R91 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part R92 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part R92 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part R93 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part R93 Old=MP New=Manufacturer Part Number
+Change Value of Parameter Manufacturer in Part R94 Old=MF New=Manufacturer
+Change Value of Parameter Manufacturer Part Number in Part R94 Old=MP New=Manufacturer Part Number
+Added Parameter Manufacturer Part Number= to Part J9
+Added Parameter Manufacturer Part Number= to Part J10
+Added Parameter Manufacturer= to Part J9
+Added Parameter Manufacturer= to Part J10

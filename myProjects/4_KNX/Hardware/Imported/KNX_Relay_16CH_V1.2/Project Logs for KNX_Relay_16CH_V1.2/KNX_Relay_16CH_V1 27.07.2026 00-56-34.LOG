@@ -1,0 +1,1935 @@
+Change Footprint: Footprint Not Found CP_Radial_D12.5mm_P5.00mm
+Change Component Comment : Designator=R86 Old Comment=Comment New Comment=0R
+Change Component Comment : Designator=R33 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R34 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R56 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R57 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R60 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R61 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R64 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R65 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R68 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R69 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R72 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R73 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R76 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R77 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R80 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R81 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R91 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R92 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R93 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R94 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R99 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R100 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R103 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R104 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R107 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R108 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R111 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R112 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R115 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R116 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R119 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=R120 Old Comment=Comment New Comment=1K
+Change Component Comment : Designator=Q3 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q4 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q18 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q19 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q20 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q21 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q22 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q23 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q24 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q25 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q26 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q27 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q28 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q29 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q30 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q31 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q32 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q33 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q34 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q35 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q36 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q37 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q38 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q39 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q40 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q41 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q42 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q43 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q44 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q45 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q46 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q47 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Q48 Old Comment=Comment New Comment=2N7002ET1G
+Change Component Comment : Designator=Z2 Old Comment=Comment New Comment=6.8V
+Change Component Comment : Designator=R32 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R35 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R58 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R59 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R62 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R63 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R66 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R67 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R70 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R71 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R74 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R75 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R78 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R79 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R82 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R83 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R84 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R85 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R95 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R96 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R97 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R98 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R101 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R102 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R105 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R106 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R109 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R110 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R113 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R114 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R117 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R118 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R121 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R122 Old Comment=Comment New Comment=10K
+Change Component Comment : Designator=R87 Old Comment=Comment New Comment=33R
+Change Component Comment : Designator=R88 Old Comment=Comment New Comment=33R
+Change Component Comment : Designator=R89 Old Comment=Comment New Comment=33R
+Change Component Comment : Designator=R90 Old Comment=Comment New Comment=33R
+Change Component Comment : Designator=U15 Old Comment=Comment New Comment=74HC595PW,118
+Change Component Comment : Designator=U16 Old Comment=Comment New Comment=74HC595PW,118
+Change Component Comment : Designator=U17 Old Comment=Comment New Comment=74HC595PW,118
+Change Component Comment : Designator=U18 Old Comment=Comment New Comment=74HC595PW,118
+Change Component Comment : Designator=C6 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C7 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C12 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C13 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C14 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C15 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C16 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C17 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C18 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C19 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C20 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C21 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C22 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C23 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C24 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C25 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C26 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C27 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C28 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C29 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C30 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C31 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C32 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C33 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C34 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C35 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C36 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C37 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C38 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C39 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C40 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C41 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C42 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C43 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C44 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C45 Old Comment=Comment New Comment=100nF
+Change Component Comment : Designator=C4 Old Comment=Comment New Comment=1500uf/35V
+Change Component Comment : Designator=C5 Old Comment=Comment New Comment=1500uf/35V
+Change Component Comment : Designator=J9 Old Comment=Comment New Comment=Conn_01x04
+Change Component Comment : Designator=J10 Old Comment=Comment New Comment=Conn_01x04
+Change Component Comment : Designator=J1 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J2 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J3 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J4 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J5 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J6 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J7 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J8 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J11 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J12 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J13 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J14 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J15 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J16 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J17 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=J18 Old Comment=Comment New Comment=DG129-5.08-02P-14-00AH
+Change Component Comment : Designator=H5 Old Comment=Comment New Comment=MountingHole
+Change Component Comment : Designator=H6 Old Comment=Comment New Comment=MountingHole
+Change Component Comment : Designator=H7 Old Comment=Comment New Comment=MountingHole
+Change Component Comment : Designator=H8 Old Comment=Comment New Comment=MountingHole
+Change Component Comment : Designator=K1 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K4 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K5 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K6 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K7 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K8 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K9 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K10 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K11 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K12 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K13 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K14 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K15 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K16 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K17 Old Comment=Comment New Comment=RT314F12
+Change Component Comment : Designator=K18 Old Comment=Comment New Comment=RT314F12
+Change component parameters: Designator = "Q3" ("Q3"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\XWARZIHI" ("\HVVVTQDZ\XWARZIHI")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q4" ("Q4"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\ZXADKQQF" ("\HVVVTQDZ\ZXADKQQF")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q18" ("Q18"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\LZKLLERI" ("\HVVVTQDZ\LZKLLERI")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q19" ("Q19"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\CUVKLSPG" ("\HVVVTQDZ\CUVKLSPG")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q20" ("Q20"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\LLFSFJKY" ("\HVVVTQDZ\LLFSFJKY")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q21" ("Q21"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\VNAYSPFX" ("\HVVVTQDZ\VNAYSPFX")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q22" ("Q22"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\LKXKBFDS" ("\HVVVTQDZ\LKXKBFDS")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q23" ("Q23"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\ZJAUCPXP" ("\HVVVTQDZ\ZJAUCPXP")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q24" ("Q24"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\RBJIWZFG" ("\HVVVTQDZ\RBJIWZFG")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q25" ("Q25"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\AKYOUQUW" ("\HVVVTQDZ\AKYOUQUW")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q26" ("Q26"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\JULKHVEW" ("\HVVVTQDZ\JULKHVEW")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q27" ("Q27"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\MVFTLUXJ" ("\HVVVTQDZ\MVFTLUXJ")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q28" ("Q28"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\WGCZDXHQ" ("\HVVVTQDZ\WGCZDXHQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q29" ("Q29"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\BCRHJIBC" ("\HVVVTQDZ\BCRHJIBC")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q30" ("Q30"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\NAFQPYPC" ("\HVVVTQDZ\NAFQPYPC")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q31" ("Q31"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\UDWWOEHA" ("\HVVVTQDZ\UDWWOEHA")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q32" ("Q32"); Footprint = "SOT-23"; UniqueID = "\KOHBNAGK" ("\KOHBNAGK")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R86" ("R86"); Footprint = "R_0603_1608Metric"; UniqueID = "\HCOZONVH" ("\HCOZONVH")
+Change component parameters (AddParameter): Name = "MF"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "0R"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C6" ("C6"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\QOJPIUYR" ("\HVVVTQDZ\QOJPIUYR")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C7" ("C7"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\YGVVWZXA" ("\HVVVTQDZ\YGVVWZXA")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C12" ("C12"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\APAIYGPQ" ("\HVVVTQDZ\APAIYGPQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C13" ("C13"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\OQJBVRYE" ("\HVVVTQDZ\OQJBVRYE")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C14" ("C14"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\OJPRPDPC" ("\HVVVTQDZ\OJPRPDPC")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C15" ("C15"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\UBEMQXGR" ("\HVVVTQDZ\UBEMQXGR")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C16" ("C16"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PWBWEZKC" ("\HVVVTQDZ\PWBWEZKC")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C17" ("C17"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\KCCLNSSZ" ("\HVVVTQDZ\KCCLNSSZ")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C18" ("C18"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\ICPMBNMV" ("\HVVVTQDZ\ICPMBNMV")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C19" ("C19"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\VRDYJGLR" ("\HVVVTQDZ\VRDYJGLR")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C20" ("C20"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\CEDUDOXK" ("\HVVVTQDZ\CEDUDOXK")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C21" ("C21"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PNUCFQJD" ("\HVVVTQDZ\PNUCFQJD")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C22" ("C22"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\DXSQBLUB" ("\HVVVTQDZ\DXSQBLUB")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C23" ("C23"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\TOZJFLEE" ("\HVVVTQDZ\TOZJFLEE")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C24" ("C24"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\FSYGLLKB" ("\HVVVTQDZ\FSYGLLKB")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C25" ("C25"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\UUPAMLEC" ("\HVVVTQDZ\UUPAMLEC")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C33" ("C33"); Footprint = "C_0603_1608Metric"; UniqueID = "\POSVAQAE\MKZWNQJP" ("\POSVAQAE\MKZWNQJP")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C34" ("C34"); Footprint = "C_0603_1608Metric"; UniqueID = "\POSVAQAE\TCEPXXFO" ("\POSVAQAE\TCEPXXFO")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J1" ("J1"); Footprint = "DG129-5.08-02P"; UniqueID = "\UCURKEXI" ("\UCURKEXI")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J2" ("J2"); Footprint = "DG129-5.08-02P"; UniqueID = "\UNQVXMMU" ("\UNQVXMMU")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J3" ("J3"); Footprint = "DG129-5.08-02P"; UniqueID = "\FNBSRPEE" ("\FNBSRPEE")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J4" ("J4"); Footprint = "DG129-5.08-02P"; UniqueID = "\NHVRBDXQ" ("\NHVRBDXQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J5" ("J5"); Footprint = "DG129-5.08-02P"; UniqueID = "\AEWBBIUN" ("\AEWBBIUN")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J6" ("J6"); Footprint = "DG129-5.08-02P"; UniqueID = "\DQGHXUDJ" ("\DQGHXUDJ")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J7" ("J7"); Footprint = "DG129-5.08-02P"; UniqueID = "\GUYEHZUR" ("\GUYEHZUR")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J8" ("J8"); Footprint = "DG129-5.08-02P"; UniqueID = "\BWKGUQUC" ("\BWKGUQUC")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J9" ("J9"); Footprint = "PinHeader_1x04_P2.54mm_Vertical"; UniqueID = "\GKNWCXHZ" ("\GKNWCXHZ")
+Change component parameters (AddParameter): Name = "Value"; Value = "Conn_01x04"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J10" ("J10"); Footprint = "PinHeader_1x04_P2.54mm_Vertical"; UniqueID = "\GHSBHPVT" ("\GHSBHPVT")
+Change component parameters (AddParameter): Name = "Value"; Value = "Conn_01x04"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J11" ("J11"); Footprint = "DG129-5.08-02P"; UniqueID = "\HDYSKBGN" ("\HDYSKBGN")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J12" ("J12"); Footprint = "DG129-5.08-02P"; UniqueID = "\EKORTDFN" ("\EKORTDFN")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J13" ("J13"); Footprint = "DG129-5.08-02P"; UniqueID = "\HMFIATBR" ("\HMFIATBR")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J14" ("J14"); Footprint = "DG129-5.08-02P"; UniqueID = "\AOHZBOFC" ("\AOHZBOFC")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J15" ("J15"); Footprint = "DG129-5.08-02P"; UniqueID = "\NDTIIIYM" ("\NDTIIIYM")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J16" ("J16"); Footprint = "DG129-5.08-02P"; UniqueID = "\NFQPKBLS" ("\NFQPKBLS")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J17" ("J17"); Footprint = "DG129-5.08-02P"; UniqueID = "\YVILMUBH" ("\YVILMUBH")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J18" ("J18"); Footprint = "DG129-5.08-02P"; UniqueID = "\UAWBQOEH" ("\UAWBQOEH")
+Change component parameters (AddParameter): Name = "MF"; Value = "DEGSON"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT V/T  5.08mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "DG129-5.08-02P-14-00AH"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K1" ("K1"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\EQSNHYWL" ("\HVVVTQDZ\EQSNHYWL")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K4" ("K4"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\QWLKZROX" ("\HVVVTQDZ\QWLKZROX")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K5" ("K5"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\LLHFOIWO" ("\HVVVTQDZ\LLHFOIWO")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K6" ("K6"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\FLULSOZU" ("\HVVVTQDZ\FLULSOZU")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K7" ("K7"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\ODLGSOUE" ("\HVVVTQDZ\ODLGSOUE")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K8" ("K8"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\GVFFLKDY" ("\HVVVTQDZ\GVFFLKDY")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K9" ("K9"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\MXKPNSMH" ("\HVVVTQDZ\MXKPNSMH")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K10" ("K10"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\GBDUIEOI" ("\HVVVTQDZ\GBDUIEOI")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K11" ("K11"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\KGOIXKGK" ("\HVVVTQDZ\KGOIXKGK")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K12" ("K12"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\WXISXFYB" ("\HVVVTQDZ\WXISXFYB")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K13" ("K13"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\GORPECFA" ("\HVVVTQDZ\GORPECFA")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K14" ("K14"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\BZFABNAT" ("\HVVVTQDZ\BZFABNAT")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K15" ("K15"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\WHAGYIRW" ("\HVVVTQDZ\WHAGYIRW")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K16" ("K16"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\TVOFPGOW" ("\HVVVTQDZ\TVOFPGOW")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K17" ("K17"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\HVBJSIVO" ("\HVVVTQDZ\HVBJSIVO")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "K18" ("K18"); Footprint = "RELAY9-500X1142_618"; UniqueID = "\HVVVTQDZ\TQAYTXKT" ("\HVVVTQDZ\TQAYTXKT")
+Change component parameters (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "DIP,29x12.7mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "RT314F12"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R32" ("R32"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\XNVIAATT" ("\HVVVTQDZ\XNVIAATT")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R33" ("R33"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\HTOUGOGC" ("\HVVVTQDZ\HTOUGOGC")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R34" ("R34"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\DWYLMKKQ" ("\HVVVTQDZ\DWYLMKKQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R35" ("R35"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\UDKGSDRO" ("\HVVVTQDZ\UDKGSDRO")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R56" ("R56"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PQFRKRWJ" ("\HVVVTQDZ\PQFRKRWJ")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R57" ("R57"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\HLXHJKAE" ("\HVVVTQDZ\HLXHJKAE")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R58" ("R58"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\JCSASUIX" ("\HVVVTQDZ\JCSASUIX")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R59" ("R59"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\WLLAPPHN" ("\HVVVTQDZ\WLLAPPHN")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R60" ("R60"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\SMBGZZLQ" ("\HVVVTQDZ\SMBGZZLQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R61" ("R61"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\UMKIQKPQ" ("\HVVVTQDZ\UMKIQKPQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R62" ("R62"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\AXFEVIQQ" ("\HVVVTQDZ\AXFEVIQQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R63" ("R63"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\ICDFAJHW" ("\HVVVTQDZ\ICDFAJHW")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R64" ("R64"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\CIHVMGRI" ("\HVVVTQDZ\CIHVMGRI")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R65" ("R65"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\MGSMKXVO" ("\HVVVTQDZ\MGSMKXVO")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R66" ("R66"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\WOGIMZCL" ("\HVVVTQDZ\WOGIMZCL")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R67" ("R67"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\BQBNMQHG" ("\HVVVTQDZ\BQBNMQHG")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R68" ("R68"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\BAKEFMBH" ("\HVVVTQDZ\BAKEFMBH")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R69" ("R69"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\MLRHHRMF" ("\HVVVTQDZ\MLRHHRMF")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R70" ("R70"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\RHXYPOUL" ("\HVVVTQDZ\RHXYPOUL")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R71" ("R71"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\QHBLOJCH" ("\HVVVTQDZ\QHBLOJCH")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R72" ("R72"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\XSKJIIVB" ("\HVVVTQDZ\XSKJIIVB")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R73" ("R73"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\ARPNWTOI" ("\HVVVTQDZ\ARPNWTOI")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R74" ("R74"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\RZYYNOSM" ("\HVVVTQDZ\RZYYNOSM")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R75" ("R75"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\FVIUJIZT" ("\HVVVTQDZ\FVIUJIZT")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R76" ("R76"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\VGOKQMIC" ("\HVVVTQDZ\VGOKQMIC")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R77" ("R77"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\ZPEBYNSG" ("\HVVVTQDZ\ZPEBYNSG")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R78" ("R78"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\XIQQZHBB" ("\HVVVTQDZ\XIQQZHBB")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R79" ("R79"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\GMFFLLBE" ("\HVVVTQDZ\GMFFLLBE")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R80" ("R80"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\SAYEKUAN" ("\HVVVTQDZ\SAYEKUAN")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R81" ("R81"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\JMCVHEQY" ("\HVVVTQDZ\JMCVHEQY")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R82" ("R82"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\VKABMYYH" ("\HVVVTQDZ\VKABMYYH")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R83" ("R83"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\UFDELUJQ" ("\HVVVTQDZ\UFDELUJQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R84" ("R84"); Footprint = "R_0603_1608Metric"; UniqueID = "\XOWEMPMX" ("\XOWEMPMX")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R85" ("R85"); Footprint = "R_0603_1608Metric"; UniqueID = "\WZXRHOUD" ("\WZXRHOUD")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "U15" ("U15"); Footprint = "TSSOP-16_4.4x5mm_P0.65mm"; UniqueID = "\POSVAQAE\KHUOMYDD" ("\POSVAQAE\KHUOMYDD")
+Change component parameters (AddParameter): Name = "MF"; Value = "Nexperia"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "TSSOP-16"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters: Designator = "U17" ("U17"); Footprint = "TSSOP-16_4.4x5mm_P0.65mm"; UniqueID = "\POSVAQAE\ZTDDTSCX" ("\POSVAQAE\ZTDDTSCX")
+Change component parameters (AddParameter): Name = "MF"; Value = "Nexperia"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "TSSOP-16"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Z2" ("Z2"); Footprint = "D_MiniMELF"; UniqueID = "\CWLKXFVA" ("\CWLKXFVA")
+Change component parameters (AddParameter): Name = "MF"; Value = "PANJIT"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "ZMM55-C6V8_R1_10001"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "ZMM55-C6V8_R1_10001"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "D_MiniMELF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "6.8V"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q33" ("Q33"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\FMLWSNXJ" ("\HVVVTQDZ\FMLWSNXJ")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q34" ("Q34"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\OOEFXTQZ" ("\HVVVTQDZ\OOEFXTQZ")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q35" ("Q35"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\JPSDHHYI" ("\HVVVTQDZ\JPSDHHYI")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q36" ("Q36"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\YPTUIYVR" ("\HVVVTQDZ\YPTUIYVR")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q37" ("Q37"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\JOMBTKWQ" ("\HVVVTQDZ\JOMBTKWQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q38" ("Q38"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\BODRJDLM" ("\HVVVTQDZ\BODRJDLM")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q39" ("Q39"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\MPGDPSGL" ("\HVVVTQDZ\MPGDPSGL")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q40" ("Q40"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\OAKBWBZD" ("\HVVVTQDZ\OAKBWBZD")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q41" ("Q41"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\XMBMQMFK" ("\HVVVTQDZ\XMBMQMFK")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q42" ("Q42"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\WOQKIVVD" ("\HVVVTQDZ\WOQKIVVD")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q43" ("Q43"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\DNFNOPHU" ("\HVVVTQDZ\DNFNOPHU")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q44" ("Q44"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\PXYAFWYS" ("\HVVVTQDZ\PXYAFWYS")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q45" ("Q45"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\LQINCVPB" ("\HVVVTQDZ\LQINCVPB")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q46" ("Q46"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\JNBAAHZQ" ("\HVVVTQDZ\JNBAAHZQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q47" ("Q47"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\BYYGHILX" ("\HVVVTQDZ\BYYGHILX")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "Q48" ("Q48"); Footprint = "SOT-23"; UniqueID = "\HVVVTQDZ\GKXJUPEH" ("\HVVVTQDZ\GKXJUPEH")
+Change component parameters (AddParameter): Name = "MF"; Value = "onsemi"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "2N7002ET1G"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C5" ("C5"); Footprint = "CP_Radial_D12.5mm_P5.00mm"; UniqueID = "\YENGVKZE" ("\YENGVKZE")
+Change component parameters (AddParameter): Name = "MF"; Value = "SAMWHA"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RP1C158M12020PL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RP1C158M12020PL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT 12.5x20mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1500uf/35V"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C26" ("C26"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PAZAJAMT" ("\HVVVTQDZ\PAZAJAMT")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C27" ("C27"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\KKHXWMJU" ("\HVVVTQDZ\KKHXWMJU")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C28" ("C28"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PZJVEEKT" ("\HVVVTQDZ\PZJVEEKT")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C29" ("C29"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\CWODRSLT" ("\HVVVTQDZ\CWODRSLT")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C30" ("C30"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\ZIOIUXHG" ("\HVVVTQDZ\ZIOIUXHG")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C31" ("C31"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PHTAVSXQ" ("\HVVVTQDZ\PHTAVSXQ")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C32" ("C32"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PUWJNHGY" ("\HVVVTQDZ\PUWJNHGY")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C35" ("C35"); Footprint = "C_0603_1608Metric"; UniqueID = "\POSVAQAE\TKSQJISI" ("\POSVAQAE\TKSQJISI")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C36" ("C36"); Footprint = "C_0603_1608Metric"; UniqueID = "\POSVAQAE\HLBLDOUW" ("\POSVAQAE\HLBLDOUW")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C37" ("C37"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\NUMQTNNI" ("\HVVVTQDZ\NUMQTNNI")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C38" ("C38"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\REZDMULJ" ("\HVVVTQDZ\REZDMULJ")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C39" ("C39"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\KZFWZHJW" ("\HVVVTQDZ\KZFWZHJW")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C40" ("C40"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\RMKGFWAX" ("\HVVVTQDZ\RMKGFWAX")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C41" ("C41"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\UGIVEFVK" ("\HVVVTQDZ\UGIVEFVK")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C42" ("C42"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\XMBZZXCU" ("\HVVVTQDZ\XMBZZXCU")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C43" ("C43"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\KXOBPLRD" ("\HVVVTQDZ\KXOBPLRD")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C44" ("C44"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\DQWGKATS" ("\HVVVTQDZ\DQWGKATS")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C45" ("C45"); Footprint = "C_0603_1608Metric"; UniqueID = "\HVVVTQDZ\XILGTVXT" ("\HVVVTQDZ\XILGTVXT")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CC0603KRX7R9BB104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "C_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "H5" ("H5"); Footprint = "MountingHole_3mm"; UniqueID = "\USTFUCIF" ("\USTFUCIF")
+Change component parameters (AddParameter): Name = "Value"; Value = "MountingHole"; VariantName = "[No Variations]"
+Change component parameters: Designator = "H6" ("H6"); Footprint = "MountingHole_3mm"; UniqueID = "\GQYGVFKO" ("\GQYGVFKO")
+Change component parameters (AddParameter): Name = "Value"; Value = "MountingHole"; VariantName = "[No Variations]"
+Change component parameters: Designator = "H7" ("H7"); Footprint = "MountingHole_3mm"; UniqueID = "\XTBTFMIT" ("\XTBTFMIT")
+Change component parameters (AddParameter): Name = "Value"; Value = "MountingHole"; VariantName = "[No Variations]"
+Change component parameters: Designator = "H8" ("H8"); Footprint = "MountingHole_3mm"; UniqueID = "\ZMSYNUGO" ("\ZMSYNUGO")
+Change component parameters (AddParameter): Name = "Value"; Value = "MountingHole"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R87" ("R87"); Footprint = "R_0603_1608Metric"; UniqueID = "\QYFKYYWE" ("\QYFKYYWE")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-0733RL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-0733RL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "33R"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R88" ("R88"); Footprint = "R_0603_1608Metric"; UniqueID = "\YTAETRGV" ("\YTAETRGV")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-0733RL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-0733RL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "33R"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R89" ("R89"); Footprint = "R_0603_1608Metric"; UniqueID = "\XGSWJJFW" ("\XGSWJJFW")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-0733RL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-0733RL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "33R"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R90" ("R90"); Footprint = "R_0603_1608Metric"; UniqueID = "\HBTKGXYT" ("\HBTKGXYT")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-0733RL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-0733RL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "33R"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R91" ("R91"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\CWYVTRYH" ("\HVVVTQDZ\CWYVTRYH")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R92" ("R92"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\JFWGRQJY" ("\HVVVTQDZ\JFWGRQJY")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R93" ("R93"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\XXVDBWKB" ("\HVVVTQDZ\XXVDBWKB")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R94" ("R94"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\VAEIZQBX" ("\HVVVTQDZ\VAEIZQBX")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R95" ("R95"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\FUQOTBYL" ("\HVVVTQDZ\FUQOTBYL")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R96" ("R96"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\XJDUHGUS" ("\HVVVTQDZ\XJDUHGUS")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R97" ("R97"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\EZMGWJVA" ("\HVVVTQDZ\EZMGWJVA")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R98" ("R98"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PHIHOAIB" ("\HVVVTQDZ\PHIHOAIB")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R99" ("R99"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\ILMGIAMO" ("\HVVVTQDZ\ILMGIAMO")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R100" ("R100"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\EGCPQXMB" ("\HVVVTQDZ\EGCPQXMB")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R101" ("R101"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\SLIPTUCI" ("\HVVVTQDZ\SLIPTUCI")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R102" ("R102"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\JCUSTWHP" ("\HVVVTQDZ\JCUSTWHP")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R103" ("R103"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\ZHVJZTMV" ("\HVVVTQDZ\ZHVJZTMV")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R104" ("R104"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\AGRTXNYS" ("\HVVVTQDZ\AGRTXNYS")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R105" ("R105"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\BFJHTBZG" ("\HVVVTQDZ\BFJHTBZG")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R106" ("R106"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\BERSIPDO" ("\HVVVTQDZ\BERSIPDO")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R107" ("R107"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PZSZGJIS" ("\HVVVTQDZ\PZSZGJIS")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R108" ("R108"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\YRCQWVXU" ("\HVVVTQDZ\YRCQWVXU")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R109" ("R109"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\XWFTQQOH" ("\HVVVTQDZ\XWFTQQOH")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R110" ("R110"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\CUFYAFIU" ("\HVVVTQDZ\CUFYAFIU")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R111" ("R111"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\ICDZAKXU" ("\HVVVTQDZ\ICDZAKXU")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R112" ("R112"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\FQARYIUP" ("\HVVVTQDZ\FQARYIUP")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R113" ("R113"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\DBYCDGTP" ("\HVVVTQDZ\DBYCDGTP")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R114" ("R114"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\BWHSXHVS" ("\HVVVTQDZ\BWHSXHVS")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R115" ("R115"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\WEEUUMNU" ("\HVVVTQDZ\WEEUUMNU")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R116" ("R116"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\ZHMTSVBH" ("\HVVVTQDZ\ZHMTSVBH")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R117" ("R117"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\OPPQJQPB" ("\HVVVTQDZ\OPPQJQPB")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R118" ("R118"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\KGAUWDFI" ("\HVVVTQDZ\KGAUWDFI")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R119" ("R119"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\DUNAIMLT" ("\HVVVTQDZ\DUNAIMLT")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R120" ("R120"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\IFACRIJA" ("\HVVVTQDZ\IFACRIJA")
+Change component parameters (AddParameter): Name = "MF"; Value = "YAGEO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RC0603JR-071KL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R121" ("R121"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\PBHDMMRD" ("\HVVVTQDZ\PBHDMMRD")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R122" ("R122"); Footprint = "R_0603_1608Metric"; UniqueID = "\HVVVTQDZ\SQQROACG" ("\HVVVTQDZ\SQQROACG")
+Change component parameters (AddParameter): Name = "MF"; Value = "FOJAN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "FRC0603J103TS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "R_0603"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "U16" ("U16"); Footprint = "TSSOP-16_4.4x5mm_P0.65mm"; UniqueID = "\POSVAQAE\ATNOZIOS" ("\POSVAQAE\ATNOZIOS")
+Change component parameters (AddParameter): Name = "MF"; Value = "Nexperia"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "TSSOP-16"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters: Designator = "U18" ("U18"); Footprint = "TSSOP-16_4.4x5mm_P0.65mm"; UniqueID = "\POSVAQAE\JCAQLLMF" ("\POSVAQAE\JCAQLLMF")
+Change component parameters (AddParameter): Name = "MF"; Value = "Nexperia"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "TSSOP-16"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "74HC595PW,118"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C4" ("C4"); Footprint = "CP_Elec_10x10"; UniqueID = "\DVXVNENK" ("\DVXVNENK")
+Change component parameters (AddParameter): Name = "MF"; Value = "SAMWHA"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "RP1C158M12020PL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "OZD"; Value = "RP1C158M12020PL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "THT 12.5x20mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "1500uf/35V"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+3V3 Pin=C33-2
+Added Pin To Net: NetName=+3V3 Pin=C34-2
+Added Pin To Net: NetName=+3V3 Pin=C35-2
+Added Pin To Net: NetName=+3V3 Pin=C36-2
+Added Pin To Net: NetName=+3V3 Pin=J10-2
+Added Pin To Net: NetName=+3V3 Pin=U15-10
+Added Pin To Net: NetName=+3V3 Pin=U15-16
+Added Pin To Net: NetName=+3V3 Pin=U16-10
+Added Pin To Net: NetName=+3V3 Pin=U16-16
+Added Pin To Net: NetName=+3V3 Pin=U17-10
+Added Pin To Net: NetName=+3V3 Pin=U17-16
+Added Pin To Net: NetName=+3V3 Pin=U18-10
+Added Pin To Net: NetName=+3V3 Pin=U18-16
+Added Net: Name=+3V3
+Added Pin To Net: NetName=+12V Pin=C4-1
+Added Pin To Net: NetName=+12V Pin=C5-1
+Added Pin To Net: NetName=+12V Pin=J10-1
+Added Pin To Net: NetName=+12V Pin=K1-A3
+Added Pin To Net: NetName=+12V Pin=K4-A3
+Added Pin To Net: NetName=+12V Pin=K5-A3
+Added Pin To Net: NetName=+12V Pin=K6-A3
+Added Pin To Net: NetName=+12V Pin=K7-A3
+Added Pin To Net: NetName=+12V Pin=K8-A3
+Added Pin To Net: NetName=+12V Pin=K9-A3
+Added Pin To Net: NetName=+12V Pin=K10-A3
+Added Pin To Net: NetName=+12V Pin=K11-A3
+Added Pin To Net: NetName=+12V Pin=K12-A3
+Added Pin To Net: NetName=+12V Pin=K13-A3
+Added Pin To Net: NetName=+12V Pin=K14-A3
+Added Pin To Net: NetName=+12V Pin=K15-A3
+Added Pin To Net: NetName=+12V Pin=K16-A3
+Added Pin To Net: NetName=+12V Pin=K17-A3
+Added Pin To Net: NetName=+12V Pin=K18-A3
+Added Pin To Net: NetName=+12V Pin=R86-1
+Added Pin To Net: NetName=+12V Pin=Z2-1
+Added Net: Name=+12V
+Added Pin To Net: NetName=GNDD Pin=C5-2
+Added Pin To Net: NetName=GNDD Pin=C6-1
+Added Pin To Net: NetName=GNDD Pin=C7-1
+Added Pin To Net: NetName=GNDD Pin=C12-1
+Added Pin To Net: NetName=GNDD Pin=C13-1
+Added Pin To Net: NetName=GNDD Pin=C14-1
+Added Pin To Net: NetName=GNDD Pin=C15-1
+Added Pin To Net: NetName=GNDD Pin=C16-1
+Added Pin To Net: NetName=GNDD Pin=C17-1
+Added Pin To Net: NetName=GNDD Pin=C18-1
+Added Pin To Net: NetName=GNDD Pin=C19-1
+Added Pin To Net: NetName=GNDD Pin=C20-1
+Added Pin To Net: NetName=GNDD Pin=C21-1
+Added Pin To Net: NetName=GNDD Pin=C22-1
+Added Pin To Net: NetName=GNDD Pin=C23-1
+Added Pin To Net: NetName=GNDD Pin=C24-1
+Added Pin To Net: NetName=GNDD Pin=C25-1
+Added Pin To Net: NetName=GNDD Pin=C26-1
+Added Pin To Net: NetName=GNDD Pin=C27-1
+Added Pin To Net: NetName=GNDD Pin=C28-1
+Added Pin To Net: NetName=GNDD Pin=C29-1
+Added Pin To Net: NetName=GNDD Pin=C30-1
+Added Pin To Net: NetName=GNDD Pin=C31-1
+Added Pin To Net: NetName=GNDD Pin=C32-1
+Added Pin To Net: NetName=GNDD Pin=C33-1
+Added Pin To Net: NetName=GNDD Pin=C34-1
+Added Pin To Net: NetName=GNDD Pin=C35-1
+Added Pin To Net: NetName=GNDD Pin=C36-1
+Added Pin To Net: NetName=GNDD Pin=C37-1
+Added Pin To Net: NetName=GNDD Pin=C38-1
+Added Pin To Net: NetName=GNDD Pin=C39-1
+Added Pin To Net: NetName=GNDD Pin=C40-1
+Added Pin To Net: NetName=GNDD Pin=C41-1
+Added Pin To Net: NetName=GNDD Pin=C42-1
+Added Pin To Net: NetName=GNDD Pin=C43-1
+Added Pin To Net: NetName=GNDD Pin=C44-1
+Added Pin To Net: NetName=GNDD Pin=C45-1
+Added Pin To Net: NetName=GNDD Pin=J10-3
+Added Pin To Net: NetName=GNDD Pin=Q3-2
+Added Pin To Net: NetName=GNDD Pin=Q4-2
+Added Pin To Net: NetName=GNDD Pin=Q18-2
+Added Pin To Net: NetName=GNDD Pin=Q19-2
+Added Pin To Net: NetName=GNDD Pin=Q20-2
+Added Pin To Net: NetName=GNDD Pin=Q21-2
+Added Pin To Net: NetName=GNDD Pin=Q22-2
+Added Pin To Net: NetName=GNDD Pin=Q23-2
+Added Pin To Net: NetName=GNDD Pin=Q24-2
+Added Pin To Net: NetName=GNDD Pin=Q25-2
+Added Pin To Net: NetName=GNDD Pin=Q26-2
+Added Pin To Net: NetName=GNDD Pin=Q27-2
+Added Pin To Net: NetName=GNDD Pin=Q28-2
+Added Pin To Net: NetName=GNDD Pin=Q29-2
+Added Pin To Net: NetName=GNDD Pin=Q30-2
+Added Pin To Net: NetName=GNDD Pin=Q31-2
+Added Pin To Net: NetName=GNDD Pin=Q32-2
+Added Pin To Net: NetName=GNDD Pin=Q33-2
+Added Pin To Net: NetName=GNDD Pin=Q34-2
+Added Pin To Net: NetName=GNDD Pin=Q35-2
+Added Pin To Net: NetName=GNDD Pin=Q36-2
+Added Pin To Net: NetName=GNDD Pin=Q37-2
+Added Pin To Net: NetName=GNDD Pin=Q38-2
+Added Pin To Net: NetName=GNDD Pin=Q39-2
+Added Pin To Net: NetName=GNDD Pin=Q40-2
+Added Pin To Net: NetName=GNDD Pin=Q41-2
+Added Pin To Net: NetName=GNDD Pin=Q42-2
+Added Pin To Net: NetName=GNDD Pin=Q43-2
+Added Pin To Net: NetName=GNDD Pin=Q44-2
+Added Pin To Net: NetName=GNDD Pin=Q45-2
+Added Pin To Net: NetName=GNDD Pin=Q46-2
+Added Pin To Net: NetName=GNDD Pin=Q47-2
+Added Pin To Net: NetName=GNDD Pin=Q48-2
+Added Pin To Net: NetName=GNDD Pin=R32-1
+Added Pin To Net: NetName=GNDD Pin=R35-1
+Added Pin To Net: NetName=GNDD Pin=R58-1
+Added Pin To Net: NetName=GNDD Pin=R59-1
+Added Pin To Net: NetName=GNDD Pin=R62-1
+Added Pin To Net: NetName=GNDD Pin=R63-1
+Added Pin To Net: NetName=GNDD Pin=R66-1
+Added Pin To Net: NetName=GNDD Pin=R67-1
+Added Pin To Net: NetName=GNDD Pin=R70-1
+Added Pin To Net: NetName=GNDD Pin=R71-1
+Added Pin To Net: NetName=GNDD Pin=R74-1
+Added Pin To Net: NetName=GNDD Pin=R75-1
+Added Pin To Net: NetName=GNDD Pin=R78-1
+Added Pin To Net: NetName=GNDD Pin=R79-1
+Added Pin To Net: NetName=GNDD Pin=R82-1
+Added Pin To Net: NetName=GNDD Pin=R83-1
+Added Pin To Net: NetName=GNDD Pin=R84-1
+Added Pin To Net: NetName=GNDD Pin=R95-1
+Added Pin To Net: NetName=GNDD Pin=R96-1
+Added Pin To Net: NetName=GNDD Pin=R97-1
+Added Pin To Net: NetName=GNDD Pin=R98-1
+Added Pin To Net: NetName=GNDD Pin=R101-1
+Added Pin To Net: NetName=GNDD Pin=R102-1
+Added Pin To Net: NetName=GNDD Pin=R105-1
+Added Pin To Net: NetName=GNDD Pin=R106-1
+Added Pin To Net: NetName=GNDD Pin=R109-1
+Added Pin To Net: NetName=GNDD Pin=R110-1
+Added Pin To Net: NetName=GNDD Pin=R113-1
+Added Pin To Net: NetName=GNDD Pin=R114-1
+Added Pin To Net: NetName=GNDD Pin=R117-1
+Added Pin To Net: NetName=GNDD Pin=R118-1
+Added Pin To Net: NetName=GNDD Pin=R121-1
+Added Pin To Net: NetName=GNDD Pin=R122-1
+Added Pin To Net: NetName=GNDD Pin=U15-8
+Added Pin To Net: NetName=GNDD Pin=U16-8
+Added Pin To Net: NetName=GNDD Pin=U17-8
+Added Pin To Net: NetName=GNDD Pin=U18-8
+Added Net: Name=GNDD
+Added Pin To Net: NetName=NetC4_2 Pin=C4-2
+Added Pin To Net: NetName=NetC4_2 Pin=Q32-3
+Added Net: Name=NetC4_2
+Added Pin To Net: NetName=NetC6_2 Pin=C6-2
+Added Pin To Net: NetName=NetC6_2 Pin=Q3-1
+Added Pin To Net: NetName=NetC6_2 Pin=R32-2
+Added Pin To Net: NetName=NetC6_2 Pin=R33-1
+Added Net: Name=NetC6_2
+Added Pin To Net: NetName=NetC7_2 Pin=C7-2
+Added Pin To Net: NetName=NetC7_2 Pin=Q4-1
+Added Pin To Net: NetName=NetC7_2 Pin=R34-1
+Added Pin To Net: NetName=NetC7_2 Pin=R35-2
+Added Net: Name=NetC7_2
+Added Pin To Net: NetName=NetC12_2 Pin=C12-2
+Added Pin To Net: NetName=NetC12_2 Pin=Q18-1
+Added Pin To Net: NetName=NetC12_2 Pin=R57-1
+Added Pin To Net: NetName=NetC12_2 Pin=R58-2
+Added Net: Name=NetC12_2
+Added Pin To Net: NetName=NetC13_2 Pin=C13-2
+Added Pin To Net: NetName=NetC13_2 Pin=Q19-1
+Added Pin To Net: NetName=NetC13_2 Pin=R56-1
+Added Pin To Net: NetName=NetC13_2 Pin=R59-2
+Added Net: Name=NetC13_2
+Added Pin To Net: NetName=NetC14_2 Pin=C14-2
+Added Pin To Net: NetName=NetC14_2 Pin=Q20-1
+Added Pin To Net: NetName=NetC14_2 Pin=R61-1
+Added Pin To Net: NetName=NetC14_2 Pin=R62-2
+Added Net: Name=NetC14_2
+Added Pin To Net: NetName=NetC15_2 Pin=C15-2
+Added Pin To Net: NetName=NetC15_2 Pin=Q21-1
+Added Pin To Net: NetName=NetC15_2 Pin=R60-1
+Added Pin To Net: NetName=NetC15_2 Pin=R63-2
+Added Net: Name=NetC15_2
+Added Pin To Net: NetName=NetC16_2 Pin=C16-2
+Added Pin To Net: NetName=NetC16_2 Pin=Q22-1
+Added Pin To Net: NetName=NetC16_2 Pin=R65-1
+Added Pin To Net: NetName=NetC16_2 Pin=R66-2
+Added Net: Name=NetC16_2
+Added Pin To Net: NetName=NetC17_2 Pin=C17-2
+Added Pin To Net: NetName=NetC17_2 Pin=Q23-1
+Added Pin To Net: NetName=NetC17_2 Pin=R64-1
+Added Pin To Net: NetName=NetC17_2 Pin=R67-2
+Added Net: Name=NetC17_2
+Added Pin To Net: NetName=NetC18_2 Pin=C18-2
+Added Pin To Net: NetName=NetC18_2 Pin=Q24-1
+Added Pin To Net: NetName=NetC18_2 Pin=R69-1
+Added Pin To Net: NetName=NetC18_2 Pin=R70-2
+Added Net: Name=NetC18_2
+Added Pin To Net: NetName=NetC19_2 Pin=C19-2
+Added Pin To Net: NetName=NetC19_2 Pin=Q25-1
+Added Pin To Net: NetName=NetC19_2 Pin=R68-1
+Added Pin To Net: NetName=NetC19_2 Pin=R71-2
+Added Net: Name=NetC19_2
+Added Pin To Net: NetName=NetC20_2 Pin=C20-2
+Added Pin To Net: NetName=NetC20_2 Pin=Q26-1
+Added Pin To Net: NetName=NetC20_2 Pin=R73-1
+Added Pin To Net: NetName=NetC20_2 Pin=R74-2
+Added Net: Name=NetC20_2
+Added Pin To Net: NetName=NetC21_2 Pin=C21-2
+Added Pin To Net: NetName=NetC21_2 Pin=Q27-1
+Added Pin To Net: NetName=NetC21_2 Pin=R72-1
+Added Pin To Net: NetName=NetC21_2 Pin=R75-2
+Added Net: Name=NetC21_2
+Added Pin To Net: NetName=NetC22_2 Pin=C22-2
+Added Pin To Net: NetName=NetC22_2 Pin=Q28-1
+Added Pin To Net: NetName=NetC22_2 Pin=R77-1
+Added Pin To Net: NetName=NetC22_2 Pin=R78-2
+Added Net: Name=NetC22_2
+Added Pin To Net: NetName=NetC23_2 Pin=C23-2
+Added Pin To Net: NetName=NetC23_2 Pin=Q29-1
+Added Pin To Net: NetName=NetC23_2 Pin=R76-1
+Added Pin To Net: NetName=NetC23_2 Pin=R79-2
+Added Net: Name=NetC23_2
+Added Pin To Net: NetName=NetC24_2 Pin=C24-2
+Added Pin To Net: NetName=NetC24_2 Pin=Q30-1
+Added Pin To Net: NetName=NetC24_2 Pin=R81-1
+Added Pin To Net: NetName=NetC24_2 Pin=R82-2
+Added Net: Name=NetC24_2
+Added Pin To Net: NetName=NetC25_2 Pin=C25-2
+Added Pin To Net: NetName=NetC25_2 Pin=Q31-1
+Added Pin To Net: NetName=NetC25_2 Pin=R80-1
+Added Pin To Net: NetName=NetC25_2 Pin=R83-2
+Added Net: Name=NetC25_2
+Added Pin To Net: NetName=NetC26_2 Pin=C26-2
+Added Pin To Net: NetName=NetC26_2 Pin=Q33-1
+Added Pin To Net: NetName=NetC26_2 Pin=R93-1
+Added Pin To Net: NetName=NetC26_2 Pin=R95-2
+Added Net: Name=NetC26_2
+Added Pin To Net: NetName=NetC27_2 Pin=C27-2
+Added Pin To Net: NetName=NetC27_2 Pin=Q34-1
+Added Pin To Net: NetName=NetC27_2 Pin=R94-1
+Added Pin To Net: NetName=NetC27_2 Pin=R97-2
+Added Net: Name=NetC27_2
+Added Pin To Net: NetName=NetC28_2 Pin=C28-2
+Added Pin To Net: NetName=NetC28_2 Pin=Q35-1
+Added Pin To Net: NetName=NetC28_2 Pin=R91-1
+Added Pin To Net: NetName=NetC28_2 Pin=R96-2
+Added Net: Name=NetC28_2
+Added Pin To Net: NetName=NetC29_2 Pin=C29-2
+Added Pin To Net: NetName=NetC29_2 Pin=Q36-1
+Added Pin To Net: NetName=NetC29_2 Pin=R92-1
+Added Pin To Net: NetName=NetC29_2 Pin=R98-2
+Added Net: Name=NetC29_2
+Added Pin To Net: NetName=NetC30_2 Pin=C30-2
+Added Pin To Net: NetName=NetC30_2 Pin=Q37-1
+Added Pin To Net: NetName=NetC30_2 Pin=R100-1
+Added Pin To Net: NetName=NetC30_2 Pin=R101-2
+Added Net: Name=NetC30_2
+Added Pin To Net: NetName=NetC31_2 Pin=C31-2
+Added Pin To Net: NetName=NetC31_2 Pin=Q38-1
+Added Pin To Net: NetName=NetC31_2 Pin=R99-1
+Added Pin To Net: NetName=NetC31_2 Pin=R102-2
+Added Net: Name=NetC31_2
+Added Pin To Net: NetName=NetC32_2 Pin=C32-2
+Added Pin To Net: NetName=NetC32_2 Pin=Q39-1
+Added Pin To Net: NetName=NetC32_2 Pin=R104-1
+Added Pin To Net: NetName=NetC32_2 Pin=R105-2
+Added Net: Name=NetC32_2
+Added Pin To Net: NetName=NetC37_2 Pin=C37-2
+Added Pin To Net: NetName=NetC37_2 Pin=Q40-1
+Added Pin To Net: NetName=NetC37_2 Pin=R103-1
+Added Pin To Net: NetName=NetC37_2 Pin=R106-2
+Added Net: Name=NetC37_2
+Added Pin To Net: NetName=NetC38_2 Pin=C38-2
+Added Pin To Net: NetName=NetC38_2 Pin=Q41-1
+Added Pin To Net: NetName=NetC38_2 Pin=R108-1
+Added Pin To Net: NetName=NetC38_2 Pin=R109-2
+Added Net: Name=NetC38_2
+Added Pin To Net: NetName=NetC39_2 Pin=C39-2
+Added Pin To Net: NetName=NetC39_2 Pin=Q42-1
+Added Pin To Net: NetName=NetC39_2 Pin=R107-1
+Added Pin To Net: NetName=NetC39_2 Pin=R110-2
+Added Net: Name=NetC39_2
+Added Pin To Net: NetName=NetC40_2 Pin=C40-2
+Added Pin To Net: NetName=NetC40_2 Pin=Q43-1
+Added Pin To Net: NetName=NetC40_2 Pin=R112-1
+Added Pin To Net: NetName=NetC40_2 Pin=R113-2
+Added Net: Name=NetC40_2
+Added Pin To Net: NetName=NetC41_2 Pin=C41-2
+Added Pin To Net: NetName=NetC41_2 Pin=Q44-1
+Added Pin To Net: NetName=NetC41_2 Pin=R111-1
+Added Pin To Net: NetName=NetC41_2 Pin=R114-2
+Added Net: Name=NetC41_2
+Added Pin To Net: NetName=NetC42_2 Pin=C42-2
+Added Pin To Net: NetName=NetC42_2 Pin=Q45-1
+Added Pin To Net: NetName=NetC42_2 Pin=R116-1
+Added Pin To Net: NetName=NetC42_2 Pin=R117-2
+Added Net: Name=NetC42_2
+Added Pin To Net: NetName=NetC43_2 Pin=C43-2
+Added Pin To Net: NetName=NetC43_2 Pin=Q46-1
+Added Pin To Net: NetName=NetC43_2 Pin=R115-1
+Added Pin To Net: NetName=NetC43_2 Pin=R118-2
+Added Net: Name=NetC43_2
+Added Pin To Net: NetName=NetC44_2 Pin=C44-2
+Added Pin To Net: NetName=NetC44_2 Pin=Q47-1
+Added Pin To Net: NetName=NetC44_2 Pin=R120-1
+Added Pin To Net: NetName=NetC44_2 Pin=R121-2
+Added Net: Name=NetC44_2
+Added Pin To Net: NetName=NetC45_2 Pin=C45-2
+Added Pin To Net: NetName=NetC45_2 Pin=Q48-1
+Added Pin To Net: NetName=NetC45_2 Pin=R119-1
+Added Pin To Net: NetName=NetC45_2 Pin=R122-2
+Added Net: Name=NetC45_2
+Added Pin To Net: NetName=NetJ9_1 Pin=J9-1
+Added Pin To Net: NetName=NetJ9_1 Pin=R90-1
+Added Net: Name=NetJ9_1
+Added Pin To Net: NetName=NetJ9_2 Pin=J9-2
+Added Pin To Net: NetName=NetJ9_2 Pin=R89-1
+Added Net: Name=NetJ9_2
+Added Pin To Net: NetName=NetJ9_3 Pin=J9-3
+Added Pin To Net: NetName=NetJ9_3 Pin=R87-1
+Added Net: Name=NetJ9_3
+Added Pin To Net: NetName=NetJ9_4 Pin=J9-4
+Added Pin To Net: NetName=NetJ9_4 Pin=R88-1
+Added Net: Name=NetJ9_4
+Added Pin To Net: NetName=NetK1_A1 Pin=K1-A1
+Added Pin To Net: NetName=NetK1_A1 Pin=Q4-3
+Added Net: Name=NetK1_A1
+Added Pin To Net: NetName=NetK1_A2 Pin=K1-A2
+Added Pin To Net: NetName=NetK1_A2 Pin=Q3-3
+Added Net: Name=NetK1_A2
+Added Pin To Net: NetName=NetK4_A1 Pin=K4-A1
+Added Pin To Net: NetName=NetK4_A1 Pin=Q18-3
+Added Net: Name=NetK4_A1
+Added Pin To Net: NetName=NetK4_A2 Pin=K4-A2
+Added Pin To Net: NetName=NetK4_A2 Pin=Q19-3
+Added Net: Name=NetK4_A2
+Added Pin To Net: NetName=NetK5_A1 Pin=K5-A1
+Added Pin To Net: NetName=NetK5_A1 Pin=Q20-3
+Added Net: Name=NetK5_A1
+Added Pin To Net: NetName=NetK5_A2 Pin=K5-A2
+Added Pin To Net: NetName=NetK5_A2 Pin=Q21-3
+Added Net: Name=NetK5_A2
+Added Pin To Net: NetName=NetK6_A1 Pin=K6-A1
+Added Pin To Net: NetName=NetK6_A1 Pin=Q22-3
+Added Net: Name=NetK6_A1
+Added Pin To Net: NetName=NetK6_A2 Pin=K6-A2
+Added Pin To Net: NetName=NetK6_A2 Pin=Q23-3
+Added Net: Name=NetK6_A2
+Added Pin To Net: NetName=NetK7_A1 Pin=K7-A1
+Added Pin To Net: NetName=NetK7_A1 Pin=Q24-3
+Added Net: Name=NetK7_A1
+Added Pin To Net: NetName=NetK7_A2 Pin=K7-A2
+Added Pin To Net: NetName=NetK7_A2 Pin=Q25-3
+Added Net: Name=NetK7_A2
+Added Pin To Net: NetName=NetK8_A1 Pin=K8-A1
+Added Pin To Net: NetName=NetK8_A1 Pin=Q26-3
+Added Net: Name=NetK8_A1
+Added Pin To Net: NetName=NetK8_A2 Pin=K8-A2
+Added Pin To Net: NetName=NetK8_A2 Pin=Q27-3
+Added Net: Name=NetK8_A2
+Added Pin To Net: NetName=NetK9_A1 Pin=K9-A1
+Added Pin To Net: NetName=NetK9_A1 Pin=Q28-3
+Added Net: Name=NetK9_A1
+Added Pin To Net: NetName=NetK9_A2 Pin=K9-A2
+Added Pin To Net: NetName=NetK9_A2 Pin=Q29-3
+Added Net: Name=NetK9_A2
+Added Pin To Net: NetName=NetK10_A1 Pin=K10-A1
+Added Pin To Net: NetName=NetK10_A1 Pin=Q30-3
+Added Net: Name=NetK10_A1
+Added Pin To Net: NetName=NetK10_A2 Pin=K10-A2
+Added Pin To Net: NetName=NetK10_A2 Pin=Q31-3
+Added Net: Name=NetK10_A2
+Added Pin To Net: NetName=NetK11_A1 Pin=K11-A1
+Added Pin To Net: NetName=NetK11_A1 Pin=Q33-3
+Added Net: Name=NetK11_A1
+Added Pin To Net: NetName=NetK11_A2 Pin=K11-A2
+Added Pin To Net: NetName=NetK11_A2 Pin=Q35-3
+Added Net: Name=NetK11_A2
+Added Pin To Net: NetName=NetK12_A1 Pin=K12-A1
+Added Pin To Net: NetName=NetK12_A1 Pin=Q34-3
+Added Net: Name=NetK12_A1
+Added Pin To Net: NetName=NetK12_A2 Pin=K12-A2
+Added Pin To Net: NetName=NetK12_A2 Pin=Q36-3
+Added Net: Name=NetK12_A2
+Added Pin To Net: NetName=NetK13_A1 Pin=K13-A1
+Added Pin To Net: NetName=NetK13_A1 Pin=Q37-3
+Added Net: Name=NetK13_A1
+Added Pin To Net: NetName=NetK13_A2 Pin=K13-A2
+Added Pin To Net: NetName=NetK13_A2 Pin=Q38-3
+Added Net: Name=NetK13_A2
+Added Pin To Net: NetName=NetK14_A1 Pin=K14-A1
+Added Pin To Net: NetName=NetK14_A1 Pin=Q39-3
+Added Net: Name=NetK14_A1
+Added Pin To Net: NetName=NetK14_A2 Pin=K14-A2
+Added Pin To Net: NetName=NetK14_A2 Pin=Q40-3
+Added Net: Name=NetK14_A2
+Added Pin To Net: NetName=NetK15_A1 Pin=K15-A1
+Added Pin To Net: NetName=NetK15_A1 Pin=Q41-3
+Added Net: Name=NetK15_A1
+Added Pin To Net: NetName=NetK15_A2 Pin=K15-A2
+Added Pin To Net: NetName=NetK15_A2 Pin=Q42-3
+Added Net: Name=NetK15_A2
+Added Pin To Net: NetName=NetK16_A1 Pin=K16-A1
+Added Pin To Net: NetName=NetK16_A1 Pin=Q43-3
+Added Net: Name=NetK16_A1
+Added Pin To Net: NetName=NetK16_A2 Pin=K16-A2
+Added Pin To Net: NetName=NetK16_A2 Pin=Q44-3
+Added Net: Name=NetK16_A2
+Added Pin To Net: NetName=NetK17_A1 Pin=K17-A1
+Added Pin To Net: NetName=NetK17_A1 Pin=Q45-3
+Added Net: Name=NetK17_A1
+Added Pin To Net: NetName=NetK17_A2 Pin=K17-A2
+Added Pin To Net: NetName=NetK17_A2 Pin=Q46-3
+Added Net: Name=NetK17_A2
+Added Pin To Net: NetName=NetK18_A1 Pin=K18-A1
+Added Pin To Net: NetName=NetK18_A1 Pin=Q47-3
+Added Net: Name=NetK18_A1
+Added Pin To Net: NetName=NetK18_A2 Pin=K18-A2
+Added Pin To Net: NetName=NetK18_A2 Pin=Q48-3
+Added Net: Name=NetK18_A2
+Added Pin To Net: NetName=NetQ32_1 Pin=Q32-1
+Added Pin To Net: NetName=NetQ32_1 Pin=R85-1
+Added Net: Name=NetQ32_1
+Added Pin To Net: NetName=NetR84_2 Pin=R84-2
+Added Pin To Net: NetName=NetR84_2 Pin=R85-2
+Added Pin To Net: NetName=NetR84_2 Pin=Z2-2
+Added Net: Name=NetR84_2
+Added Pin To Net: NetName=NetU15_9 Pin=U15-9
+Added Pin To Net: NetName=NetU15_9 Pin=U17-14
+Added Net: Name=NetU15_9
+Added Pin To Net: NetName=NetU16_9 Pin=U16-9
+Added Pin To Net: NetName=NetU16_9 Pin=U18-14
+Added Net: Name=NetU16_9
+Added Pin To Net: NetName=NetU16_14 Pin=U16-14
+Added Pin To Net: NetName=NetU16_14 Pin=U17-9
+Added Net: Name=NetU16_14
+Added Pin To Net: NetName=R1_A1 Pin=R34-2
+Added Pin To Net: NetName=R1_A1 Pin=U17-2
+Added Net: Name=R1_A1
+Added Pin To Net: NetName=R1_A2 Pin=R33-2
+Added Pin To Net: NetName=R1_A2 Pin=U16-7
+Added Net: Name=R1_A2
+Added Pin To Net: NetName=R1_COM Pin=J1-2
+Added Pin To Net: NetName=R1_COM Pin=K1-11
+Added Pin To Net: NetName=R1_COM Pin=K1-11
+Added Net: Name=R1_COM
+Added Pin To Net: NetName=R1_NC Pin=K1-12
+Added Pin To Net: NetName=R1_NC Pin=K1-12
+Added Net: Name=R1_NC
+Added Pin To Net: NetName=R1_NO Pin=J1-1
+Added Pin To Net: NetName=R1_NO Pin=K1-14
+Added Pin To Net: NetName=R1_NO Pin=K1-14
+Added Net: Name=R1_NO
+Added Pin To Net: NetName=R2_A1 Pin=R57-2
+Added Pin To Net: NetName=R2_A1 Pin=U15-1
+Added Net: Name=R2_A1
+Added Pin To Net: NetName=R2_A2 Pin=R56-2
+Added Pin To Net: NetName=R2_A2 Pin=U15-3
+Added Net: Name=R2_A2
+Added Pin To Net: NetName=R2_COM Pin=J2-2
+Added Pin To Net: NetName=R2_COM Pin=K4-11
+Added Pin To Net: NetName=R2_COM Pin=K4-11
+Added Net: Name=R2_COM
+Added Pin To Net: NetName=R2_NC Pin=K4-12
+Added Pin To Net: NetName=R2_NC Pin=K4-12
+Added Net: Name=R2_NC
+Added Pin To Net: NetName=R2_NO Pin=J2-1
+Added Pin To Net: NetName=R2_NO Pin=K4-14
+Added Pin To Net: NetName=R2_NO Pin=K4-14
+Added Net: Name=R2_NO
+Added Pin To Net: NetName=R3_A1 Pin=R61-2
+Added Pin To Net: NetName=R3_A1 Pin=U15-5
+Added Net: Name=R3_A1
+Added Pin To Net: NetName=R3_A2 Pin=R60-2
+Added Pin To Net: NetName=R3_A2 Pin=U15-7
+Added Net: Name=R3_A2
+Added Pin To Net: NetName=R3_COM Pin=J3-2
+Added Pin To Net: NetName=R3_COM Pin=K5-11
+Added Pin To Net: NetName=R3_COM Pin=K5-11
+Added Net: Name=R3_COM
+Added Pin To Net: NetName=R3_NC Pin=K5-12
+Added Pin To Net: NetName=R3_NC Pin=K5-12
+Added Net: Name=R3_NC
+Added Pin To Net: NetName=R3_NO Pin=J3-1
+Added Pin To Net: NetName=R3_NO Pin=K5-14
+Added Pin To Net: NetName=R3_NO Pin=K5-14
+Added Net: Name=R3_NO
+Added Pin To Net: NetName=R4_A1 Pin=R65-2
+Added Pin To Net: NetName=R4_A1 Pin=U17-3
+Added Net: Name=R4_A1
+Added Pin To Net: NetName=R4_A2 Pin=R64-2
+Added Pin To Net: NetName=R4_A2 Pin=U18-7
+Added Net: Name=R4_A2
+Added Pin To Net: NetName=R4_COM Pin=J4-2
+Added Pin To Net: NetName=R4_COM Pin=K6-11
+Added Pin To Net: NetName=R4_COM Pin=K6-11
+Added Net: Name=R4_COM
+Added Pin To Net: NetName=R4_NC Pin=K6-12
+Added Pin To Net: NetName=R4_NC Pin=K6-12
+Added Net: Name=R4_NC
+Added Pin To Net: NetName=R4_NO Pin=J4-1
+Added Pin To Net: NetName=R4_NO Pin=K6-14
+Added Pin To Net: NetName=R4_NO Pin=K6-14
+Added Net: Name=R4_NO
+Added Pin To Net: NetName=R5_A1 Pin=R69-2
+Added Pin To Net: NetName=R5_A1 Pin=U18-5
+Added Net: Name=R5_A1
+Added Pin To Net: NetName=R5_A2 Pin=R68-2
+Added Pin To Net: NetName=R5_A2 Pin=U18-3
+Added Net: Name=R5_A2
+Added Pin To Net: NetName=R5_COM Pin=J5-2
+Added Pin To Net: NetName=R5_COM Pin=K7-11
+Added Pin To Net: NetName=R5_COM Pin=K7-11
+Added Net: Name=R5_COM
+Added Pin To Net: NetName=R5_NC Pin=K7-12
+Added Pin To Net: NetName=R5_NC Pin=K7-12
+Added Net: Name=R5_NC
+Added Pin To Net: NetName=R5_NO Pin=J5-1
+Added Pin To Net: NetName=R5_NO Pin=K7-14
+Added Pin To Net: NetName=R5_NO Pin=K7-14
+Added Net: Name=R5_NO
+Added Pin To Net: NetName=R6_A1 Pin=R73-2
+Added Pin To Net: NetName=R6_A1 Pin=U18-1
+Added Net: Name=R6_A1
+Added Pin To Net: NetName=R6_A2 Pin=R72-2
+Added Pin To Net: NetName=R6_A2 Pin=U17-5
+Added Net: Name=R6_A2
+Added Pin To Net: NetName=R6_COM Pin=J6-2
+Added Pin To Net: NetName=R6_COM Pin=K8-11
+Added Pin To Net: NetName=R6_COM Pin=K8-11
+Added Net: Name=R6_COM
+Added Pin To Net: NetName=R6_NC Pin=K8-12
+Added Pin To Net: NetName=R6_NC Pin=K8-12
+Added Net: Name=R6_NC
+Added Pin To Net: NetName=R6_NO Pin=J6-1
+Added Pin To Net: NetName=R6_NO Pin=K8-14
+Added Pin To Net: NetName=R6_NO Pin=K8-14
+Added Net: Name=R6_NO
+Added Pin To Net: NetName=R7_A1 Pin=R77-2
+Added Pin To Net: NetName=R7_A1 Pin=U16-6
+Added Net: Name=R7_A1
+Added Pin To Net: NetName=R7_A2 Pin=R76-2
+Added Pin To Net: NetName=R7_A2 Pin=U16-4
+Added Net: Name=R7_A2
+Added Pin To Net: NetName=R7_COM Pin=J7-2
+Added Pin To Net: NetName=R7_COM Pin=K9-11
+Added Pin To Net: NetName=R7_COM Pin=K9-11
+Added Net: Name=R7_COM
+Added Pin To Net: NetName=R7_NC Pin=K9-12
+Added Pin To Net: NetName=R7_NC Pin=K9-12
+Added Net: Name=R7_NC
+Added Pin To Net: NetName=R7_NO Pin=J7-1
+Added Pin To Net: NetName=R7_NO Pin=K9-14
+Added Pin To Net: NetName=R7_NO Pin=K9-14
+Added Net: Name=R7_NO
+Added Pin To Net: NetName=R8_A1 Pin=R81-2
+Added Pin To Net: NetName=R8_A1 Pin=U16-2
+Added Net: Name=R8_A1
+Added Pin To Net: NetName=R8_A2 Pin=R80-2
+Added Pin To Net: NetName=R8_A2 Pin=U16-15
+Added Net: Name=R8_A2
+Added Pin To Net: NetName=R8_COM Pin=J8-2
+Added Pin To Net: NetName=R8_COM Pin=K10-11
+Added Pin To Net: NetName=R8_COM Pin=K10-11
+Added Net: Name=R8_COM
+Added Pin To Net: NetName=R8_NC Pin=K10-12
+Added Pin To Net: NetName=R8_NC Pin=K10-12
+Added Net: Name=R8_NC
+Added Pin To Net: NetName=R8_NO Pin=J8-1
+Added Pin To Net: NetName=R8_NO Pin=K10-14
+Added Pin To Net: NetName=R8_NO Pin=K10-14
+Added Net: Name=R8_NO
+Added Pin To Net: NetName=R9_A1 Pin=R93-2
+Added Pin To Net: NetName=R9_A1 Pin=U15-15
+Added Net: Name=R9_A1
+Added Pin To Net: NetName=R9_A2 Pin=R91-2
+Added Pin To Net: NetName=R9_A2 Pin=U17-1
+Added Net: Name=R9_A2
+Added Pin To Net: NetName=R9_COM Pin=J11-2
+Added Pin To Net: NetName=R9_COM Pin=K11-11
+Added Pin To Net: NetName=R9_COM Pin=K11-11
+Added Net: Name=R9_COM
+Added Pin To Net: NetName=R9_NC Pin=K11-12
+Added Pin To Net: NetName=R9_NC Pin=K11-12
+Added Net: Name=R9_NC
+Added Pin To Net: NetName=R9_NO Pin=J11-1
+Added Pin To Net: NetName=R9_NO Pin=K11-14
+Added Pin To Net: NetName=R9_NO Pin=K11-14
+Added Net: Name=R9_NO
+Added Pin To Net: NetName=R10_A1 Pin=R94-2
+Added Pin To Net: NetName=R10_A1 Pin=U15-4
+Added Net: Name=R10_A1
+Added Pin To Net: NetName=R10_A2 Pin=R92-2
+Added Pin To Net: NetName=R10_A2 Pin=U15-2
+Added Net: Name=R10_A2
+Added Pin To Net: NetName=R10_COM Pin=J12-2
+Added Pin To Net: NetName=R10_COM Pin=K12-11
+Added Pin To Net: NetName=R10_COM Pin=K12-11
+Added Net: Name=R10_COM
+Added Pin To Net: NetName=R10_NC Pin=K12-12
+Added Pin To Net: NetName=R10_NC Pin=K12-12
+Added Net: Name=R10_NC
+Added Pin To Net: NetName=R10_NO Pin=J12-1
+Added Pin To Net: NetName=R10_NO Pin=K12-14
+Added Pin To Net: NetName=R10_NO Pin=K12-14
+Added Net: Name=R10_NO
+Added Pin To Net: NetName=R11_A1 Pin=R100-2
+Added Pin To Net: NetName=R11_A1 Pin=U17-4
+Added Net: Name=R11_A1
+Added Pin To Net: NetName=R11_A2 Pin=R99-2
+Added Pin To Net: NetName=R11_A2 Pin=U15-6
+Added Net: Name=R11_A2
+Added Pin To Net: NetName=R11_COM Pin=J13-2
+Added Pin To Net: NetName=R11_COM Pin=K13-11
+Added Pin To Net: NetName=R11_COM Pin=K13-11
+Added Net: Name=R11_COM
+Added Pin To Net: NetName=R11_NC Pin=K13-12
+Added Pin To Net: NetName=R11_NC Pin=K13-12
+Added Net: Name=R11_NC
+Added Pin To Net: NetName=R11_NO Pin=J13-1
+Added Pin To Net: NetName=R11_NO Pin=K13-14
+Added Pin To Net: NetName=R11_NO Pin=K13-14
+Added Net: Name=R11_NO
+Added Pin To Net: NetName=R12_A1 Pin=R104-2
+Added Pin To Net: NetName=R12_A1 Pin=U18-6
+Added Net: Name=R12_A1
+Added Pin To Net: NetName=R12_A2 Pin=R103-2
+Added Pin To Net: NetName=R12_A2 Pin=U17-15
+Added Net: Name=R12_A2
+Added Pin To Net: NetName=R12_COM Pin=J14-2
+Added Pin To Net: NetName=R12_COM Pin=K14-11
+Added Pin To Net: NetName=R12_COM Pin=K14-11
+Added Net: Name=R12_COM
+Added Pin To Net: NetName=R12_NC Pin=K14-12
+Added Pin To Net: NetName=R12_NC Pin=K14-12
+Added Net: Name=R12_NC
+Added Pin To Net: NetName=R12_NO Pin=J14-1
+Added Pin To Net: NetName=R12_NO Pin=K14-14
+Added Pin To Net: NetName=R12_NO Pin=K14-14
+Added Net: Name=R12_NO
+Added Pin To Net: NetName=R13_A1 Pin=R108-2
+Added Pin To Net: NetName=R13_A1 Pin=U18-2
+Added Net: Name=R13_A1
+Added Pin To Net: NetName=R13_A2 Pin=R107-2
+Added Pin To Net: NetName=R13_A2 Pin=U18-4
+Added Net: Name=R13_A2
+Added Pin To Net: NetName=R13_COM Pin=J15-2
+Added Pin To Net: NetName=R13_COM Pin=K15-11
+Added Pin To Net: NetName=R13_COM Pin=K15-11
+Added Net: Name=R13_COM
+Added Pin To Net: NetName=R13_NC Pin=K15-12
+Added Pin To Net: NetName=R13_NC Pin=K15-12
+Added Net: Name=R13_NC
+Added Pin To Net: NetName=R13_NO Pin=J15-1
+Added Pin To Net: NetName=R13_NO Pin=K15-14
+Added Pin To Net: NetName=R13_NO Pin=K15-14
+Added Net: Name=R13_NO
+Added Pin To Net: NetName=R14_A1 Pin=R112-2
+Added Pin To Net: NetName=R14_A1 Pin=U17-6
+Added Net: Name=R14_A1
+Added Pin To Net: NetName=R14_A2 Pin=R111-2
+Added Pin To Net: NetName=R14_A2 Pin=U18-15
+Added Net: Name=R14_A2
+Added Pin To Net: NetName=R14_COM Pin=J16-2
+Added Pin To Net: NetName=R14_COM Pin=K16-11
+Added Pin To Net: NetName=R14_COM Pin=K16-11
+Added Net: Name=R14_COM
+Added Pin To Net: NetName=R14_NC Pin=K16-12
+Added Pin To Net: NetName=R14_NC Pin=K16-12
+Added Net: Name=R14_NC
+Added Pin To Net: NetName=R14_NO Pin=J16-1
+Added Pin To Net: NetName=R14_NO Pin=K16-14
+Added Pin To Net: NetName=R14_NO Pin=K16-14
+Added Net: Name=R14_NO
+Added Pin To Net: NetName=R15_A1 Pin=R116-2
+Added Pin To Net: NetName=R15_A1 Pin=U16-3
+Added Net: Name=R15_A1
+Added Pin To Net: NetName=R15_A2 Pin=R115-2
+Added Pin To Net: NetName=R15_A2 Pin=U16-5
+Added Net: Name=R15_A2
+Added Pin To Net: NetName=R15_COM Pin=J17-2
+Added Pin To Net: NetName=R15_COM Pin=K17-11
+Added Pin To Net: NetName=R15_COM Pin=K17-11
+Added Net: Name=R15_COM
+Added Pin To Net: NetName=R15_NC Pin=K17-12
+Added Pin To Net: NetName=R15_NC Pin=K17-12
+Added Net: Name=R15_NC
+Added Pin To Net: NetName=R15_NO Pin=J17-1
+Added Pin To Net: NetName=R15_NO Pin=K17-14
+Added Pin To Net: NetName=R15_NO Pin=K17-14
+Added Net: Name=R15_NO
+Added Pin To Net: NetName=R16_A1 Pin=R120-2
+Added Pin To Net: NetName=R16_A1 Pin=U17-7
+Added Net: Name=R16_A1
+Added Pin To Net: NetName=R16_A2 Pin=R119-2
+Added Pin To Net: NetName=R16_A2 Pin=U16-1
+Added Net: Name=R16_A2
+Added Pin To Net: NetName=R16_COM Pin=J18-2
+Added Pin To Net: NetName=R16_COM Pin=K18-11
+Added Pin To Net: NetName=R16_COM Pin=K18-11
+Added Net: Name=R16_COM
+Added Pin To Net: NetName=R16_NC Pin=K18-12
+Added Pin To Net: NetName=R16_NC Pin=K18-12
+Added Net: Name=R16_NC
+Added Pin To Net: NetName=R16_NO Pin=J18-1
+Added Pin To Net: NetName=R16_NO Pin=K18-14
+Added Pin To Net: NetName=R16_NO Pin=K18-14
+Added Net: Name=R16_NO
+Added Pin To Net: NetName=Relay_ADC Pin=J10-4
+Added Pin To Net: NetName=Relay_ADC Pin=R86-2
+Added Net: Name=Relay_ADC
+Added Pin To Net: NetName=Shift_{\O\E\}\ Pin=R90-2
+Added Pin To Net: NetName=Shift_{\O\E\}\ Pin=U15-13
+Added Pin To Net: NetName=Shift_{\O\E\}\ Pin=U16-13
+Added Pin To Net: NetName=Shift_{\O\E\}\ Pin=U17-13
+Added Pin To Net: NetName=Shift_{\O\E\}\ Pin=U18-13
+Added Net: Name=Shift_{\O\E\}\
+Added Pin To Net: NetName=ShiftReg_Latch Pin=R89-2
+Added Pin To Net: NetName=ShiftReg_Latch Pin=U15-12
+Added Pin To Net: NetName=ShiftReg_Latch Pin=U16-12
+Added Pin To Net: NetName=ShiftReg_Latch Pin=U17-12
+Added Pin To Net: NetName=ShiftReg_Latch Pin=U18-12
+Added Net: Name=ShiftReg_Latch
+Added Pin To Net: NetName=ShiftRegCLK Pin=R88-2
+Added Pin To Net: NetName=ShiftRegCLK Pin=U15-11
+Added Pin To Net: NetName=ShiftRegCLK Pin=U16-11
+Added Pin To Net: NetName=ShiftRegCLK Pin=U17-11
+Added Pin To Net: NetName=ShiftRegCLK Pin=U18-11
+Added Net: Name=ShiftRegCLK
+Added Pin To Net: NetName=ShiftRegDATA Pin=R87-2
+Added Pin To Net: NetName=ShiftRegDATA Pin=U15-14
+Added Net: Name=ShiftRegDATA
+Added Class: Name=KNX_Relay_16CH_V0.2
+Added Class: Name=RELAYS
+Added Class: Name=Shift register
+Added Rule: Name=Schematic Supply Nets
+Added Rule: Name=Schematic Supply Nets_1
+Added Rule: Name=Schematic Supply Nets_2

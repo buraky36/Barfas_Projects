@@ -1,0 +1,6796 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "947e773f-b75d-496a-b390-5bebe3cb81b9")
+	(paper "A4")
+	(lib_symbols
+		(symbol "74xx:74HC595"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at -7.62 13.97 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "74HC595"
+				(at -7.62 -16.51 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "8-bit serial in/out Shift Register 3-State Outputs"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "HCMOS SR 3State"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "DIP*W7.62mm* SOIC*3.9x9.9mm*P1.27mm* TSSOP*4.4x5mm*P0.65mm* SOIC*5.3x10.2mm*P1.27mm* SOIC*7.5x10.3mm*P1.27mm*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "74HC595_1_0"
+				(pin tri_state line
+					(at 10.16 7.62 180)
+					(length 2.54)
+					(name "QB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 10.16 5.08 180)
+					(length 2.54)
+					(name "QC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "QD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "QE"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "QF"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 10.16 -5.08 180)
+					(length 2.54)
+					(name "QG"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 10.16 -7.62 180)
+					(length 2.54)
+					(name "QH"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -17.78 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 -12.7 180)
+					(length 2.54)
+					(name "QH'"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "~{SRCLR}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 5.08 0)
+					(length 2.54)
+					(name "SRCLK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "RCLK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "~{OE}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 10.16 0)
+					(length 2.54)
+					(name "SER"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 10.16 10.16 180)
+					(length 2.54)
+					(name "QA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 15.24 270)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74HC595_1_1"
+				(rectangle
+					(start -7.62 12.7)
+					(end 7.62 -15.24)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:+3V3"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "+3V3"
+				(at 0 3.556 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"+3V3\""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "+3V3_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "+3V3_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:GNDD"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "GNDD"
+				(at 0 -3.175 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "GNDD_0_1"
+				(rectangle
+					(start -1.27 -1.524)
+					(end 1.27 -2.032)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GNDD_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(junction
+		(at 34.29 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "26d3a96d-6cc0-4946-b640-0a0ad39053ff")
+	)
+	(junction
+		(at 127 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2888a22a-5a98-46fc-bb33-c71d23facbaf")
+	)
+	(junction
+		(at 156.21 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3567225d-cf95-476c-846d-57c4867e424a")
+	)
+	(junction
+		(at 129.54 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3cbffaab-f46c-4f69-958c-11e402bf33a1")
+	)
+	(junction
+		(at 240.03 95.25)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "578803b9-07eb-426a-aa2d-a52504a30742")
+	)
+	(junction
+		(at 60.96 27.94)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "801af655-ed12-4806-a982-8fdbf72e251c")
+	)
+	(junction
+		(at 213.36 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "94be0ce8-66bc-4185-96e2-de452cddedec")
+	)
+	(junction
+		(at 134.62 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "957621c7-fe7e-4eb4-bbfc-5555f0d64125")
+	)
+	(junction
+		(at 39.37 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b6039174-11fe-471f-a6de-fae3f3982a10")
+	)
+	(junction
+		(at 156.21 27.94)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c5dfdb1c-fa3b-4ba6-b297-8aea1b410a2d")
+	)
+	(junction
+		(at 218.44 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d17eca36-d914-45b7-a80a-21b4931ea246")
+	)
+	(junction
+		(at 31.75 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dfdbcc50-284f-45a0-a07d-27ba649fcf99")
+	)
+	(junction
+		(at 60.96 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e33b28f2-16d0-4b94-aeec-514bd22ae86d")
+	)
+	(junction
+		(at 210.82 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e5f6d12c-00c5-41ad-9460-28ca050eb769")
+	)
+	(junction
+		(at 240.03 29.21)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ea13d9c6-84ee-427d-b1ec-1bffc157829a")
+	)
+	(wire
+		(pts
+			(xy 29.21 53.34) (xy 31.75 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00da180f-17bd-400d-9b95-88bc940a3e6b")
+	)
+	(wire
+		(pts
+			(xy 210.82 120.65) (xy 210.82 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02ebbbe2-4f8b-4173-b902-f5c5b9471e28")
+	)
+	(wire
+		(pts
+			(xy 156.21 133.35) (xy 156.21 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "05886a7e-46e4-40da-9dcf-8201019c4f95")
+	)
+	(wire
+		(pts
+			(xy 172.72 53.34) (xy 166.37 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "06467517-2abd-4d5b-9394-733398aa917a")
+	)
+	(wire
+		(pts
+			(xy 144.78 45.72) (xy 146.05 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "079132a5-47cc-4ca3-b01d-71eda4bf0068")
+	)
+	(wire
+		(pts
+			(xy 256.54 49.53) (xy 250.19 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08d7d530-4822-4ab8-8726-f60476cc4753")
+	)
+	(wire
+		(pts
+			(xy 172.72 45.72) (xy 166.37 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0c0ace4c-ab1a-4bb1-8702-d5666b6cc1a7")
+	)
+	(wire
+		(pts
+			(xy 240.03 90.17) (xy 240.03 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0defb39f-bb2c-40b9-9269-2ec3408987d9")
+	)
+	(wire
+		(pts
+			(xy 256.54 123.19) (xy 250.19 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f2927e3-3b47-498c-b172-782383c7f9dd")
+	)
+	(wire
+		(pts
+			(xy 60.96 133.35) (xy 60.96 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "108a146f-8bfd-446d-b3b8-5442470d80fe")
+	)
+	(wire
+		(pts
+			(xy 44.45 111.76) (xy 50.8 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12713621-ff07-4361-b950-de8b1d57fd3e")
+	)
+	(wire
+		(pts
+			(xy 240.03 134.62) (xy 240.03 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "128f61f3-a969-4571-9e5b-128167f01893")
+	)
+	(wire
+		(pts
+			(xy 256.54 118.11) (xy 250.19 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "146a7d63-bf35-4876-b5e7-a54154feb818")
+	)
+	(wire
+		(pts
+			(xy 48.26 80.01) (xy 48.26 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "18064540-51eb-493a-85b0-5d7f32bd2b18")
+	)
+	(wire
+		(pts
+			(xy 48.26 104.14) (xy 50.8 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "19256007-d216-4801-9971-06f3708ff14e")
+	)
+	(wire
+		(pts
+			(xy 39.37 43.18) (xy 50.8 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "19e8a7b4-a51f-43f1-ad95-27103028ba60")
+	)
+	(wire
+		(pts
+			(xy 256.54 115.57) (xy 250.19 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "19f9e0c3-019c-4393-aef5-89fd2bb0b50d")
+	)
+	(wire
+		(pts
+			(xy 39.37 43.18) (xy 39.37 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1cf17def-c94b-4680-9732-6e9d40edae54")
+	)
+	(wire
+		(pts
+			(xy 77.47 114.3) (xy 71.12 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ed567eb-13cd-4335-b2c1-94d2bbe24310")
+	)
+	(wire
+		(pts
+			(xy 172.72 119.38) (xy 166.37 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "218e35ce-9d93-48a5-b251-a043ecb16df5")
+	)
+	(wire
+		(pts
+			(xy 71.12 38.1) (xy 90.17 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23e6a973-5cf4-4a43-9b18-3be67d81dfc5")
+	)
+	(wire
+		(pts
+			(xy 139.7 111.76) (xy 146.05 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26f6add1-d3dd-4484-ae9c-b7cbec8e6e0a")
+	)
+	(wire
+		(pts
+			(xy 229.87 120.65) (xy 210.82 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2d6b27e2-1963-4aba-b66f-2aa94346f0ed")
+	)
+	(wire
+		(pts
+			(xy 156.21 88.9) (xy 156.21 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e24933e-aca1-490f-81fe-ce6477e4d4f2")
+	)
+	(wire
+		(pts
+			(xy 139.7 76.2) (xy 139.7 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e3361eb-87a3-4dd1-bf03-712db9100baf")
+	)
+	(wire
+		(pts
+			(xy 127 53.34) (xy 146.05 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3039c8c6-f767-487a-86c9-c7a07bb6bab8")
+	)
+	(wire
+		(pts
+			(xy 256.54 110.49) (xy 250.19 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30c98f99-81f8-46ef-918c-746ea95d7f99")
+	)
+	(wire
+		(pts
+			(xy 256.54 39.37) (xy 250.19 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3445117d-4175-4b7d-a061-7dc2c4db1da7")
+	)
+	(wire
+		(pts
+			(xy 172.72 55.88) (xy 166.37 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3460b49f-5361-4211-8e4f-33e0d6143556")
+	)
+	(wire
+		(pts
+			(xy 156.21 93.98) (xy 168.91 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34dfbbdd-a22b-4169-9777-18576d938c9c")
+	)
+	(wire
+		(pts
+			(xy 124.46 53.34) (xy 127 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3695f15f-6ba5-4200-88d8-0c008610f171")
+	)
+	(wire
+		(pts
+			(xy 256.54 105.41) (xy 250.19 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a8d8dfc-dc9e-4dbb-9690-7cecb4ff636e")
+	)
+	(wire
+		(pts
+			(xy 71.12 50.8) (xy 90.17 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3cbf3551-d7e0-494f-b0db-e21fd51b89fe")
+	)
+	(wire
+		(pts
+			(xy 256.54 57.15) (xy 250.19 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3e1273d0-6511-47e3-a20f-18fb65d87f6e")
+	)
+	(wire
+		(pts
+			(xy 49.53 45.72) (xy 50.8 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3e2ac1e7-53a7-4413-9e0e-4458369ae83f")
+	)
+	(wire
+		(pts
+			(xy 256.54 113.03) (xy 250.19 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3e94205c-f3bf-471b-bf99-f90e039edcba")
+	)
+	(wire
+		(pts
+			(xy 60.96 93.98) (xy 85.09 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3f0896d1-f8ad-4077-b94b-59032757f202")
+	)
+	(wire
+		(pts
+			(xy 213.36 118.11) (xy 213.36 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3f9e51cc-b461-45f5-9b1f-bcec6a6d28fa")
+	)
+	(wire
+		(pts
+			(xy 172.72 111.76) (xy 166.37 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3fc0ec00-8170-485f-80c6-681129020198")
+	)
+	(wire
+		(pts
+			(xy 60.96 93.98) (xy 60.96 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "404cfa5a-a7df-4da5-8d83-c6fc66d6487f")
+	)
+	(wire
+		(pts
+			(xy 71.12 53.34) (xy 90.17 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40e04250-62a5-40a5-a361-7280e3e01d69")
+	)
+	(wire
+		(pts
+			(xy 134.62 109.22) (xy 146.05 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4144d45a-1627-4a37-8313-57f18ed93a67")
+	)
+	(wire
+		(pts
+			(xy 134.62 43.18) (xy 134.62 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "437585e3-c9c7-49fe-9d13-b4bff4d63386")
+	)
+	(wire
+		(pts
+			(xy 240.03 95.25) (xy 264.16 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "43e6269f-75a2-478d-9ae7-d31dac641925")
+	)
+	(wire
+		(pts
+			(xy 77.47 121.92) (xy 71.12 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "44cc490c-073d-477b-a749-882253c9cc64")
+	)
+	(wire
+		(pts
+			(xy 182.88 27.94) (xy 177.8 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4f8953b7-94d2-4622-8d60-fb8da4b71316")
+	)
+	(wire
+		(pts
+			(xy 208.28 44.45) (xy 218.44 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5006b266-4e6c-4876-aa42-b477f2eeab1b")
+	)
+	(wire
+		(pts
+			(xy 76.2 60.96) (xy 76.2 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "512d85b8-8f54-4cfa-89ac-b2ad1e19bddf")
+	)
+	(wire
+		(pts
+			(xy 95.25 27.94) (xy 90.17 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "52c46c70-5c5c-4b21-a7da-c97ee080b8fc")
+	)
+	(wire
+		(pts
+			(xy 71.12 45.72) (xy 90.17 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5485afcf-e33f-4c8b-ab01-4db587f49018")
+	)
+	(wire
+		(pts
+			(xy 276.86 95.25) (xy 271.78 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "585d9fe8-574c-44dd-a04b-988f590a1250")
+	)
+	(wire
+		(pts
+			(xy 129.54 50.8) (xy 146.05 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5dd9d398-dc23-4ea7-a262-13bf33fcb18b")
+	)
+	(wire
+		(pts
+			(xy 223.52 105.41) (xy 229.87 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5f3e3823-e358-4930-8cfd-d3e09a25cc69")
+	)
+	(wire
+		(pts
+			(xy 127 119.38) (xy 127 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6593f9ab-ad19-4eb9-a3fb-44689ca67d98")
+	)
+	(wire
+		(pts
+			(xy 240.03 95.25) (xy 240.03 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66ecafff-3281-4d0e-ab46-ed6bbfbf8013")
+	)
+	(wire
+		(pts
+			(xy 218.44 44.45) (xy 218.44 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68783d8c-5c34-4bc5-a679-3babf3c9d1f9")
+	)
+	(wire
+		(pts
+			(xy 77.47 106.68) (xy 71.12 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69308efb-2ae1-4742-99f9-9e58be765d70")
+	)
+	(wire
+		(pts
+			(xy 134.62 43.18) (xy 146.05 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "695fcc53-eaf2-4289-98ed-7be440a4a34e")
+	)
+	(wire
+		(pts
+			(xy 240.03 29.21) (xy 240.03 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "699ac5e8-7a4d-4594-a53e-09a756c4696a")
+	)
+	(wire
+		(pts
+			(xy 129.54 116.84) (xy 129.54 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6bfc6910-3ebd-4a0b-8bad-0aed68a979c9")
+	)
+	(wire
+		(pts
+			(xy 173.99 76.2) (xy 139.7 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6cf1785b-4abf-4d0a-aa90-23a2827f7d4f")
+	)
+	(wire
+		(pts
+			(xy 208.28 54.61) (xy 210.82 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6e12b833-8b6d-4c7d-9192-1802e818a1fc")
+	)
+	(wire
+		(pts
+			(xy 210.82 54.61) (xy 229.87 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6fdbfa55-4963-441c-9830-b01f8e51d0a3")
+	)
+	(wire
+		(pts
+			(xy 29.21 50.8) (xy 34.29 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "738a321d-c6c0-423d-b5fe-40e4cb3ec3c0")
+	)
+	(wire
+		(pts
+			(xy 172.72 121.92) (xy 166.37 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7453eb42-30a0-42b7-a8af-35b555aecc24")
+	)
+	(wire
+		(pts
+			(xy 124.46 43.18) (xy 134.62 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74dbe05a-5b2a-4806-ad0f-d188b5a65e83")
+	)
+	(wire
+		(pts
+			(xy 139.7 104.14) (xy 146.05 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76cb7958-b933-4101-9953-2417b6ff2f89")
+	)
+	(wire
+		(pts
+			(xy 172.72 40.64) (xy 166.37 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76f6589b-3699-4eda-818a-3f5a46fc1be2")
+	)
+	(wire
+		(pts
+			(xy 77.47 116.84) (xy 71.12 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78b98c19-c210-46a5-87a3-b253936ee325")
+	)
+	(wire
+		(pts
+			(xy 172.72 109.22) (xy 166.37 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7afbd77f-3da7-4f73-8a7d-7a8c8b647626")
+	)
+	(wire
+		(pts
+			(xy 229.87 118.11) (xy 213.36 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c477af9-9a19-4a6f-a2c5-890820ffa16e")
+	)
+	(wire
+		(pts
+			(xy 256.54 52.07) (xy 250.19 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c7fed11-5e65-4a29-a339-a49d287ef8d8")
+	)
+	(wire
+		(pts
+			(xy 77.47 104.14) (xy 71.12 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f58d18f-3530-40d5-815f-ab98abe7902f")
+	)
+	(wire
+		(pts
+			(xy 124.46 50.8) (xy 129.54 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80ec161c-86bd-454e-a0ae-71394da4a1ff")
+	)
+	(wire
+		(pts
+			(xy 191.77 127) (xy 191.77 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "82b90adc-203d-4cf8-8045-1705f26057ce")
+	)
+	(wire
+		(pts
+			(xy 34.29 116.84) (xy 34.29 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "840ced4b-6d75-4657-b037-5626fe453cd7")
+	)
+	(wire
+		(pts
+			(xy 107.95 127) (xy 107.95 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8aae0a72-31e0-44bf-a5ff-257842c18f48")
+	)
+	(wire
+		(pts
+			(xy 172.72 50.8) (xy 166.37 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d43adbb-5ff3-42c1-b5d8-e09f8ba2deb7")
+	)
+	(wire
+		(pts
+			(xy 107.95 38.1) (xy 146.05 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8dd742e9-c857-41cf-908f-0a01574a73ff")
+	)
+	(wire
+		(pts
+			(xy 71.12 40.64) (xy 90.17 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8fac3d91-9eb1-42d1-804f-537042157f1e")
+	)
+	(wire
+		(pts
+			(xy 240.03 29.21) (xy 261.62 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90f6e154-f070-4092-ba31-3e2ea212a704")
+	)
+	(wire
+		(pts
+			(xy 218.44 44.45) (xy 229.87 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "940cbbc3-8b77-4fbc-ad3d-c8fb25c399ea")
+	)
+	(wire
+		(pts
+			(xy 173.99 60.96) (xy 173.99 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "953c4072-e9ea-42f8-bc6a-8f46b1ac6e80")
+	)
+	(wire
+		(pts
+			(xy 31.75 53.34) (xy 50.8 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "972eb69f-ba3f-4852-9995-f48d5dd20499")
+	)
+	(wire
+		(pts
+			(xy 50.8 119.38) (xy 31.75 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "978f0528-df50-4ef1-afef-8eded3b3ec14")
+	)
+	(wire
+		(pts
+			(xy 156.21 22.86) (xy 156.21 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b02870e-6ed2-4e26-9dad-d167a2718aec")
+	)
+	(wire
+		(pts
+			(xy 176.53 93.98) (xy 184.15 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c198ef6-bf17-47c8-8d74-465b2113da83")
+	)
+	(wire
+		(pts
+			(xy 156.21 93.98) (xy 156.21 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9cc1f92d-5d7a-4d50-963f-1b9a23b399d6")
+	)
+	(wire
+		(pts
+			(xy 250.19 62.23) (xy 257.81 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9fddc4ed-15ad-4e83-b422-5d50a9c42bfb")
+	)
+	(wire
+		(pts
+			(xy 71.12 48.26) (xy 90.17 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a3c14c01-1190-47d9-8725-4e71c59b44fd")
+	)
+	(wire
+		(pts
+			(xy 39.37 109.22) (xy 50.8 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5266f1d-fa4c-4130-bead-299616d4dd87")
+	)
+	(wire
+		(pts
+			(xy 31.75 119.38) (xy 31.75 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7e96a5c-eb02-4fd3-bea3-28e7d7dbf553")
+	)
+	(wire
+		(pts
+			(xy 77.47 109.22) (xy 71.12 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa542124-53dc-4a02-bd43-60413f14ee8a")
+	)
+	(wire
+		(pts
+			(xy 257.81 77.47) (xy 223.52 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1ed3e8e-cca2-46e0-9ac0-29ce96ef01b6")
+	)
+	(wire
+		(pts
+			(xy 172.72 116.84) (xy 166.37 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b261ef3e-e296-4181-b703-faa44680e687")
+	)
+	(wire
+		(pts
+			(xy 256.54 54.61) (xy 250.19 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b3608610-6628-440a-89ad-ef6ea5e90a19")
+	)
+	(wire
+		(pts
+			(xy 156.21 27.94) (xy 170.18 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b40d9409-9b3d-4259-af22-bf7a2c3cf34d")
+	)
+	(wire
+		(pts
+			(xy 172.72 38.1) (xy 166.37 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4dcb283-dea1-4830-9340-7e8b501a7bc6")
+	)
+	(wire
+		(pts
+			(xy 166.37 60.96) (xy 173.99 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b593a14f-5fab-4964-b543-aea8d0ee1118")
+	)
+	(wire
+		(pts
+			(xy 172.72 106.68) (xy 166.37 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b5dd56df-bed3-4e41-ae1c-b0e154b19300")
+	)
+	(wire
+		(pts
+			(xy 223.52 113.03) (xy 229.87 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6a5b21d-2af7-4867-9c8e-cb93fe8f1bcb")
+	)
+	(wire
+		(pts
+			(xy 218.44 110.49) (xy 229.87 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b8218377-d1fd-49bf-8749-155401ae45fd")
+	)
+	(wire
+		(pts
+			(xy 29.21 38.1) (xy 50.8 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b877132a-bba4-40c3-ae0d-93c01ff2bbe9")
+	)
+	(wire
+		(pts
+			(xy 172.72 48.26) (xy 166.37 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b8e6a8be-49e1-4872-a1d4-39583364dbf0")
+	)
+	(wire
+		(pts
+			(xy 77.47 119.38) (xy 71.12 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb4cb03b-fc9a-49e9-8f48-e9be12eb0164")
+	)
+	(wire
+		(pts
+			(xy 71.12 60.96) (xy 76.2 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bbcf9e9b-62c6-4e6b-a4ed-53b68f5f976c")
+	)
+	(wire
+		(pts
+			(xy 76.2 80.01) (xy 48.26 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd7fb9ea-498c-457f-859c-bfb42d424036")
+	)
+	(wire
+		(pts
+			(xy 172.72 114.3) (xy 166.37 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bfda82cc-e92b-4254-b2f5-dacadea38ffe")
+	)
+	(wire
+		(pts
+			(xy 257.81 62.23) (xy 257.81 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0befe26-47e9-4195-840f-f015d8a07a66")
+	)
+	(wire
+		(pts
+			(xy 256.54 44.45) (xy 250.19 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0f52631-6ac8-4349-80d3-8b22eb2265ee")
+	)
+	(wire
+		(pts
+			(xy 256.54 107.95) (xy 250.19 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c20d95f6-414a-42ef-9370-e765499efbfa")
+	)
+	(wire
+		(pts
+			(xy 156.21 67.31) (xy 156.21 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c32ce3d3-f032-4043-8ad9-c21c1623f191")
+	)
+	(wire
+		(pts
+			(xy 223.52 77.47) (xy 223.52 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c50f907c-d786-4cb4-8f33-b2434a299cdb")
+	)
+	(wire
+		(pts
+			(xy 172.72 104.14) (xy 166.37 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c5691084-a5fb-44e9-9ccb-42fcfd9ae0e0")
+	)
+	(wire
+		(pts
+			(xy 60.96 88.9) (xy 60.96 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c67f646d-6894-4db5-8706-72f937a8636e")
+	)
+	(wire
+		(pts
+			(xy 191.77 39.37) (xy 229.87 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6afe5ee-4f48-4b44-92b5-a50d47ade0fb")
+	)
+	(wire
+		(pts
+			(xy 156.21 27.94) (xy 156.21 33.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6e9f43d-d2e0-44e9-b4b4-b4ed7baef265")
+	)
+	(wire
+		(pts
+			(xy 213.36 52.07) (xy 229.87 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8230a43-39c5-4e97-813a-f06a34de0fad")
+	)
+	(wire
+		(pts
+			(xy 172.72 43.18) (xy 166.37 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c860446c-ef2f-4570-8db8-0d3e923532d8")
+	)
+	(wire
+		(pts
+			(xy 71.12 43.18) (xy 90.17 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca1ce3ac-5962-4688-80cc-70b57d0fdde6")
+	)
+	(wire
+		(pts
+			(xy 146.05 116.84) (xy 129.54 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca6c0e62-e31e-40a3-ad69-829f4785acc6")
+	)
+	(wire
+		(pts
+			(xy 97.79 93.98) (xy 92.71 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce31d2f8-e333-4e1f-935a-1f075528ecdf")
+	)
+	(wire
+		(pts
+			(xy 50.8 116.84) (xy 34.29 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf3f1617-f073-477d-9faa-dd7c61527da8")
+	)
+	(wire
+		(pts
+			(xy 71.12 55.88) (xy 90.17 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d1741a97-39ee-4933-8c02-525148e2ec1a")
+	)
+	(wire
+		(pts
+			(xy 60.96 67.31) (xy 60.96 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d2127bc4-e9ec-4ab2-8c03-8d4cc46ed456")
+	)
+	(wire
+		(pts
+			(xy 71.12 127) (xy 107.95 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d3a7066a-c7eb-4832-8121-a708f790afbb")
+	)
+	(wire
+		(pts
+			(xy 60.96 27.94) (xy 82.55 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d7d1473a-1607-4c6e-9595-41f7ecdc77a0")
+	)
+	(wire
+		(pts
+			(xy 256.54 41.91) (xy 250.19 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "da12fc27-caa3-4bcc-b3ca-c765c9456bce")
+	)
+	(wire
+		(pts
+			(xy 228.6 46.99) (xy 229.87 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dc26d8b1-e14f-4fc2-accb-2a611309234b")
+	)
+	(wire
+		(pts
+			(xy 60.96 22.86) (xy 60.96 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de11ce90-bbe6-48ed-bc65-80fd081b723e")
+	)
+	(wire
+		(pts
+			(xy 29.21 43.18) (xy 39.37 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de19da1b-ee31-4347-9387-d394395587f1")
+	)
+	(wire
+		(pts
+			(xy 274.32 29.21) (xy 269.24 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df91b20a-c452-4f75-8fa8-47ecd5c45259")
+	)
+	(wire
+		(pts
+			(xy 208.28 52.07) (xy 213.36 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e0d97501-31c8-4db7-973f-5e9096ca1653")
+	)
+	(wire
+		(pts
+			(xy 256.54 120.65) (xy 250.19 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5cb3001-2832-4d11-8815-6975d085e9bd")
+	)
+	(wire
+		(pts
+			(xy 240.03 24.13) (xy 240.03 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e758ac3f-eabd-4a8a-94bf-aa649bae376d")
+	)
+	(wire
+		(pts
+			(xy 60.96 27.94) (xy 60.96 33.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7633755-d969-4ecb-a69e-fa2022010a2d")
+	)
+	(wire
+		(pts
+			(xy 166.37 127) (xy 191.77 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f00d0a73-c1f5-4c42-ac64-9f2a20617e2b")
+	)
+	(wire
+		(pts
+			(xy 240.03 68.58) (xy 240.03 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f43e3bde-1c7d-435f-8448-b0b9d7b1f32f")
+	)
+	(wire
+		(pts
+			(xy 146.05 119.38) (xy 127 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5c7e35f-ed27-46af-ac80-087de3d7fa91")
+	)
+	(wire
+		(pts
+			(xy 256.54 46.99) (xy 250.19 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6dc79b0-5efc-4280-b5fa-d1fa49ebeaec")
+	)
+	(wire
+		(pts
+			(xy 34.29 50.8) (xy 50.8 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8e7aa88-45ac-4f99-b514-730bd23f6cd4")
+	)
+	(wire
+		(pts
+			(xy 77.47 111.76) (xy 71.12 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb931d5f-f2a2-47ff-8bd1-f7bd7a6df428")
+	)
+	(global_label "ShiftReg1_QA"
+		(shape input)
+		(at 90.17 38.1 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "18ae0443-7760-4021-8804-fa0f64c9ec1a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.6737 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "ShiftReg1_QF"
+		(shape input)
+		(at 90.17 50.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "346ef6b6-8921-4b03-947f-40cd311d4626")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.6737 50.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "ShiftReg1_QE"
+		(shape input)
+		(at 90.17 48.26 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "67ccec47-22be-4694-8343-00ad70777240")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.7341 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "ShiftReg1_QC"
+		(shape input)
+		(at 90.17 43.18 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6ad5e924-12ad-4f47-874c-de764eab05ec")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.8551 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "ShiftReg1_QD"
+		(shape input)
+		(at 90.17 45.72 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7eabe448-9fca-4c43-a666-7721a0258136")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.8551 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "ShiftReg1_QH"
+		(shape input)
+		(at 90.17 55.88 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9fdc7a83-6e07-4363-9bbf-48d212da45a2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.9156 55.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "ShiftReg1_QB"
+		(shape input)
+		(at 90.17 40.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c30a7995-85c7-4925-b97e-fa997da61b6f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.8551 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "ShiftReg1_QG"
+		(shape input)
+		(at 90.17 53.34 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "db6e98f2-4dcd-4515-9f14-e8349627498d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.8551 53.34 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(hierarchical_label "ShiftReg6_QD"
+		(shape input)
+		(at 256.54 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "014294f9-e3b2-428c-860d-8357ae5d0d2e")
+	)
+	(hierarchical_label "ShiftReg1_QB"
+		(shape input)
+		(at 73.66 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "03a8fae7-726a-486f-b642-480e906522a3")
+	)
+	(hierarchical_label "ShiftRegCLK"
+		(shape input)
+		(at 208.28 44.45 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "090a67f1-b9a9-40f7-8642-8a18cd92fcdc")
+	)
+	(hierarchical_label "ShiftReg3_QB"
+		(shape input)
+		(at 172.72 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0a2e7711-411b-4c5b-94c2-98a51bb8b384")
+	)
+	(hierarchical_label "ShiftReg5_QD"
+		(shape input)
+		(at 256.54 46.99 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0d1cbe87-29d7-4c30-a614-15901957e23b")
+	)
+	(hierarchical_label "ShiftReg2_QG"
+		(shape input)
+		(at 77.47 119.38 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0d3dd729-4975-4432-9892-5334cbfc5138")
+	)
+	(hierarchical_label "ShiftReg3_QA"
+		(shape input)
+		(at 172.72 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0f5c399a-467a-4ec9-a071-d29a4ad23cd4")
+	)
+	(hierarchical_label "ShiftReg1_QD"
+		(shape input)
+		(at 73.66 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "158aaf75-68e2-4849-9aec-587523071836")
+	)
+	(hierarchical_label "ShiftReg6_QC"
+		(shape input)
+		(at 256.54 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "18df67ab-f29c-43b1-89d5-c5a9687399f0")
+	)
+	(hierarchical_label "ShiftReg3_QF"
+		(shape input)
+		(at 172.72 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1ed817dd-1c65-4d07-8a3d-df2835913e66")
+	)
+	(hierarchical_label "ShiftReg3_QG"
+		(shape input)
+		(at 172.72 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "223b67ea-fd53-4620-ba46-e246cab23802")
+	)
+	(hierarchical_label "ShiftReg_Latch"
+		(shape input)
+		(at 208.28 52.07 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "32c67c71-2283-4c43-bc86-945ee7b3e2dd")
+	)
+	(hierarchical_label "ShiftReg1_QE"
+		(shape input)
+		(at 73.66 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "350a3aab-d5ec-4a77-aab3-9d0f8efa456b")
+	)
+	(hierarchical_label "ShiftReg2_QE"
+		(shape input)
+		(at 77.47 114.3 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3de2f1cc-145d-4dc8-953f-ac7cd2dece43")
+	)
+	(hierarchical_label "ShiftReg4_QG"
+		(shape input)
+		(at 172.72 119.38 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3fda6b93-366b-4704-8c4a-0acba3139746")
+	)
+	(hierarchical_label "ShiftReg5_QA"
+		(shape input)
+		(at 256.54 39.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "434c463f-1644-429d-b618-8ff231f5716a")
+	)
+	(hierarchical_label "ShiftReg5_QH"
+		(shape input)
+		(at 256.54 57.15 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "435d68c7-6643-4745-a10d-21cb2dc81611")
+	)
+	(hierarchical_label "Shift_~{OE}"
+		(shape input)
+		(at 29.21 53.34 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4617c414-2c34-4520-ad9f-f443db3b3fcf")
+	)
+	(hierarchical_label "ShiftReg4_QE"
+		(shape input)
+		(at 172.72 114.3 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "59cd9ae2-08c9-4237-84b4-404b87e4cd60")
+	)
+	(hierarchical_label "ShiftReg1_QC"
+		(shape input)
+		(at 73.66 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5a028f3b-483a-428f-a7a7-c46a25e640e1")
+	)
+	(hierarchical_label "Shift_~{OE}"
+		(shape input)
+		(at 124.46 53.34 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "62b542f5-2666-4325-a6de-ed5d08c95e0d")
+	)
+	(hierarchical_label "ShiftReg2_QA"
+		(shape input)
+		(at 77.47 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "664ffa9a-293a-4240-acdb-bd769c4b2911")
+	)
+	(hierarchical_label "ShiftReg2_QB"
+		(shape input)
+		(at 77.47 106.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "78ed2a4f-0c20-44b0-8cf0-ecb6865609a9")
+	)
+	(hierarchical_label "ShiftReg5_QF"
+		(shape input)
+		(at 256.54 52.07 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7f4eb606-64d5-4e7a-be38-9715c7dc0d3b")
+	)
+	(hierarchical_label "ShiftReg1_QA"
+		(shape input)
+		(at 73.66 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "81668226-7f7c-4b0f-a3b4-a4e24445b9e9")
+	)
+	(hierarchical_label "ShiftReg4_QF"
+		(shape input)
+		(at 172.72 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "816a4e24-1841-4b35-9b60-628d4b1de9b7")
+	)
+	(hierarchical_label "ShiftReg6_QH"
+		(shape input)
+		(at 256.54 123.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "820c8f9d-bdfd-43d6-8e02-faa5456cc0d1")
+	)
+	(hierarchical_label "ShiftReg_Latch"
+		(shape input)
+		(at 124.46 50.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "837d790b-2be9-415a-8eef-0a3da7becb9b")
+	)
+	(hierarchical_label "ShiftReg5_QB"
+		(shape input)
+		(at 256.54 41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "87c4029e-5109-404f-9832-a14938926ce5")
+	)
+	(hierarchical_label "ShiftReg1_QH"
+		(shape input)
+		(at 73.66 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8b011663-89ff-4c7d-b2f9-eeab6234293d")
+	)
+	(hierarchical_label "ShiftRegCLK"
+		(shape input)
+		(at 29.21 43.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8e9cfcc3-c6cb-4bd8-b827-516badf39270")
+	)
+	(hierarchical_label "ShiftReg4_QH"
+		(shape input)
+		(at 172.72 121.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "91461860-ab1a-4433-8d04-725ee40ef248")
+	)
+	(hierarchical_label "ShiftReg4_QD"
+		(shape input)
+		(at 172.72 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "924363a9-3bcb-4495-8eb2-9a99c7a0516d")
+	)
+	(hierarchical_label "ShiftReg6_QG"
+		(shape input)
+		(at 256.54 120.65 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "95dca2c4-e0db-4f47-9b43-ed05ac1e4a4c")
+	)
+	(hierarchical_label "ShiftReg1_QG"
+		(shape input)
+		(at 73.66 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9639ec57-c599-4926-8119-2b7aaf483773")
+	)
+	(hierarchical_label "ShiftReg3_QH"
+		(shape input)
+		(at 172.72 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "984efb54-9d24-4f0a-9025-11b1e456972e")
+	)
+	(hierarchical_label "ShiftReg6_QA"
+		(shape input)
+		(at 256.54 105.41 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9a70ca29-e26b-4d77-a0a0-618e4be44610")
+	)
+	(hierarchical_label "ShiftReg6_QE"
+		(shape input)
+		(at 256.54 115.57 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9bb2859f-bdfa-42dc-96cf-d3b1851cd468")
+	)
+	(hierarchical_label "ShiftReg2_QF"
+		(shape input)
+		(at 77.47 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b1982e60-980c-466a-a9cb-87fb6470433e")
+	)
+	(hierarchical_label "ShiftReg3_QD"
+		(shape input)
+		(at 172.72 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b783df44-905c-4ef8-83cf-bbc92f5edbbf")
+	)
+	(hierarchical_label "ShiftReg6_QB"
+		(shape input)
+		(at 256.54 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b95ca8f2-853e-4bf2-a239-64e5f3f579ba")
+	)
+	(hierarchical_label "ShiftReg4_QC"
+		(shape input)
+		(at 172.72 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "bbaf1717-7fbe-45f0-b1a1-441d6babd5ab")
+	)
+	(hierarchical_label "ShiftReg5_QG"
+		(shape input)
+		(at 256.54 54.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "bd5a9c86-5267-4d6d-b04a-3183fe9f2ed2")
+	)
+	(hierarchical_label "ShiftReg2_QC"
+		(shape input)
+		(at 77.47 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c275cea5-8c20-4061-82ed-3fa13b23da85")
+	)
+	(hierarchical_label "ShiftReg1_QF"
+		(shape input)
+		(at 73.66 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c5059b6a-7780-4566-bb73-ff7f55bc9907")
+	)
+	(hierarchical_label "ShiftRegCLK"
+		(shape input)
+		(at 124.46 43.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c700f756-8df5-4a7c-a6c6-938899cf3f92")
+	)
+	(hierarchical_label "ShiftReg3_QC"
+		(shape input)
+		(at 172.72 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c8872813-c1e4-4783-8702-db2412102af0")
+	)
+	(hierarchical_label "Shift_~{OE}"
+		(shape input)
+		(at 208.28 54.61 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d3815b60-b235-4d92-baed-5c3b974675b7")
+	)
+	(hierarchical_label "ShiftReg2_QH"
+		(shape input)
+		(at 77.47 121.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d68278ae-c842-4e25-a0b1-a581bab4a458")
+	)
+	(hierarchical_label "ShiftReg3_QE"
+		(shape input)
+		(at 172.72 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d7aa6841-3dea-4674-a196-026af3923f92")
+	)
+	(hierarchical_label "ShiftReg5_QE"
+		(shape input)
+		(at 256.54 49.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "df40e27d-496e-411e-a0c6-5f671cefc75c")
+	)
+	(hierarchical_label "ShiftReg4_QA"
+		(shape input)
+		(at 172.72 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e0d0b13b-6cfe-423c-a56b-7a012190a698")
+	)
+	(hierarchical_label "ShiftReg_Latch"
+		(shape input)
+		(at 29.21 50.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e1035d67-690d-48f2-b7a4-c25b60d329f2")
+	)
+	(hierarchical_label "ShiftReg2_QD"
+		(shape input)
+		(at 77.47 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e74df5d5-9045-4e23-bdae-2377755de4eb")
+	)
+	(hierarchical_label "ShiftReg6_QF"
+		(shape input)
+		(at 256.54 118.11 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f2e1d746-09fa-4a2d-950d-76af2f3891d8")
+	)
+	(hierarchical_label "ShiftReg4_QB"
+		(shape input)
+		(at 172.72 106.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f30e2d7f-d24c-4985-8a12-265ee02fe6c9")
+	)
+	(hierarchical_label "ShiftRegDATA"
+		(shape input)
+		(at 29.21 38.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f5b498ff-8daa-44a1-a0ba-7ec363e43368")
+	)
+	(hierarchical_label "ShiftReg5_QC"
+		(shape input)
+		(at 256.54 44.45 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "fb95094c-bede-47c4-9c7e-397ce97af11b")
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 240.03 134.62 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "01d46abd-7144-4d81-b4ad-c51dc1500884")
+		(property "Reference" "#PWR0225"
+			(at 240.03 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 240.03 138.43 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 240.03 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 240.03 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 240.03 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b98e7e8a-15ef-4b59-8cbe-54966bf3fbf2")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0225")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 44.45 111.76 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "0d2bf0fa-dd52-42b6-ac9c-0eafa951d0e1")
+		(property "Reference" "#PWR0110"
+			(at 48.26 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 40.64 111.7599 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 44.45 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 44.45 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 44.45 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0b3dd3c7-906e-4db1-ad9c-b84dbb01a26a")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0110")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 144.78 45.72 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0e8d64b1-ecd3-426f-b487-25458822648c")
+		(property "Reference" "#PWR0112"
+			(at 148.59 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 140.97 45.7199 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 144.78 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 144.78 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 144.78 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1ef11679-09f1-4e67-a622-3a34cf407d12")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0112")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 223.52 113.03 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "2ad94209-fd0e-47ed-9139-795a932c89c9")
+		(property "Reference" "#PWR0220"
+			(at 227.33 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 219.71 113.0299 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 223.52 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 223.52 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 223.52 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4e1f7f03-e17d-4072-a4e5-92bf3f144bee")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0220")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 49.53 45.72 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2c30c7e2-95fd-414f-ad0a-36dacbf57426")
+		(property "Reference" "#PWR0109"
+			(at 53.34 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 45.72 45.7199 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 49.53 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 49.53 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 49.53 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4b03ba4a-0e6c-463e-b80a-dd6d554a08c9")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0109")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 139.7 111.76 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "36eb4018-2dee-4baf-9d3f-5ec2b8c2b26d")
+		(property "Reference" "#PWR0111"
+			(at 143.51 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 135.89 111.7599 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 139.7 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 139.7 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "73abd420-8165-4b25-a575-e5b3730d4a0e")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0111")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 267.97 95.25 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4a6daced-87fe-4641-aa19-965e4692d8d7")
+		(property "Reference" "C63"
+			(at 270.51 93.98 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 255.27 93.98 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 264.16 94.2848 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 267.97 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "CAP CER 100nF 50V X7R 0603"
+			(at 267.97 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "CC0603KRX7R9BB104 "
+			(at 267.97 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "YAGEO"
+			(at 267.97 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "C0603"
+			(at 267.97 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "CC0603KRX7R9BB104 "
+			(at 267.97 95.25 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "03722c3a-65af-492a-9585-f69191c8d916")
+		)
+		(pin "2"
+			(uuid "20343144-ba74-4fbe-b07d-aa05bfa92012")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "C63")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 95.25 27.94 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "520c71f5-12f8-475b-9c59-e6a5edccab91")
+		(property "Reference" "#PWR089"
+			(at 101.6 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 99.06 27.9399 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 95.25 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 95.25 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 95.25 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e09c4586-a452-420a-9361-542d1dcfe1b9")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR089")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 60.96 22.86 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5d41a952-4c33-49fb-83b4-e42834a5e70e")
+		(property "Reference" "#PWR0106"
+			(at 60.96 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 60.96 17.78 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 60.96 22.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 60.96 22.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 60.96 22.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b77a31bd-88ee-4f3e-bd67-8ee007fe0d08")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0106")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 172.72 93.98 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "60841573-aa58-49f6-b7d6-ab6a4b1ccf0b")
+		(property "Reference" "C36"
+			(at 175.26 92.71 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 160.02 92.71 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 168.91 93.0148 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 172.72 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "CAP CER 100nF 50V X7R 0603"
+			(at 172.72 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "CC0603KRX7R9BB104 "
+			(at 172.72 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "YAGEO"
+			(at 172.72 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "C0603"
+			(at 172.72 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "CC0603KRX7R9BB104 "
+			(at 172.72 93.98 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5bca4289-fb00-459e-8bc4-805c81c0631c")
+		)
+		(pin "2"
+			(uuid "08f05a46-f2cf-4bfb-b397-76fca7ca1abc")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "C36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 265.43 29.21 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "63999bdf-8860-4b0c-800d-42700d4133c9")
+		(property "Reference" "C62"
+			(at 267.97 27.94 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 252.984 27.94 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 261.62 28.2448 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 265.43 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "CAP CER 100nF 50V X7R 0603"
+			(at 265.43 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "CC0603KRX7R9BB104 "
+			(at 265.43 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "YAGEO"
+			(at 265.43 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "C0603"
+			(at 265.43 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "CC0603KRX7R9BB104 "
+			(at 265.43 29.21 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "85b49d59-13dd-4e11-8c77-5bf585624d6b")
+		)
+		(pin "2"
+			(uuid "759764e1-23bb-4b77-ad85-4fd546dc5f65")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "C62")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 60.96 133.35 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6a5f7511-1979-4cfd-8c4c-3bcd41bc119e")
+		(property "Reference" "#PWR088"
+			(at 60.96 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 60.96 137.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 60.96 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 60.96 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 60.96 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4f7ca484-c71a-4938-b0b7-06f0c7898fa9")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR088")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74HC595")
+		(at 240.03 115.57 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6ad7fe7d-3363-4ae0-97ed-1262dca287c3")
+		(property "Reference" "U20"
+			(at 242.1733 97.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "74HC595PW,118"
+			(at 242.1733 100.33 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
+			(at 240.03 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf"
+			(at 240.03 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "8-bit serial-in, serial or parallel-out shift register with output latches; 3-state"
+			(at 240.03 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "74HC595PW,118"
+			(at 240.03 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "Nexperia"
+			(at 240.03 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "TSSOP-16"
+			(at 240.03 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "74HC595PW,118"
+			(at 240.03 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ca5b48c8-f9eb-4723-b8f0-fcda4c15564a")
+		)
+		(pin "10"
+			(uuid "5cbc8c8c-d3a7-4ca5-9256-4d02cc464929")
+		)
+		(pin "11"
+			(uuid "b644d3a5-0269-435c-b9ae-e6018c445f57")
+		)
+		(pin "12"
+			(uuid "ecc6b739-6a28-4681-9576-3963e1590181")
+		)
+		(pin "13"
+			(uuid "96360e12-6fef-440e-8c80-a91706608d76")
+		)
+		(pin "14"
+			(uuid "d0148e60-2bf9-4206-82e6-aa9d6f5ef7cb")
+		)
+		(pin "15"
+			(uuid "cc79d07e-d171-4021-a052-61415bd026c7")
+		)
+		(pin "16"
+			(uuid "5cb2d93b-b468-4b13-a390-73143d0320ce")
+		)
+		(pin "2"
+			(uuid "bf66f6a6-cff8-448b-ab11-47dde236d312")
+		)
+		(pin "3"
+			(uuid "d84476e2-8614-4535-92e5-664a9b62aa44")
+		)
+		(pin "4"
+			(uuid "4f424407-68d5-4d89-b104-7bd799bb217e")
+		)
+		(pin "5"
+			(uuid "7dff03af-c1e7-4e54-875f-3f463f340358")
+		)
+		(pin "6"
+			(uuid "60c22c0c-2676-4beb-8593-6327d44e40a1")
+		)
+		(pin "7"
+			(uuid "e57590ac-66d0-453a-876c-906fec29fcff")
+		)
+		(pin "8"
+			(uuid "a1daaa46-5588-4d72-ae2f-c2a96faebecc")
+		)
+		(pin "9"
+			(uuid "3b571356-8cee-4a1c-ac74-899408fcd187")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "U20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 184.15 93.98 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "70d90632-ce2e-4b04-b537-299463b446b4")
+		(property "Reference" "#PWR097"
+			(at 190.5 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 187.452 91.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 184.15 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 184.15 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 184.15 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2a6c0ccc-03cb-4782-8d30-25f6cf7502af")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR097")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 156.21 88.9 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "85294c13-3671-4d14-9c34-6b6cfef8ea50")
+		(property "Reference" "#PWR0114"
+			(at 156.21 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 156.21 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 156.21 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 156.21 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 156.21 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1d8fb872-2aee-4c40-831f-a9307cdcf133")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0114")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 240.03 90.17 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "94eb4f4c-b8fe-4550-a400-8333fd333f4d")
+		(property "Reference" "#PWR0224"
+			(at 240.03 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 240.03 85.09 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 240.03 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 240.03 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 240.03 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0017f991-d576-477f-8f85-4802f9b33b97")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0224")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 240.03 68.58 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "968e4972-7712-4606-8844-d113abf891d7")
+		(property "Reference" "#PWR0223"
+			(at 240.03 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 240.03 72.39 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 240.03 68.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 240.03 68.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 240.03 68.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "76f062a2-6a40-4c24-9774-776d3853083d")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0223")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 276.86 95.25 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "9848111f-ca38-4a39-b685-825a80a7441e")
+		(property "Reference" "#PWR0227"
+			(at 283.21 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 280.416 92.71 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 276.86 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 276.86 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 276.86 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9d678bc2-d2d4-4c63-a50f-8855be27e641")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0227")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 88.9 93.98 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a02615a5-a472-48a9-8a2b-5f4d1b58985d")
+		(property "Reference" "C34"
+			(at 91.44 92.71 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 76.2 92.71 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 85.09 93.0148 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 88.9 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "CAP CER 100nF 50V X7R 0603"
+			(at 88.9 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "CC0603KRX7R9BB104 "
+			(at 88.9 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "YAGEO"
+			(at 88.9 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "C0603"
+			(at 88.9 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "CC0603KRX7R9BB104 "
+			(at 88.9 93.98 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7d8f7af5-eb6f-4a08-b867-f24a61ec4eca")
+		)
+		(pin "2"
+			(uuid "838b8c9b-dc0d-4779-9766-8b62d316cec1")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "C34")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 228.6 46.99 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a24825f5-9135-4dab-9d30-62b6c009a921")
+		(property "Reference" "#PWR0221"
+			(at 232.41 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 224.79 46.9899 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 228.6 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 228.6 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 228.6 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d7bc0a88-713f-4edf-bd59-d3924004ef11")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0221")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 156.21 22.86 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ab8a41dd-4ca9-4069-81cc-78631dbda1d3")
+		(property "Reference" "#PWR0113"
+			(at 156.21 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 156.21 17.78 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 156.21 22.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 156.21 22.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 156.21 22.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "bdfd8281-a275-47b2-a743-4f4d62dccc5b")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0113")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74HC595")
+		(at 156.21 48.26 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b24f7b52-aad7-4cf3-9011-46f8660f6ac9")
+		(property "Reference" "U16"
+			(at 158.3533 30.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "74HC595PW,118"
+			(at 158.3533 33.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
+			(at 156.21 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf"
+			(at 156.21 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "8-bit serial-in, serial or parallel-out shift register with output latches; 3-state"
+			(at 156.21 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "74HC595PW,118"
+			(at 156.21 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "Nexperia"
+			(at 156.21 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "TSSOP-16"
+			(at 156.21 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "74HC595PW,118"
+			(at 156.21 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f2405c8d-3018-48c0-87cb-8a18a035a843")
+		)
+		(pin "10"
+			(uuid "0fb8b562-823e-4d43-a891-3b97167386fb")
+		)
+		(pin "11"
+			(uuid "996f462a-9280-4dca-bb6f-2a52f19d1259")
+		)
+		(pin "12"
+			(uuid "ee932e6a-dbb2-4b25-a2cc-7a9317b517d8")
+		)
+		(pin "13"
+			(uuid "fb3505f9-4eea-4c8f-9e70-02f1caecb74a")
+		)
+		(pin "14"
+			(uuid "3ad385ab-0d34-421f-98ec-f7379a435610")
+		)
+		(pin "15"
+			(uuid "be9bf1b4-71f4-4e20-8ae2-09f574fbecdb")
+		)
+		(pin "16"
+			(uuid "833f5eb6-38a7-47bf-a66b-4bec998055bd")
+		)
+		(pin "2"
+			(uuid "e25f34ff-219c-4d0b-b69e-1a7f8116d4b0")
+		)
+		(pin "3"
+			(uuid "da5b2d95-792b-4704-8052-e95e898f2d9d")
+		)
+		(pin "4"
+			(uuid "8fbae67b-dc70-46cc-94c4-cccbd05c5174")
+		)
+		(pin "5"
+			(uuid "387304d5-0193-4c44-b375-db3241db333d")
+		)
+		(pin "6"
+			(uuid "a2e9e3b1-1ede-4ebb-98a9-50231a4648b4")
+		)
+		(pin "7"
+			(uuid "c6bcef19-786d-44b9-b7e6-9a5f88640a1b")
+		)
+		(pin "8"
+			(uuid "9a000807-db12-44a9-9217-eee6fc8728fc")
+		)
+		(pin "9"
+			(uuid "8bf74218-8b93-415d-8d52-f5125cb9a163")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "U16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74HC595")
+		(at 60.96 48.26 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bbe73cc5-c6d3-4ac6-ae9b-c192df68a02f")
+		(property "Reference" "U15"
+			(at 63.1033 30.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "74HC595PW,118"
+			(at 63.1033 33.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
+			(at 60.96 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf"
+			(at 60.96 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "8-bit serial-in, serial or parallel-out shift register with output latches; 3-state"
+			(at 60.96 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "74HC595PW,118"
+			(at 60.96 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "Nexperia"
+			(at 60.96 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "TSSOP-16"
+			(at 60.96 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "74HC595PW,118"
+			(at 60.96 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f12b0352-a725-4b77-ae4a-ad8e376b2ba6")
+		)
+		(pin "10"
+			(uuid "654ce59d-dd54-4408-ad19-b5223343ab25")
+		)
+		(pin "11"
+			(uuid "c4fa094c-002c-49e7-b0fc-add15d14e9eb")
+		)
+		(pin "12"
+			(uuid "041a6c7d-0c27-461f-9518-d3abc3add15c")
+		)
+		(pin "13"
+			(uuid "dee92f02-0a06-4a83-ab86-d18f5d831cf5")
+		)
+		(pin "14"
+			(uuid "1b81b3f5-59c2-485b-b101-99f8b820151e")
+		)
+		(pin "15"
+			(uuid "0e154799-a2de-4ec9-bbba-48a1d362cd5d")
+		)
+		(pin "16"
+			(uuid "1f189ed5-1516-4587-8cf8-6ed748f629de")
+		)
+		(pin "2"
+			(uuid "193a4aa6-b2de-4ab2-ac1d-eca569292ab4")
+		)
+		(pin "3"
+			(uuid "f2aff7d4-6459-443c-80ed-973c4d1177d8")
+		)
+		(pin "4"
+			(uuid "247deb27-0cf8-48f9-bc08-9f5ee2ecf91c")
+		)
+		(pin "5"
+			(uuid "cf21a436-d475-4578-93b3-10c1fac06027")
+		)
+		(pin "6"
+			(uuid "82dad523-5d5e-4180-ac21-9033d828720c")
+		)
+		(pin "7"
+			(uuid "137db9b9-25fd-4b5a-b9c4-2f3d79ea8ed5")
+		)
+		(pin "8"
+			(uuid "1d7e44bb-0e30-490b-94ae-3646323910b3")
+		)
+		(pin "9"
+			(uuid "7ccb4415-1a96-4434-8f82-cf282e628dec")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "U15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 156.21 133.35 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c3ee36fd-282b-43fa-8314-f7a12ef21a16")
+		(property "Reference" "#PWR095"
+			(at 156.21 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 156.21 137.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 156.21 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 156.21 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 156.21 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "eba1eba5-1f4d-4776-b183-094b0d5db759")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR095")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 182.88 27.94 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c494f1e3-aead-4912-9842-6050872ed36d")
+		(property "Reference" "#PWR098"
+			(at 189.23 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 186.182 25.4 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 182.88 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 182.88 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 182.88 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "239e5cf3-50e9-4876-bfc7-2f4596fc529e")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR098")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74HC595")
+		(at 156.21 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c8d18f3a-6c2e-44ae-ab92-3239695ac854")
+		(property "Reference" "U18"
+			(at 158.3533 96.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "74HC595PW,118"
+			(at 158.3533 99.06 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
+			(at 156.21 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf"
+			(at 156.21 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "8-bit serial-in, serial or parallel-out shift register with output latches; 3-state"
+			(at 156.21 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "74HC595PW,118"
+			(at 156.21 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "Nexperia"
+			(at 156.21 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "TSSOP-16"
+			(at 156.21 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "74HC595PW,118"
+			(at 156.21 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "65ab65c6-b032-4f42-98b9-64983278d235")
+		)
+		(pin "10"
+			(uuid "e89578f7-ee61-4326-8058-08c034b8a55f")
+		)
+		(pin "11"
+			(uuid "9d6c957d-2276-4e59-81fd-595519004511")
+		)
+		(pin "12"
+			(uuid "5c849dae-c94a-4f41-841c-bf36f03492ef")
+		)
+		(pin "13"
+			(uuid "4c207509-e041-4ac9-a2d0-233198bb156d")
+		)
+		(pin "14"
+			(uuid "f70b451e-5281-44cd-9595-1faa3f597030")
+		)
+		(pin "15"
+			(uuid "f35074d7-077e-4a91-ab78-d8e4a22e3da6")
+		)
+		(pin "16"
+			(uuid "1d62bed3-2db2-473d-a9c3-ea2fd093f013")
+		)
+		(pin "2"
+			(uuid "1bba6c70-1b99-4ee1-996e-ca9537defa84")
+		)
+		(pin "3"
+			(uuid "38519b43-b96e-41d6-aa98-b8456b9b8602")
+		)
+		(pin "4"
+			(uuid "bac653e2-92d5-4ae0-8ea6-aab1eaab5549")
+		)
+		(pin "5"
+			(uuid "c25888fa-e5cf-441e-9655-ce5bebde5862")
+		)
+		(pin "6"
+			(uuid "37e14696-5068-4b28-98da-c67b540d6a70")
+		)
+		(pin "7"
+			(uuid "53de39eb-6b34-4bdd-8083-2d90ed78693e")
+		)
+		(pin "8"
+			(uuid "1a9e3856-e754-4a20-9f61-6038c42bac8e")
+		)
+		(pin "9"
+			(uuid "a47a4817-89b4-4fca-b4b5-0cf7a527ca30")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "U18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 274.32 29.21 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "cadd3912-77c0-4446-94d3-f51f158c00ce")
+		(property "Reference" "#PWR0226"
+			(at 280.67 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 278.13 26.67 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 274.32 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 274.32 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 274.32 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "00070933-c816-4adb-9ee9-d5d89d9e252f")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0226")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 156.21 67.31 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "dadb1fef-623f-484d-9d7e-2161149bd313")
+		(property "Reference" "#PWR096"
+			(at 156.21 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 156.21 71.12 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 156.21 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 156.21 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 156.21 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f2232d59-d9b4-4920-ba71-2f658c709f36")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR096")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 86.36 27.94 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e2e526db-24bc-4471-83e5-d743038dd9d2")
+		(property "Reference" "C33"
+			(at 88.9 26.67 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 73.914 26.67 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 82.55 26.9748 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 86.36 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "CAP CER 100nF 50V X7R 0603"
+			(at 86.36 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "CC0603KRX7R9BB104 "
+			(at 86.36 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "YAGEO"
+			(at 86.36 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "C0603"
+			(at 86.36 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "CC0603KRX7R9BB104 "
+			(at 86.36 27.94 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7d855fb4-162f-41bd-8a31-739b415d5834")
+		)
+		(pin "2"
+			(uuid "ca983802-414a-4644-9fb7-57f1bb277e98")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "C33")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 97.79 93.98 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e5779581-2481-4ebe-b09e-7bb39cbf7c81")
+		(property "Reference" "#PWR090"
+			(at 104.14 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 101.6 93.9799 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 97.79 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 97.79 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 97.79 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8115e94b-1a06-484b-9d6f-d9436389933f")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR090")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 173.99 27.94 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ef5c0f74-91ed-4d17-a8f6-3c5a2972df8a")
+		(property "Reference" "C35"
+			(at 176.53 26.67 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 161.544 26.67 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 170.18 26.9748 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 173.99 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "CAP CER 100nF 50V X7R 0603"
+			(at 173.99 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "CC0603KRX7R9BB104 "
+			(at 173.99 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "YAGEO"
+			(at 173.99 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "C0603"
+			(at 173.99 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "CC0603KRX7R9BB104 "
+			(at 173.99 27.94 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "304aaa28-52b8-4937-9737-4353702437d0")
+		)
+		(pin "2"
+			(uuid "fc4cc0fd-b140-477c-853e-f1654c0601ae")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "C35")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74HC595")
+		(at 60.96 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f3fa4990-b365-4d78-b40b-d017cd37870f")
+		(property "Reference" "U17"
+			(at 63.1033 96.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "74HC595PW,118"
+			(at 63.1033 99.06 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
+			(at 60.96 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf"
+			(at 60.96 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "8-bit serial-in, serial or parallel-out shift register with output latches; 3-state"
+			(at 60.96 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "74HC595PW,118"
+			(at 60.96 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "Nexperia"
+			(at 60.96 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "TSSOP-16"
+			(at 60.96 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "74HC595PW,118"
+			(at 60.96 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9195ff3b-7bec-4c37-97a3-15456f19ce15")
+		)
+		(pin "10"
+			(uuid "db45a104-b7ca-4e94-97ff-2d09ef8a65f9")
+		)
+		(pin "11"
+			(uuid "cc476cad-08a0-4acf-bb13-0343e53a32fc")
+		)
+		(pin "12"
+			(uuid "6b5b2f23-b660-4de8-8ff2-f600b21661b6")
+		)
+		(pin "13"
+			(uuid "6fd3526d-6008-47b0-a76f-0e32ef73a77d")
+		)
+		(pin "14"
+			(uuid "f208027e-1d95-4ce7-825a-42dc13c5e93b")
+		)
+		(pin "15"
+			(uuid "2be52af0-3b54-4352-bdff-d5fdc3c06928")
+		)
+		(pin "16"
+			(uuid "254c6b57-74b0-45bc-b6b3-f76ec25f2d4f")
+		)
+		(pin "2"
+			(uuid "20216f7e-db1f-4449-9b25-12983aa21ae9")
+		)
+		(pin "3"
+			(uuid "4a596b52-2378-4044-a4d0-02c8a485f45f")
+		)
+		(pin "4"
+			(uuid "b3311fe2-23e1-4969-9e26-2a61bdd8ada8")
+		)
+		(pin "5"
+			(uuid "8f09148f-d783-4f6b-b4ef-3ce52a129654")
+		)
+		(pin "6"
+			(uuid "d6077af4-60fa-4d87-9054-810381f52f41")
+		)
+		(pin "7"
+			(uuid "180664e5-7dab-43c3-a806-8ef3d189e670")
+		)
+		(pin "8"
+			(uuid "be353da0-bc4f-406f-b6a5-3c637c0c59f2")
+		)
+		(pin "9"
+			(uuid "3f058460-aadd-4bd0-ab5e-1def470d89ef")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "U17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74HC595")
+		(at 240.03 49.53 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f453faeb-1a5a-4b0a-85e8-41d105032da4")
+		(property "Reference" "U19"
+			(at 242.1733 31.75 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "74HC595PW,118"
+			(at 242.1733 34.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
+			(at 240.03 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf"
+			(at 240.03 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "8-bit serial-in, serial or parallel-out shift register with output latches; 3-state"
+			(at 240.03 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" "74HC595PW,118"
+			(at 240.03 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "Nexperia"
+			(at 240.03 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" "TSSOP-16"
+			(at 240.03 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OZD" "74HC595PW,118"
+			(at 240.03 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f612ccf7-fed7-40c1-862a-bacbf4150f7e")
+		)
+		(pin "10"
+			(uuid "403022d2-d32b-4456-b28d-f151d659f8c3")
+		)
+		(pin "11"
+			(uuid "577f7d71-8733-4398-82d3-f91d9a0945ba")
+		)
+		(pin "12"
+			(uuid "262455e4-0468-46b5-aba3-36cb67a24968")
+		)
+		(pin "13"
+			(uuid "ab2b9565-e7e9-4d2e-be24-a3b2039dcb05")
+		)
+		(pin "14"
+			(uuid "d00ed5c5-54d3-4b1d-b0a5-9c7744ca58dc")
+		)
+		(pin "15"
+			(uuid "3706733a-c6c4-442a-86bf-e22aec924814")
+		)
+		(pin "16"
+			(uuid "d96cf472-1de3-4bea-8b07-12b705756534")
+		)
+		(pin "2"
+			(uuid "63de7f8f-2214-477b-9664-8ede02bd7a5c")
+		)
+		(pin "3"
+			(uuid "b06adf07-b620-431b-8da9-82a41e5f0254")
+		)
+		(pin "4"
+			(uuid "8be0c408-03d3-40ac-86d1-62b0127f4d8d")
+		)
+		(pin "5"
+			(uuid "70485541-996d-4e08-9c82-77b7451c039f")
+		)
+		(pin "6"
+			(uuid "fbcd50e9-d943-4dff-8aad-1ad661f48bcf")
+		)
+		(pin "7"
+			(uuid "4e367153-8307-4ace-b938-4808feaff6c3")
+		)
+		(pin "8"
+			(uuid "0065e4d8-2644-4e42-b039-9a6c411c08c3")
+		)
+		(pin "9"
+			(uuid "31e5478d-ce54-4355-a6f3-465bc1da8ad1")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "U19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 60.96 88.9 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f571f8c8-b408-4213-9331-47b6f6607cc0")
+		(property "Reference" "#PWR0107"
+			(at 60.96 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 60.96 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 60.96 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 60.96 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 60.96 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f0eaba28-fce6-45f4-8c2b-bbbb1461458d")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0107")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 240.03 24.13 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f5baff48-2b46-4e74-b6a5-2fe5274c1601")
+		(property "Reference" "#PWR0222"
+			(at 240.03 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 240.03 19.05 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 240.03 24.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 240.03 24.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 240.03 24.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "af5dc6c2-4806-4393-a039-a8e13c21075a")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR0222")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDD")
+		(at 60.96 67.31 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ffd7a5a3-e07e-4ce1-9738-c0a4be4b050e")
+		(property "Reference" "#PWR087"
+			(at 60.96 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDD"
+			(at 60.96 71.12 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 60.96 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 60.96 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDD\" , digital ground"
+			(at 60.96 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9ae9e772-2420-49aa-8dd7-c1ce603729ef")
+		)
+		(instances
+			(project "KNX-RELAY-24CH_V0.2"
+				(path "/8f2ed637-ec20-4424-8466-aca5334fbc0c/83cf5941-c30c-45a3-8838-b2ad6a061b46"
+					(reference "#PWR087")
+					(unit 1)
+				)
+			)
+		)
+	)
+)

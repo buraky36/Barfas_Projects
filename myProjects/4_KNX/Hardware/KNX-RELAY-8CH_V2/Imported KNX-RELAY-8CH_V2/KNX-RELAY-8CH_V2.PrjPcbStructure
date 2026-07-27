@@ -1,0 +1,4 @@
+Record=TopLevelDocument|FileName=KNX-RELAY-8CH_V2.SchDoc|SheetNumber= 
+Record=SheetSymbol|SourceDocument=KNX-RELAY-8CH_V2.SchDoc|Designator=RELAYS|SchDesignator=RELAYS|FileName=RELAYS.SchDoc|SheetNumber= |SymbolType=Normal|RawFileName=RELAYS.SchDoc|DesignItemId= |SourceLibraryName=RELAYS.SchDoc|ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=KNX-RELAY-8CH_V2.SchDoc|Designator=Shift register|SchDesignator=Shift register|FileName=Shift register.SchDoc|SheetNumber= |SymbolType=Normal|RawFileName=Shift register.SchDoc|DesignItemId= |SourceLibraryName=Shift register.SchDoc|ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=NoMainPathDocument|SourceDocument=KNX-RELAY-8CH_V2.SchDoc|FileName=other.SchDoc|SheetNumber= 
